@@ -25,7 +25,7 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 USERS_FILE = os.path.join(BASE_DIR, "users.json")
 KEY_FILE = os.path.join(BASE_DIR, ".gateway_key")
-DEFAULT_GATEWAY = "https://tv.tingbao.kdns.fr/live.m3u"  # Worker 绑定域名后的订阅入口
+DEFAULT_GATEWAY = "https://tv.tingbao.kdns.fr"  # Worker 绑定域名后的订阅入口（基址，不带 /live.m3u）
 
 
 def load_key():
@@ -67,8 +67,15 @@ def sign(key, u, e):
 
 
 def make_url(gw, key, u, e):
+    """生成路径型订阅地址：https://网关/<用户名>/<到期时间戳>/<签名>.m3u
+    以 .m3u 结尾，PotPlayer / IPTV 播放器才能识别为播放列表。"""
+    from urllib.parse import quote
     s = sign(key, u, e)
-    return f"{gw}?u={u}&e={e}&s={s}"
+    base = gw.rstrip("/")
+    # 兼容旧配置里带 /live.m3u 的网关值
+    if base.endswith("/live.m3u"):
+        base = base[: -len("/live.m3u")]
+    return f"{base}/{quote(u, safe='')}/{e}/{s}.m3u"
 
 
 def main():
