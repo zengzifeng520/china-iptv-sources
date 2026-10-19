@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
-"""多人订阅用户管理 + 签名订阅地址生成（与 Cloudflare Worker 网关配套）。
+"""多人订阅用户管理（GitHub Pages 专属文件方案）
+
+每个用户一个专属订阅文件（以 .m3u 结尾），到期自动失效：
+    https://tingbao.kdns.fr/output/users/张三_2027-01-01.m3u
+
+NAS 每次 push_nas.py 推送时：
+    - 未过期用户 -> 生成专属文件并推送到 GitHub（地址以 .m3u 结尾，播放器可直接导入）
+    - 已过期用户 -> 自动从 GitHub 删除专属文件（播放器 404，打不开）
 
 用法（在 NAS 上，项目目录内）:
     python3 gen_token.py --add 张三 --expire 2027-01-01    # 新增/续期一个用户
     python3 gen_token.py --list                             # 查看所有用户与订阅地址
-    python3 gen_token.py --remove 张三                      # 删除用户（订阅立即失效）
-    python3 gen_token.py --expire <YYYY-MM-DD>              # 到期时间戳转秒（辅助）
-
-工作方式:
-    - 用户清单存本地 users.json（不推送 GitHub）
-    - 订阅地址 = GATEWAY_URL + ?u=<用户名>&e=<到期时间戳>&s=<HMAC签名>
-    - 签名 = HMAC-SHA256(密钥, "u|e")，密钥在 .gateway_key（与 Worker 的 SUB_KEY 一致）
-    - 到期后 Worker 自动拒绝，无需手动删除
+    python3 gen_token.py --remove 张三                      # 删除用户（下次推送后失效）
 """
 import argparse
-import hashlib
-import hmac
 import json
 import os
 import sys
@@ -24,22 +22,7 @@ from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 USERS_FILE = os.path.join(BASE_DIR, "users.json")
-KEY_FILE = os.path.join(BASE_DIR, ".gateway_key")
-DEFAULT_GATEWAY = "https://tv.tingbao.kdns.fr"  # Worker 绑定域名后的订阅入口（基址，不带 /live.m3u）
-
-
-def load_key():
-    """读取网关密钥；不存在则生成一个（写入 .gateway_key，不推送 GitHub）。"""
-    if os.path.exists(KEY_FILE):
-        k = open(KEY_FILE, encoding="utf-8").read().strip()
-        if k:
-            return k
-    k = "gw-" + hashlib.sha256(os.urandom(32)).hexdigest()
-    with open(KEY_FILE, "w", encoding="utf-8") as f:
-        f.write(k)
-    print(f"已生成网关密钥 -> .gateway_key（请把它填入 Cloudflare Worker 的环境变量 SUB_KEY）")
-    print(f"密钥内容: {k}")
-    return k
+DEFAULT_BASE = "https://tingbao.kdns.fr"  # 对外域名（GitHub Pages）
 
 
 def load_users():
@@ -62,20 +45,12 @@ def expire_ts(date_str):
     return int(dt.replace(hour=23, minute=59, second=59).timestamp())
 
 
-def sign(key, u, e):
-    return hmac.new(key.encode("utf-8"), f"{u}|{e}".encode("utf-8"), hashlib.sha256).hexdigest()
-
-
-def make_url(gw, key, u, e):
-    """生成路径型订阅地址：https://网关/<用户名>/<到期时间戳>/<签名>.m3u
-    以 .m3u 结尾，PotPlayer / IPTV 播放器才能识别为播放列表。"""
+def make_url(base, u, expire_date):
+    """生成专属订阅地址：https://域名/output/users/<用户名>_<到期日期>.m3u
+    以 .m3u 结尾，PotPlayer / IPTV 播放器识别为播放列表。"""
     from urllib.parse import quote
-    s = sign(key, u, e)
-    base = gw.rstrip("/")
-    # 兼容旧配置里带 /live.m3u 的网关值
-    if base.endswith("/live.m3u"):
-        base = base[: -len("/live.m3u")]
-    return f"{base}/{quote(u, safe='')}/{e}/{s}.m3u"
+    base = base.rstrip("/")
+    return f"{base}/output/users/{quote(u, safe='')}_{expire_date}.m3u"
 
 
 def main():
@@ -84,27 +59,25 @@ def main():
     ap.add_argument("--expire", metavar="YYYY-MM-DD", help="到期日期（配合 --add）")
     ap.add_argument("--list", action="store_true", help="列出所有用户与订阅地址")
     ap.add_argument("--remove", metavar="用户名", help="删除用户")
-    ap.add_argument("--gateway", default="", help="网关地址（默认用 config.json 或内置默认值）")
+    ap.add_argument("--base", default="", help="对外域名（默认 config.json 或 tingbao.kdns.fr）")
     args = ap.parse_args()
 
-    key = load_key()
-    # 网关地址：命令行 > config.json > 默认
-    gw = args.gateway
-    if not gw:
+    base = args.base
+    if not base:
         try:
             cfg = json.load(open(os.path.join(BASE_DIR, "config.json"), encoding="utf-8"))
-            gw = cfg.get("gateway_url", "")
+            base = cfg.get("base_url", "")
         except Exception:  # noqa: BLE001
-            gw = ""
-    if not gw:
-        gw = DEFAULT_GATEWAY
+            base = ""
+    if not base:
+        base = DEFAULT_BASE
 
     if args.remove:
         users = load_users()
         if args.remove in users:
             del users[args.remove]
             save_users(users)
-            print(f"已删除用户: {args.remove}（订阅立即失效）")
+            print(f"已删除用户: {args.remove}（下次推送后订阅自动失效）")
         else:
             print(f"用户不存在: {args.remove}")
         return
@@ -114,25 +87,24 @@ def main():
             print("请用 --expire 指定到期日期，例如: python3 gen_token.py --add 张三 --expire 2027-01-01")
             sys.exit(1)
         users = load_users()
-        e = str(expire_ts(args.expire))
-        users[args.add] = {"expire": args.expire, "ts": e}
+        users[args.add] = {"expire": args.expire, "ts": str(expire_ts(args.expire))}
         save_users(users)
         print(f"用户 [{args.add}] 到期 {args.expire}")
         print(f"订阅地址（发给用户，导入播放器即可）:")
-        print(make_url(gw, key, args.add, e))
+        print(make_url(base, args.add, args.expire))
         return
 
     # --list（默认也打印）
     users = load_users()
     now = int(time.time())
-    print(f"网关: {gw}")
+    print(f"域名: {base}")
     print(f"用户数: {len(users)}")
     print("-" * 40)
     for name, info in sorted(users.items()):
         e = str(info.get("ts", ""))
-        expired = "已过期" if e and int(e) * 1000 < now * 1000 else f"剩余 {(int(e) - now) // 86400} 天"
+        expired = "已过期" if e and int(e) < now else f"剩余 {(int(e) - now) // 86400} 天"
         print(f"[{name}] 到期 {info.get('expire')}（{expired}）")
-        print(f"  {make_url(gw, key, name, e)}")
+        print(f"  {make_url(base, name, info.get('expire'))}")
     if not users:
         print("（暂无用户，用 --add 添加）")
 
