@@ -25,29 +25,19 @@
 
 ## 👥 多人订阅（每人一个地址，可控制到期时间）
 
-想分享给家人/朋友使用，又不想地址被无限转发？用 **Cloudflare Worker 签名网关**：
-每个用户拿到**专属订阅地址**（带签名 + 到期时间），**到期自动失效**，无需手动删除；续期重新生成即可。
+想分享给家人/朋友使用，又不想地址被无限转发？每个用户拿到**专属订阅文件**，**到期自动失效**，无需手动删除；续期重新生成即可。
 
 ```
-https://tv.tingbao.kdns.fr/live.m3u?u=张三&e=4070966399&s=81a8fe2ad408...
+https://tingbao.kdns.fr/output/users/张三_2027-01-01.m3u
 ```
 
-**工作原理**：订阅地址里的签名由你的密钥（HMAC-SHA256）生成，Cloudflare Worker 每次请求校验签名与到期时间：
-- 签名有效且未到期 → 返回 live.m3u（所有用户同一份内容）
-- 已过期 / 签名被篡改 → 403，播放器打不开
+**工作原理**：NAS 每次推送时，为每个未过期用户生成一份专属订阅文件（内容与 live.m3u 相同），文件名的日期就是到期日：
 
-### 一次性部署（约 10 分钟）
+- 未到期 → 专属文件在 GitHub 上，播放器可正常导入（地址以 `.m3u` 结尾，PotPlayer / TiviMate 等直接识别为播放列表）
+- 已到期 → NAS 自动把该用户的专属文件从 GitHub 删除，播放器 404 打不开
+- 续期/改日期 → 自动生成新文件并删除旧文件，旧地址失效
 
-1. **注册 Cloudflare**：cloudflare.com 免费注册
-2. **创建 Worker**：控制台 → Workers & Pages → 创建 Worker → 把 `gateway/worker.js` 内容粘贴进编辑器
-3. **配置环境变量**（Worker 的 设置 → 变量和机密）：
-   - `SUB_KEY` = NAS 部署包内 `.gateway_key` 文件的内容（一串 `gw-` 开头的密钥）
-   - `UPSTREAM` = `https://tingbao.kdns.fr/output/live.m3u`
-4. **保存并部署**
-5. **（推荐）绑定域名**：Worker 设置 → 域和路由 → 添加 `tv.tingbao.kdns.fr`（或任意子域），然后去 DNS 面板加 CNAME 记录指向该 Worker
-6. 部署完成后测试：浏览器打开 `https://tv.tingbao.kdns.fr/live.m3u?u=张三&e=4070966399&s=81a8...`（用下面 NAS 生成的完整地址）能看到 M3U 内容即为成功
-
-### NAS 上管理用户（推送后自动打印各用户地址）
+### NAS 上管理用户（推送后自动生成/删除专属文件）
 
 ```bash
 cd /vol1/1000/docker/china-iptv-sources
@@ -58,15 +48,14 @@ python3 gen_token.py --add 张三 --expire 2027-01-01
 # 查看所有用户（含每个用户的完整订阅地址，已过期的会标注）
 python3 gen_token.py --list
 
-# 续期（重新执行 --add 即可，原地址失效，需重新导入）
+# 续期（重新执行 --add 即可，旧地址失效，需把新地址发给对方重新导入）
 python3 gen_token.py --add 张三 --expire 2027-06-01
 
-# 删除用户（订阅立即失效）
+# 删除用户（下次推送后订阅自动失效）
 python3 gen_token.py --remove 张三
 ```
 
-> 用户清单保存在 NAS 本地 `users.json`（不推送 GitHub）；密钥保存在 `.gateway_key`（不推送 GitHub）。每次 `push_nas.py` 推送完成后会自动打印所有未过期用户的订阅地址。
-> 注意：用户续期/删除后，请把新地址发给对方重新导入播放器（旧地址立即失效）。
+> 用户清单保存在 NAS 本地 `users.json`（不推送 GitHub）。每次 `push_nas.py` 推送（`--latest-dir ... --validate --sync-epg --sync-logo`）会自动：①为未过期用户生成/更新专属文件并推送到 GitHub；②删除已到期用户的专属文件（订阅立即失效）。
 
 ---
 
