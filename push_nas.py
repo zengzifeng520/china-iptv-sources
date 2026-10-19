@@ -43,16 +43,27 @@ FILES_TO_PUSH = ["live.txt", "live.m3u", "all.txt", "all.m3u", "stats.json", "ep
 # 组播 / rtsp 等无法用 HTTP 探测的协议：校验时自动保留，不误删
 NON_HTTP_PREFIXES = ("rtp://", "udp://", "igmp://", "rtsp://", "rtmp://")
 
-# ===== 数据源（均为持续维护的活跃仓库）=====
-# EPG 节目单：alantang1977/iptv_api（活跃），经 ghproxy 镜像国内可下载
+# ===== 数据源 =====
+# EPG 节目单（多源，播放器按顺序尝试）：
+#   alantang1977/iptv_api（活跃，每天更新，频道 100+）
+#   epg.51zmt.top（国内老牌节目单，频道全，长期维护）
 EPG_SOURCE = "https://ghproxy.net/https://raw.githubusercontent.com/alantang1977/iptv_api/main/output/epg.xml"
-# 图标索引：拉取活跃仓库文件清单，按频道名精确匹配（不靠猜路径）
+EPG_EXTRA = "https://s.102031.xyz/xml/a1999882e.xml"  # 51zmt 最终地址
+# 台标索引（按优先级拉取文件清单，按频道名精确+模糊匹配）：
+#   Meroser/Media_Coll TVlogo（活跃，央视+卫视+地方台）
+#   fanmingming/live tv（929 个中文台标，最全；台标为静态图片，不受仓库停更影响）
+#   Meroser/IPTV TVlogo（活跃，少量补充）
+#   alantang1977/iptv_api pic（保留，当前基本为空）
 LOGO_INDEX_DIRS = [
     ("Meroser/Media_Coll", "TVlogo"),
+    ("fanmingming/live", "tv"),
+    ("Meroser/IPTV", "TVlogo"),
     ("alantang1977/iptv_api", "pic"),
 ]
 SKIP_LOGO_DIRS = {"Adult"}  # 跳过不适内容目录
 LOGO_RAW_MIRROR = "https://ghproxy.net/https://raw.githubusercontent.com/{repo}/main/{path}"
+LOGO_INDEX_CACHE = os.path.join(BASE_DIR, ".logo_index.json")  # 台标索引本地缓存（24h）
+LOGO_INDEX_TTL = 24 * 3600
 DEFAULT_BASE_URL = "https://tingbao.kdns.fr"  # 订阅/图标/EPG 的对外域名（你自己的 GitHub Pages）
 
 # 频道名常见后缀（清洗时去掉）
@@ -60,7 +71,31 @@ _NAME_SUFFIXES = [
     "高清", "超清", "4K", "1080P", "1080", "720P", "标清", "普清", "蓝光",
     "H265", "H264", "HEVC", "AVC", "SDR", "HDR", "HD", "测试", "源",
     "线路", "回看", "轮播", "频道", "直播", "FHD", "UHD", "IPV4", "IPV6",
+    "咪咕", "央视",
 ]
+# 频道名常见前缀（清洗时去掉）
+_NAME_PREFIXES = ["4K", "8K", "1080P", "1080", "720P", "HD", "UHD", "FHD",
+                  "高清", "超清", "标清", "普清", "蓝光", "数字", "数码"]
+# 繁转简（频道名常见字，用字典避免长度错位）
+_TRAD_MAP = {ord(k): v for k, v in {
+    "頻": "频", "劇": "剧", "臺": "台", "體": "体", "國": "国", "視": "视",
+    "電": "电", "欄": "栏", "綜": "综", "藝": "艺", "動": "动", "畫": "画",
+    "數": "数", "無": "无", "衛": "卫", "經": "经", "濟": "济", "訊": "讯",
+    "聞": "闻", "銀": "银", "樂": "乐", "華": "华", "亞": "亚", "東": "东",
+    "灣": "湾", "島": "岛", "網": "网", "際": "际", "廣": "广", "價": "价",
+    "術": "术", "區": "区", "龍": "龙", "鳳": "凤", "飛": "飞", "蘭": "兰",
+    "極": "极", "貴": "贵", "產": "产", "億": "亿", "萬": "万",
+    "線": "线", "韓": "韩", "還": "还", "這": "这", "個": "个", "與": "与",
+    "於": "于", "時": "时", "間": "间", "開": "开", "發": "发", "節": "节",
+    "舊": "旧", "標": "标", "樣": "样", "點": "点", "單": "单", "雙": "双",
+    "會": "会", "員": "员", "務": "务", "處": "处", "戰": "战", "爭": "争",
+    "號": "号", "軍": "军", "師": "师", "聯": "联", "聲": "声", "愛": "爱",
+    "見": "见", "觀": "观", "親": "亲", "夢": "梦", "機": "机", "權": "权",
+    "驗": "验", "驚": "惊", "張": "张", "陳": "陈", "劉": "刘", "鳳": "凤",
+    "說": "说", "話": "话", "讀": "读", "寫": "写", "車": "车", "馬": "马",
+    "鳥": "鸟", "魚": "鱼", "風": "风", "雲": "云", "紅": "红", "綠": "绿",
+    "藍": "蓝", "黃": "黄", "雜": "杂", "劇": "剧",
+}.items()}
 
 sys.path.insert(0, BASE_DIR)
 from iptv_sources.generator import now_str, build_txt, build_m3u, write_outputs  # noqa: E402
@@ -235,8 +270,23 @@ def fetch_github_dir(repo, path, token=None):
         return []
 
 
-def build_logo_index(token=None):
-    """从活跃仓库构建图标索引 {文件名: 镜像下载URL}（只含 .png，跳过不适目录）。"""
+def build_logo_index(token=None, force=False):
+    """从台标仓库构建索引 {文件名: 镜像下载URL}。
+
+    结果缓存到本地 .logo_index.json（24 小时有效），避免每次推送都请求 GitHub API。
+    """
+    import time
+    if not force and os.path.exists(LOGO_INDEX_CACHE):
+        try:
+            age = time.time() - os.path.getmtime(LOGO_INDEX_CACHE)
+            if age < LOGO_INDEX_TTL:
+                with open(LOGO_INDEX_CACHE, encoding="utf-8") as f:
+                    cached = json.load(f)
+                if cached:
+                    print(f"图标索引：{len(cached)} 个文件名（本地缓存，{int(age // 60)} 分钟前更新）")
+                    return cached
+        except Exception:  # noqa: BLE001
+            pass
     idx = {}
     for repo, prefix in LOGO_INDEX_DIRS:
         items = fetch_github_dir(repo, prefix, token)
@@ -249,8 +299,30 @@ def build_logo_index(token=None):
                 for f in fetch_github_dir(repo, it["path"], token):
                     if isinstance(f, dict) and f.get("type") == "file" and f["name"].lower().endswith(".png"):
                         idx.setdefault(f["name"], LOGO_RAW_MIRROR.format(repo=repo, path=f["path"]))
-    print(f"图标索引：{len(idx)} 个文件名（来源：Meroser/Media_Coll + alantang1977/iptv_api）")
+    try:
+        with open(LOGO_INDEX_CACHE, "w", encoding="utf-8") as f:
+            json.dump(idx, f, ensure_ascii=False)
+    except Exception:  # noqa: BLE001
+        pass
+    print(f"图标索引：{len(idx)} 个文件名（Meroser/Media_Coll + fanmingming/live + Meroser/IPTV + alantang1977）")
     return idx
+
+
+def norm_logo_key(s):
+    """台标文件名规范化：与频道名清洗对齐（繁转简/去括号/去空格等）。"""
+    base = os.path.splitext(s)[0]
+    return norm_channel(base).lower()
+
+
+def match_fuzzy_logo(norm_name, idx_keys_set, min_len=4):
+    """模糊匹配：纯中文频道名逐步去尾字，命中台标索引（避免数字台误配）。"""
+    n = norm_name
+    if re.search(r"[A-Za-z0-9]", n):
+        return None  # 含英文/数字的走精确候选，避免 CCTV5+ 误配到 CCTV5
+    for L in range(len(n), min_len - 1, -1):
+        if n[:L] in idx_keys_set:
+            return n[:L]
+    return None
 
 
 def download_epg(url):
@@ -280,14 +352,23 @@ def download_epg(url):
 
 
 def norm_channel(name):
-    """频道名清洗：去空格/常见后缀，统一央视写法（CCTV-1 -> CCTV1）。"""
+    """频道名清洗：繁转简、删括号、去前后缀、统一央视/CGTN 写法（CCTV-1 -> CCTV1）。"""
     n = name.strip().replace(" ", "").replace("　", "")
+    n = n.translate(_TRAD_MAP)
+    n = re.sub(r"[（(][^（()）]*[)）]", "", n)  # 删除括号及其内容（翡翠综合台(北美) -> 翡翠综合台）
+    for p in _NAME_PREFIXES:
+        if n.startswith(p):
+            n = n[len(p):]
+            break
     for s in _NAME_SUFFIXES:
         if n.endswith(s):
             n = n[: -len(s)]
             break
-    n = re.sub(r"CCTV[-－](\d+)", r"CCTV\1", n)
-    n = re.sub(r"央视(\d+)", r"CCTV\1", n)
+    n = re.sub(r"[•·]*(线路\d*|源\d*)$", "", n)  # 尾部 线路1/源2 等编号
+    n = re.sub(r"^\d+", "", n)  # 前导编号（200TVBS -> TVBS）
+    n = re.sub(r"CCTV[-－]0*(\d+)", r"CCTV\1", n)  # CCTV-01 -> CCTV1
+    n = re.sub(r"央视0*(\d+)", r"CCTV\1", n)
+    n = re.sub(r"^CGT(?!N)", "CGTN", n)  # CGT法语 -> CGTN法语
     m2 = re.match(r"CCTV\d+\+?", n)
     if m2:
         n = m2.group(0)  # CCTV2财经 -> CCTV2；CCTV5+体育 -> CCTV5+
@@ -309,6 +390,8 @@ def channel_logo_candidates(name):
     m = re.match(r"CCTV(\d+)(\+?)", norm)
     if m:
         cands.append(f"CCTV{m.group(1)}{m.group(2)}.png")  # Meroser CCTV 目录（活跃，CCTV5+ 等）
+    if norm.startswith("TVBS"):
+        cands += ["TVBS.png", "TVBS新闻台.png", "TVBS欢乐台.png", "TVBS亚洲台.png"]
     cands.append(f"logos{name.strip()}.png")   # 原样兜底
     seen, out = set(), []
     for c in cands:
@@ -321,30 +404,59 @@ def channel_logo_candidates(name):
 def sync_logos(entries, workers=20, token=None):
     """下载频道图标到 output/logo/，返回 {频道名: 图标文件名}。
 
-    先拉取活跃仓库图标索引，再按频道名候选精确匹配下载（不靠试错路径）。
+    匹配链：精确候选（含 CCTV 变体）→ 规范化精确（空格/大小写/繁简）→
+           子串包含（如 Now剧集 -> Now剧集台）→ 纯中文去尾字模糊。
     """
     os.makedirs(LOGO_DIR, exist_ok=True)
     names = list(dict.fromkeys(n for _c, n, _u in entries))
     print(f"== 同步频道图标（{len(names)} 个唯一频道，并发 {workers}）==")
     idx = build_logo_index(token)
+    idx_norm = {norm_logo_key(k): k for k in idx}  # 规范化文件名 -> 原始文件名
+    idx_norm_items = list(idx_norm.items())
     result = {}
 
+    def _save(name, orig):
+        fname = safe_logo_name(orig)
+        local = os.path.join(LOGO_DIR, fname)
+        if os.path.exists(local) and os.path.getsize(local) > 300:
+            return fname
+        data = download_http(idx[orig], timeout=15)
+        if data and len(data) > 300 and (
+                data[:8] == b"\x89PNG\r\n\x1a\n" or data[:2] == b"\xff\xd8"
+                or data[:4] == b"GIF8"):
+            with open(local, "wb") as f:
+                f.write(data)
+            return fname
+        return None
+
     def work(name):
+        # 1) 精确候选（频道名清洗后直配，含 CCTV/卫视等变体）
         for cand in channel_logo_candidates(name):
-            url = idx.get(cand)
-            if not url:
-                continue
-            fname = safe_logo_name(cand)
-            local = os.path.join(LOGO_DIR, fname)
-            if os.path.exists(local) and os.path.getsize(local) > 300:
-                return fname  # 已下载过
-            data = download_http(url, timeout=15)
-            if data and len(data) > 300 and (
-                    data[:8] == b"\x89PNG\r\n\x1a\n" or data[:2] == b"\xff\xd8"
-                    or data[:4] == b"GIF8"):
-                with open(local, "wb") as f:
-                    f.write(data)
-                return fname
+            if cand in idx:
+                r = _save(name, cand)
+                if r:
+                    return r
+        # 2) 规范化精确（TVB DRAMA -> tvbdrama；繁简/大小写/空格差异）
+        nk = norm_logo_key(name)
+        if len(nk) >= 3 and nk in idx_norm:
+            r = _save(name, idx_norm[nk])
+            if r:
+                return r
+        # 3) 子串包含（长度差 <= 3，防误配）：Now剧集 -> Now剧集台 / HBO原创 -> HBO原创巨献
+        if len(nk) >= 4:
+            for kk, orig in idx_norm_items:
+                if kk == nk:
+                    continue
+                if (kk in nk or nk in kk) and abs(len(kk) - len(nk)) <= 3:
+                    r = _save(name, orig)
+                    if r:
+                        return r
+        # 4) 纯中文去尾字模糊（湖南卫视高清 -> 湖南卫视）
+        hit = match_fuzzy_logo(nk, set(idx_norm))
+        if hit:
+            r = _save(name, idx_norm[hit])
+            if r:
+                return r
         return None
 
     with cf.ThreadPoolExecutor(max_workers=workers) as ex:
@@ -424,7 +536,7 @@ def write_all_outputs(all_entries, updated, logo_map=None, tvgid_map=None, epg_u
     print(f"已生成 output/all.txt、all.m3u（全量原样 {len(all_entries)} 条，校验时兜底订阅）")
 
 
-def run_import(src_file, validate, category, logo_map=None, tvgid_map=None, epg_url=None):
+def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_url=None):
     print(f"== 导入源文件: {src_file} ==")
     text = read_source_file(src_file)
     entries = parse_auto(text)
@@ -481,7 +593,13 @@ def run_import(src_file, validate, category, logo_map=None, tvgid_map=None, epg_
         stats["categories"][c] = stats["categories"].get(c, 0) + 1
 
     logo_map = logo_map or {}
-    tvgid_map = tvgid_map or {}
+    # tvg-id：优先匹配 EPG channel id；未命中回退为规范频道名
+    # （多数国内 EPG 的 channel id 就是中文/拼音频道名，按名也能匹配节目单）
+    tvgid_map = {}
+    for _c, n, _u in entries:
+        k = norm_channel(n)
+        if k:
+            tvgid_map[n] = (epg_map or {}).get(k) or k
     write_outputs(entries, OUTPUT_DIR, logo_map=logo_map, tvgid_map=tvgid_map,
                   updated=updated, stats=stats, epg_url=epg_url)
     print(f"已生成 output/live.txt、live.m3u、stats.json（订阅版 {len(entries)} 条）")
@@ -541,20 +659,15 @@ def main():
         # 转成完整 URL（台标地址指向你自己的域名）
         logo_map = {k: f"{base_url}/output/logo/{v}" for k, v in logo_map.items()}
 
-    # 3) 生成（用 EPG 映射构建 tvg-id）
-    tvgid_map = {}
-    if epg_map and src:
-        text = read_source_file(src)
-        for _c, n, _u in parse_auto(text):
-            k = norm_channel(n)
-            if k in epg_map:
-                tvgid_map[n] = epg_map[k]
-
+    # 3) 生成（EPG 映射用于 tvg-id，多源节目单挂载头部）
     entries = None
     if src:
+        epg_urls = [EPG_EXTRA]  # 51zmt 国内全量节目单（长期维护）
+        if epg_map or os.path.exists(os.path.join(OUTPUT_DIR, "epg.xml")):
+            epg_urls.insert(0, f"{base_url}/output/epg.xml")  # 自托管 alantang 最新节目单
         entries = run_import(src, args.validate, args.category,
-                             logo_map=logo_map, tvgid_map=tvgid_map,
-                             epg_url=f"{base_url}/output/epg.xml" if (epg_map or os.path.exists(os.path.join(OUTPUT_DIR, "epg.xml"))) else None)
+                             logo_map=logo_map, epg_map=epg_map,
+                             epg_url=epg_urls)
     elif not args.push_only:
         print("请指定 --file <源文件路径> 或 --latest-dir <源文件目录>，或使用 --push-only。")
         sys.exit(1)
