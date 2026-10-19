@@ -70,7 +70,31 @@ python deploy.py --push-only
 python deploy.py --no-push
 ```
 
-> 说明：央视部分频道（CCTV-2/7/10/11/15/16/17 等）的稳定源位于国内公网，GitHub Actions 的海外服务器访问不到；**在本机运行 `deploy.py` 得到的订阅最完整**。仓库默认已内置 `GITHUB_TOKEN`（本项目专用，仅仓库读写权限），也可通过环境变量 `GITHUB_TOKEN` 覆盖。
+> 说明：央视部分频道（CCTV-2/7/10/11/15/16/17 等）的稳定源位于国内公网，GitHub Actions 的海外服务器访问不到；**在本机运行 `deploy.py` 得到的订阅最完整**。
+
+### 推送本地 / NAS 上的直播源
+
+如果直播源由你自己维护（例如放在 NAS 上、或用其他工具抓取），可以直接导入并推送，无需经过采集逻辑：
+
+```bash
+# 导入 NAS/本机的 m3u 或 txt 源文件，生成订阅并推送到 GitHub
+python deploy.py --import "D:/nas/iptv/live.m3u"
+
+# 推送前先做三级有效性校验（默认原样保留，不校验）
+python deploy.py --import "D:/nas/iptv/live.m3u" --validate
+
+# 统一覆盖分类名（默认保留文件内的分组）
+python deploy.py --import "D:/nas/iptv/live.txt" --category "我的源"
+```
+
+**NAS 定时自动推送**（群晖 / 威联通等 Linux NAS 配置 cron）：
+
+```bash
+# 每天 02:30 把 NAS 上的源文件推送到 GitHub
+30 2 * * * cd /volume1/iptv/china-iptv-sources && python3 deploy.py --import "/volume1/iptv/live.m3u" >> push.log 2>&1
+```
+
+Windows 可用"任务计划程序"配置同样命令。令牌读取顺序：环境变量 `GITHUB_TOKEN` → 项目目录下 `.github_token` 文件（已在 `.gitignore` 中排除，不会上传）。
 
 ### 自定义配置（config.json）
 
