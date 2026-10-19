@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
 from iptv_sources.cctv import collect_cctv_sources  # noqa: E402
+from iptv_sources.cctv_alt import collect_cctv_alt_sources  # noqa: E402
 from iptv_sources.generator import now_str, write_outputs  # noqa: E402
 from iptv_sources.hotel import collect_hotel_sources  # noqa: E402
 from iptv_sources.validator import check_stream_many  # noqa: E402
@@ -97,7 +98,24 @@ def main():
     )
     log.info("央视源: %d 个频道可用，共 %d 条流", cctv_stats["channels_ok"], len(cctv_entries))
 
-    # 2) 酒店直播源
+    # 2) 央视备选源（官方直链缺失的频道，从聚合源补全；内部已三级校验）
+    log.info("===== 采集央视备选源 =====")
+    cctv_alt_cfg = cfg.get("cctv_alt", {})
+    cctv_alt_sources = cctv_alt_cfg.get("sources", [])
+    cctv_alt_entries, cctv_alt_stats = ({}, {})
+    if cctv_alt_sources:
+        cctv_alt_entries, cctv_alt_stats = collect_cctv_alt_sources(
+            cctv_alt_sources,
+            max_per_channel=cctv_alt_cfg.get("max_per_channel", 1),
+            timeout=timeout,
+            workers=workers,
+            retries=retries,
+        )
+        log.info("央视备选源: %d 条", len(cctv_alt_entries))
+    else:
+        log.info("未配置央视备选源，跳过")
+
+    # 3) 酒店直播源
     log.info("===== 采集酒店直播源 =====")
     hotel_entries, hotel_stats = collect_hotel_sources(
         cfg["hotel_sources"],
@@ -127,9 +145,9 @@ def main():
         ]
         log.info("酒店源有效 %d / %d", len(hotel_valid), len(hotel_entries))
 
-    # 4) 汇总排序：央视在前；酒店源按分类分组（组内保持原顺序）
+    # 4) 汇总排序：央视官方在前；备选其次；酒店源按分类分组（组内保持原顺序）
     hotel_valid.sort(key=lambda x: x[0])
-    all_entries = cctv_entries + hotel_valid
+    all_entries = cctv_entries + cctv_alt_entries + hotel_valid
 
     # 5) 生成输出
     updated = now_str()
@@ -137,6 +155,7 @@ def main():
         "updated_at": updated,
         "total": len(all_entries),
         "cctv": cctv_stats,
+        "cctv_alt": cctv_alt_stats,
         "hotel": hotel_stats,
         "hotel_candidates": len(hotel_entries),
         "hotel_valid": len(hotel_valid),
@@ -152,7 +171,7 @@ def main():
     print(f"更新完成: {updated}")
     print(f"输出目录: {out_dir}")
     print(f"可用频道/流总数: {len(all_entries)}")
-    print(f"  央视官方: {len(cctv_entries)} 条 / 酒店源有效: {len(hotel_valid)} 条（候选 {len(hotel_entries)} 条）")
+    print(f"  央视官方: {len(cctv_entries)} 条 / 央视备选: {len(cctv_alt_entries)} 条 / 酒店源有效: {len(hotel_valid)} 条（候选 {len(hotel_entries)} 条）")
     for cat, cnt in stats["categories"].items():
         print(f"  [{cat}] {cnt} 条")
     print("已生成: live.txt, live.m3u, stats.json")
