@@ -75,6 +75,10 @@ crontab -e
 # 导入 NAS 源文件并推送（默认不校验，原样保留）
 python3 push_nas.py --file "/vol1/IPTV/live.m3u"
 
+# 源文件名字会变（如 iptv-manager 每次生成带随机名的新文件）？
+# 用 --latest-dir 自动选择目录中最新的 m3u/txt，一劳永逸：
+python3 push_nas.py --latest-dir "/vol1/1000/docker/iptv-manager/data/uploads"
+
 # 推送前先做三级有效性校验（master→分片全通过才保留）
 python3 push_nas.py --file "/vol1/IPTV/live.m3u" --validate
 
