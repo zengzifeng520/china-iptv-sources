@@ -234,9 +234,13 @@ def print_user_urls():
             return
         import time as _t
         cfg = load_config()
-        gw = cfg.get("gateway_url", "") or "https://tv.tingbao.kdns.fr/live.m3u"
+        gw = cfg.get("gateway_url", "") or "https://tv.tingbao.kdns.fr"
+        gw = gw.rstrip("/")
+        if gw.endswith("/live.m3u"):
+            gw = gw[: -len("/live.m3u")]
         import hmac as _hmac
         import hashlib as _hl
+        from urllib.parse import quote as _q
         now = _t.time()
         print(f"== 多人订阅（{len(users)} 个用户，网关 {gw}）==")
         for name, info in sorted(users.items()):
@@ -247,7 +251,7 @@ def print_user_urls():
                 print(f"  [{name}] 已过期（到期 {info.get('expire')}）")
                 continue
             s = _hmac.new(key.encode("utf-8"), f"{name}|{e}".encode("utf-8"), _hl.sha256).hexdigest()
-            print(f"  [{name}] 到期 {info.get('expire')} -> {gw}?u={name}&e={e}&s={s}")
+            print(f"  [{name}] 到期 {info.get('expire')} -> {gw}/{_q(name, safe='')}/{e}/{s}.m3u")
     except Exception:  # noqa: BLE001
         pass
 
