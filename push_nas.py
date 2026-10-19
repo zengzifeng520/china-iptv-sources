@@ -162,8 +162,14 @@ def pick_latest(directory):
     return latest
 
 
+def api_url(repo, path):
+    """构造 Contents API URL（路径含中文文件名，需要 URL 编码）。"""
+    from urllib.parse import quote
+    return f"https://api.github.com/repos/{repo}/contents/{quote(path, safe='/')}"
+
+
 def get_sha(repo, path, token):
-    url = f"https://api.github.com/repos/{repo}/contents/{path}"
+    url = api_url(repo, path)
     req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}", "User-Agent": "push-nas"})
     try:
         with urllib.request.urlopen(req, timeout=20) as r:
@@ -180,7 +186,7 @@ def push_file(repo, path, content_bytes, token):
     }
     if sha:
         payload["sha"] = sha
-    url = f"https://api.github.com/repos/{repo}/contents/{path}"
+    url = api_url(repo, path)
     body = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
         url,
