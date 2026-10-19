@@ -12,7 +12,7 @@ cctvchild 少儿、cctv5plus 体育赛事等）。
 """
 import logging
 
-from .validator import check_stream_many
+from .validator import check_stream_best_many
 
 log = logging.getLogger("cctv")
 
@@ -101,7 +101,10 @@ def logo_url_for(ch_id):
 
 
 def collect_cctv_sources(max_urls_per_channel=3, timeout=8, workers=40, retries=1):
-    """采集央视官方直播源：并发校验所有候选 CDN 地址，每频道保留若干可用源。
+    """采集央视官方直播源：三级校验（master→变体→分片）后每频道保留若干可用源。
+
+    订阅中写入的是校验后下钻到变体（分片清单）的 URL，播放器直接加载分片
+    清单，避免多码率变体列表兼容性问题。
 
     Returns:
         (entries, stats, logo_map)
@@ -111,7 +114,7 @@ def collect_cctv_sources(max_urls_per_channel=3, timeout=8, workers=40, retries=
     """
     candidates = build_candidates()
     all_urls = [u for _, _, u in candidates]
-    ok_map = check_stream_many(all_urls, timeout=timeout, workers=workers, retries=retries)
+    best_map = check_stream_best_many(all_urls, timeout=timeout, workers=workers, retries=retries)
 
     entries = []
     logo_map = {}
@@ -124,7 +127,11 @@ def collect_cctv_sources(max_urls_per_channel=3, timeout=8, workers=40, retries=
     for ch_id, ch_name in CCTV_CHANNELS:
         stats["channels_total"] += 1
         pool = per_channel.get(ch_id, [])
-        valid = [u for _, u in pool if ok_map.get(u)]
+        valid = []
+        for _, url in pool:
+            best = best_map.get(url)
+            if best:
+                valid.append(best)
         if not valid:
             log.warning("频道 %s (%s) 无可用源，跳过", ch_id, ch_name)
             continue
