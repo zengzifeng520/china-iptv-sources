@@ -74,10 +74,62 @@
         "https://ghproxy.net/https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/hotels/上海市.txt",
         "https://cdn.jsdelivr.net/gh/maowei1125/spider-iptv@main/source/hotels/上海市.txt"
       ]
+    },
+    {
+      "name": "maowei1125/spider-iptv 上海酒店源(M3U)",
+      "urls": [
+        "https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/hotels/上海市.m3u",
+        "https://ghproxy.net/https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/hotels/上海市.m3u",
+        "https://cdn.jsdelivr.net/gh/maowei1125/spider-iptv@main/source/hotels/上海市.m3u"
+      ]
     }
   ],
   "cctv": {
     "max_urls_per_channel": 3
+  },
+  "cctv_alt": {
+    "max_per_channel": 1,
+    "sources": [
+      {
+        "name": "fanmingming/live 全量源(央视部分)",
+        "urls": [
+          "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/index.m3u",
+          "https://ghproxy.net/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/index.m3u",
+          "https://cdn.jsdelivr.net/gh/fanmingming/live@main/tv/m3u/index.m3u",
+          "https://live.fanmingming.com/tv/m3u/index.m3u"
+        ]
+      },
+      {
+        "name": "iptv-org cn(央视部分)",
+        "urls": [
+          "https://iptv-org.github.io/iptv/countries/cn.m3u"
+        ]
+      },
+      {
+        "name": "279458179/iptv cctv_ipv4",
+        "urls": [
+          "https://raw.githubusercontent.com/279458179/iptv/main/cctv_ipv4.m3u",
+          "https://ghproxy.net/https://raw.githubusercontent.com/279458179/iptv/main/cctv_ipv4.m3u",
+          "https://cdn.jsdelivr.net/gh/279458179/iptv@main/cctv_ipv4.m3u"
+        ]
+      },
+      {
+        "name": "279458179/cctv1-16-iptv",
+        "urls": [
+          "https://raw.githubusercontent.com/279458179/cctv1-16-iptv/main/cctv1-16.m3u",
+          "https://ghproxy.net/https://raw.githubusercontent.com/279458179/cctv1-16-iptv/main/cctv1-16.m3u",
+          "https://cdn.jsdelivr.net/gh/279458179/cctv1-16-iptv@main/cctv1-16.m3u"
+        ]
+      },
+      {
+        "name": "BurningC4/Chinese-IPTV TV-IPV4",
+        "urls": [
+          "https://raw.githubusercontent.com/BurningC4/Chinese-IPTV/master/TV-IPV4.m3u",
+          "https://ghproxy.net/https://raw.githubusercontent.com/BurningC4/Chinese-IPTV/master/TV-IPV4.m3u",
+          "https://cdn.jsdelivr.net/gh/BurningC4/Chinese-IPTV@master/TV-IPV4.m3u"
+        ]
+      }
+    ]
   },
   "validator": {
     "timeout": 8,
