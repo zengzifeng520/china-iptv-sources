@@ -45,10 +45,28 @@ NON_HTTP_PREFIXES = ("rtp://", "udp://", "igmp://", "rtsp://", "rtmp://")
 
 # ===== 数据源 =====
 # EPG 节目单（多源，播放器按顺序尝试）：
-#   alantang1977/iptv_api（活跃，每天更新，频道 100+）
-#   epg.51zmt.top（国内老牌节目单，频道全，长期维护）
+#   alantang1977/iptv_api（活跃，每天更新，频道 100+，51zmt 免费镜像同源）
+#   CCSH/IPTV（活跃聚合 EPG，505 频道，含央视/卫视/地方台/港澳台，输出 e.xml 6.7MB）
+#   epg.51zmt.top（国内老牌节目单，完整版需 token，免费版已退化为 alantang 同源）
 EPG_SOURCE = "https://ghproxy.net/https://raw.githubusercontent.com/alantang1977/iptv_api/main/output/epg.xml"
-EPG_EXTRA = "https://s.102031.xyz/xml/a1999882e.xml"  # 51zmt 最终地址
+# alantang 的 GitHub API 兜底通道（ghproxy 不通时走 contents→blob，需 token）
+EPG_ALANTANG_API = "https://api.github.com/repos/alantang1977/iptv_api/contents/output/epg.xml"
+# CCSH 大覆盖 EPG 的多条下载通道（jsdelivr gz 优先，体积小；GitHub blob API 兜底）
+EPG_CCSH_CHANNELS = [
+    "https://cdn.jsdelivr.net/gh/CCSH/IPTV@main/e.xml.gz",
+    "https://fastly.jsdelivr.net/gh/CCSH/IPTV@main/e.xml.gz",
+    "https://ghproxy.net/https://raw.githubusercontent.com/CCSH/IPTV/main/e.xml.gz",
+    "https://api.github.com/repos/CCSH/IPTV/contents/e.xml",  # 最后走 API（需 token，见 download_http_multi）
+]
+# EPG 频道英文/别名 -> 规范中文（提升匹配率，只在规范名匹配失败时使用）
+_EPG_ALIAS = {
+    "CCTVNEWS": "CGTN", "CGTNNEWS": "CGTN", "CGTV": "CGTN",
+    "BTV国际频道": "BTV国际", "BTV国际": "BTV国际",
+    "BRTV新闻": "BTV新闻", "BRTV文艺": "BTV文艺", "BRTV影视": "BTV影视",
+    "BRTV体育休闲": "BTV体育", "BRTV生活": "BTV生活", "BRTV财经": "BTV财经",
+    "CETV1": "中国教育1台", "CETV2": "中国教育2台", "CETV3": "中国教育3台", "CETV4": "中国教育4台",
+    "CHC家庭影院": "CHC家庭影院", "CHC动作电影": "CHC动作电影", "CHC高清电影": "CHC高清电影",
+}
 # 台标索引（按优先级拉取文件清单，按频道名精确+模糊匹配）：
 #   Meroser/Media_Coll TVlogo（活跃，央视+卫视+地方台）
 #   fanmingming/live tv（929 个中文台标，最全；台标为静态图片，不受仓库停更影响）
@@ -241,11 +259,11 @@ def is_non_http(url):
 def download_http(url, timeout=30, want=None):
     """下载 URL，返回 bytes 或 None（失败/非 200）。中文路径自动做 URL 编码。"""
     try:
-        # 只编码路径中的非 ASCII（保留 / : ? & = % # 等）
+        # 只编码路径中的非 ASCII（保留 / : ? & = % # 等；冒号必须保留——ghproxy 内嵌 URL）
         from urllib.parse import quote
         scheme, rest = url.split("://", 1)
         host, path = rest.split("/", 1)
-        path = quote(path, safe="/:?&=%#~+")
+        path = quote(path, safe="/:?&=%#~+:")  # 冒号必须保留（ghproxy 内嵌 https:// URL）
         url = f"{scheme}://{host}/{path}"
         req = urllib.request.Request(
             url,
@@ -331,29 +349,191 @@ def match_fuzzy_logo(norm_name, idx_keys_set, min_len=4):
     return None
 
 
-def download_epg(url):
-    """下载 EPG 节目单到 output/epg.xml。
+def download_http_multi(urls, timeout=90, token=None):
+    """多通道下载：依次尝试 urls，返回 bytes 或 None。
 
-    支持两种 URL：
-      - GitHub API contents（返回 JSON base64）
-      - 普通 XML / gz 直链
+    通道示例：jsdelivr（gz）→ fastly → ghproxy → GitHub blob API（带 token）。
+    """
+    for url in urls:
+        if "api.github.com" in url:
+            continue  # API 通道走下面的专用逻辑
+        data = download_http(url, timeout=timeout)
+        if data:
+            return data
+    # GitHub API 兜底：contents 拿 sha → blob raw 下载（带 token，避免限流；raw 省 base64 膨胀）
+    if token:
+        m2 = re.match(r"https://api\.github\.com/repos/([^/]+/[^/]+)/contents/(.+)", urls[-1]) if urls else None
+        if m2:
+            try:
+                from urllib.parse import quote
+                repo = m2.group(1)
+                path = quote(m2.group(2), safe="/")
+                cj = download_github_api(f"https://api.github.com/repos/{repo}/contents/{path}", token, timeout=60)
+                sha = (cj or {}).get("sha")
+                if sha:
+                    for attempt in range(3):
+                        data = download_github_raw(
+                            f"https://api.github.com/repos/{repo}/git/blobs/{sha}", token, timeout=180)
+                        if data:
+                            return data
+            except Exception:  # noqa: BLE001
+                pass
+    return None
+
+
+def download_github_api(url, token, timeout=60):
+    """GitHub API JSON 请求（带 token）。"""
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"Authorization": f"Bearer {token}",
+                     "User-Agent": "push-nas",
+                     "Accept": "application/vnd.github+json"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.loads(r.read().decode("utf-8"))
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def download_github_raw(url, token, timeout=180):
+    """GitHub API blob 原始字节下载（Accept raw，带重试）。"""
+    import time
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(
+                url,
+                headers={"Authorization": f"Bearer {token}",
+                         "User-Agent": "push-nas",
+                         "Accept": "application/vnd.github.raw+json"},
+            )
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read()
+        except Exception as e:  # noqa: BLE001
+            print(f"  blob 下载重试 {attempt + 1}: {e}")
+            time.sleep(3)
+    return None
+
+
+def merge_epg_files(src_paths, out_path):
+    """合并多个 EPG XML：channel id 统一为主 display-name（优先中文），节目按频道合并去重。
+
+    src_paths: 本地的 EPG 文件路径列表（可能含 .gz，自动解压）。
+    返回合并后的频道数；失败返回 0。
+    """
+    import gzip
+
+    channels = {}   # name -> True（去重）
+    progs = {}      # name -> { (start, title): attrs+body }
+    src_count = 0
+    for p in src_paths:
+        if not p or not os.path.exists(p):
+            continue
+        try:
+            raw = open(p, "rb").read()
+            if raw[:2] == b"\x1f\x8b":
+                raw = gzip.decompress(raw)
+            text = raw.decode("utf-8", errors="replace")
+        except Exception as e:  # noqa: BLE001
+            print(f"  读取 EPG 失败 {p}: {e}")
+            continue
+        src_count += 1
+        # channel: id -> display-names
+        id2names = {}
+        for m in re.finditer(r'<channel\s+id="([^"]+)"[^>]*>(.*?)</channel>', text, re.S):
+            cid = m.group(1)
+            dns = re.findall(r"<display-name[^>]*>([^<]+)</display-name>", m.group(2))
+            if dns:
+                id2names[cid] = dns
+        # programme: 按 channel 属性归到主名
+        prog_blocks = re.findall(r"<programme\s+([^>]*)>(.*?)</programme>", text, re.S)
+        for attrs, body in prog_blocks:
+            cm = re.search(r'channel="([^"]*)"', attrs)
+            if not cm or cm.group(1) not in id2names:
+                continue
+            nm = main_display_name(id2names[cm.group(1)])
+            if not nm:
+                continue
+            channels[nm] = True
+            sm = re.search(r'start="([^"]*)"', attrs)
+            tm = re.search(r'<title[^>]*>([^<]*)</title>', body)
+            key = (sm.group(1) if sm else "", tm.group(1) if tm else "")
+            progs.setdefault(nm, {})[key] = (attrs, body)
+    if not channels:
+        print("合并 EPG：没有任何可用的节目单数据。")
+        return 0
+    # 写合并文件
+    out = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<tv generator-info-name="china-iptv-sources merged EPG">']
+    for nm in sorted(channels):
+        out.append(f'  <channel id="{esc_xml(nm)}">')
+        out.append(f'    <display-name lang="zh">{esc_xml(nm)}</display-name>')
+        out.append("  </channel>")
+    for nm in sorted(progs):
+        for key in sorted(progs[nm]):
+            attrs, body = progs[nm][key]
+            attrs2 = re.sub(r'channel="[^"]*"', f'channel="{esc_xml(nm)}"', attrs, count=1)
+            out.append(f"  <programme {attrs2}>{body}</programme>")
+    out.append("</tv>")
+    with open(out_path, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(out))
+    print(f"合并 EPG 完成：{len(channels)} 个频道、{sum(len(v) for v in progs.values())} 条节目"
+          f"（来自 {src_count} 个源）-> {out_path}")
+    return len(channels)
+
+
+def main_display_name(dns):
+    """取频道主显示名：优先中文名，否则第一个。"""
+    for d in dns:
+        if re.search(r"[\u4e00-\u9fff]", d):
+            return d
+    return dns[0] if dns else ""
+
+
+def esc_xml(s):
+    return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+             .replace('"', "&quot;"))
+
+
+def download_epg(epg_source, token=None):
+    """下载并合并多源 EPG 节目单到 output/epg.xml。
+
+    源 1：alantang（101 频道，51zmt 免费同源）
+    源 2：CCSH 聚合（505 频道，央视/卫视/地方台/港澳台）
+    合并后 channel id 统一为主显示名（中文优先），与订阅 tvg-id 精确一致。
     """
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    data = download_http(url, timeout=90)
-    if not data:
-        print("EPG 下载失败，跳过（不影响订阅）。")
+    tmp_dir = os.path.join(BASE_DIR, ".epg_tmp")
+    os.makedirs(tmp_dir, exist_ok=True)
+    local = []
+    # 源 1：alantang（ghproxy → GitHub API 兜底）
+    d1 = download_http_multi([epg_source, EPG_ALANTANG_API], timeout=90, token=token)
+    if d1:
+        p1 = os.path.join(tmp_dir, "alantang.xml")
+        with open(p1, "wb") as f:
+            f.write(d1)
+        local.append(p1)
+        print(f"已下载 EPG 源1 alantang（{len(d1)} bytes）")
+    else:
+        print("EPG 源1 alantang 下载失败。")
+    # 源 2：CCSH（多通道，gz 自动解压）
+    d2 = download_http_multi(EPG_CCSH_CHANNELS, timeout=120, token=token)
+    if d2:
+        p2 = os.path.join(tmp_dir, "ccsh.xml.gz" if d2[:2] == b"\x1f\x8b" else "ccsh.xml")
+        with open(p2, "wb") as f:
+            f.write(d2)
+        local.append(p2)
+        print(f"已下载 EPG 源2 CCSH（{len(d2)} bytes）")
+    else:
+        print("EPG 源2 CCSH 下载失败，将只使用源1。")
+    if not local:
+        print("EPG 全部下载失败，跳过（不影响订阅）。")
         return None
-    if "api.github.com/repos" in url:
-        try:
-            js = json.loads(data.decode("utf-8", "ignore"))
-            if isinstance(js, dict) and js.get("content"):
-                data = base64.b64decode(js["content"].replace("\n", ""))
-        except Exception:  # noqa: BLE001
-            pass
     out = os.path.join(OUTPUT_DIR, "epg.xml")
-    with open(out, "wb") as f:
-        f.write(data)
-    print(f"已下载 EPG 节目单 -> output/epg.xml（{len(data)} bytes）")
+    n = merge_epg_files(local, out)
+    if not n:
+        print("EPG 合并失败，跳过。")
+        return None
     return out
 
 
@@ -371,7 +551,7 @@ def norm_channel(name):
             n = n[: -len(s)]
             break
     n = re.sub(r"[•·]*(线路\d*|源\d*)$", "", n)  # 尾部 线路1/源2 等编号
-    n = re.sub(r"^\d+", "", n)  # 前导编号（200TVBS -> TVBS）
+    n = re.sub(r"^\d+(?=[A-Za-z\u4e00-\u9fff])", "", n)  # 前导编号（200TVBS -> TVBS；2026-10-19 不动）
     n = re.sub(r"CCTV[-－]0*(\d+)", r"CCTV\1", n)  # CCTV-01 -> CCTV1
     n = re.sub(r"央视0*(\d+)", r"CCTV\1", n)
     n = re.sub(r"^CGT(?!N)", "CGTN", n)  # CGT法语 -> CGTN法语
@@ -480,20 +660,66 @@ def sync_logos(entries, workers=20, token=None):
 
 
 def parse_epg_channels(xml_path):
-    """解析 EPG 的 channel 列表，返回 {清洗后的频道名: channel id}。"""
+    """解析 EPG 的 channel 列表。
+
+    返回 (map, norm_set)：
+      map: {规范化频道名: 原 display-name}（与合并后 epg.xml 的 channel id 一致）
+      norm_set: 规范化名集合（供匹配链使用）
+    """
     try:
         text = open(xml_path, encoding="utf-8", errors="ignore").read()
     except Exception:  # noqa: BLE001
-        return {}
+        return {}, set()
     ch = {}
     for m in re.finditer(r'<channel\s+id="([^"]+)"[^>]*>(.*?)</channel>', text, re.S):
         cid = m.group(1)
         dm = re.search(r"<display-name[^>]*>([^<]+)</display-name>", m.group(2))
         if dm:
-            key = norm_channel(dm.group(1))
-            ch.setdefault(key, cid)
-    print(f"EPG 解析出 {len(ch)} 个频道的节目单标识")
-    return ch
+            dn = dm.group(1)
+            key = norm_channel(dn)
+            if key:
+                ch.setdefault(key, dn)
+    print(f"EPG 解析出 {len(ch)} 个频道的节目单标识（合并后频道 id 统一为频道名）")
+    return ch, set(ch)
+
+
+def match_epg_id(channel_name, epg_map, epg_norm_set):
+    """频道名 -> EPG channel id（display-name 原样）的四级匹配。
+
+    1) 规范化精确（CCTV-1 高清 -> CCTV1；繁简/括号/前后缀已清洗）
+    2) 别名映射（CCTVNEWS -> CGTN；BRTV影视 -> 北京影视）
+    3) 子串包含（长度差 <= 3，防误配）：Now剧集 -> Now剧集台
+    4) 纯中文去尾字模糊（湖南卫视高清 -> 湖南卫视）
+    未命中返回 None（调用方回退为规范化频道名）。
+    """
+    n = norm_channel(channel_name)
+    if not n:
+        return None
+    if n in epg_norm_set:
+        return epg_map[n]
+    # 别名（整名 + 前缀展开：BRTV体育休闲 -> 北京体育休闲）
+    if n in _EPG_ALIAS:
+        a = norm_channel(_EPG_ALIAS[n])
+        if a in epg_norm_set:
+            return epg_map[a]
+    # 去掉"台/频道/卫视"尾字再试（BRTV新闻HD -> BRTV新闻）
+    for tail in ("频道", "电视台", "卫视", "台"):
+        if n.endswith(tail) and len(n) > len(tail):
+            t = n[: -len(tail)]
+            if t in epg_norm_set:
+                return epg_map[t]
+    # 子串包含
+    if len(n) >= 4:
+        for k in epg_norm_set:
+            if k == n:
+                continue
+            if (k in n or n in k) and abs(len(k) - len(n)) <= 3:
+                return epg_map[k]
+    # 纯中文去尾字模糊
+    hit = match_fuzzy_logo(n, epg_norm_set)
+    if hit:
+        return epg_map[hit]
+    return None
 
 
 def push_logos(repo, token):
@@ -599,13 +825,17 @@ def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_ur
         stats["categories"][c] = stats["categories"].get(c, 0) + 1
 
     logo_map = logo_map or {}
-    # tvg-id：优先匹配 EPG channel id；未命中回退为规范频道名
-    # （多数国内 EPG 的 channel id 就是中文/拼音频道名，按名也能匹配节目单）
+    # tvg-id：频道名四级匹配到合并 EPG 的 channel id（display-name 原样），
+    # 未命中回退为规范化频道名。EPG 覆盖到的频道播放器 100% 能对上节目单。
+    if isinstance(epg_map, tuple) and len(epg_map) == 2:
+        epg_map_norm, epg_norm_set = epg_map
+    else:
+        epg_map_norm = epg_map or {}
+        epg_norm_set = set(epg_map_norm)
     tvgid_map = {}
     for _c, n, _u in entries:
-        k = norm_channel(n)
-        if k:
-            tvgid_map[n] = (epg_map or {}).get(k) or k
+        hit = match_epg_id(n, epg_map_norm, epg_norm_set)
+        tvgid_map[n] = hit or norm_channel(n) or n
     write_outputs(entries, OUTPUT_DIR, logo_map=logo_map, tvgid_map=tvgid_map,
                   updated=updated, stats=stats, epg_url=epg_url)
     print(f"已生成 output/live.txt、live.m3u、stats.json（订阅版 {len(entries)} 条）")
@@ -641,10 +871,10 @@ def main():
     if args.src_dir:
         src = pick_latest(args.src_dir)
 
-    # 1) 同步 EPG（生成 m3u 需要节目单频道映射）
+    # 1) 同步 EPG（多源合并：alantang + CCSH；生成 m3u 需要节目单频道映射）
     epg_map = None
     if args.sync_epg:
-        ep = download_epg(epg_source)
+        ep = download_epg(epg_source, token=token)
         if ep:
             epg_map = parse_epg_channels(ep)
     elif os.path.exists(os.path.join(OUTPUT_DIR, "epg.xml")):
@@ -665,12 +895,14 @@ def main():
         # 转成完整 URL（台标地址指向你自己的域名）
         logo_map = {k: f"{base_url}/output/logo/{v}" for k, v in logo_map.items()}
 
-    # 3) 生成（EPG 映射用于 tvg-id，多源节目单挂载头部）
+    # 3) 生成（EPG 映射用于 tvg-id，自建合并节目单挂载头部）
     entries = None
     if src:
-        epg_urls = [EPG_EXTRA]  # 51zmt 国内全量节目单（长期维护）
+        epg_urls = []
         if epg_map or os.path.exists(os.path.join(OUTPUT_DIR, "epg.xml")):
-            epg_urls.insert(0, f"{base_url}/output/epg.xml")  # 自托管 alantang 最新节目单
+            epg_urls.insert(0, f"{base_url}/output/epg.xml")  # 自托管合并 EPG（channel id 已统一为频道名）
+        if not epg_urls:
+            epg_urls = [EPG_SOURCE]  # 兜底
         entries = run_import(src, args.validate, args.category,
                              logo_map=logo_map, epg_map=epg_map,
                              epg_url=epg_urls)
