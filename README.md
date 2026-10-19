@@ -140,27 +140,23 @@ echo 'github_pat_xxxxxxxxxxxxxxxx' > .github_token
 
 > 如果源文件**名字每次会变**（如 iptv-manager 每次生成带随机名的新文件），不用改路径，直接使用 `--latest-dir` 参数自动选择目录中最新的 m3u/txt（见下文定时任务），一劳永逸。
 
-### 第 4 步：设置定时任务（每天自动检测 + 推送）
+### 第 4 步：设置定时任务（每天 6 / 12 / 18 点三轮自动检测并推送）
 
 ```bash
 crontab -e
 ```
 
-添加以下三行（**每天两轮：检测 → 更新源 → 推送**）：
+添加以下一行（**每天 6:00 / 12:00 / 18:00 三轮：更新源 → 检测有效性 → 立即推送**）：
 
 ```
-0 5,17 * * * cd /vol1/1000/docker/china-iptv-sources && python3 -u push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --no-push >> push.log 2>&1
-0 6,18 * * * cd /vol1/1000/docker/iptv-manager && bash sync_sub.sh >> /vol1/1000/docker/china-iptv-sources/push.log 2>&1
-0 7,19 * * * cd /vol1/1000/docker/china-iptv-sources && python3 -u push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo >> push.log 2>&1
+0 6,12,18 * * * cd /vol1/1000/docker/china-iptv-sources && python3 -u push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo >> push.log 2>&1
 ```
 
 | 时间 | 任务 | 说明 |
 | --- | --- | --- |
-| 5:00 / 17:00 | **检测** | 20 并发逐个探测直播源有效性（每条超时 4 秒），只检测不推送 |
-| 6:00 / 18:00 | **更新源** | iptv-manager 同步最新直播源（若你的更新命令不同，替换第二行） |
-| 7:00 / 19:00 | **推送** | 生成订阅（同步节目单 + 台标）+ 校验 + 推送到 GitHub |
+| 6:00 / 12:00 / 18:00 | **更新 + 检测 + 推送** | 自动取最新源文件 → 20 并发探测有效性（每条超时 4 秒）→ 同步节目单 + 台标 → 立即推送到 GitHub |
 
-> 加 `-u` 参数让日志实时写入（方便排查）；校验超时已优化为 4 秒，2 万条源约 15-60 分钟完成。
+> 加 `-u` 参数让日志实时写入（方便排查）；校验超时已优化为 4 秒，2 万条源约 15-60 分钟完成。若 iptv-manager 需要先同步源，可在同一行命令前拼接你的更新命令（用 `&&` 连接）。
 
 ### 第 5 步：手动推送一次，验证全链路
 
