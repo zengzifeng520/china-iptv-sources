@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>china-iptv-sources · NAS 直播源自动推送</title>
+<meta name="description" content="飞牛 NAS 直播源自动推送到 GitHub，自动匹配台标与节目信息，生成 TXT/M3U 订阅地址">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2316191f'/%3E%3Cpath d='M5 8.5A2.5 2.5 0 0 1 7.5 6h9A2.5 2.5 0 0 1 19 8.5v7a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 15.5v-7Z' fill='none' stroke='%23f59e0b' stroke-width='1.8'/%3E%3Cpath d='M9 9.5 15 12l-6 2.5v-5Z' fill='%23f59e0b'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --bg:#0e1116; --panel:#171b22; --panel2:#1d222b; --line:#262d38;
+  --text:#e8ecf1; --sub:#9aa5b1; --dim:#6b7684;
+  --accent:#f59e0b; --accent2:#38bdf8; --ok:#34d399;
+  --mono:ui-monospace,SFMono-Regular,Consolas,"Courier New",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;
+  font-size:15px;min-width:320px;
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ===== Hero ===== */
+.hero{padding:72px 0 44px;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:
+    radial-gradient(600px 260px at 15% 0%,rgba(245,158,11,.10),transparent 60%),
+    radial-gradient(520px 240px at 85% 10%,rgba(56,189,248,.10),transparent 60%);
+}
+.hero .wrap{position:relative}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--accent);letter-spacing:.12em;
+  border:1px solid rgba(245,158,11,.35);border-radius:999px;
+  padding:5px 14px;background:rgba(245,158,11,.06);
+}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1{font-size:clamp(30px,5.2vw,46px);font-weight:900;line-height:1.25;margin:20px 0 14px;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{color:var(--sub);font-size:16px;max-width:640px;margin-bottom:28px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#13161b;font-weight:700;
+  border-radius:10px;padding:11px 22px;font-size:14.5px;border:none;cursor:pointer;
+  transition:filter .15s,transform .15s;
+}
+.btn:hover{filter:brightness(1.08);text-decoration:none}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--dim)}
+.btn svg{flex:none}
+.meta-line{margin-top:22px;color:var(--dim);font-size:13px}
+
+/* ===== Section ===== */
+section{padding:34px 0}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+.sec-head h2{font-size:20px;font-weight:700}
+.sec-head .en{color:var(--dim);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--mono)}
+
+/* ===== 订阅地址 ===== */
+.sub-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px;overflow:hidden}
+.sub-row{
+  display:flex;align-items:center;gap:14px;padding:13px 16px;
+  border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.sub-row:last-child{border-bottom:none}
+.sub-tag{
+  flex:none;font-size:12px;font-weight:700;border-radius:6px;padding:3px 9px;
+  letter-spacing:.05em;
+}
+.sub-tag.m3u{background:rgba(245,158,11,.14);color:var(--accent)}
+.sub-tag.txt{background:rgba(56,189,248,.12);color:var(--accent2)}
+.sub-tag.cdn{background:rgba(52,211,153,.12);color:var(--ok)}
+.sub-url{
+  font-family:var(--mono);font-size:12.5px;color:var(--sub);
+  flex:1 1 360px;min-width:0;word-break:break-all;
+}
+.copy-btn{
+  flex:none;font-size:12.5px;color:var(--text);background:var(--panel2);
+  border:1px solid var(--line);border-radius:8px;padding:6px 14px;cursor:pointer;
+  font-family:inherit;transition:border-color .15s,color .15s;
+}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.copy-btn.ok{border-color:var(--ok);color:var(--ok)}
+.sub-note{margin-top:12px;color:var(--dim);font-size:13px}
+
+/* ===== 特性 ===== */
+.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.feat{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;
+}
+.feat .num{font-size:26px;font-weight:900;color:var(--accent);font-family:var(--mono)}
+.feat .num b{color:var(--accent2)}
+.feat h3{font-size:15px;font-weight:700;margin:8px 0 6px}
+.feat p{color:var(--sub);font-size:13.5px}
+
+/* ===== 流程 ===== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.step{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 16px;
+  position:relative;
+}
+.step .idx{
+  width:26px;height:26px;border-radius:8px;background:rgba(245,158,11,.14);
+  color:var(--accent);font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);margin-bottom:12px;
+}
+.step h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.step p{color:var(--sub);font-size:12.5px}
+.step code{
+  font-family:var(--mono);font-size:11.5px;color:var(--accent2);
+  background:rgba(56,189,248,.08);border-radius:4px;padding:1px 5px;
+}
+
+/* ===== 数据源 ===== */
+.src-wrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px}
+.src-row{display:flex;gap:12px;align-items:baseline;padding:11px 14px;border-bottom:1px solid var(--line)}
+.src-row:last-child{border-bottom:none}
+.src-row .k{flex:none;width:88px;color:var(--accent);font-size:12.5px;font-weight:700}
+.src-row .v{color:var(--sub);font-size:13px}
+
+/* ===== Footer ===== */
+footer{padding:40px 0 56px;border-top:1px solid var(--line);margin-top:20px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
+footer a{color:var(--sub)}
+
+/* ===== 响应式 ===== */
+@media (max-width:720px){
+  .hero{padding:52px 0 30px}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .sub-url{flex-basis:100%}
+}
+@media (max-width:520px){
+  .feat-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span>NAS 自动同步 · 持续更新</span>
+    <h1>china-iptv-sources<em>·</em> 直播源自动推送</h1>
+    <p class="lead">把飞牛 NAS 上维护的直播源自动推送到 GitHub，每条频道自动匹配台标与节目信息，生成 TXT / M3U 订阅地址。你只管在 NAS 上维护源文件，剩下全部自动。</p>
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/zengzifeng520/china-iptv-sources" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        查看 GitHub 仓库
+      </a>
+      <a class="btn ghost" href="https://github.com/zengzifeng520/china-iptv-sources/blob/main/README.md" target="_blank" rel="noopener">详细安装文档</a>
+    </div>
+    <p class="meta-line">播放器填入下方订阅地址即可使用 · 台标覆盖率 96%+ · 节目信息覆盖率 100%</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== 订阅地址 ===== -->
+  <section id="subscribe">
+    <div class="sec-head">
+      <h2>订阅地址</h2><span class="en">Subscribe</span>
+    </div>
+    <div class="sub-card">
+      <div class="sub-row">
+        <span class="sub-tag m3u">M3U</span>
+        <span class="sub-url">https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u</span>
+        <button class="copy-btn" data-copy="https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u">复制</button>
+      </div>
+      <div class="sub-row">
+        <span class="sub-tag m3u">M3U·域名</span>
+        <span class="sub-url">https://tingbao.kdns.fr/output/live.m3u</span>
+        <button class="copy-btn" data-copy="https://tingbao.kdns.fr/output/live.m3u">复制</button>
+      </div>
+      <div class="sub-row">
+        <span class="sub-tag cdn">CDN</span>
+        <span class="sub-url">https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u</span>
+        <button class="copy-btn" data-copy="https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u">复制</button>
+      </div>
+      <div class="sub-row">
+        <span class="sub-tag txt">TXT</span>
+        <span class="sub-url">https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.txt</span>
+        <button class="copy-btn" data-copy="https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.txt">复制</button>
+      </div>
+      <div class="sub-row">
+        <span class="sub-tag txt">TXT·CDN</span>
+        <span class="sub-url">https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.txt</span>
+        <button class="copy-btn" data-copy="https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.txt">复制</button>
+      </div>
+    </div>
+    <p class="sub-note">M3U 头部自动挂载双节目单（EPG），每个频道带台标（tvg-logo）与节目标识（tvg-id / tvg-name），播放器支持即可显示台标和当日节目信息。</p>
+  </section>
+
+  <!-- ===== 特性 ===== -->
+  <section id="features">
+    <div class="sec-head">
+      <h2>核心能力</h2><span class="en">Features</span>
+    </div>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="num">96<b>%+</b></div>
+        <h3>台标自动匹配</h3>
+        <p>四级匹配链：精确 → 规范化（繁简/空格）→ 子串 → 模糊。实测 1955 条真实源覆盖率 96.4%。</p>
+      </div>
+      <div class="feat">
+        <div class="num">100<b>%</b></div>
+        <h3>节目信息全覆盖</h3>
+        <p>每条频道都带 tvg-id / tvg-name，并挂载双 EPG 节目单，播放器即可显示节目预告。</p>
+      </div>
+      <div class="feat">
+        <div class="num">2<b>轮/天</b></div>
+        <h3>自动检测与推送</h3>
+        <p>每天两轮：5/17 点 20 并发检测有效性，6/18 点更新源，7/19 点推送 GitHub 并同步台标节目单。</p>
+      </div>
+      <div class="feat">
+        <div class="num">4<b>秒</b></div>
+        <h3>高效校验</h3>
+        <p>三级校验（master→分片→媒体数据），每条超时 4 秒，2 万条源约 15-60 分钟完成；组播/rtsp 自动保留。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 部署流程 ===== -->
+  <section id="deploy">
+    <div class="sec-head">
+      <h2>NAS 上部署 · 四步</h2><span class="en">Deploy</span>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="idx">1</div>
+        <h3>上传解压</h3>
+        <p>部署包上传到 <code>/vol1/1000/docker/</code>，解压到 <code>china-iptv-sources/</code></p>
+      </div>
+      <div class="step">
+        <div class="idx">2</div>
+        <h3>配置令牌</h3>
+        <p>GitHub 令牌写入 <code>.github_token</code>（需 Contents 读写权限）</p>
+      </div>
+      <div class="step">
+        <div class="idx">3</div>
+        <h3>定时任务</h3>
+        <p>crontab 三行：5/17 检测、6/18 更新源、7/19 推送</p>
+      </div>
+      <div class="step">
+        <div class="idx">4</div>
+        <h3>手动验证</h3>
+        <p>跑一次 <code>--sync-epg --sync-logo</code> 验证全链路</p>
+      </div>
+    </div>
+    <p class="sub-note">完整步骤、全部命令、常见问题见 <a href="https://github.com/zengzifeng520/china-iptv-sources/blob/main/README.md" target="_blank" rel="noopener">README 安装文档</a>。</p>
+  </section>
+
+  <!-- ===== 数据源 ===== -->
+  <section id="source">
+    <div class="sec-head">
+      <h2>台标与节目单数据源</h2><span class="en">Data Source</span>
+    </div>
+    <div class="src-wrap">
+      <div class="src-row"><span class="k">节目单</span><span class="v">alantang1977/iptv_api（每天更新，100+ 频道）+ epg.51zmt.top（国内老牌全量，长期维护）</span></div>
+      <div class="src-row"><span class="k">台标库</span><span class="v">Meroser/Media_Coll（活跃）+ fanmingming/live tv/（929 个中文台标）+ Meroser/IPTV</span></div>
+      <div class="src-row"><span class="k">更新方式</span><span class="v">每次推送自动下载最新节目单、按频道名自动匹配台标，增量上传（记录 sha256，只推变更文件）</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>china-iptv-sources · 仅供个人学习交流使用，直播源版权归各电视台及版权方所有</span>
+    <span><a href="https://github.com/zengzifeng520/china-iptv-sources" target="_blank" rel="noopener">GitHub</a> · <a href="https://github.com/zengzifeng520/china-iptv-sources/blob/main/README.md" target="_blank" rel="noopener">文档</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var btns = document.querySelectorAll(".copy-btn");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function () {
+      var url = this.getAttribute("data-copy");
+      function done(ok) {
+        var t = this;
+        t.classList.add("ok");
+        t.textContent = ok ? "已复制" : "复制失败";
+        setTimeout(function () {
+          t.classList.remove("ok");
+          t.textContent = "复制";
+        }, 1800);
+      }
+      var self = this;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          done.call(self, true);
+        }, function () {
+          done.call(self, false);
+        });
+      } else {
+        var ta = document.createElement("textarea");
+        ta.value = url;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); done.call(self, true); }
+        catch (e) { done.call(self, false); }
+        document.body.removeChild(ta);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
