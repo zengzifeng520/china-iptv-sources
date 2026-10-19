@@ -221,6 +221,37 @@ def push_file(repo, path, content_bytes, token):
     return True
 
 
+def print_user_urls():
+    """推送完成后打印多人订阅地址（配合 Cloudflare Worker 网关 + gen_token.py）。"""
+    try:
+        key_f = os.path.join(BASE_DIR, ".gateway_key")
+        users_f = os.path.join(BASE_DIR, "users.json")
+        if not (os.path.exists(key_f) and os.path.exists(users_f)):
+            return
+        key = open(key_f, encoding="utf-8").read().strip()
+        users = json.load(open(users_f, encoding="utf-8"))
+        if not key or not users:
+            return
+        import time as _t
+        cfg = load_config()
+        gw = cfg.get("gateway_url", "") or "https://tv.tingbao.kdns.fr/live.m3u"
+        import hmac as _hmac
+        import hashlib as _hl
+        now = _t.time()
+        print(f"== 多人订阅（{len(users)} 个用户，网关 {gw}）==")
+        for name, info in sorted(users.items()):
+            e = str(info.get("ts", ""))
+            if not e:
+                continue
+            if int(e) < now:
+                print(f"  [{name}] 已过期（到期 {info.get('expire')}）")
+                continue
+            s = _hmac.new(key.encode("utf-8"), f"{name}|{e}".encode("utf-8"), _hl.sha256).hexdigest()
+            print(f"  [{name}] 到期 {info.get('expire')} -> {gw}?u={name}&e={e}&s={s}")
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def push_outputs(repo, token):
     print(f"== 推送 output/ 到 {repo} ==")
     ok = 0
@@ -245,6 +276,7 @@ def push_outputs(repo, token):
         if os.path.exists(os.path.join(OUTPUT_DIR, "all.m3u")):
             print(f"  全量版订阅（all.m3u，原样兜底）：https://raw.githubusercontent.com/{repo}/main/output/all.m3u")
         print(f"  TXT（TVBox 用）：https://raw.githubusercontent.com/{repo}/main/output/live.txt")
+        print_user_urls()
     return ok
 
 
