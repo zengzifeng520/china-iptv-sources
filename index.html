@@ -3,143 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>china-iptv-sources · NAS 直播源自动推送</title>
-<meta name="description" content="飞牛 NAS 直播源自动推送到 GitHub，自动匹配台标与节目信息，生成 TXT/M3U 订阅地址">
+<title>china-iptv-sources · NAS 直播源自动分发系统</title>
+<meta name="description" content="飞牛 NAS 直播源自动推送到 GitHub：自动有效性检测、台标与节目信息自动匹配、多人订阅到期管理，生成标准 TXT / M3U 订阅">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2316191f'/%3E%3Cpath d='M5 8.5A2.5 2.5 0 0 1 7.5 6h9A2.5 2.5 0 0 1 19 8.5v7a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 15.5v-7Z' fill='none' stroke='%23f59e0b' stroke-width='1.8'/%3E%3Cpath d='M9 9.5 15 12l-6 2.5v-5Z' fill='%23f59e0b'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 :root{
   --bg:#0e1116; --panel:#171b22; --panel2:#1d222b; --line:#262d38;
   --text:#e8ecf1; --sub:#9aa5b1; --dim:#6b7684;
-  --accent:#f59e0b; --accent2:#38bdf8; --ok:#34d399;
-  --mono:ui-monospace,SFMono-Regular,Consolas,"Courier New",monospace;
+  --accent:#f59e0b; --accent2:#38bdf8; --ok:#34d399; --warn:#fb7185;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Consolas,"Courier New",monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
   font-family:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
-  background:var(--bg);color:var(--text);line-height:1.65;
-  font-size:15px;min-width:320px;
+  background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;min-width:320px;
 }
-.wrap{max-width:960px;margin:0 auto;padding:0 20px}
-a{color:var(--accent2);text-decoration:none}
-a:hover{text-decoration:underline}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+::selection{background:rgba(245,158,11,.25)}
 
 /* ===== Hero ===== */
-.hero{padding:72px 0 44px;position:relative;overflow:hidden}
+.hero{padding:84px 0 52px;position:relative;overflow:hidden}
 .hero::before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
   background:
-    radial-gradient(600px 260px at 15% 0%,rgba(245,158,11,.10),transparent 60%),
-    radial-gradient(520px 240px at 85% 10%,rgba(56,189,248,.10),transparent 60%);
+    radial-gradient(640px 280px at 12% -5%,rgba(245,158,11,.12),transparent 60%),
+    radial-gradient(560px 260px at 88% 8%,rgba(56,189,248,.12),transparent 60%),
+    radial-gradient(420px 200px at 50% 110%,rgba(52,211,153,.06),transparent 60%);
 }
 .hero .wrap{position:relative}
 .badge{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:12px;color:var(--accent);letter-spacing:.12em;
-  border:1px solid rgba(245,158,11,.35);border-radius:999px;
-  padding:5px 14px;background:rgba(245,158,11,.06);
+  font-size:12px;color:var(--accent);letter-spacing:.14em;font-weight:700;
+  border:1px solid rgba(245,158,11,.35);border-radius:999px;padding:6px 14px;
+  background:rgba(245,158,11,.06);
 }
-.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(245,158,11,.8);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-h1{font-size:clamp(30px,5.2vw,46px);font-weight:900;line-height:1.25;margin:20px 0 14px;letter-spacing:-.01em}
-h1 em{font-style:normal;color:var(--accent)}
-.hero p.lead{color:var(--sub);font-size:16px;max-width:640px;margin-bottom:28px}
-.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--accent);color:#13161b;font-weight:700;
-  border-radius:10px;padding:11px 22px;font-size:14.5px;border:none;cursor:pointer;
-  transition:filter .15s,transform .15s;
+.hero h1{
+  font-size:38px;font-weight:900;letter-spacing:.01em;margin:20px 0 12px;
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
 }
-.btn:hover{filter:brightness(1.08);text-decoration:none}
-.btn:active{transform:translateY(1px)}
-.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--dim)}
-.btn svg{flex:none}
-.meta-line{margin-top:22px;color:var(--dim);font-size:13px}
+.hero h1 em{font-style:normal;color:var(--accent2);font-size:26px;font-weight:700}
+.hero .lead{
+  color:var(--sub);font-size:16.5px;max-width:680px;margin-bottom:26px;
+}
+.hero .lead b{color:var(--text);font-weight:600}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  font-size:12px;color:var(--sub);border:1px solid var(--line);border-radius:999px;
+  padding:5px 12px;background:var(--panel);
+}
+.tag b{color:var(--accent2);font-weight:600}
 
 /* ===== Section ===== */
-section{padding:34px 0}
-.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
-.sec-head h2{font-size:20px;font-weight:700}
-.sec-head .en{color:var(--dim);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--mono)}
-
-/* ===== 订阅地址 ===== */
-.sub-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px;overflow:hidden}
-.sub-row{
-  display:flex;align-items:center;gap:14px;padding:13px 16px;
-  border-bottom:1px solid var(--line);flex-wrap:wrap;
+section{padding:46px 0 8px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:22px}
+.sec-head h2{font-size:22px;font-weight:900;letter-spacing:.02em}
+.sec-head .en{
+  font-size:12px;color:var(--dim);letter-spacing:.2em;font-weight:600;
+  font-family:var(--mono);
 }
-.sub-row:last-child{border-bottom:none}
-.sub-tag{
-  flex:none;font-size:12px;font-weight:700;border-radius:6px;padding:3px 9px;
-  letter-spacing:.05em;
-}
-.sub-tag.m3u{background:rgba(245,158,11,.14);color:var(--accent)}
-.sub-tag.txt{background:rgba(56,189,248,.12);color:var(--accent2)}
-.sub-tag.cdn{background:rgba(52,211,153,.12);color:var(--ok)}
-.sub-url{
-  font-family:var(--mono);font-size:12.5px;color:var(--sub);
-  flex:1 1 360px;min-width:0;word-break:break-all;
-}
-.copy-btn{
-  flex:none;font-size:12.5px;color:var(--text);background:var(--panel2);
-  border:1px solid var(--line);border-radius:8px;padding:6px 14px;cursor:pointer;
-  font-family:inherit;transition:border-color .15s,color .15s;
-}
-.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
-.copy-btn.ok{border-color:var(--ok);color:var(--ok)}
-.sub-note{margin-top:12px;color:var(--dim);font-size:13px}
+.sec-head::after{content:"";flex:1;height:1px;background:var(--line);margin-left:8px}
 
 /* ===== 特性 ===== */
-.feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .feat{
-  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:20px 18px;position:relative;overflow:hidden;
 }
-.feat .num{font-size:26px;font-weight:900;color:var(--accent);font-family:var(--mono)}
-.feat .num b{color:var(--accent2)}
-.feat h3{font-size:15px;font-weight:700;margin:8px 0 6px}
-.feat p{color:var(--sub);font-size:13.5px}
+.feat::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:.5}
+.feat .ico{width:40px;height:40px;border-radius:10px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.feat .ico svg{width:22px;height:22px;stroke:var(--accent)}
+.feat h3{font-size:15px;font-weight:700;margin-bottom:7px}
+.feat p{color:var(--sub);font-size:13px;line-height:1.65}
+.feat .stat{margin-top:12px;font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent2)}
+.feat .stat small{font-size:11px;color:var(--dim);font-weight:400;font-family:"Noto Sans SC",sans-serif;margin-left:4px}
 
 /* ===== 流程 ===== */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:step}
 .step{
   background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 16px;
-  position:relative;
+  position:relative;counter-increment:step;
 }
-.step .idx{
-  width:26px;height:26px;border-radius:8px;background:rgba(245,158,11,.14);
-  color:var(--accent);font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);margin-bottom:12px;
+.step::before{
+  content:"0" counter(step);
+  font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:700;
+  position:absolute;top:14px;right:16px;opacity:.7;
 }
 .step h3{font-size:14px;font-weight:700;margin-bottom:6px}
 .step p{color:var(--sub);font-size:12.5px}
-.step code{
-  font-family:var(--mono);font-size:11.5px;color:var(--accent2);
-  background:rgba(56,189,248,.08);border-radius:4px;padding:1px 5px;
-}
+.step .arrow{color:var(--accent2);font-family:var(--mono);font-size:14px;font-weight:700;margin-left:4px}
 
-/* ===== 数据源 ===== */
-.src-wrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px}
-.src-row{display:flex;gap:12px;align-items:baseline;padding:11px 14px;border-bottom:1px solid var(--line)}
-.src-row:last-child{border-bottom:none}
-.src-row .k{flex:none;width:88px;color:var(--accent);font-size:12.5px;font-weight:700}
-.src-row .v{color:var(--sub);font-size:13px}
+/* ===== 安装 ===== */
+.install{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.inst-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;overflow:hidden}
+.inst-card.full{grid-column:1/-1}
+.inst-card h3{font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:9px}
+.inst-card h3 .step-badge{
+  flex:none;width:22px;height:22px;border-radius:7px;background:rgba(245,158,11,.14);
+  color:var(--accent);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);
+}
+.inst-card .desc{color:var(--sub);font-size:13px;margin-bottom:14px}
+.inst-card ul{list-style:none;margin-bottom:12px}
+.inst-card li{
+  color:var(--sub);font-size:13px;padding:3px 0 3px 20px;position:relative;
+}
+.inst-card li::before{
+  content:"";position:absolute;left:4px;top:11px;width:6px;height:6px;
+  border-radius:2px;background:var(--accent2);opacity:.8;
+}
+.inst-card li b{color:var(--text);font-weight:600}
+pre{
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;
+  background:#0c0f14;border:1px solid var(--line);border-radius:12px;
+  padding:16px;overflow-x:auto;color:#d7dee8;
+}
+pre .cm{color:#5b6775}
+pre .cmd{color:var(--ok)}
+code.inline{
+  font-family:var(--mono);font-size:12px;color:var(--accent2);
+  background:rgba(56,189,248,.08);border-radius:5px;padding:2px 6px;
+}
+.note{
+  display:flex;gap:10px;align-items:flex-start;
+  background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.25);
+  border-radius:12px;padding:12px 14px;color:var(--sub);font-size:12.5px;margin-top:12px;
+}
+.note svg{flex:none;width:16px;height:16px;stroke:var(--accent2);margin-top:2px}
+.warn{
+  background:rgba(251,113,133,.07);border-color:rgba(251,113,133,.28);
+}
+.warn svg{stroke:var(--warn)}
 
 /* ===== Footer ===== */
-footer{padding:40px 0 56px;border-top:1px solid var(--line);margin-top:20px}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
-footer a{color:var(--sub)}
+footer{padding:46px 0 56px;border-top:1px solid var(--line);margin-top:36px}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
+footer b{color:var(--sub);font-weight:600}
+footer .ft-right{display:flex;gap:18px}
 
 /* ===== 响应式 ===== */
-@media (max-width:720px){
-  .hero{padding:52px 0 30px}
+@media (max-width:820px){
   .feat-grid{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:1fr 1fr}
-  .sub-url{flex-basis:100%}
+  .install{grid-template-columns:1fr}
 }
 @media (max-width:520px){
+  .hero{padding:56px 0 36px}
+  .hero h1{font-size:28px}
+  .hero h1 em{font-size:19px}
   .feat-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
 }
@@ -147,176 +161,196 @@ footer a{color:var(--sub)}
 </head>
 <body>
 
+<!-- ===== Hero ===== -->
 <header class="hero">
   <div class="wrap">
     <span class="badge"><span class="dot"></span>NAS 自动同步 · 持续更新</span>
-    <h1>china-iptv-sources<em>·</em> 直播源自动推送</h1>
-    <p class="lead">把飞牛 NAS 上维护的直播源自动推送到 GitHub，每条频道自动匹配台标与节目信息，生成 TXT / M3U 订阅地址。你只管在 NAS 上维护源文件，剩下全部自动。</p>
-    <div class="cta-row">
-      <a class="btn" href="https://github.com/zengzifeng520/china-iptv-sources" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-        查看 GitHub 仓库
-      </a>
-      <a class="btn ghost" href="https://github.com/zengzifeng520/china-iptv-sources/blob/main/README.md" target="_blank" rel="noopener">详细安装文档</a>
+    <h1>china-iptv-sources<em>直播源自动分发系统</em></h1>
+    <p class="lead">
+      把 <b>飞牛 NAS</b> 上维护的直播源，自动完成 <b>有效性检测 → 台标匹配 → 节目信息挂载 → 推送到 GitHub</b>，
+      生成标准 <b>TXT / M3U</b> 订阅文件。你只负责在 NAS 上维护源文件，剩下全部自动化。
+    </p>
+    <div class="tag-row">
+      <span class="tag">支持 <b>M3U / TXT</b> 订阅</span>
+      <span class="tag">自动 <b>20 并发</b> 有效性检测</span>
+      <span class="tag">台标 <b>自动匹配</b></span>
+      <span class="tag">EPG <b>节目单</b> 自动挂载</span>
+      <span class="tag">多人订阅 <b>到期管理</b></span>
+      <span class="tag">兼容 <b>VLC / PotPlayer / TiviMate</b></span>
     </div>
-    <p class="meta-line">播放器填入下方订阅地址即可使用 · 台标覆盖率 96%+ · 节目信息覆盖率 100%</p>
   </div>
 </header>
 
 <main class="wrap">
 
-  <!-- ===== 订阅地址 ===== -->
-  <section id="subscribe">
-    <div class="sec-head">
-      <h2>订阅地址</h2><span class="en">Subscribe</span>
-    </div>
-    <div class="sub-card">
-      <div class="sub-row">
-        <span class="sub-tag m3u">M3U</span>
-        <span class="sub-url">https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u</span>
-        <button class="copy-btn" data-copy="https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u">复制</button>
-      </div>
-      <div class="sub-row">
-        <span class="sub-tag m3u">M3U·域名</span>
-        <span class="sub-url">https://tingbao.kdns.fr/output/live.m3u</span>
-        <button class="copy-btn" data-copy="https://tingbao.kdns.fr/output/live.m3u">复制</button>
-      </div>
-      <div class="sub-row">
-        <span class="sub-tag cdn">CDN</span>
-        <span class="sub-url">https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u</span>
-        <button class="copy-btn" data-copy="https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u">复制</button>
-      </div>
-      <div class="sub-row">
-        <span class="sub-tag txt">TXT</span>
-        <span class="sub-url">https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.txt</span>
-        <button class="copy-btn" data-copy="https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.txt">复制</button>
-      </div>
-      <div class="sub-row">
-        <span class="sub-tag txt">TXT·CDN</span>
-        <span class="sub-url">https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.txt</span>
-        <button class="copy-btn" data-copy="https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.txt">复制</button>
-      </div>
-    </div>
-    <p class="sub-note">M3U 头部自动挂载双节目单（EPG），每个频道带台标（tvg-logo）与节目标识（tvg-id / tvg-name），播放器支持即可显示台标和当日节目信息。</p>
-  </section>
-
-  <!-- ===== 特性 ===== -->
+  <!-- ===== 核心能力 ===== -->
   <section id="features">
-    <div class="sec-head">
-      <h2>核心能力</h2><span class="en">Features</span>
-    </div>
+    <div class="sec-head"><h2>核心能力</h2><span class="en">FEATURES</span></div>
     <div class="feat-grid">
       <div class="feat">
-        <div class="num">96<b>%+</b></div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="3"/></svg></div>
+        <h3>NAS → GitHub 自动推送</h3>
+        <p>定时任务监控 NAS 源目录，自动选取最新源文件，推送完成后输出全部订阅地址，无需人工干预。</p>
+        <div class="stat">2<small>轮 / 天</small></div>
+      </div>
+      <div class="feat">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h3>20 并发有效性检测</h3>
+        <p>每条源 4 秒超时，逐条探测 HTTP 响应与媒体数据；失效源自动剔除，组播 / rtsp 自动保留。</p>
+        <div class="stat">20<small>并发 · 4s 超时</small></div>
+      </div>
+      <div class="feat">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7M15 9h2M15 13h2"/></svg></div>
         <h3>台标自动匹配</h3>
-        <p>四级匹配链：精确 → 规范化（繁简/空格）→ 子串 → 模糊。实测 1955 条真实源覆盖率 96.4%。</p>
+        <p>四级匹配链：精确 → 规范化 → 子串 → 模糊。频道名与台标库自动对应，播放器直接显示台标。</p>
+        <div class="stat">96<small>%+ 覆盖率</small></div>
       </div>
       <div class="feat">
-        <div class="num">100<b>%</b></div>
-        <h3>节目信息全覆盖</h3>
-        <p>每条频道都带 tvg-id / tvg-name，并挂载双 EPG 节目单，播放器即可显示节目预告。</p>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <h3>EPG 节目信息挂载</h3>
+        <p>多源合并节目单（497+ 频道），订阅头部自动挂载，每条频道带 tvg-id，播放器显示当日节目预告。</p>
+        <div class="stat">497<small>频道节目单</small></div>
       </div>
       <div class="feat">
-        <div class="num">2<b>轮/天</b></div>
-        <h3>自动检测与推送</h3>
-        <p>每天两轮：5/17 点 20 并发检测有效性，6/18 点更新源，7/19 点推送 GitHub 并同步台标节目单。</p>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="16" r="3.2"/><path d="M11.5 9.5 15 14.5M7 20c1.2-2 2.5-3 3.5-3.2"/></svg></div>
+        <h3>多人订阅 · 到期控制</h3>
+        <p>每人一个专属订阅地址，到期自动失效（文件删除，播放器 404），续期一键生成，无需手动管理。</p>
+        <div class="stat">N<small>用户独立管理</small></div>
       </div>
       <div class="feat">
-        <div class="num">4<b>秒</b></div>
-        <h3>高效校验</h3>
-        <p>三级校验（master→分片→媒体数据），每条超时 4 秒，2 万条源约 15-60 分钟完成；组播/rtsp 自动保留。</p>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h18M3 15h18"/></svg></div>
+        <h3>多端播放器兼容</h3>
+        <p>标准 M3U / TXT 格式，订阅地址以 .m3u 结尾，VLC、PotPlayer、TiviMate、影视仓等直接导入。</p>
+        <div class="stat">VLC<small>PotPlayer · 手机/电视</small></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 部署流程 ===== -->
-  <section id="deploy">
-    <div class="sec-head">
-      <h2>NAS 上部署 · 四步</h2><span class="en">Deploy</span>
-    </div>
+  <!-- ===== 工作流程 ===== -->
+  <section id="flow">
+    <div class="sec-head"><h2>工作流程</h2><span class="en">WORKFLOW</span></div>
     <div class="steps">
       <div class="step">
-        <div class="idx">1</div>
-        <h3>上传解压</h3>
-        <p>部署包上传到 <code>/vol1/1000/docker/</code>，解压到 <code>china-iptv-sources/</code></p>
+        <h3>维护源文件<span class="arrow">→</span></h3>
+        <p>在 NAS 上通过 iptv-manager 等工具维护直播源，导出文件到固定目录（文件名可随时变化）。</p>
       </div>
       <div class="step">
-        <div class="idx">2</div>
-        <h3>配置令牌</h3>
-        <p>GitHub 令牌写入 <code>.github_token</code>（需 Contents 读写权限）</p>
+        <h3>自动检测<span class="arrow">→</span></h3>
+        <p>定时任务自动选取最新源文件，20 并发逐条探测有效性，失效源剔除，组播源保留。</p>
       </div>
       <div class="step">
-        <div class="idx">3</div>
-        <h3>定时任务</h3>
-        <p>crontab 三行：5/17 检测、6/18 更新源、7/19 推送</p>
+        <h3>自动推送<span class="arrow">→</span></h3>
+        <p>匹配台标与节目信息后生成订阅文件，推送到 GitHub 并刷新 CDN，全程无人值守。</p>
       </div>
       <div class="step">
-        <div class="idx">4</div>
-        <h3>手动验证</h3>
-        <p>跑一次 <code>--sync-epg --sync-logo</code> 验证全链路</p>
+        <h3>订阅分发<span class="arrow">→</span></h3>
+        <p>播放器导入订阅地址即可观看；多人订阅按用户独立生成，到期自动失效。</p>
       </div>
     </div>
-    <p class="sub-note">完整步骤、全部命令、常见问题见 <a href="https://github.com/zengzifeng520/china-iptv-sources/blob/main/README.md" target="_blank" rel="noopener">README 安装文档</a>。</p>
   </section>
 
-  <!-- ===== 数据源 ===== -->
-  <section id="source">
-    <div class="sec-head">
-      <h2>台标与节目单数据源</h2><span class="en">Data Source</span>
-    </div>
-    <div class="src-wrap">
-      <div class="src-row"><span class="k">节目单</span><span class="v">alantang1977/iptv_api（每天更新，100+ 频道）+ epg.51zmt.top（国内老牌全量，长期维护）</span></div>
-      <div class="src-row"><span class="k">台标库</span><span class="v">Meroser/Media_Coll（活跃）+ fanmingming/live tv/（929 个中文台标）+ Meroser/IPTV</span></div>
-      <div class="src-row"><span class="k">更新方式</span><span class="v">每次推送自动下载最新节目单、按频道名自动匹配台标，增量上传（记录 sha256，只推变更文件）</span></div>
+  <!-- ===== 安装方法 ===== -->
+  <section id="install">
+    <div class="sec-head"><h2>安装方法</h2><span class="en">INSTALL</span></div>
+
+    <div class="install">
+      <div class="inst-card">
+        <h3><span class="step-badge">1</span>准备环境</h3>
+        <div class="desc">飞牛 NAS（支持 SSH 终端）、GitHub 账号 + 推送令牌。</div>
+        <ul>
+          <li><b>NAS</b>：飞牛 OS，开启 SSH，终端可执行 python3</li>
+          <li><b>GitHub 令牌</b>：Settings → Developer settings → Personal access tokens，勾选 <b>repo</b> 权限生成</li>
+          <li><b>源目录</b>：直播源导出目录，如 <code class="inline">/vol1/1000/docker/iptv-manager/data/uploads</code></li>
+        </ul>
+      </div>
+
+      <div class="inst-card">
+        <h3><span class="step-badge">2</span>部署项目</h3>
+        <div class="desc">下载部署包（含全部脚本与配置模板），解压到 NAS 项目目录。</div>
+<pre><span class="cm"># 解压部署包到项目目录</span>
+tar -xzf china-iptv-sources-nas.tar.gz <span class="cmd">-C</span> /vol1/1000/docker/china-iptv-sources/
+
+<span class="cm"># 写入 GitHub 推送令牌（必填）</span>
+<span class="cmd">echo -n</span> <span class="cm">"github_pat_你的令牌"</span> <span class="cmd">&gt;</span> .github_token
+
+<span class="cm"># 确认关键文件就位</span>
+ls -la push_nas.py gen_token.py config.json</pre>
+      </div>
+
+      <div class="inst-card full">
+        <h3><span class="step-badge">3</span>配置定时任务（crontab -e，自动检测与推送）</h3>
+        <div class="desc">每天两轮：检测有效性 → 同步台标/节目单 → 推送 GitHub。源文件名变化也不影响，脚本自动取最新文件。</div>
+<pre><span class="cm"># 每天 5:00 / 17:00 —— 只检测源有效性（不推送）</span>
+0 5,17 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --no-push <span class="cmd">&gt;&gt;</span> validate.log 2<span class="cmd">&gt;&amp;</span>1
+
+<span class="cm"># 每天 6:00 / 18:00 —— 同步节目单与台标并推送</span>
+0 6,18 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo <span class="cmd">&gt;&gt;</span> push_run.log 2<span class="cmd">&gt;&amp;</span>1
+
+<span class="cm"># 每天 7:00 / 19:00 —— 再次推送（保证最新）</span>
+0 7,19 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo <span class="cmd">&gt;&gt;</span> push_run.log 2<span class="cmd">&gt;&amp;</span>1</pre>
+      </div>
+
+      <div class="inst-card full">
+        <h3><span class="step-badge">4</span>多人订阅管理（每人独立地址，到期自动失效）</h3>
+        <div class="desc">每次推送时自动为未过期用户生成专属订阅文件并推到 GitHub；到期的用户文件自动删除，播放器打不开。用户清单保存在 NAS 本地 <code class="inline">users.json</code>，不随仓库发布。</div>
+<pre><span class="cm"># 新增用户（到期日期 YYYY-MM-DD，输出专属订阅地址）</span>
+python3 gen_token.py <span class="cmd">--add</span> 张三 <span class="cmd">--expire</span> 2027-01-01
+
+<span class="cm"># 查看所有用户与订阅地址（已过期的会标注）</span>
+python3 gen_token.py <span class="cmd">--list</span>
+
+<span class="cm"># 续期（重新执行 --add 即可，旧地址自动失效）</span>
+python3 gen_token.py <span class="cmd">--add</span> 张三 <span class="cmd">--expire</span> 2027-06-01
+
+<span class="cm"># 删除用户（下次推送后订阅自动失效）</span>
+python3 gen_token.py <span class="cmd">--remove</span> 张三</pre>
+      </div>
+
+      <div class="inst-card">
+        <h3><span class="step-badge">5</span>手动运行验证</h3>
+        <div class="desc">首次部署建议手动跑一轮完整流程，确认日志无报错后即可交给定时任务。</div>
+<pre><span class="cm"># 完整跑一轮（检测+同步+推送）</span>
+nohup python3 <span class="cmd">-u</span> push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo <span class="cmd">&gt;</span> push_run.log 2<span class="cmd">&gt;&amp;</span>1 <span class="cmd">&amp;</span>
+
+<span class="cm"># 实时查看进度</span>
+tail -f push_run.log</pre>
+        <div class="note warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <span>第一次全量检测约需 30–60 分钟（2 万条源、20 并发、每条超时 4 秒）。检测完成后日志会打印推送结果与各用户订阅地址。</span>
+        </div>
+      </div>
+
+      <div class="inst-card">
+        <h3><span class="step-badge">6</span>使用说明</h3>
+        <div class="desc">订阅文件为标准格式，导入任意支持 M3U / TXT 的播放器即可使用。</div>
+        <ul>
+          <li><b>电脑</b>：VLC「打开网络串流」/ PotPlayer「打开 URL」，粘贴订阅地址</li>
+          <li><b>手机 / 电视</b>：TiviMate、影视仓、小薇直播等，添加订阅地址</li>
+          <li><b>TVBox</b>：使用 TXT 格式订阅地址（live.txt）</li>
+          <li><b>多人分享</b>：把各用户的专属地址分别发给对应的人，到期自动失效</li>
+          <li><b>更新频率</b>：订阅文件每天两轮自动更新，播放器重新打开即可获取最新列表</li>
+        </ul>
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+          <span>M3U 头部自动挂载双 EPG 节目单，每条频道带台标（tvg-logo）与节目标识（tvg-id），播放器支持即可显示台标和当日节目信息。</span>
+        </div>
+      </div>
     </div>
   </section>
 
 </main>
 
+<!-- ===== Footer ===== -->
 <footer>
   <div class="wrap">
-    <span>china-iptv-sources · 仅供个人学习交流使用，直播源版权归各电视台及版权方所有</span>
-    <span><a href="https://github.com/zengzifeng520/china-iptv-sources" target="_blank" rel="noopener">GitHub</a> · <a href="https://github.com/zengzifeng520/china-iptv-sources/blob/main/README.md" target="_blank" rel="noopener">文档</a></span>
+    <span>china-iptv-sources · NAS 直播源自动分发系统</span>
+    <span class="ft-right">
+      <span>台标 96%+</span>
+      <span>EPG 497 频道</span>
+      <span>每天两轮自动更新</span>
+    </span>
   </div>
 </footer>
 
-<script>
-(function () {
-  "use strict";
-  var btns = document.querySelectorAll(".copy-btn");
-  for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function () {
-      var url = this.getAttribute("data-copy");
-      function done(ok) {
-        var t = this;
-        t.classList.add("ok");
-        t.textContent = ok ? "已复制" : "复制失败";
-        setTimeout(function () {
-          t.classList.remove("ok");
-          t.textContent = "复制";
-        }, 1800);
-      }
-      var self = this;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(function () {
-          done.call(self, true);
-        }, function () {
-          done.call(self, false);
-        });
-      } else {
-        var ta = document.createElement("textarea");
-        ta.value = url;
-        ta.style.position = "fixed";
-        ta.style.opacity = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand("copy"); done.call(self, true); }
-        catch (e) { done.call(self, false); }
-        document.body.removeChild(ta);
-      }
-    });
-  }
-})();
-</script>
 </body>
 </html>
