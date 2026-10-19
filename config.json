@@ -1,0 +1,90 @@
+{
+  "hotel_sources": [
+    {
+      "name": "ssili126/tv 全国酒店源(聚合)",
+      "urls": [
+        "https://raw.githubusercontent.com/ssili126/tv/main/temp/IPTV.txt",
+        "https://ghproxy.net/https://raw.githubusercontent.com/ssili126/tv/main/temp/IPTV.txt",
+        "https://gh-proxy.com/https://raw.githubusercontent.com/ssili126/tv/main/temp/IPTV.txt",
+        "https://cdn.jsdelivr.net/gh/ssili126/tv@main/temp/IPTV.txt"
+      ]
+    },
+    {
+      "name": "ssili126/tv 酒店源(主列表)",
+      "urls": [
+        "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt",
+        "https://ghproxy.net/https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt",
+        "https://gh-proxy.com/https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt",
+        "https://cdn.jsdelivr.net/gh/ssili126/tv@main/itvlist.txt"
+      ]
+    },
+    {
+      "name": "ssili126/tv 酒店源(M3U)",
+      "urls": [
+        "https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u",
+        "https://ghproxy.net/https://raw.githubusercontent.com/ssili126/tv/main/itvlist.m3u",
+        "https://cdn.jsdelivr.net/gh/ssili126/tv@main/itvlist.m3u"
+      ]
+    },
+    {
+      "name": "ssili126/tv 广东酒店源",
+      "urls": [
+        "https://raw.githubusercontent.com/ssili126/tv/main/temp/guangdong.txt",
+        "https://ghproxy.net/https://raw.githubusercontent.com/ssili126/tv/main/temp/guangdong.txt",
+        "https://cdn.jsdelivr.net/gh/ssili126/tv@main/temp/guangdong.txt"
+      ]
+    },
+    {
+      "name": "ssili126/tv 江苏酒店源",
+      "urls": [
+        "https://raw.githubusercontent.com/ssili126/tv/main/temp/jiangsu.txt",
+        "https://ghproxy.net/https://raw.githubusercontent.com/ssili126/tv/main/temp/jiangsu.txt",
+        "https://cdn.jsdelivr.net/gh/ssili126/tv@main/temp/jiangsu.txt"
+      ]
+    },
+    {
+      "name": "ssili126/tv 上海酒店源",
+      "urls": [
+        "https://raw.githubusercontent.com/ssili126/tv/main/temp/shanghai.txt",
+        "https://ghproxy.net/https://raw.githubusercontent.com/ssili126/tv/main/temp/shanghai.txt",
+        "https://cdn.jsdelivr.net/gh/ssili126/tv@main/temp/shanghai.txt"
+      ]
+    },
+    {
+      "name": "ssili126/tv 浙江酒店源",
+      "urls": [
+        "https://raw.githubusercontent.com/ssili126/tv/main/temp/zhejiang.txt",
+        "https://ghproxy.net/https://raw.githubusercontent.com/ssili126/tv/main/temp/zhejiang.txt",
+        "https://cdn.jsdelivr.net/gh/ssili126/tv@main/temp/zhejiang.txt"
+      ]
+    },
+    {
+      "name": "fanmingming/live ITV",
+      "urls": [
+        "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/itv.m3u",
+        "https://ghproxy.net/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/itv.m3u",
+        "https://cdn.jsdelivr.net/gh/fanmingming/live@main/tv/m3u/itv.m3u",
+        "https://live.fanmingming.com/tv/m3u/itv.m3u"
+      ]
+    },
+    {
+      "name": "maowei1125/spider-iptv 上海酒店源",
+      "urls": [
+        "https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/hotels/上海市.txt",
+        "https://ghproxy.net/https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/hotels/上海市.txt",
+        "https://cdn.jsdelivr.net/gh/maowei1125/spider-iptv@main/source/hotels/上海市.txt"
+      ]
+    }
+  ],
+  "cctv": {
+    "max_urls_per_channel": 3
+  },
+  "validator": {
+    "timeout": 8,
+    "workers": 40,
+    "retries": 1
+  },
+  "output_dir": "output",
+  "max_lines_per_source": 2000,
+  "max_hotel_candidates": 3000
+}
