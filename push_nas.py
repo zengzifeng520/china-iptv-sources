@@ -221,39 +221,106 @@ def push_file(repo, path, content_bytes, token):
     return True
 
 
-def print_user_urls():
-    """推送完成后打印多人订阅地址（配合 Cloudflare Worker 网关 + gen_token.py）。"""
+def delete_file(repo, path, token):
+    """删除 GitHub 上的文件（Contents API DELETE）。"""
+    sha = get_sha(repo, path, token)
+    if not sha:
+        return False
+    payload = {"message": f"chore: NAS 到期删除 {path}", "sha": sha}
+    url = api_url(repo, path)
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        method="DELETE",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "User-Agent": "push-nas",
+            "Content-Type": "application/json",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=30) as r:
+        json.loads(r.read().decode("utf-8"))
+    return True
+
+
+def sync_user_files(repo, token, base_url=""):
+    """为每个用户生成专属订阅文件并推送 GitHub；到期的用户文件自动删除。
+
+    专属文件：output/users/<用户名>_<到期日期>.m3u（内容 = 当前 live.m3u）
+    订阅地址：https://<域名>/output/users/<用户名>_<到期日期>.m3u（以 .m3u 结尾）
+    到期：文件从 GitHub 删除，播放器 404 打不开。
+    续期/改名：自动删除旧文件（用 users.json 里记录的 last_file）。
+    """
+    import time as _t
+    users_f = os.path.join(BASE_DIR, "users.json")
+    if not os.path.exists(users_f):
+        return
     try:
-        key_f = os.path.join(BASE_DIR, ".gateway_key")
-        users_f = os.path.join(BASE_DIR, "users.json")
-        if not (os.path.exists(key_f) and os.path.exists(users_f)):
-            return
-        key = open(key_f, encoding="utf-8").read().strip()
         users = json.load(open(users_f, encoding="utf-8"))
-        if not key or not users:
-            return
-        import time as _t
-        cfg = load_config()
-        gw = cfg.get("gateway_url", "") or "https://tv.tingbao.kdns.fr"
-        gw = gw.rstrip("/")
-        if gw.endswith("/live.m3u"):
-            gw = gw[: -len("/live.m3u")]
-        import hmac as _hmac
-        import hashlib as _hl
-        from urllib.parse import quote as _q
-        now = _t.time()
-        print(f"== 多人订阅（{len(users)} 个用户，网关 {gw}）==")
-        for name, info in sorted(users.items()):
-            e = str(info.get("ts", ""))
-            if not e:
-                continue
-            if int(e) < now:
-                print(f"  [{name}] 已过期（到期 {info.get('expire')}）")
-                continue
-            s = _hmac.new(key.encode("utf-8"), f"{name}|{e}".encode("utf-8"), _hl.sha256).hexdigest()
-            print(f"  [{name}] 到期 {info.get('expire')} -> {gw}/{_q(name, safe='')}/{e}/{s}.m3u")
     except Exception:  # noqa: BLE001
-        pass
+        return
+    if not users:
+        return
+    live_path = os.path.join(OUTPUT_DIR, "live.m3u")
+    if not os.path.exists(live_path):
+        print("output/live.m3u 不存在，跳过用户专属文件同步。")
+        return
+    data = open(live_path, "rb").read()
+    base_url = (base_url or DEFAULT_BASE_URL).rstrip("/")
+    now = _t.time()
+    users_dir = os.path.join(OUTPUT_DIR, "users")
+    os.makedirs(users_dir, exist_ok=True)
+    print(f"== 多人订阅（{len(users)} 个用户）==")
+    active = 0
+    changed = False
+    for name, info in sorted(users.items()):
+        expire_date = str(info.get("expire", ""))
+        e = str(info.get("ts", ""))
+        if not expire_date or not e:
+            continue
+        cur_file = f"{name}_{expire_date}.m3u"
+        last_file = str(info.get("last_file", "") or "")
+        gh_path = f"output/users/{cur_file}"
+        if int(e) < now:
+            # 已到期 -> 删除专属文件（优先用 last_file，兼容日期变更）
+            target = last_file if last_file else cur_file
+            try:
+                if delete_file(repo, f"output/users/{target}", token):
+                    print(f"  [{name}] 已到期（{expire_date}），专属文件 {target} 已删除 -> 订阅失效")
+                else:
+                    print(f"  [{name}] 已到期（{expire_date}），GitHub 无该文件（已删/不存在）")
+            except Exception as ex:  # noqa: BLE001
+                print(f"  [{name}] 到期删除失败: {ex}")
+            if "last_file" in info:
+                info.pop("last_file", None)
+                changed = True
+            continue
+        # 未过期 -> 若存在旧文件（续期/改名），先删除
+        if last_file and last_file != cur_file:
+            try:
+                if delete_file(repo, f"output/users/{last_file}", token):
+                    print(f"  [{name}] 旧订阅 {last_file} 已删除（续期/日期变更）")
+            except Exception as ex:  # noqa: BLE001
+                print(f"  [{name}] 旧订阅删除失败: {ex}")
+        # 生成并推送专属文件
+        local = os.path.join(users_dir, cur_file)
+        with open(local, "wb") as f:
+            f.write(data)
+        try:
+            push_file(repo, gh_path, data, token)
+            active += 1
+            info["last_file"] = cur_file
+            changed = True
+            print(f"  [{name}] 到期 {expire_date} -> {base_url}/output/users/{cur_file}")
+        except Exception as ex:  # noqa: BLE001
+            print(f"  [{name}] 推送失败: {ex}")
+    if changed:
+        try:
+            with open(users_f, "w", encoding="utf-8") as _f:
+                json.dump(users, _f, ensure_ascii=False, indent=2)
+        except Exception:  # noqa: BLE001
+            pass
+    print(f"多人订阅同步完成：生效 {active} 个用户。")
 
 
 def push_outputs(repo, token):
@@ -280,7 +347,6 @@ def push_outputs(repo, token):
         if os.path.exists(os.path.join(OUTPUT_DIR, "all.m3u")):
             print(f"  全量版订阅（all.m3u，原样兜底）：https://raw.githubusercontent.com/{repo}/main/output/all.m3u")
         print(f"  TXT（TVBox 用）：https://raw.githubusercontent.com/{repo}/main/output/live.txt")
-        print_user_urls()
     return ok
 
 
@@ -951,6 +1017,7 @@ def main():
         return
 
     push_outputs(repo, token)
+    sync_user_files(repo, token, base_url)
     if args.sync_logo:
         push_logos(repo, token)
 
