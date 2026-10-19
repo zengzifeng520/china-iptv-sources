@@ -8,12 +8,25 @@
 
 | 格式 | 订阅地址 |
 | --- | --- |
-| M3U | `https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u` |
-| M3U（jsDelivr CDN，国内更快） | `https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u` |
+| M3U（含台标+节目单，推荐） | `https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u` |
+| M3U（你的域名） | `https://tingbao.kdns.fr/output/live.m3u` |
+| M3U（jsDelivr CDN） | `https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u` |
 | TXT | `https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.txt` |
 | TXT（jsDelivr CDN） | `https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.txt` |
 
-> 内容由你的 NAS 定时推送，首次部署后推送一次即生效。
+> M3U 订阅头部自动挂载节目单（EPG），每个频道带台标（tvg-logo）与节目单标识（tvg-id），播放器支持即可显示台标和当日节目信息。
+> 节目单与台标数据源为**持续维护的活跃仓库**：alantang1977/iptv_api（EPG）、Meroser/Media_Coll（台标）。
+
+## 台标与节目单（可选功能）
+
+推送时加上 `--sync-epg --sync-logo`，脚本会自动：
+1. 下载最新**节目单**到 `output/epg.xml`（订阅头部自动挂载）；
+2. 按频道名匹配下载**台标**到 `output/logo/`（M3U 自动带 `tvg-logo`）；
+3. 台标采用**增量推送**（记录 sha256，只推变更文件）。
+
+```bash
+python3 push_nas.py --latest-dir "/vol1/1000/docker/iptv-manager/data/uploads" --validate --sync-epg --sync-logo
+```
 
 ## 在飞牛 NAS 上部署（三步）
 
@@ -55,19 +68,18 @@ echo 'github_pat_xxxxxxxxxxxxxxxx' > .github_token
 }
 ```
 
-设置 crontab 定时任务（每天 02:30 推送一次）：
+设置 crontab 定时任务（**每天两轮：5/17 点检测、6/18 点更新源、7/19 点推送**）：
 
 ```bash
 crontab -e
-# 添加一行：
-30 2 * * * cd /vol1/iptv/china-iptv-sources && python3 push_nas.py --file "/vol1/IPTV/live.m3u" >> push.log 2>&1
+# 添加以下三行：
+0 5,17 * * * cd /vol1/1000/docker/china-iptv-sources && python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --no-push >> push.log 2>&1
+0 6,18 * * * cd /vol1/1000/docker/iptv-manager && bash sync_sub.sh >> /vol1/1000/docker/china-iptv-sources/push.log 2>&1
+0 7,19 * * * cd /vol1/1000/docker/china-iptv-sources && python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo >> push.log 2>&1
 ```
 
-想更频繁（每 6 小时）：
-
-```bash
-0 */6 * * * cd /vol1/iptv/china-iptv-sources && python3 push_nas.py --file "/vol1/IPTV/live.m3u" >> push.log 2>&1
-```
+> 检测（5/17 点）20 并发逐个探测；更新源（6/18 点）由 iptv-manager 同步新直播源；推送（7/19 点）时生成订阅并同步节目单/台标。
+> 若 iptv-manager 的同步命令不同，把第二行换成你实际的更新命令。
 
 ## 手动推送
 
@@ -121,18 +133,21 @@ http://example.com/live/cctv1.m3u8
 
 ```
 china-iptv-sources/
-├── push_nas.py               # 入口：NAS 源文件 → 生成订阅 → 推送 GitHub
+├── push_nas.py               # 入口：NAS 源文件 → 生成订阅（台标+节目单）→ 推送 GitHub
 ├── check_output.py           # Actions 用：output 轻量检查（非空、格式）
-├── config.json               # NAS 源文件路径配置
+├── config.json               # NAS 源路径 / 域名 / EPG 数据源配置
 ├── iptv_sources/
 │   ├── parser.py             # TXT / M3U 解析（自动识别）
-│   ├── generator.py          # 生成 live.txt / live.m3u / stats.json
-│   ├── validator.py          # 三级有效性校验（--validate 时使用）
+│   ├── generator.py          # 生成 live.txt / live.m3u（tvg-id/tvg-logo/x-tvg-url）
+│   ├── validator.py          # 有效性检测（--validate 时使用）
 │   └── fetcher.py            # HTTP 抓取工具
 ├── .github/workflows/update.yml  # Actions 检查工作流
 └── output/                   # 生成的订阅文件（自动提交）
     ├── live.txt
-    ├── live.m3u
+    ├── live.m3u              # 头部挂载 EPG，频道带台标
+    ├── all.m3u               # --validate 时的全量兜底订阅
+    ├── epg.xml               # 最新节目单（自动同步）
+    ├── logo/                 # 频道台标（自动同步、增量推送）
     └── stats.json
 ```
 
