@@ -63,6 +63,28 @@ def read_source_file(path):
         return f.read().decode("utf-8", errors="replace")
 
 
+def pick_latest(directory):
+    """从目录中自动选择最新的 .m3u / .txt 源文件。
+
+    适用于 iptv-manager 等工具每次生成带随机文件名新文件的情况：
+    定时任务只需指向目录，脚本自动取最新的源。
+    """
+    if not os.path.isdir(directory):
+        print(f"目录不存在: {directory}")
+        sys.exit(1)
+    files = []
+    for name in os.listdir(directory):
+        low = name.lower()
+        if low.endswith(".m3u") or low.endswith(".m3u8") or low.endswith(".txt"):
+            files.append(os.path.join(directory, name))
+    if not files:
+        print(f"目录中没有找到 .m3u / .m3u8 / .txt 源文件: {directory}")
+        sys.exit(1)
+    latest = max(files, key=os.path.getmtime)
+    print(f"自动选择最新源文件: {latest}")
+    return latest
+
+
 def get_sha(repo, path, token):
     url = f"https://api.github.com/repos/{repo}/contents/{path}"
     req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}", "User-Agent": "push-nas"})
@@ -159,6 +181,8 @@ def run_import(src_file, validate, category):
 def main():
     ap = argparse.ArgumentParser(description="飞牛 NAS 直播源自动推送 GitHub")
     ap.add_argument("--file", dest="src_file", metavar="FILE", help="NAS 上直播源文件路径（m3u/txt）")
+    ap.add_argument("--latest-dir", dest="src_dir", metavar="DIR",
+                    help="自动取目录中最新的 m3u/txt 源文件（文件名字会变时用这个）")
     ap.add_argument("--validate", action="store_true", help="推送前做三级有效性校验（默认原样保留）")
     ap.add_argument("--category", default="", help="统一覆盖分类名（默认保留文件内分组）")
     ap.add_argument("--push-only", action="store_true", help="只推送本地 output/（不导入）")
@@ -168,10 +192,14 @@ def main():
     token = load_token()
     repo = os.environ.get("GITHUB_REPO", DEFAULT_REPO)
 
-    if args.src_file:
-        run_import(args.src_file, args.validate, args.category)
+    src = args.src_file
+    if args.src_dir:
+        src = pick_latest(args.src_dir)
+
+    if src:
+        run_import(src, args.validate, args.category)
     elif not args.push_only:
-        print("请指定 --file <NAS 源文件路径>，或使用 --push-only。")
+        print("请指定 --file <源文件路径> 或 --latest-dir <源文件目录>，或使用 --push-only。")
         sys.exit(1)
 
     if args.no_push:
