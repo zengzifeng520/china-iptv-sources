@@ -2,13 +2,15 @@
   "_说明": "本配置供 push_nas.py 使用。直播源文件由你维护在 NAS 上，本工具负责把它生成订阅并推送到 GitHub。",
   "nas": {
     "_示例": "把下面的 source_file 改成你 NAS 上直播源文件的真实路径（m3u 或 txt 均可）。",
-    "source_file": "/vol1/IPTV/live.m3u",
-    "_定时": "在 NAS 上执行 crontab -e 添加： 30 2 * * * cd /vol1/iptv/china-iptv-sources && python3 push_nas.py --file \"/vol1/IPTV/live.m3u\" >> push.log 2>&1"
+    "source_file": "/vol1/1000/docker/iptv-manager/data/uploads",
+    "_定时": "在 NAS 上执行 crontab -e 添加： 0 7 * * * cd /vol1/1000/docker/china-iptv-sources && python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo >> push.log 2>&1"
   },
   "validator": {
     "timeout": 8,
-    "workers": 40,
+    "workers": 20,
     "retries": 1
   },
-  "output_dir": "output"
+  "output_dir": "output",
+  "base_url": "https://tingbao.kdns.fr",
+  "epg_source": "https://ghproxy.net/https://raw.githubusercontent.com/alantang1977/iptv_api/main/output/epg.xml"
 }
