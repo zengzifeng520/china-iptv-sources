@@ -204,7 +204,7 @@ footer .ft-right{display:flex;gap:18px}
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="3"/></svg></div>
         <h3>NAS → GitHub 自动推送</h3>
         <p>定时任务监控 NAS 源目录，自动选取最新源文件，推送完成后输出全部订阅地址，无需人工干预。</p>
-        <div class="stat">2<small>轮 / 天</small></div>
+        <div class="stat">3<small>轮 / 天</small></div>
       </div>
       <div class="feat">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
@@ -300,16 +300,10 @@ ls -la push_nas.py gen_token.py config.json</pre>
       </div>
 
       <div class="inst-card full">
-        <h3><span class="step-badge">4</span>配置定时任务（crontab -e，自动检测与推送）</h3>
-        <div class="desc">每天两轮：检测有效性 → 同步台标/节目单 → 推送 GitHub。源文件名变化也不影响，脚本自动取最新文件。</div>
-<pre><span class="cm"># 每天 5:00 / 17:00 —— 只检测源有效性（不推送）</span>
-0 5,17 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --no-push <span class="cmd">&gt;&gt;</span> validate.log 2<span class="cmd">&gt;&amp;</span>1
-
-<span class="cm"># 每天 6:00 / 18:00 —— 同步节目单与台标并推送</span>
-0 6,18 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo <span class="cmd">&gt;&gt;</span> push_run.log 2<span class="cmd">&gt;&amp;</span>1
-
-<span class="cm"># 每天 7:00 / 19:00 —— 再次推送（保证最新）</span>
-0 7,19 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo <span class="cmd">&gt;&gt;</span> push_run.log 2<span class="cmd">&gt;&amp;</span>1</pre>
+        <h3><span class="step-badge">4</span>配置定时任务（crontab -e，每天三轮自动检测并推送）</h3>
+        <div class="desc">每天 6:00 / 12:00 / 18:00 自动运行三轮：更新源文件 → 检测有效性 → 立即推送 GitHub 并同步台标/节目单。源文件名变化也不影响，脚本自动取最新文件。</div>
+<pre><span class="cm"># 每天 6:00 / 12:00 / 18:00 —— 更新源 + 检测有效性 + 立即推送（共 3 轮）</span>
+0 6,12,18 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo <span class="cmd">&gt;&gt;</span> push_run.log 2<span class="cmd">&gt;&amp;</span>1</pre>
       </div>
 
       <div class="inst-card full">
@@ -369,7 +363,7 @@ tail -f push_run.log</pre>
     <span class="ft-right">
       <span>台标 96%+</span>
       <span>EPG 497 频道</span>
-      <span>每天两轮自动更新</span>
+      <span>每天三轮自动更新</span>
     </span>
   </div>
 </footer>
