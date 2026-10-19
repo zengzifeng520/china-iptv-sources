@@ -1,0 +1,42 @@
+name: 自动更新直播源
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # 每 6 小时自动运行一次
+  workflow_dispatch:        # 支持手动触发
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-iptv
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 采集并校验直播源
+        run: python run.py
+
+      - name: 提交更新结果
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: 自动更新直播源 $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push
+          else
+            echo "本次无变化，跳过提交"
+          fi
