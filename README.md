@@ -5,10 +5,11 @@
 ## 功能特性
 
 - 📡 **酒店直播源采集**：默认接入 `ssili126/tv`（全国聚合 + 分省酒店源）、`fanmingming/live`（ITV 源）、`maowei1125/spider-iptv`（酒店/组播源）等多个公开数据源，支持在 `config.json` 中任意增删源与镜像地址
-- 🏛️ **央视官方源采集**：从央视播放器（tv.cctv.com）内置的 12 个 CDN 域名按「频道 ID × CDN」模式构建候选地址，覆盖 CCTV-1~17、新闻、纪录、少儿、4K 等 21 个频道
-- ✅ **有效性检测**：多线程并发 HTTP 探测，识别 m3u8 / FLV / TS 流，自动剔除失效源
+- 🏛️ **央视源三层采集**：① 官方播放器（tv.cctv.com）内置 12 个 CDN 域名按「频道 ID × CDN」模式构建（CCTV-1/13 官方直链）；② 多个活跃维护的央视聚合仓库（279458179、BurningC4、fanmingming 等）抓取候选；③ 内置已验证可播的服务器模板（电信 tsfile / 电信 hls / 海外镜像等）批量生成候选——覆盖 CCTV-1~17 及 4K
+- ✅ **三级有效性检测**：并发探测 master 列表 → 变体列表 → 首个 TS 分片，全部通过才判定可用；订阅中写入下钻后的分片清单地址，播放器直接加载即可播
 - 📄 **双格式输出**：TVBox 兼容 TXT（`#分类,#genre#`）+ 标准 M3U，另附 `stats.json` 统计
 - 🔄 **自动更新**：GitHub Actions 每 6 小时运行一次，检测到变化自动提交，订阅地址永远指向最新内容
+- 🖥️ **一键部署脚本**：`deploy.py` 在本机采集完整订阅并自动推送 GitHub（国内网络下可获得最全的央视源）
 - 🐍 **零依赖**：纯 Python 标准库实现，本地和云端开箱即用
 
 ## 订阅地址
@@ -29,13 +30,15 @@
 ```
 china-iptv-sources/
 ├── run.py                     # 入口：采集 → 校验 → 生成
+├── deploy.py                  # 一键部署：本地采集 + 自动推送 GitHub（可选 --push-only / --no-push）
 ├── config.json                # 数据源与校验参数配置
 ├── iptv_sources/
-│   ├── fetcher.py             # HTTP 抓取（多镜像自动回退）
+│   ├── fetcher.py             # HTTP 抓取（多镜像自动回退 + api.github.com 备用通道）
 │   ├── parser.py              # TXT / M3U 解析
 │   ├── hotel.py               # 酒店源采集与去重
-│   ├── cctv.py                # 央视源构建与校验
-│   ├── validator.py           # 并发有效性检测
+│   ├── cctv.py                # 央视官方源构建与校验
+│   ├── cctv_alt.py            # 央视备选源（聚合仓库 + 服务器模板）补全
+│   ├── validator.py           # 三级并发有效性检测
 │   └── generator.py           # 生成 live.txt / live.m3u / stats.json
 ├── .github/workflows/update.yml  # 自动更新工作流
 └── output/                    # 生成的订阅文件（提交到仓库）
@@ -52,6 +55,22 @@ python run.py
 ```
 
 运行完成后查看 `output/` 下的文件，日志会输出各数据源抓取结果、有效/失效统计。
+
+### 一键部署到 GitHub（推荐）
+
+```bash
+# 在本机（国内网络）采集完整订阅并自动推送到 GitHub 仓库
+# 推送后约 1 分钟，jsDelivr / raw 订阅地址即为最新内容
+python deploy.py
+
+# 只推送本地已有的 output/（跳过重新采集）
+python deploy.py --push-only
+
+# 只采集生成，不推送
+python deploy.py --no-push
+```
+
+> 说明：央视部分频道（CCTV-2/7/10/11/15/16/17 等）的稳定源位于国内公网，GitHub Actions 的海外服务器访问不到；**在本机运行 `deploy.py` 得到的订阅最完整**。仓库默认已内置 `GITHUB_TOKEN`（本项目专用，仅仓库读写权限），也可通过环境变量 `GITHUB_TOKEN` 覆盖。
 
 ### 自定义配置（config.json）
 
@@ -103,12 +122,13 @@ python run.py
 酒店直播源(ssili126/fanmingming等) ──► 抓取(TXT/M3U解析, 跨源去重)
                                                  │
 央视官方源(频道ID × 12个CDN模式) ────────────────┤
+央视备选源(聚合仓库 + 服务器模板) ───────────────┤
                                                  ▼
-                              并发有效性检测(m3u8/FLV/TS识别)
+                     三级并发校验(master→变体→TS分片全通过)
                                                  ▼
                          生成 live.txt / live.m3u / stats.json
                                                  ▼
-                        GitHub Actions 定时提交 ──► 订阅地址自动更新
+             GitHub Actions 定时提交 / deploy.py 一键推送 ──► 订阅地址自动更新
 ```
 
 ## 免责声明
