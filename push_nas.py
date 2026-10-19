@@ -558,13 +558,13 @@ def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_ur
 
     dropped = 0
     if validate:
-        print(f"== 有效性检测（--validate，20 并发，每条超时 8 秒，约需 30-120 分钟）==")
+        print(f"== 有效性检测（--validate，20 并发，每条超时 4 秒，约需 15-60 分钟）==")
         http_items = [(i, u) for i, (c, n, u) in enumerate(entries)
                       if u.lower().startswith(("http://", "https://"))]
         urls = [u for _, u in http_items]
         non_http_count = len(entries) - len(urls)
         print(f"待检测 http(s) 源 {len(urls)} 条；组播/rtsp 等 {non_http_count} 条自动保留（不误删）")
-        best_map = check_stream_best_many(urls, timeout=8, workers=20, retries=1)
+        best_map = check_stream_best_many(urls, timeout=4, workers=20, retries=1)
         kept = set()
         replace = {}
         for i, u in http_items:
