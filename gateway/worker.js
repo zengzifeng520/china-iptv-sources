@@ -33,9 +33,21 @@ async function hmacHex(key, msg) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const u = url.searchParams.get("u") || "";
-    const e = url.searchParams.get("e") || ""; // 到期时间戳（秒）
-    const s = url.searchParams.get("s") || ""; // 签名 = HMAC(SUB_KEY, "u|e")
+
+    // ---- 路径型（推荐）：https://网关/<用户>/<到期时间戳>/<签名>.m3u ----
+    // 地址以 .m3u 结尾，PotPlayer / IPTV 播放器都能识别为播放列表
+    let u = "", e = "", s = "";
+    const m = url.pathname.match(/^\/([^/]+)\/(\d+)\/([0-9a-f]{64})\.m3u$/);
+    if (m) {
+      try { u = decodeURIComponent(m[1]); } catch (err) { u = m[1]; }
+      e = m[2];
+      s = m[3];
+    } else {
+      // ---- 兼容旧式 query 型：?u=&e=&s= ----
+      u = url.searchParams.get("u") || "";
+      e = url.searchParams.get("e") || "";
+      s = url.searchParams.get("s") || "";
+    }
 
     // 1) 参数齐全性
     if (!u || !e || !s) {
@@ -79,7 +91,7 @@ export default {
     // 5) 返回 M3U（禁止缓存，保证每次都是最新）
     return new Response(body, {
       headers: {
-        "Content-Type": "audio/x-mpegurl; charset=utf-8",
+        "Content-Type": "application/vnd.apple.mpegurl; charset=utf-8",
         "Cache-Control": "no-store, no-cache, must-revalidate",
         "Pragma": "no-cache",
       },
