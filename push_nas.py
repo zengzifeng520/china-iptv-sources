@@ -5,15 +5,14 @@
 订阅地址（output/live.m3u、output/live.txt）始终指向最新内容。
 
 用法（在 NAS 上执行）:
-    python3 push_nas.py --file "/vol1/IPTV/live.m3u"             # 导入并推送
-    python3 push_nas.py --file "/vol1/IPTV/live.m3u" --validate  # 推送前先校验有效性
+    python3 push_nas.py --file "/vol1/IPTV/live.m3u"             # 导入并推送（原样全量）
+    python3 push_nas.py --file "/vol1/IPTV/live.m3u" --validate  # 检测有效性：生成有效版 live.* + 全量版 all.* 再推送
     python3 push_nas.py --file "/vol1/IPTV/live.txt" --category "我的源"  # 覆盖分类
     python3 push_nas.py --push-only                              # 只推送本地 output/
     python3 push_nas.py --file ... --no-push                     # 只生成，不推送
 
-定时推送（NAS 上 crontab -e 添加）:
-    30 2 * * * cd /vol1/iptv/china-iptv-sources && python3 push_nas.py --file "/vol1/IPTV/live.m3u" >> push.log 2>&1
-（飞牛 fnOS 基于 Debian，自带 python3；若提示缺命令，先执行 sudo apt install python3）
+定时推送（NAS 上 crontab -e 添加，推荐加 --validate 自动检测）:
+    0 7 * * * cd /vol1/1000/docker/china-iptv-sources && python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate >> push.log 2>&1
 
 令牌读取顺序：
     1) 环境变量 GITHUB_TOKEN
@@ -29,12 +28,15 @@ import urllib.request
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_REPO = "zengzifeng520/china-iptv-sources"
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
-FILES_TO_PUSH = ["live.txt", "live.m3u", "stats.json"]
+FILES_TO_PUSH = ["live.txt", "live.m3u", "all.txt", "all.m3u", "stats.json"]
+
+# 组播 / rtsp 等无法用 HTTP 探测的协议：校验时自动保留，不误删
+NON_HTTP_PREFIXES = ("rtp://", "udp://", "igmp://", "rtsp://", "rtmp://")
 
 sys.path.insert(0, BASE_DIR)
-from iptv_sources.generator import now_str, write_outputs  # noqa: E402
+from iptv_sources.generator import now_str, build_txt, build_m3u, write_outputs  # noqa: E402
 from iptv_sources.parser import parse_auto  # noqa: E402
-from iptv_sources.validator import check_stream_many  # noqa: E402
+from iptv_sources.validator import check_stream_best_many  # noqa: E402
 
 
 def load_token():
@@ -139,43 +141,90 @@ def push_outputs(repo, token):
     print(f"完成：成功 {ok}/{len(FILES_TO_PUSH)} 个文件。")
     if ok:
         print("订阅地址（约 1 分钟后刷新）：")
-        print(f"  https://raw.githubusercontent.com/{repo}/main/output/live.m3u")
-        print(f"  https://raw.githubusercontent.com/{repo}/main/output/live.txt")
-        print(f"  https://cdn.jsdelivr.net/gh/{repo}@main/output/live.m3u")
+        print(f"  有效版订阅（live.m3u，校验后生成）：https://raw.githubusercontent.com/{repo}/main/output/live.m3u")
+        print(f"  jsDelivr 镜像：https://cdn.jsdelivr.net/gh/{repo}@main/output/live.m3u")
+        if os.path.exists(os.path.join(OUTPUT_DIR, "all.m3u")):
+            print(f"  全量版订阅（all.m3u，原样兜底）：https://raw.githubusercontent.com/{repo}/main/output/all.m3u")
+        print(f"  TXT（TVBox 用）：https://raw.githubusercontent.com/{repo}/main/output/live.txt")
     return ok
+
+
+def is_non_http(url):
+    """组播 / rtsp / rtmp 等无法用 HTTP 探测的协议。"""
+    low = url.lower()
+    return low.startswith(NON_HTTP_PREFIXES)
+
+
+def write_all_outputs(all_entries, updated):
+    """把全量原样版本写入 output/all.txt、output/all.m3u（校验时的兜底订阅）。"""
+    txt = build_txt(all_entries)
+    m3u = build_m3u(all_entries, updated=updated)
+    with open(os.path.join(OUTPUT_DIR, "all.txt"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(txt)
+    with open(os.path.join(OUTPUT_DIR, "all.m3u"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(m3u)
+    print(f"已生成 output/all.txt、all.m3u（全量原样 {len(all_entries)} 条，校验时兜底订阅）")
 
 
 def run_import(src_file, validate, category):
     print(f"== 导入源文件: {src_file} ==")
     text = read_source_file(src_file)
     entries = parse_auto(text)
-    print(f"解析出 {len(entries)} 条")
+    total = len(entries)
+    print(f"解析出 {total} 条")
 
     if not entries:
         print("文件为空或无法解析，终止（请检查文件路径与格式：m3u 或 txt）。")
         sys.exit(1)
     if category:
         entries = [(category, n, u) for _c, n, u in entries]
+    all_entries = list(entries)  # 全量原样（校验时写 all.* 兜底）
 
+    dropped = 0
     if validate:
-        print(f"== 校验 {len(entries)} 条（--validate）==")
-        urls = [u for _, _, u in entries]
-        ok_map = check_stream_many(urls, timeout=8, workers=40, retries=1)
-        entries = [(c, n, u) for c, n, u in entries if ok_map.get(u)]
-        print(f"校验后剩 {len(entries)} 条")
+        print(f"== 有效性检测（--validate，40 并发，每条超时 8 秒，约需 15-60 分钟）==")
+        http_items = [(i, u) for i, (c, n, u) in enumerate(entries)
+                      if u.lower().startswith(("http://", "https://"))]
+        urls = [u for _, u in http_items]
+        non_http_count = len(entries) - len(urls)
+        print(f"待检测 http(s) 源 {len(urls)} 条；组播/rtsp 等 {non_http_count} 条自动保留（不误删）")
+        best_map = check_stream_best_many(urls, timeout=8, workers=40, retries=1)
+        kept = set()
+        replace = {}
+        for i, u in http_items:
+            b = best_map.get(u)
+            if b:
+                kept.add(i)
+                if b != u:
+                    replace[i] = b  # 把 master 地址替换为可直接播的分片清单地址
+        valid_entries = []
+        for idx, (c, n, u) in enumerate(entries):
+            if idx in kept:
+                valid_entries.append((c, n, replace.get(idx, u)))
+            elif is_non_http(u):
+                valid_entries.append((c, n, u))
+        dropped = len(entries) - len(valid_entries)
+        print(f"检测结果：保留 {len(valid_entries)} 条"
+              f"（http(s) 通过 {len(kept)} + 组播保留 {len(valid_entries) - len(kept)}），"
+              f"删除失效 {dropped} 条")
+        entries = valid_entries
 
     updated = now_str()
     stats = {
         "updated_at": updated,
         "source": os.path.basename(src_file),
         "via": "NAS push",
-        "total": len(entries),
+        "total": total,
+        "valid": len(entries),
+        "dropped": dropped,
         "categories": {},
     }
     for c, _n, _u in entries:
         stats["categories"][c] = stats["categories"].get(c, 0) + 1
     write_outputs(entries, OUTPUT_DIR, updated=updated, stats=stats)
-    print(f"已生成 output/live.txt、live.m3u、stats.json（共 {len(entries)} 条）")
+    print(f"已生成 output/live.txt、live.m3u、stats.json（订阅版 {len(entries)} 条）")
+    if validate:
+        write_all_outputs(all_entries, updated)
 
 
 def main():
@@ -183,7 +232,9 @@ def main():
     ap.add_argument("--file", dest="src_file", metavar="FILE", help="NAS 上直播源文件路径（m3u/txt）")
     ap.add_argument("--latest-dir", dest="src_dir", metavar="DIR",
                     help="自动取目录中最新的 m3u/txt 源文件（文件名字会变时用这个）")
-    ap.add_argument("--validate", action="store_true", help="推送前做三级有效性校验（默认原样保留）")
+    ap.add_argument("--validate", action="store_true",
+                    help="推送前做有效性检测：http(s) 源逐个探测，组播/rtsp 自动保留，"
+                         "生成有效版 live.* + 全量版 all.*（检测耗时约 15-60 分钟）")
     ap.add_argument("--category", default="", help="统一覆盖分类名（默认保留文件内分组）")
     ap.add_argument("--push-only", action="store_true", help="只推送本地 output/（不导入）")
     ap.add_argument("--no-push", action="store_true", help="只生成，不推送")
