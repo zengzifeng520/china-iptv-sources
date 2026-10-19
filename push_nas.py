@@ -182,13 +182,13 @@ def run_import(src_file, validate, category):
 
     dropped = 0
     if validate:
-        print(f"== 有效性检测（--validate，40 并发，每条超时 8 秒，约需 15-60 分钟）==")
+        print(f"== 有效性检测（--validate，20 并发，每条超时 8 秒，约需 30-120 分钟）==")
         http_items = [(i, u) for i, (c, n, u) in enumerate(entries)
                       if u.lower().startswith(("http://", "https://"))]
         urls = [u for _, u in http_items]
         non_http_count = len(entries) - len(urls)
         print(f"待检测 http(s) 源 {len(urls)} 条；组播/rtsp 等 {non_http_count} 条自动保留（不误删）")
-        best_map = check_stream_best_many(urls, timeout=8, workers=40, retries=1)
+        best_map = check_stream_best_many(urls, timeout=8, workers=20, retries=1)
         kept = set()
         replace = {}
         for i, u in http_items:
@@ -233,8 +233,8 @@ def main():
     ap.add_argument("--latest-dir", dest="src_dir", metavar="DIR",
                     help="自动取目录中最新的 m3u/txt 源文件（文件名字会变时用这个）")
     ap.add_argument("--validate", action="store_true",
-                    help="推送前做有效性检测：http(s) 源逐个探测，组播/rtsp 自动保留，"
-                         "生成有效版 live.* + 全量版 all.*（检测耗时约 15-60 分钟）")
+                    help="推送前做有效性检测：http(s) 源 20 并发逐个探测，组播/rtsp 自动保留，"
+                         "生成有效版 live.* + 全量版 all.*（检测耗时约 30-120 分钟）")
     ap.add_argument("--category", default="", help="统一覆盖分类名（默认保留文件内分组）")
     ap.add_argument("--push-only", action="store_true", help="只推送本地 output/（不导入）")
     ap.add_argument("--no-push", action="store_true", help="只生成，不推送")
