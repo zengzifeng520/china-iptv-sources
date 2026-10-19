@@ -138,6 +138,19 @@ code.inline{
 }
 .warn svg{stroke:var(--warn)}
 
+/* ===== 下载按钮 ===== */
+.dl-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,rgba(245,158,11,.16),rgba(245,158,11,.06));
+  border:1px solid rgba(245,158,11,.45);color:var(--accent);
+  border-radius:12px;padding:12px 18px;margin:4px 0 14px;
+  font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;
+}
+.dl-btn:hover{background:linear-gradient(135deg,rgba(245,158,11,.28),rgba(245,158,11,.1));border-color:var(--accent)}
+.dl-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dl-btn .meta{display:flex;flex-direction:column;line-height:1.35;gap:1px}
+.dl-btn .meta small{font-weight:400;font-size:11px;color:var(--sub)}
+
 /* ===== Footer ===== */
 footer{padding:46px 0 56px;border-top:1px solid var(--line);margin-top:36px}
 footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--dim);font-size:12.5px}
@@ -265,8 +278,17 @@ footer .ft-right{display:flex;gap:18px}
       </div>
 
       <div class="inst-card">
-        <h3><span class="step-badge">2</span>部署项目</h3>
-        <div class="desc">下载部署包（含全部脚本与配置模板），解压到 NAS 项目目录。</div>
+        <h3><span class="step-badge">2</span>下载部署包</h3>
+        <div class="desc">部署包包含全部脚本与配置模板，支持下载到任意 NAS（飞牛 / 群晖 / 威联通等）部署。包内不含任何私有信息，可放心下载。</div>
+        <a class="dl-btn" href="https://tingbao.kdns.fr/china-iptv-sources-nas.tar.gz" download>
+          <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <span class="meta">下载部署包<span>china-iptv-sources-nas.tar.gz · 6MB</span></span>
+        </a>
+      </div>
+
+      <div class="inst-card">
+        <h3><span class="step-badge">3</span>部署到 NAS</h3>
+        <div class="desc">把部署包放到 NAS 上，解压到项目目录，写入 GitHub 推送令牌。</div>
 <pre><span class="cm"># 解压部署包到项目目录</span>
 tar -xzf china-iptv-sources-nas.tar.gz <span class="cmd">-C</span> /vol1/1000/docker/china-iptv-sources/
 
@@ -278,7 +300,7 @@ ls -la push_nas.py gen_token.py config.json</pre>
       </div>
 
       <div class="inst-card full">
-        <h3><span class="step-badge">3</span>配置定时任务（crontab -e，自动检测与推送）</h3>
+        <h3><span class="step-badge">4</span>配置定时任务（crontab -e，自动检测与推送）</h3>
         <div class="desc">每天两轮：检测有效性 → 同步台标/节目单 → 推送 GitHub。源文件名变化也不影响，脚本自动取最新文件。</div>
 <pre><span class="cm"># 每天 5:00 / 17:00 —— 只检测源有效性（不推送）</span>
 0 5,17 * * * cd /vol1/1000/docker/china-iptv-sources <span class="cmd">&amp;&amp;</span> python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --no-push <span class="cmd">&gt;&gt;</span> validate.log 2<span class="cmd">&gt;&amp;</span>1
@@ -291,7 +313,7 @@ ls -la push_nas.py gen_token.py config.json</pre>
       </div>
 
       <div class="inst-card full">
-        <h3><span class="step-badge">4</span>多人订阅管理（每人独立地址，到期自动失效）</h3>
+        <h3><span class="step-badge">5</span>多人订阅管理（每人独立地址，到期自动失效）</h3>
         <div class="desc">每次推送时自动为未过期用户生成专属订阅文件并推到 GitHub；到期的用户文件自动删除，播放器打不开。用户清单保存在 NAS 本地 <code class="inline">users.json</code>，不随仓库发布。</div>
 <pre><span class="cm"># 新增用户（到期日期 YYYY-MM-DD，输出专属订阅地址）</span>
 python3 gen_token.py <span class="cmd">--add</span> 张三 <span class="cmd">--expire</span> 2027-01-01
@@ -307,7 +329,7 @@ python3 gen_token.py <span class="cmd">--remove</span> 张三</pre>
       </div>
 
       <div class="inst-card">
-        <h3><span class="step-badge">5</span>手动运行验证</h3>
+        <h3><span class="step-badge">6</span>手动运行验证</h3>
         <div class="desc">首次部署建议手动跑一轮完整流程，确认日志无报错后即可交给定时任务。</div>
 <pre><span class="cm"># 完整跑一轮（检测+同步+推送）</span>
 nohup python3 <span class="cmd">-u</span> push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo <span class="cmd">&gt;</span> push_run.log 2<span class="cmd">&gt;&amp;</span>1 <span class="cmd">&amp;</span>
@@ -321,7 +343,7 @@ tail -f push_run.log</pre>
       </div>
 
       <div class="inst-card">
-        <h3><span class="step-badge">6</span>使用说明</h3>
+        <h3><span class="step-badge">7</span>使用说明</h3>
         <div class="desc">订阅文件为标准格式，导入任意支持 M3U / TXT 的播放器即可使用。</div>
         <ul>
           <li><b>电脑</b>：VLC「打开网络串流」/ PotPlayer「打开 URL」，粘贴订阅地址</li>
