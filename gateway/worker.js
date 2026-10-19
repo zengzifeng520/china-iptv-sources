@@ -10,11 +10,10 @@
  * 部署：
  *   1. cloudflare.com 注册 -> Workers & Pages -> 创建 Worker
  *   2. 把本文件内容粘贴进编辑器
- *   3. 设置 -> 变量和机密：
+ *   3. 设置 -> 变量和机密（生产环境）：
  *        SUB_KEY  = 你的随机密钥（与 NAS 上 .gateway_key 内容一致）
  *        UPSTREAM = https://tingbao.kdns.fr/output/live.m3u
- *   4. 保存并部署
- *   5. （可选）自定义域绑定：添加路由 tv.你的域名.workers.dev 或你的子域
+ *   4. 保存版本 -> 部署（必须重新部署，变量才会生效）
  *
  * 签名生成（NAS 上）：
  *   python3 gen_token.py --add 张三 --expire 2027-01-01
@@ -32,7 +31,7 @@ async function hmacHex(key, msg) {
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const url = new URL(request.url);
     const u = url.searchParams.get("u") || "";
     const e = url.searchParams.get("e") || ""; // 到期时间戳（秒）
@@ -43,8 +42,8 @@ export default {
       return new Response("Not Found", { status: 404 });
     }
 
-    // 2) 签名校验（用固定的密钥，防参数被篡改）
-    const SUB_KEY = globalThis.SUB_KEY || "";
+    // 2) 签名校验（变量从 env 读取，兼容 globalThis）
+    const SUB_KEY = env.SUB_KEY || globalThis.SUB_KEY || "";
     if (!SUB_KEY) {
       return new Response("Gateway not configured", { status: 500 });
     }
@@ -60,7 +59,7 @@ export default {
     }
 
     // 4) 拉取上游订阅（GitHub Pages 上的 live.m3u）
-    const UPSTREAM = globalThis.UPSTREAM || "";
+    const UPSTREAM = env.UPSTREAM || globalThis.UPSTREAM || "";
     if (!UPSTREAM) {
       return new Response("Upstream not configured", { status: 500 });
     }
