@@ -1,0 +1,8 @@
+name = "china-iptv-sources"
+compatibility_date = "2026-10-21"
+
+# 静态资源配置：把 output/ 目录下的文件作为静态网站托管
+[assets]
+directory = "./output"
+# 可选：如果所有路径都走静态文件，不需要 Worker 代码
+not_found_handling = "single-page-application"
