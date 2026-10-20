@@ -3,7 +3,7 @@
   "nas": {
     "_示例": "把下面的 source_file 改成你 NAS 上直播源文件的真实路径（m3u 或 txt 均可）。",
     "source_file": "/vol1/1000/docker/iptv-manager/data/uploads",
-    "_定时": "在 NAS 上执行 crontab -e 添加： 0 6,12,18 * * * cd /vol1/1000/docker/china-iptv-sources && python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo >> push.log 2>&1（每天 6/12/18 点三轮：更新+检测+立即推送）"
+    "_定时": "在 NAS 上执行 crontab -e 添加： 0 0,5,8,11,14,17,20 * * * cd /vol1/1000/docker/china-iptv-sources && python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo >> push.log 2>&1（每天 5/8/11/14/17/20/24 点七轮：更新+检测+立即推送，cron 中 24 点写作 0 点）"
   },
   "validator": {
     "timeout": 8,
