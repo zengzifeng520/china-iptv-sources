@@ -11,7 +11,7 @@
 | 格式 | 订阅地址 |
 | --- | --- |
 | **M3U（推荐，含台标+节目单）** | `https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u` |
-| M3U（你的域名） | `https://tingbao.kdns.fr/output/live.m3u` |
+| M3U（你的域名） | `https://zengzifeng.ccwu.cc/output/live.m3u` |
 | M3U（jsDelivr CDN 加速） | `https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u` |
 | TXT（TVBox 格式） | `https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.txt` |
 | TXT（jsDelivr CDN 加速） | `https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.txt` |
@@ -28,7 +28,7 @@
 想分享给家人/朋友使用，又不想地址被无限转发？每个用户拿到**专属订阅文件**，**到期自动失效**，无需手动删除；续期重新生成即可。
 
 ```
-https://tingbao.kdns.fr/output/users/张三_2027-01-01.m3u
+https://zengzifeng.ccwu.cc/output/users/张三_2027-01-01.m3u
 ```
 
 **工作原理**：NAS 每次推送时，为每个未过期用户生成一份专属订阅文件（内容与 live.m3u 相同），文件名的日期就是到期日：
@@ -133,7 +133,7 @@ echo 'github_pat_xxxxxxxxxxxxxxxx' > .github_token
   "nas": {
     "source_file": "/vol1/1000/docker/iptv-manager/data/uploads/live.m3u"
   },
-  "base_url": "https://tingbao.kdns.fr",
+  "base_url": "https://zengzifeng.ccwu.cc",
   "validator": { "workers": 20 }
 }
 ```
