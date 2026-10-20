@@ -11,8 +11,9 @@ def now_str():
     return datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")
 
 
-def build_txt(entries):
-    """生成 TVBox 兼容的 TXT：`#分类,#genre#` + `频道名,url`。"""
+def build_txt(entries, up_url=None, updated=None):
+    """生成 TVBox 兼容的 TXT：`#分类,#genre#` + `频道名,url`。
+    up_url/updated 提供时，末尾追加"系统"分组与"更新时间"条目。"""
     lines = []
     current = None
     for cat, name, url in entries:
@@ -20,16 +21,20 @@ def build_txt(entries):
             lines.append(f"# {cat},#genre#")
             current = cat
         lines.append(f"{name},{url}")
+    if up_url and updated:
+        lines.append("# 系统,#genre#")
+        lines.append(f"⏰ 更新时间 {updated},{up_url}")
     return "\n".join(lines) + "\n"
 
 
-def build_m3u(entries, logo_map=None, tvgid_map=None, updated=None, epg_url=None):
+def build_m3u(entries, logo_map=None, tvgid_map=None, updated=None, epg_url=None, up_url=None):
     """生成 M3U 订阅文件。
 
     logo_map: {频道名: tvg-logo URL}
     tvgid_map: {频道名: tvg-id}
     epg_url: 节目单（EPG XML）地址，写入头部 #EXT-X-TVG-URL；
              传字符串（单个）或列表（多个，按顺序尝试）
+    up_url: 更新时间页面地址；提供时在列表末尾追加"系统"分组条目
     """
     logo_map = logo_map or {}
     tvgid_map = tvgid_map or {}
@@ -51,14 +56,18 @@ def build_m3u(entries, logo_map=None, tvgid_map=None, updated=None, epg_url=None
             attrs.append(f'tvg-logo="{logo}"')
         lines.append(f"#EXTINF:-1 {' '.join(attrs)},{name}")
         lines.append(url)
+    # 追加"更新时间"系统条目（每次推送自动生成）
+    if up_url and updated:
+        lines.append(f'#EXTINF:-1 group-title="系统",⏰ 更新时间 {updated}')
+        lines.append(up_url)
     return "\n".join(lines) + "\n"
 
 
-def write_outputs(entries, output_dir, logo_map=None, tvgid_map=None, updated=None, stats=None, epg_url=None):
-    """写入 live.txt / live.m3u / stats.json，返回 (txt, m3u)。"""
+def write_outputs(entries, output_dir, logo_map=None, tvgid_map=None, updated=None, stats=None, epg_url=None, up_url=None):
+    """写入 live.txt / live.m3u / uptime.txt / stats.json，返回 (txt, m3u)。"""
     os.makedirs(output_dir, exist_ok=True)
-    txt = build_txt(entries)
-    m3u = build_m3u(entries, logo_map=logo_map, tvgid_map=tvgid_map, updated=updated, epg_url=epg_url)
+    txt = build_txt(entries, up_url=up_url, updated=updated)
+    m3u = build_m3u(entries, logo_map=logo_map, tvgid_map=tvgid_map, updated=updated, epg_url=epg_url, up_url=up_url)
 
     with open(os.path.join(output_dir, "live.txt"), "w", encoding="utf-8", newline="\n") as f:
         f.write(txt)
@@ -67,4 +76,18 @@ def write_outputs(entries, output_dir, logo_map=None, tvgid_map=None, updated=No
     if stats is not None:
         with open(os.path.join(output_dir, "stats.json"), "w", encoding="utf-8") as f:
             json.dump(stats, f, ensure_ascii=False, indent=2)
+    # 更新时间页面（订阅里的"更新时间"条目指向它）
+    if up_url and updated:
+        lines = [
+            "= 订阅更新时间 =",
+            f"更新时间：{updated}",
+            f"源文件：{stats.get('source', '') if stats else ''}",
+            f"解析频道：{stats.get('total', 0) if stats else 0}",
+            f"有效频道：{stats.get('valid', 0) if stats else 0}",
+            f"失效剔除：{stats.get('dropped', 0) if stats else 0}",
+            "",
+            "提示：本页面由 NAS 定时任务自动生成，每次推送自动刷新。",
+        ]
+        with open(os.path.join(output_dir, "uptime.txt"), "w", encoding="utf-8", newline="\n") as f:
+            f.write("\n".join(lines) + "\n")
     return txt, m3u
