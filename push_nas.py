@@ -859,10 +859,24 @@ def push_logos(repo, token):
     return changed
 
 
-def write_all_outputs(all_entries, updated, logo_map=None, tvgid_map=None, epg_url=None, up_url=None):
+def load_group_logos(base_url, output_dir=None):
+    """扫描 output/logo/groups/ 下的分组图标，返回 {分组名: group-logo URL}。
+    分组图标由部署包自带或本地生成（gen_group_icons），NAS 无需 PIL。"""
+    output_dir = output_dir or OUTPUT_DIR
+    gdir = os.path.join(output_dir, "logo", "groups")
+    gl = {}
+    if os.path.isdir(gdir):
+        for f in os.listdir(gdir):
+            if f.endswith(".png"):
+                name = f[:-4]
+                gl[name] = f"{base_url}/output/logo/groups/{name}.png"
+    return gl
+
+
+def write_all_outputs(all_entries, updated, logo_map=None, tvgid_map=None, epg_url=None, up_url=None, group_logo_map=None):
     """把全量原样版本写入 output/all.txt、output/all.m3u（校验时的兜底订阅）。"""
     txt = build_txt(all_entries, up_url=up_url, updated=updated)
-    m3u = build_m3u(all_entries, logo_map=logo_map, tvgid_map=tvgid_map, updated=updated, epg_url=epg_url, up_url=up_url)
+    m3u = build_m3u(all_entries, logo_map=logo_map, tvgid_map=tvgid_map, updated=updated, epg_url=epg_url, up_url=up_url, group_logo_map=group_logo_map)
     with open(os.path.join(OUTPUT_DIR, "all.txt"), "w", encoding="utf-8", newline="\n") as f:
         f.write(txt)
     with open(os.path.join(OUTPUT_DIR, "all.m3u"), "w", encoding="utf-8", newline="\n") as f:
@@ -870,7 +884,7 @@ def write_all_outputs(all_entries, updated, logo_map=None, tvgid_map=None, epg_u
     print(f"已生成 output/all.txt、all.m3u（全量原样 {len(all_entries)} 条，校验时兜底订阅）")
 
 
-def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_url=None, up_url=None):
+def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_url=None, up_url=None, group_logo_map=None):
     print(f"== 导入源文件: {src_file} ==")
     text = read_source_file(src_file)
     entries = parse_auto(text)
@@ -939,10 +953,11 @@ def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_ur
         hit = match_epg_id(n, epg_map_norm, epg_norm_set)
         tvgid_map[n] = hit or norm_channel(n) or n
     write_outputs(entries, OUTPUT_DIR, logo_map=logo_map, tvgid_map=tvgid_map,
-                  updated=updated, stats=stats, epg_url=epg_url, up_url=up_url)
+                  updated=updated, stats=stats, epg_url=epg_url, up_url=up_url,
+                  group_logo_map=group_logo_map)
     print(f"已生成 output/live.txt、live.m3u、uptime.txt、stats.json（订阅版 {len(entries)} 条）")
     if validate:
-        write_all_outputs(all_entries, updated, logo_map=logo_map, tvgid_map=tvgid_map, epg_url=epg_url, up_url=up_url)
+        write_all_outputs(all_entries, updated, logo_map=logo_map, tvgid_map=tvgid_map, epg_url=epg_url, up_url=up_url, group_logo_map=group_logo_map)
     return entries
 
 
@@ -1005,9 +1020,11 @@ def main():
             epg_urls.insert(0, f"{base_url}/output/epg.xml")  # 自托管合并 EPG（channel id 已统一为频道名）
         if not epg_urls:
             epg_urls = [EPG_SOURCE]  # 兜底
+        group_logo_map = load_group_logos(base_url)
         entries = run_import(src, args.validate, args.category,
                              logo_map=logo_map, epg_map=epg_map,
-                             epg_url=epg_urls, up_url=f"{base_url}/output/uptime.txt")
+                             epg_url=epg_urls, up_url=f"{base_url}/output/uptime.txt",
+                             group_logo_map=group_logo_map)
     elif not args.push_only:
         print("请指定 --file <源文件路径> 或 --latest-dir <源文件目录>，或使用 --push-only。")
         sys.exit(1)
