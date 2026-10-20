@@ -82,7 +82,7 @@ SKIP_LOGO_DIRS = {"Adult"}  # 跳过不适内容目录
 LOGO_RAW_MIRROR = "https://ghproxy.net/https://raw.githubusercontent.com/{repo}/main/{path}"
 LOGO_INDEX_CACHE = os.path.join(BASE_DIR, ".logo_index.json")  # 台标索引本地缓存（24h）
 LOGO_INDEX_TTL = 24 * 3600
-DEFAULT_BASE_URL = "https://tingbao.kdns.fr"  # 订阅/图标/EPG 的对外域名（你自己的 GitHub Pages）
+DEFAULT_BASE_URL = "https://zengzifeng.ccwu.cc"  # 订阅/图标/EPG 的对外域名（你自己的 GitHub Pages）
 
 # 频道名常见后缀（清洗时去掉）
 _NAME_SUFFIXES = [
@@ -343,7 +343,7 @@ def push_outputs(repo, token):
     if ok:
         print("订阅地址（约 1 分钟后刷新）：")
         print(f"  有效版订阅（live.m3u，含图标与节目单）：https://raw.githubusercontent.com/{repo}/main/output/live.m3u")
-        print(f"  你的域名：https://tingbao.kdns.fr/output/live.m3u")
+        print(f"  你的域名：https://zengzifeng.ccwu.cc/output/live.m3u")
         if os.path.exists(os.path.join(OUTPUT_DIR, "all.m3u")):
             print(f"  全量版订阅（all.m3u，原样兜底）：https://raw.githubusercontent.com/{repo}/main/output/all.m3u")
         print(f"  TXT（TVBox 用）：https://raw.githubusercontent.com/{repo}/main/output/live.txt")
