@@ -859,17 +859,17 @@ def push_logos(repo, token):
     return changed
 
 
-def load_group_logos(base_url, output_dir=None):
-    """扫描 output/logo/groups/ 下的分组图标，返回 {分组名: group-logo URL}。
-    分组图标由部署包自带或本地生成（gen_group_icons），NAS 无需 PIL。"""
-    output_dir = output_dir or OUTPUT_DIR
-    gdir = os.path.join(output_dir, "logo", "groups")
+def load_group_logos(base_url, output_dir=None, config=None):
+    """构建 {分组名: group-logo URL}。
+
+    分组图标文件名用英文/拼音（GitHub Pages 对中文文件名访问不稳定会 404），
+    文件名映射见 config.json 的 group_icons。图标由部署包自带（output/logo/groups/）。"""
+    config = config or {}
+    mapping = config.get("group_icons") or {}
+    mapping = {k: v for k, v in mapping.items() if not k.startswith("_")}
     gl = {}
-    if os.path.isdir(gdir):
-        for f in os.listdir(gdir):
-            if f.endswith(".png"):
-                name = f[:-4]
-                gl[name] = f"{base_url}/output/logo/groups/{name}.png"
+    for group_name, fname in mapping.items():
+        gl[group_name] = f"{base_url}/output/logo/groups/{fname}.png"
     return gl
 
 
@@ -1020,7 +1020,7 @@ def main():
             epg_urls.insert(0, f"{base_url}/output/epg.xml")  # 自托管合并 EPG（channel id 已统一为频道名）
         if not epg_urls:
             epg_urls = [EPG_SOURCE]  # 兜底
-        group_logo_map = load_group_logos(base_url)
+        group_logo_map = load_group_logos(base_url, config=cfg)
         entries = run_import(src, args.validate, args.category,
                              logo_map=logo_map, epg_map=epg_map,
                              epg_url=epg_urls, up_url=f"{base_url}/output/uptime.txt",
