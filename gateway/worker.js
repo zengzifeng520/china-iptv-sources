@@ -12,7 +12,7 @@
  *   2. 把本文件内容粘贴进编辑器
  *   3. 设置 -> 变量和机密（生产环境）：
  *        SUB_KEY  = 你的随机密钥（与 NAS 上 .gateway_key 内容一致）
- *        UPSTREAM = https://tingbao.kdns.fr/output/live.m3u
+ *        UPSTREAM = https://zengzifeng.ccwu.cc/output/live.m3u
  *   4. 保存版本 -> 部署（必须重新部署，变量才会生效）
  *
  * 签名生成（NAS 上）：
