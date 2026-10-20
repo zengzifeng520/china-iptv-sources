@@ -1,0 +1,12 @@
+name = "china-iptv-sources"
+compatibility_date = "2026-10-21"
+
+# 静态资源配置：把 output/ 目录下的所有文件作为静态网站托管
+[assets]
+directory = "./output"
+# 找不到文件时返回 404，而不是回退到 index.html
+not_found_handling = "404"
+
+# 可选：环境变量（密码等）
+# [vars]
+# PASSWORD = "你的密码"
