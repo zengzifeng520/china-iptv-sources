@@ -38,7 +38,7 @@ DEFAULT_REPO = "zengzifeng520/china-iptv-sources"
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 LOGO_DIR = os.path.join(OUTPUT_DIR, "logo")
 LOGO_STATE = os.path.join(BASE_DIR, ".logo_state.json")  # 已推送图标记录（本地，gitignore）
-FILES_TO_PUSH = ["live.txt", "live.m3u", "all.txt", "all.m3u", "stats.json", "epg.xml"]
+FILES_TO_PUSH = ["live.txt", "live.m3u", "all.txt", "all.m3u", "stats.json", "epg.xml", "uptime.txt"]
 
 # 组播 / rtsp 等无法用 HTTP 探测的协议：校验时自动保留，不误删
 NON_HTTP_PREFIXES = ("rtp://", "udp://", "igmp://", "rtsp://", "rtmp://")
@@ -859,10 +859,10 @@ def push_logos(repo, token):
     return changed
 
 
-def write_all_outputs(all_entries, updated, logo_map=None, tvgid_map=None, epg_url=None):
+def write_all_outputs(all_entries, updated, logo_map=None, tvgid_map=None, epg_url=None, up_url=None):
     """把全量原样版本写入 output/all.txt、output/all.m3u（校验时的兜底订阅）。"""
-    txt = build_txt(all_entries)
-    m3u = build_m3u(all_entries, logo_map=logo_map, tvgid_map=tvgid_map, updated=updated, epg_url=epg_url)
+    txt = build_txt(all_entries, up_url=up_url, updated=updated)
+    m3u = build_m3u(all_entries, logo_map=logo_map, tvgid_map=tvgid_map, updated=updated, epg_url=epg_url, up_url=up_url)
     with open(os.path.join(OUTPUT_DIR, "all.txt"), "w", encoding="utf-8", newline="\n") as f:
         f.write(txt)
     with open(os.path.join(OUTPUT_DIR, "all.m3u"), "w", encoding="utf-8", newline="\n") as f:
@@ -870,7 +870,7 @@ def write_all_outputs(all_entries, updated, logo_map=None, tvgid_map=None, epg_u
     print(f"已生成 output/all.txt、all.m3u（全量原样 {len(all_entries)} 条，校验时兜底订阅）")
 
 
-def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_url=None):
+def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_url=None, up_url=None):
     print(f"== 导入源文件: {src_file} ==")
     text = read_source_file(src_file)
     entries = parse_auto(text)
@@ -939,10 +939,10 @@ def run_import(src_file, validate, category, logo_map=None, epg_map=None, epg_ur
         hit = match_epg_id(n, epg_map_norm, epg_norm_set)
         tvgid_map[n] = hit or norm_channel(n) or n
     write_outputs(entries, OUTPUT_DIR, logo_map=logo_map, tvgid_map=tvgid_map,
-                  updated=updated, stats=stats, epg_url=epg_url)
-    print(f"已生成 output/live.txt、live.m3u、stats.json（订阅版 {len(entries)} 条）")
+                  updated=updated, stats=stats, epg_url=epg_url, up_url=up_url)
+    print(f"已生成 output/live.txt、live.m3u、uptime.txt、stats.json（订阅版 {len(entries)} 条）")
     if validate:
-        write_all_outputs(all_entries, updated, logo_map=logo_map, tvgid_map=tvgid_map, epg_url=epg_url)
+        write_all_outputs(all_entries, updated, logo_map=logo_map, tvgid_map=tvgid_map, epg_url=epg_url, up_url=up_url)
     return entries
 
 
@@ -1007,7 +1007,7 @@ def main():
             epg_urls = [EPG_SOURCE]  # 兜底
         entries = run_import(src, args.validate, args.category,
                              logo_map=logo_map, epg_map=epg_map,
-                             epg_url=epg_urls)
+                             epg_url=epg_urls, up_url=f"{base_url}/output/uptime.txt")
     elif not args.push_only:
         print("请指定 --file <源文件路径> 或 --latest-dir <源文件目录>，或使用 --push-only。")
         sys.exit(1)
