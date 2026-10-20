@@ -2,7 +2,7 @@
 """多人订阅用户管理（GitHub Pages 专属文件方案）
 
 每个用户一个专属订阅文件（以 .m3u 结尾），到期自动失效：
-    https://tingbao.kdns.fr/output/users/张三_2027-01-01.m3u
+    https://zengzifeng.ccwu.cc/output/users/张三_2027-01-01.m3u
 
 NAS 每次 push_nas.py 推送时：
     - 未过期用户 -> 生成专属文件并推送到 GitHub（地址以 .m3u 结尾，播放器可直接导入）
@@ -22,7 +22,7 @@ from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 USERS_FILE = os.path.join(BASE_DIR, "users.json")
-DEFAULT_BASE = "https://tingbao.kdns.fr"  # 对外域名（GitHub Pages）
+DEFAULT_BASE = "https://zengzifeng.ccwu.cc"  # 对外域名（GitHub Pages）
 
 
 def load_users():
