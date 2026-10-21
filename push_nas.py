@@ -32,6 +32,7 @@ import os
 import re
 import sys
 import urllib.request
+import urllib.parse
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_REPO = "zengzifeng520/china-iptv-sources"
@@ -869,7 +870,7 @@ def load_group_logos(base_url, output_dir=None, config=None):
     mapping = {k: v for k, v in mapping.items() if not k.startswith("_")}
     gl = {}
     for group_name, fname in mapping.items():
-        gl[group_name] = f"{base_url}/output/logo/groups/{fname}.png"
+        gl[group_name] = f"{base_url}/output/logo/groups/{urllib.parse.quote(fname)}.png"
     return gl
 
 
@@ -1009,8 +1010,9 @@ def main():
             # push-only 模式：从本地已下载图标建立映射（有图标文件的频道）
             logo_map = {f[:-4].replace("logos", "", 1): f for f in os.listdir(LOGO_DIR) if f.lower().endswith(".png")}
             print(f"使用本地已有图标 {len(logo_map)} 个")
-        # 转成完整 URL（台标地址指向你自己的域名）
-        logo_map = {k: f"{base_url}/output/logo/{v}" for k, v in logo_map.items()}
+        # 转成完整 URL（台标地址指向你自己的域名；文件名含中文时做百分号编码，
+        # 否则播放器请求中文 URL 失败会导致台标不显示）
+        logo_map = {k: f"{base_url}/output/logo/{urllib.parse.quote(v)}" for k, v in logo_map.items()}
 
     # 3) 生成（EPG 映射用于 tvg-id，自建合并节目单挂载头部）
     entries = None
