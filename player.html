@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPTV 直播播放器</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📺</text></svg>">
+<script src="https://fastly.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #0f1115;
+    --bg-secondary: #1a1d24;
+    --bg-hover: #252932;
+    --bg-active: #2d7ff0;
+    --text-primary: #e8eaed;
+    --text-secondary: #9aa0a6;
+    --border: #2c3038;
+    --accent: #2d7ff0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ===== 顶部栏 ===== */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .header-logo {
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--accent);
+  }
+
+  .header-input {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+  }
+
+  .header-input input {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  @media (min-width: 600px) {
+    .header-input input {
+      font-size: 14px;
+    }
+  }
+
+  .header-input input:focus {
+    border-color: var(--accent);
+  }
+
+  .header-input button {
+    padding: 8px 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .header-input button:hover {
+    opacity: 0.9;
+  }
+
+  .header-input button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ===== 主布局 ===== */
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ===== 左侧分组栏 ===== */
+  .sidebar {
+    width: 200px;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  .sidebar-title {
+    padding: 14px 16px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .group-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-left: 3px solid transparent;
+  }
+
+  .group-item:hover {
+    background: var(--bg-hover);
+  }
+
+  .group-item.active {
+    background: var(--bg-hover);
+    border-left-color: var(--accent);
+  }
+
+  .group-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .group-name {
+    font-size: 13px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .group-count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: var(--bg-primary);
+    padding: 2px 6px;
+    border-radius: 10px;
+  }
+
+  /* ===== 中间频道列表 ===== */
+  .channel-list {
+    width: 280px;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  .channel-search {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 1;
+  }
+
+  .channel-search input {
+    width: 100%;
+    padding: 7px 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+  }
+
+  @media (min-width: 600px) {
+    .channel-search input {
+      font-size: 13px;
+    }
+  }
+
+  .channel-search input:focus {
+    border-color: var(--accent);
+  }
+
+  .channel-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .channel-item:hover {
+    background: var(--bg-hover);
+  }
+
+  .channel-item.active {
+    background: rgba(45, 127, 240, 0.15);
+  }
+
+  .channel-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .channel-logo-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .channel-name {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ===== 右侧播放区 ===== */
+  .player-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    min-width: 0;
+  }
+
+  .video-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #000;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .player-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: var(--text-secondary);
+  }
+
+  .player-placeholder-icon {
+    font-size: 64px;
+    opacity: 0.3;
+  }
+
+  .player-placeholder-text {
+    font-size: 16px;
+  }
+
+  .player-status {
+    padding: 10px 20px;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .now-playing {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-spinner.visible {
+    display: inline-block;
+  }
+
+  /* ===== 滚动条 ===== */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+  }
+
+  /* ===== 空状态 ===== */
+  .empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 900px) {
+    .sidebar {
+      width: 64px;
+    }
+    .group-name, .group-count {
+      display: none;
+    }
+    .group-item {
+      justify-content: center;
+      padding: 12px 0;
+    }
+    .channel-list {
+      width: 200px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .channel-list {
+      display: none;
+    }
+    .header-logo {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部栏 -->
+<div class="header">
+  <div class="header-logo">📺 IPTV</div>
+  <div class="header-input">
+    <input type="text" id="urlInput" value="https://zengzifeng.ccwu.cc/output/all.m3u" />
+    <button id="loadBtn">加载</button>
+  </div>
+</div>
+
+<!-- 主区域 -->
+<div class="main">
+
+  <!-- 左侧分组 -->
+  <div class="sidebar">
+    <div class="sidebar-title">分组</div>
+    <div id="groupList">
+      <div class="empty-state">暂无分组<br>请先加载播放列表</div>
+    </div>
+  </div>
+
+  <!-- 中间频道列表 -->
+  <div class="channel-list">
+    <div class="channel-search">
+      <input type="text" id="searchInput" placeholder="搜索频道..." />
+    </div>
+    <div id="channelList">
+      <div class="empty-state">请选择分组</div>
+    </div>
+  </div>
+
+  <!-- 右侧播放区 -->
+  <div class="player-area">
+    <div class="video-container" id="videoContainer">
+      <div class="player-placeholder" id="playerPlaceholder">
+        <div class="player-placeholder-icon">📡</div>
+        <div class="player-placeholder-text">选择频道开始播放</div>
+      </div>
+      <video id="videoPlayer" style="display:none" controls></video>
+    </div>
+    <div class="player-status">
+      <div class="loading-spinner" id="spinner"></div>
+      <span class="now-playing" id="nowPlaying">未播放</span>
+      <span id="statusText"></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== 分组 emoji 映射表 =====
+// 在这里自定义你的分组图标，key 是 group-title 里的名称，value 是 emoji
+const GROUP_ICONS = {
+  "央视频道": "🏛️",
+  "卫视频道": "📡",
+  "4K节目": "🖥️",
+  "中数传媒": "🎬",
+  "地方频道": "🏙️",
+  "其他": "📺",
+  "IPTV": "📶",
+  "北京节目": "🏯",
+  "央视": "🏛️",
+  "卫视": "📡",
+  "地方": "🏙️",
+  "电影": "🎬",
+  "电视剧": "📺",
+  "体育": "⚽",
+  "新闻": "📰",
+  "少儿": "🧸",
+  "纪录": "🌍",
+  "港澳": "🇭🇰",
+  "台湾": "🇨🇳",
+  "海外": "🌐",
+  "4K": "🖥️",
+  "高清": "✨",
+  "测试": "🧪"
+};
+
+// 默认图标（匹配不到时用）
+const DEFAULT_ICON = "📁";
+
+// 状态
+let allChannels = [];      // 所有频道
+let groups = [];           // 分组列表
+let currentGroup = null;   // 当前选中分组
+let filteredChannels = []; // 当前显示的频道
+let hls = null;
+
+// DOM
+const urlInput = document.getElementById('urlInput');
+const loadBtn = document.getElementById('loadBtn');
+const groupListEl = document.getElementById('groupList');
+const channelListEl = document.getElementById('channelList');
+const searchInput = document.getElementById('searchInput');
+const video = document.getElementById('videoPlayer');
+const videoContainer = document.getElementById('videoContainer');
+const playerPlaceholder = document.getElementById('playerPlaceholder');
+const nowPlaying = document.getElementById('nowPlaying');
+const statusText = document.getElementById('statusText');
+const spinner = document.getElementById('spinner');
+
+// ===== 加载播放列表 =====
+loadBtn.addEventListener('click', loadPlaylist);
+urlInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') loadPlaylist();
+});
+
+async function loadPlaylist() {
+  const url = urlInput.value.trim();
+  if (!url) {
+    setStatus('请输入播放列表 URL');
+    return;
+  }
+
+  loadBtn.disabled = true;
+  loadBtn.textContent = '加载中...';
+  setStatus('正在获取播放列表...');
+
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const text = await resp.text();
+    parseM3U(text);
+    setStatus(`成功加载 ${allChannels.length} 个频道，${groups.length} 个分组`);
+  } catch (err) {
+    setStatus('加载失败: ' + err.message);
+    alert('加载失败: ' + err.message + '\n\n注意：跨域问题可能导致无法直接加载 GitHub 上的 m3u 文件。\n解决方法：\n1. 把 m3u 内容直接复制粘贴到本地\n2. 使用支持 CORS 的镜像地址\n3. 部署这个 HTML 到你自己的 GitHub Pages');
+  } finally {
+    loadBtn.disabled = false;
+    loadBtn.textContent = '加载';
+  }
+}
+
+// ===== 解析 M3U =====
+function parseM3U(content) {
+  const lines = content.split('\n');
+  allChannels = [];
+  const groupMap = {};
+
+  let currentExtinf = null;
+
+  for (let line of lines) {
+    line = line.trim();
+    if (!line) continue;
+
+    if (line.startsWith('#EXTINF:')) {
+      // 解析 EXTINF 行
+      currentExtinf = parseExtinf(line);
+    } else if (!line.startsWith('#') && currentExtinf) {
+      // 这是一个频道 URL
+      const channel = {
+        ...currentExtinf,
+        url: line
+      };
+      allChannels.push(channel);
+
+      const group = currentExtinf.group || '未分组';
+      if (!groupMap[group]) {
+        groupMap[group] = [];
+      }
+      groupMap[group].push(channel);
+
+      currentExtinf = null;
+    }
+  }
+
+  // 生成分组列表
+  groups = Object.keys(groupMap).map(name => ({
+    name: name,
+    channels: groupMap[name],
+    icon: getGroupIcon(name)
+  })).sort((a, b) => a.name.localeCompare(b.name, 'zh'));
+
+  // 渲染分组
+  renderGroups();
+}
+
+function parseExtinf(line) {
+  const result = {
+    name: '',
+    logo: '',
+    group: '',
+    id: ''
+  };
+
+  // 提取属性
+  const attrMatch = line.match(/([a-zA-Z0-9-]+)="([^"]*)"/g);
+  if (attrMatch) {
+    attrMatch.forEach(attr => {
+      const [key, val] = attr.split('=');
+      const cleanKey = key.trim();
+      const cleanVal = val.replace(/^"|"$/g, '');
+      if (cleanKey === 'tvg-logo') result.logo = cleanVal;
+      else if (cleanKey === 'group-title') result.group = cleanVal;
+      else if (cleanKey === 'tvg-id') result.id = cleanVal;
+      else if (cleanKey === 'tvg-name') result.tvgName = cleanVal;
+    });
+  }
+
+  // 提取频道名（逗号后面的部分）
+  const commaIdx = line.lastIndexOf(',');
+  if (commaIdx !== -1) {
+    result.name = line.substring(commaIdx + 1).trim();
+  }
+
+  return result;
+}
+
+// ===== 获取分组图标 =====
+function getGroupIcon(groupName) {
+  // 精确匹配
+  if (GROUP_ICONS[groupName]) return GROUP_ICONS[groupName];
+
+  // 模糊匹配（包含关键词）
+  for (const key in GROUP_ICONS) {
+    if (groupName.includes(key) || key.includes(groupName)) {
+      return GROUP_ICONS[key];
+    }
+  }
+
+  return DEFAULT_ICON;
+}
+
+// ===== 渲染分组列表 =====
+function renderGroups() {
+  if (groups.length === 0) {
+    groupListEl.innerHTML = '<div class="empty-state">暂无分组</div>';
+    return;
+  }
+
+  let html = '';
+  groups.forEach((group, idx) => {
+    const active = idx === 0 ? 'active' : '';
+    html += `
+      <div class="group-item ${active}" data-group="${idx}">
+        <span class="group-icon">${group.icon}</span>
+        <span class="group-name">${escapeHtml(group.name)}</span>
+        <span class="group-count">${group.channels.length}</span>
+      </div>
+    `;
+  });
+
+  groupListEl.innerHTML = html;
+
+  // 绑定点击事件
+  groupListEl.querySelectorAll('.group-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = parseInt(item.dataset.group);
+      selectGroup(idx);
+    });
+  });
+
+  // 默认选中第一个分组
+  selectGroup(0);
+}
+
+// ===== 选中分组 =====
+function selectGroup(idx) {
+  currentGroup = idx;
+
+  // 更新选中状态
+  groupListEl.querySelectorAll('.group-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+
+  // 渲染频道
+  filteredChannels = groups[idx].channels;
+  renderChannels();
+}
+
+// ===== 搜索 =====
+searchInput.addEventListener('input', () => {
+  if (currentGroup === null) return;
+  const keyword = searchInput.value.trim().toLowerCase();
+  if (!keyword) {
+    filteredChannels = groups[currentGroup].channels;
+  } else {
+    filteredChannels = groups[currentGroup].channels.filter(ch =>
+      ch.name.toLowerCase().includes(keyword)
+    );
+  }
+  renderChannels();
+});
+
+// ===== 渲染频道列表 =====
+function renderChannels() {
+  if (filteredChannels.length === 0) {
+    channelListEl.innerHTML = '<div class="empty-state">没有匹配的频道</div>';
+    return;
+  }
+
+  let html = '';
+  filteredChannels.forEach((ch, idx) => {
+    const logoHtml = ch.logo
+      ? `<img class="channel-logo" src="${escapeAttr(ch.logo)}" onerror="this.outerHTML='<div class=\\'channel-logo-placeholder\\'>📺</div>'" />`
+      : `<div class="channel-logo-placeholder">📺</div>`;
+
+    html += `
+      <div class="channel-item" data-idx="${idx}">
+        ${logoHtml}
+        <span class="channel-name">${escapeHtml(ch.name)}</span>
+      </div>
+    `;
+  });
+
+  channelListEl.innerHTML = html;
+
+  // 绑定点击
+  channelListEl.querySelectorAll('.channel-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = parseInt(item.dataset.idx);
+      playChannel(filteredChannels[idx]);
+    });
+  });
+}
+
+// ===== 播放频道 =====
+function playChannel(channel) {
+  nowPlaying.textContent = channel.name;
+  setStatus('加载中...');
+  spinner.classList.add('visible');
+
+  playerPlaceholder.style.display = 'none';
+  video.style.display = 'block';
+
+  // 销毁旧的 hls 实例
+  if (hls) {
+    hls.destroy();
+    hls = null;
+  }
+
+  if (Hls.isSupported()) {
+    hls = new Hls();
+    hls.loadSource(channel.url);
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      video.play().catch(() => {});
+      setStatus('播放中');
+      spinner.classList.remove('visible');
+    });
+
+    hls.on(Hls.Events.ERROR, (event, data) => {
+      if (data.fatal) {
+        setStatus('播放出错: ' + data.type + ' - ' + data.details);
+        spinner.classList.remove('visible');
+      }
+    });
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    // Safari 原生支持
+    video.src = channel.url;
+    video.addEventListener('loadedmetadata', () => {
+      video.play().catch(() => {});
+      setStatus('播放中');
+      spinner.classList.remove('visible');
+    });
+  } else {
+    setStatus('浏览器不支持 HLS 播放');
+    spinner.classList.remove('visible');
+  }
+}
+
+// ===== 工具函数 =====
+function setStatus(text) {
+  statusText.textContent = text;
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function escapeAttr(str) {
+  return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// 页面加载完成后自动加载播放列表
+window.addEventListener('load', () => {
+  loadPlaylist();
+});
+</script>
+
+</body>
+</html>
