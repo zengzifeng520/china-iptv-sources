@@ -54,7 +54,7 @@ def build_txt(entries, up_url=None, updated=None):
         lines.append(f"{name},{url}")
     if up_url and updated:
         lines.append(f"# {with_emoji('系统')},#genre#")
-        lines.append(f"⏰ 更新时间 {updated},{up_url}")
+        lines.append(f"📺 欢迎观看,{up_url}")
     return "\n".join(lines) + "\n"
 
 
@@ -95,9 +95,9 @@ def build_m3u(entries, logo_map=None, tvgid_map=None, updated=None, epg_url=None
             attrs.append(f'tvg-logo="{logo}"')
         lines.append(f"#EXTINF:-1 {' '.join(attrs)},{name}")
         lines.append(url)
-    # 追加"更新时间"系统条目（每次推送自动生成）
+    # 追加"欢迎观看"系统条目
     if up_url and updated:
-        lines.append(f'#EXTINF:-1 group-title="{with_emoji("系统")}",⏰ 更新时间 {updated}')
+        lines.append(f'#EXTINF:-1 group-title="{with_emoji("系统")}",📺 欢迎观看')
         lines.append(up_url)
     return "\n".join(lines) + "\n"
 
