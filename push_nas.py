@@ -1025,7 +1025,7 @@ def main():
         group_logo_map = load_group_logos(base_url, config=cfg)
         entries = run_import(src, args.validate, args.category,
                              logo_map=logo_map, epg_map=epg_map,
-                             epg_url=epg_urls, up_url="https://video-cover-1251316161.file.myqcloud.com/mp4/test.mp4",
+                             epg_url=epg_urls, up_url="http://116.230.212.78:8222/rtp/233.18.204.168:5140",
                              group_logo_map=group_logo_map)
     elif not args.push_only:
         print("请指定 --file <源文件路径> 或 --latest-dir <源文件目录>，或使用 --push-only。")
