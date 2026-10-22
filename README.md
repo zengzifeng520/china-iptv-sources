@@ -6,20 +6,14 @@
 
 ---
 
-## 📺 订阅地址
+## 🔒 订阅地址
 
-| 格式 | 订阅地址 |
-| --- | --- |
-| **M3U（推荐，含台标+节目单）** | `https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.m3u` |
-| M3U（你的域名） | `https://zengzifeng.ccwu.cc/output/live.m3u` |
-| M3U（jsDelivr CDN 加速） | `https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.m3u` |
-| TXT（TVBox 格式） | `https://raw.githubusercontent.com/zengzifeng520/china-iptv-sources/main/output/live.txt` |
-| TXT（jsDelivr CDN 加速） | `https://cdn.jsdelivr.net/gh/zengzifeng520/china-iptv-sources@main/output/live.txt` |
+订阅地址**不在仓库里公开**，由 NAS 生成后单独分发，避免被随意转发/盗用：
 
-> **M3U 订阅特点**（每一条播放地址都自动带台标与节目信息）：
-> - 每个频道自动匹配 **台标**（`tvg-logo`），实测覆盖率 **96%+**
-> - 每个频道带 **节目单标识**（`tvg-id` / `tvg-name`），覆盖率 **100%**
-> - 订阅头部自动挂载 **自托管合并节目单（EPG）**：`alantang1977`（央视/卫视）+ `CCSH`（505 频道大覆盖聚合）双源合并，约 500 个频道、18000+ 条节目，播放器可直接显示当日节目
+- 主地址：`<你的域名>/output/live.m3u`、`<你的域名>/output/live.txt`
+- 巡检版（每小时剔除失效线路）：`<你的域名>/output/checked/live.m3u`
+
+> 本仓库只保存脚本与产物，不提供可直接使用的订阅链接。
 
 ---
 
@@ -28,7 +22,7 @@
 想分享给家人/朋友使用，又不想地址被无限转发？每个用户拿到**专属订阅文件**，**到期自动失效**，无需手动删除；续期重新生成即可。
 
 ```
-https://zengzifeng.ccwu.cc/output/users/张三_2027-01-01.m3u
+https://<你的域名>/output/users/<用户名>_<到期日>.m3u
 ```
 
 **工作原理**：NAS 每次推送时，为每个未过期用户生成一份专属订阅文件（内容与 live.m3u 相同），文件名的日期就是到期日：
@@ -133,7 +127,7 @@ echo 'github_pat_xxxxxxxxxxxxxxxx' > .github_token
   "nas": {
     "source_file": "/vol1/1000/docker/iptv-manager/data/uploads/live.m3u"
   },
-  "base_url": "https://zengzifeng.ccwu.cc",
+  "base_url": "https://<你的域名>",
   "validator": { "workers": 20 }
 }
 ```
