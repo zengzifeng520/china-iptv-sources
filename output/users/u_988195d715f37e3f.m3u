@@ -1,7 +1,7 @@
 #EXTM3U x-tvg-url="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="订阅信息 到期 2026-10-23",有效期 2026-10-22 ~ 2026-10-23（剩余 1 天）
 http://118.77.107.10:8085/rtp/226.0.2.11:8000
-# 更新时间：2026-10-22 16:20:10（北京时间）
+# 更新时间：2026-10-22 17:18:58（北京时间）
 #EXTINF:-1 tvg-id="更新" tvg-name="更新" group-title="更新时间 2026-10-22 15:39:26",2026-10-22 15:39:26 更新
 http://118.77.107.10:8085/rtp/226.0.2.11:8000
 #EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山西卫视.png" group-title="卫视频道",山西卫视
@@ -46,8 +46,6 @@ http://1.192.242.239:8188/rtp/239.16.10.24:2000
 http://118.77.107.10:8085/rtp/226.0.2.11:8000
 #EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山西卫视.png" group-title="卫视频道",山西卫视
 http://118.79.113.228:8000/rtp/226.0.2.11:8000
-#EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山西卫视.png" group-title="卫视频道",山西卫视
-http://171.122.197.67:8085/rtp/226.0.2.152:9128
 #EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山西卫视.png" group-title="卫视频道",山西卫视
 http://116.230.212.78:8222/rtp/233.18.204.211:5140
 #EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山西卫视.png" group-title="卫视频道",山西卫视
@@ -485,6 +483,8 @@ http://www.rongrong.me:14022/rtp/233.18.204.92:5140
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/湖北卫视.png" group-title="卫视频道",湖北卫视
 http://111.197.231.173:4022/rtp/239.3.1.138:8044
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/湖北卫视.png" group-title="卫视频道",湖北卫视
+http://111.193.224.236:8888/rtp/239.3.1.138:8044
+#EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/湖北卫视.png" group-title="卫视频道",湖北卫视
 http://114.250.20.79:4022/rtp/239.3.1.138:8044
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/湖北卫视.png" group-title="卫视频道",湖北卫视
 http://bit.famcloud.top:9878/rtp/239.3.1.138:8044
@@ -641,15 +641,9 @@ http://39.88.15.67:4000/udp/239.253.254.117:8000
 #EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
 http://112.255.234.207:4000/udp/239.253.254.117:8000
 #EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
-http://171.122.197.67:8085/rtp/226.0.2.172:9288
-#EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
 http://118.77.107.10:8085/rtp/226.0.2.41:8240
 #EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
-http://171.122.197.67:8085/rtp/226.0.2.41:8240
-#EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
 http://116.230.212.78:8222/rtp/233.18.204.113:5140
-#EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
-http://117.9.44.7:4022/udp/225.1.2.236:5002
 #EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
 http://60.26.60.19:8000/udp/225.1.2.236:5002
 #EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰卡通.png" group-title="卫视频道",金鹰卡通
@@ -1266,10 +1260,6 @@ http://www.893224162.xyz:8188/udp/239.94.0.89:5140
 http://xmzj.f3322.net:8188/udp/239.94.0.89:5140
 #EXTINF:-1 tvg-id="广西卫视" tvg-name="广西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/广西卫视.png" group-title="卫视频道",广西卫视
 http://39.88.15.67:4000/udp/239.253.254.197:8000
-#EXTINF:-1 tvg-id="广西卫视" tvg-name="广西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/广西卫视.png" group-title="卫视频道",广西卫视
-http://171.122.197.67:8085/rtp/226.0.2.46:8280
-#EXTINF:-1 tvg-id="广西卫视" tvg-name="广西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/广西卫视.png" group-title="卫视频道",广西卫视
-http://171.122.197.67:8085/rtp/226.0.2.231:9760
 #EXTINF:-1 tvg-id="河南卫视" tvg-name="河南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/河南卫视.png" group-title="卫视频道",河南卫视
 http://120.238.84.45:9901/tsfile/live/1068_1.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="河南卫视" tvg-name="河南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/河南卫视.png" group-title="卫视频道",河南卫视
@@ -1387,8 +1377,6 @@ http://www.893224162.xyz:8188/udp/239.94.0.92:5140
 #EXTINF:-1 tvg-id="陕西卫视" tvg-name="陕西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/陕西卫视.png" group-title="卫视频道",陕西卫视
 http://118.77.107.10:8085/rtp/226.0.2.53:8336
 #EXTINF:-1 tvg-id="陕西卫视" tvg-name="陕西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/陕西卫视.png" group-title="卫视频道",陕西卫视
-http://171.122.197.67:8085/rtp/226.0.2.53:8336
-#EXTINF:-1 tvg-id="陕西卫视" tvg-name="陕西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/陕西卫视.png" group-title="卫视频道",陕西卫视
 http://219.144.150.198:10000/rtp/239.111.205.35:5140
 #EXTINF:-1 tvg-id="江西卫视" tvg-name="江西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/江西卫视.png" group-title="卫视频道",江西卫视
 http://www.rongrong.me:14022/rtp/233.18.204.95:5140
@@ -1501,8 +1489,6 @@ http://xmzj.f3322.net:8188/udp/239.94.0.99:5140
 #EXTINF:-1 tvg-id="甘肃卫视" tvg-name="甘肃卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/甘肃卫视.png" group-title="卫视频道",甘肃卫视
 http://118.79.113.228:8000/rtp/226.0.2.55:8352
 #EXTINF:-1 tvg-id="甘肃卫视" tvg-name="甘肃卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/甘肃卫视.png" group-title="卫视频道",甘肃卫视
-http://171.122.197.67:8085/rtp/226.0.2.55:8352
-#EXTINF:-1 tvg-id="甘肃卫视" tvg-name="甘肃卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/甘肃卫视.png" group-title="卫视频道",甘肃卫视
 http://114.250.20.79:4022/rtp/239.3.1.49:8188
 #EXTINF:-1 tvg-id="甘肃卫视" tvg-name="甘肃卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/甘肃卫视.png" group-title="卫视频道",甘肃卫视
 http://123.120.6.99:4022/rtp/239.3.1.49:8188
@@ -1564,10 +1550,6 @@ http://112.255.234.207:4000/udp/239.253.254.173:8000
 http://xmzj.f3322.net:8188/udp/239.94.0.91:5140
 #EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/吉林卫视.png" group-title="卫视频道",吉林卫视
 http://118.79.113.228:8000/rtp/226.0.2.58:8376
-#EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/吉林卫视.png" group-title="卫视频道",吉林卫视
-http://171.122.197.67:8085/rtp/226.0.2.58:8376
-#EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/吉林卫视.png" group-title="卫视频道",吉林卫视
-http://171.122.197.67:8085/rtp/226.0.2.199:9504
 #EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/吉林卫视.png" group-title="卫视频道",吉林卫视
 http://116.230.212.78:8222/rtp/233.18.204.108:5140
 #EXTINF:-1 tvg-id="青海卫视" tvg-name="青海卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/青海卫视.png" group-title="卫视频道",青海卫视
@@ -1746,10 +1728,6 @@ http://39.88.15.67:4000/udp/239.253.254.179:8000
 http://118.77.107.10:8085/rtp/226.0.2.61:8400
 #EXTINF:-1 tvg-id="旅游卫视" tvg-name="旅游卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/旅游卫视.png" group-title="卫视频道",旅游卫视
 http://118.79.113.228:8000/rtp/226.0.2.61:8400
-#EXTINF:-1 tvg-id="旅游卫视" tvg-name="旅游卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/旅游卫视.png" group-title="卫视频道",旅游卫视
-http://171.122.197.67:8085/rtp/226.0.2.61:8400
-#EXTINF:-1 tvg-id="旅游卫视" tvg-name="旅游卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/旅游卫视.png" group-title="卫视频道",旅游卫视
-http://171.122.197.67:8085/rtp/226.0.2.212:9608
 #EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
 http://www.rongrong.me:14022/rtp/233.18.204.221:5140
 #EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
@@ -1799,11 +1777,11 @@ http://118.77.107.10:8085/rtp/226.0.2.62:8408
 #EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
 http://118.79.113.228:8000/rtp/226.0.2.62:8408
 #EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
-http://171.122.197.67:8085/rtp/226.0.2.62:8408
-#EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
 http://116.230.212.78:8222/rtp/233.18.204.221:5140
 #EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
 http://111.197.231.173:4022/rtp/239.3.1.144:4120
+#EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
+http://111.193.224.236:8888/rtp/239.3.1.144:4120
 #EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
 http://123.117.47.136:4022/rtp/239.3.1.144:4120
 #EXTINF:-1 tvg-id="兵团卫视" tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/兵团卫视.png" group-title="卫视频道",兵团卫视
@@ -1909,8 +1887,6 @@ http://118.77.107.10:8085/rtp/226.0.2.64:8424
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁夏卫视.png" group-title="卫视频道",宁夏卫视
 http://118.79.113.228:8000/rtp/226.0.2.64:8424
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁夏卫视.png" group-title="卫视频道",宁夏卫视
-http://171.122.197.67:8085/rtp/226.0.2.64:8424
-#EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁夏卫视.png" group-title="卫视频道",宁夏卫视
 http://114.250.20.79:4022/rtp/239.3.1.46:8124
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁夏卫视.png" group-title="卫视频道",宁夏卫视
 http://123.120.6.99:4022/rtp/239.3.1.46:8124
@@ -1966,8 +1942,6 @@ http://xmzj.f3322.net:8188/udp/239.94.0.97:5140
 http://118.77.107.10:8085/rtp/226.0.2.66:8440
 #EXTINF:-1 tvg-id="西藏卫视" tvg-name="西藏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/西藏卫视.png" group-title="卫视频道",西藏卫视
 http://118.79.113.228:8000/rtp/226.0.2.66:8440
-#EXTINF:-1 tvg-id="西藏卫视" tvg-name="西藏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/西藏卫视.png" group-title="卫视频道",西藏卫视
-http://171.122.197.67:8085/rtp/226.0.2.66:8440
 #EXTINF:-1 tvg-id="西藏卫视" tvg-name="西藏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/西藏卫视.png" group-title="卫视频道",西藏卫视
 http://116.230.212.78:8222/rtp/233.18.204.222:5140
 #EXTINF:-1 tvg-id="西藏卫视" tvg-name="西藏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/西藏卫视.png" group-title="卫视频道",西藏卫视
@@ -2025,8 +1999,6 @@ http://118.77.107.10:8085/rtp/226.0.2.67:8448
 #EXTINF:-1 tvg-id="新疆卫视" tvg-name="新疆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/新疆卫视.png" group-title="卫视频道",新疆卫视
 http://118.79.113.228:8000/rtp/226.0.2.67:8448
 #EXTINF:-1 tvg-id="新疆卫视" tvg-name="新疆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/新疆卫视.png" group-title="卫视频道",新疆卫视
-http://171.122.197.67:8085/rtp/226.0.2.67:8448
-#EXTINF:-1 tvg-id="新疆卫视" tvg-name="新疆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/新疆卫视.png" group-title="卫视频道",新疆卫视
 http://111.197.231.173:4022/rtp/239.3.1.48:8160
 #EXTINF:-1 tvg-id="新疆卫视" tvg-name="新疆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/新疆卫视.png" group-title="卫视频道",新疆卫视
 http://219.144.150.198:10000/rtp/239.111.205.59:5140
@@ -2075,8 +2047,6 @@ http://39.88.15.67:4000/udp/239.253.254.59:8000
 #EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://112.255.234.207:4000/udp/239.253.254.59:8000
 #EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
-http://171.122.197.67:8085/rtp/226.0.2.130:8952
-#EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://bit.famcloud.top:9878/rtp/239.3.1.52:4120
 #EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.52:4120
@@ -2088,8 +2058,6 @@ http://113.205.89.156:4000/udp/225.0.4.183:7980
 http://ak.cj022.com:10080/udp/225.1.2.118:5002
 #EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://114.100.239.96:8888/rtp/238.1.78.254:7904
-#EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
-http://183.223.22.80:1024/udp/239.11.0.140:5140
 #EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://121.19.134.202:808/tsfile/live/1033_1.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="山东教育卫视" tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/山东教育卫视.png" group-title="卫视频道",山东教育卫视
@@ -3173,8 +3141,6 @@ http://118.77.107.10:8085/rtp/226.0.2.169:9264
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CCTV16.png" group-title="央视频道",CCTV16
 http://118.79.113.228:8000/rtp/226.0.2.169:9264
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CCTV16.png" group-title="央视频道",CCTV16
-http://171.122.197.67:8085/rtp/226.0.2.169:9264
-#EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CCTV16.png" group-title="央视频道",CCTV16
 http://n2.192372.xyz:8888/rtp/239.3.1.183:8001
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CCTV16.png" group-title="央视频道",CCTV16
 http://bit.famcloud.top:9878/rtp/239.3.1.184:8001
@@ -3504,8 +3470,6 @@ http://112.255.234.207:4000/udp/239.253.254.116:8000
 http://118.77.107.10:8085/rtp/226.0.2.70:8472
 #EXTINF:-1 tvg-id="CETV4" tvg-name="CETV4" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CETV4.png" group-title="央视频道",CETV4
 http://118.79.113.228:8000/rtp/226.0.2.70:8472
-#EXTINF:-1 tvg-id="CETV4" tvg-name="CETV4" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CETV4.png" group-title="央视频道",CETV4
-http://171.122.197.67:8085/rtp/226.0.2.70:8472
 #EXTINF:-1 tvg-id="CETV4" tvg-name="CETV4" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CETV4.png" group-title="央视频道",CETV4
 http://123.120.6.99:4022/rtp/239.3.1.56:4120
 #EXTINF:-1 tvg-id="CETV4" tvg-name="CETV4" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CETV4.png" group-title="央视频道",CETV4
@@ -3993,8 +3957,6 @@ http://xmzj.f3322.net:8188/udp/239.94.1.46:5140
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/游戏风云.png" group-title="中数传媒",游戏风云
 http://118.77.107.10:8085/rtp/226.0.2.78:8536
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/游戏风云.png" group-title="中数传媒",游戏风云
-http://171.122.197.67:8085/rtp/226.0.2.78:8536
-#EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/游戏风云.png" group-title="中数传媒",游戏风云
 http://60.26.60.19:8000/udp/225.1.1.135:5002
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/游戏风云.png" group-title="中数传媒",游戏风云
 http://home.techua.net:8000/udp/225.1.1.135:5002
@@ -4108,8 +4070,6 @@ http://xmzj.f3322.net:8188/udp/239.94.1.146:5140
 http://39.88.15.67:4000/udp/239.253.254.99:8000
 #EXTINF:-1 tvg-id="生活时尚" tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/生活时尚.png" group-title="中数传媒",生活时尚
 http://118.77.107.10:8085/rtp/226.0.2.84:8584
-#EXTINF:-1 tvg-id="生活时尚" tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/生活时尚.png" group-title="中数传媒",生活时尚
-http://171.122.197.67:8085/rtp/226.0.2.84:8584
 #EXTINF:-1 tvg-id="生活时尚" tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/生活时尚.png" group-title="中数传媒",生活时尚
 http://ak.cj022.com:10080/udp/225.1.1.143:5002
 #EXTINF:-1 tvg-id="生活时尚" tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/生活时尚.png" group-title="中数传媒",生活时尚
@@ -4434,8 +4394,6 @@ http://116.230.212.78:8222/rtp/233.18.204.66:5140
 http://ak.cj022.com:10080/udp/225.1.1.236:5002
 #EXTINF:-1 tvg-id="金色学堂" tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金色学堂.png" group-title="中数传媒",金色学堂
 http://yy15238.netyiyang.com:8800/rtp/239.69.2.13:11232
-#EXTINF:-1 tvg-id="金色学堂" tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金色学堂.png" group-title="中数传媒",金色学堂
-http://218.74.44.179:9999/udp/233.50.201.186:5140
 #EXTINF:-1 tvg-id="动漫秀场" tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/动漫秀场.png" group-title="中数传媒",动漫秀场
 http://124.77.237.107:4022/rtp/233.18.204.46:5140
 #EXTINF:-1 tvg-id="动漫秀场" tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/动漫秀场.png" group-title="中数传媒",动漫秀场
@@ -4490,8 +4448,6 @@ http://xmzj.f3322.net:8188/udp/239.94.1.171:5140
 http://www.893224162.xyz:8188/udp/239.94.1.171:5140
 #EXTINF:-1 tvg-id="动漫秀场" tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/动漫秀场.png" group-title="中数传媒",动漫秀场
 http://118.79.113.228:8000/rtp/226.0.2.183:9376
-#EXTINF:-1 tvg-id="动漫秀场" tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/动漫秀场.png" group-title="中数传媒",动漫秀场
-http://171.122.197.67:8085/rtp/226.0.2.183:9376
 #EXTINF:-1 tvg-id="动漫秀场" tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/动漫秀场.png" group-title="中数传媒",动漫秀场
 http://116.230.212.78:8222/rtp/233.18.204.46:5140
 #EXTINF:-1 tvg-id="动漫秀场" tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/动漫秀场.png" group-title="中数传媒",动漫秀场
@@ -4554,8 +4510,6 @@ http://112.255.234.207:4000/udp/239.253.254.103:8000
 http://xmzj.f3322.net:8188/udp/239.94.1.1:5140
 #EXTINF:-1 tvg-id="金鹰纪实" tvg-name="金鹰纪实" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰纪实.png" group-title="中数传媒",金鹰纪实
 http://www.893224162.xyz:8188/udp/239.94.1.1:5140
-#EXTINF:-1 tvg-id="金鹰纪实" tvg-name="金鹰纪实" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金鹰纪实.png" group-title="中数传媒",金鹰纪实
-http://171.122.197.67:8085/rtp/226.0.2.194:9464
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/茶频道.png" group-title="中数传媒",茶频道
 http://115.197.179.185:9999/udp/233.50.200.124:5140
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/茶频道.png" group-title="中数传媒",茶频道
@@ -4670,8 +4624,6 @@ http://www.ct123.online:8188/rtp/239.69.1.142:10488
 http://xmzj.f3322.net:8188/udp/239.94.1.153:5140
 #EXTINF:-1 tvg-id="快乐垂钓" tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/快乐垂钓.png" group-title="中数传媒",快乐垂钓
 http://www.893224162.xyz:8188/udp/239.94.1.153:5140
-#EXTINF:-1 tvg-id="快乐垂钓" tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/快乐垂钓.png" group-title="中数传媒",快乐垂钓
-http://171.122.197.67:8085/rtp/226.0.2.214:9624
 #EXTINF:-1 tvg-id="央视台球" tvg-name="央视台球" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/央视台球.png" group-title="中数传媒",央视台球
 http://221.234.160.7:999/rtp/239.69.1.98:10224
 #EXTINF:-1 tvg-id="央视台球" tvg-name="央视台球" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/央视台球.png" group-title="中数传媒",央视台球
@@ -5409,8 +5361,6 @@ http://39.88.15.67:4000/udp/239.253.254.98:8000
 #EXTINF:-1 tvg-id="都市剧场" tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/都市剧场.png" group-title="上海节目",都市剧场
 http://xmzj.f3322.net:8188/udp/239.94.1.133:5140
 #EXTINF:-1 tvg-id="都市剧场" tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/都市剧场.png" group-title="上海节目",都市剧场
-http://171.122.197.67:8085/rtp/226.0.2.81:8560
-#EXTINF:-1 tvg-id="都市剧场" tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/都市剧场.png" group-title="上海节目",都市剧场
 http://27.11.251.173:8009/udp/225.0.4.235:7980
 #EXTINF:-1 tvg-id="都市剧场" tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/都市剧场.png" group-title="上海节目",都市剧场
 http://116.168.44.65:10000/udp/225.0.4.235:7980
@@ -5506,8 +5456,6 @@ http://tiger81.i234.me:8888/rtp/239.109.205.51:8344
 http://tiger81.i234.me:8888/rtp/239.112.205.236:5140
 #EXTINF:-1 tvg-id="欢笑剧场" tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/欢笑剧场.png" group-title="上海节目",欢笑剧场
 http://www.chunktv.top:10000/rtp/239.109.205.51:8344
-#EXTINF:-1 tvg-id="欢笑剧场" tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/欢笑剧场.png" group-title="上海节目",欢笑剧场
-http://218.74.44.179:9999/udp/233.50.200.229:5140
 #EXTINF:-1 tvg-id="欢笑剧场" tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/欢笑剧场.png" group-title="上海节目",欢笑剧场
 http://www.745612.xyz:7788/rtp/235.254.197.150:7980
 #EXTINF:-1 tvg-id="东方购物" tvg-name="东方购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/东方购物.png" group-title="上海节目",东方购物
@@ -5688,8 +5636,6 @@ http://115.58.216.33:5800/rtp/225.1.4.223:1273
 http://1.192.242.239:8188/rtp/239.16.10.75:2000
 #EXTINF:-1 tvg-id="家有购物" tvg-name="家有购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/家有购物.png" group-title="地方频道",家有购物
 http://h.vanshun.com:8802/rtp/239.49.1.252:6000
-#EXTINF:-1 tvg-id="家有购物" tvg-name="家有购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/家有购物.png" group-title="地方频道",家有购物
-http://www.frankgb.cn:4022/rtp/239.49.1.252:6000
 #EXTINF:-1 tvg-id="爱上4K" tvg-name="爱上4K" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/爱上4K.png" group-title="地方频道",爱上4K
 http://123.117.47.136:4022/rtp/239.3.1.236:2000
 #EXTINF:-1 tvg-id="爱上4K" tvg-name="爱上4K" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/爱上4K.png" group-title="地方频道",爱上4K
@@ -6093,6 +6039,8 @@ http://www.chunktv.top:10000/rtp/239.112.205.234:5140
 #EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/美人.png" group-title="地方频道",美人
 http://111.197.231.173:4022/rtp/239.3.1.73:4120
 #EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/美人.png" group-title="地方频道",美人
+http://111.193.224.236:8888/rtp/239.3.1.73:4120
+#EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/美人.png" group-title="地方频道",美人
 http://114.250.20.79:4022/rtp/239.3.1.73:4120
 #EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/美人.png" group-title="地方频道",美人
 http://n2.192372.xyz:8888/rtp/239.3.1.73:4120
@@ -6464,8 +6412,6 @@ http://125.117.1.236:4022/udp/233.50.201.193:5140
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.125:8001
 #EXTINF:-1 tvg-id="睛彩竞技" tvg-name="睛彩竞技" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/睛彩竞技.png" group-title="IPTV",睛彩竞技
 http://125.117.1.236:4022/udp/233.50.202.26:5140
-#EXTINF:-1 tvg-id="睛彩竞技" tvg-name="睛彩竞技" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/睛彩竞技.png" group-title="IPTV",睛彩竞技
-http://218.74.44.179:9999/udp/233.50.202.26:5140
 #EXTINF:-1 tvg-id="睛彩竞技" tvg-name="睛彩竞技" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/睛彩竞技.png" group-title="IPTV",睛彩竞技
 http://guany.myds.me:25852/udp/233.50.202.26:5140
 #EXTINF:-1 tvg-id="睛彩竞技" tvg-name="睛彩竞技" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/睛彩竞技.png" group-title="IPTV",睛彩竞技
@@ -7329,8 +7275,6 @@ http://123.117.47.136:4022/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/萌宠TV.png" group-title="北京节目",萌宠TV
 http://111.197.231.173:4022/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/萌宠TV.png" group-title="北京节目",萌宠TV
-http://111.193.224.236:8888/rtp/239.3.1.102:8001
-#EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/萌宠TV.png" group-title="北京节目",萌宠TV
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/萌宠TV.png" group-title="北京节目",萌宠TV
 http://bit.famcloud.top:9878/rtp/239.3.1.102:8001
@@ -7378,8 +7322,6 @@ http://www.893224162.xyz:8188/udp/239.94.2.51:5140
 http://xmzj.f3322.net:8188/udp/239.94.2.52:5140
 #EXTINF:-1 tvg-id="凤凰中文" tvg-name="凤凰中文" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/凤凰中文.png" group-title="港台节目",凤凰中文
 http://yy15238.netyiyang.com:8800/rtp/239.69.2.20:11274
-#EXTINF:-1 tvg-id="凤凰中文" tvg-name="凤凰中文" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/凤凰中文.png" group-title="港台节目",凤凰中文
-http://218.74.44.179:9999/udp/233.50.200.42:5140
 #EXTINF:-1 tvg-id="凤凰中文" tvg-name="凤凰中文" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/凤凰中文.png" group-title="港台节目",凤凰中文
 http://115.197.179.185:9999/udp/233.50.200.191:5140
 #EXTINF:-1 tvg-id="凤凰中文" tvg-name="凤凰中文" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/凤凰中文.png" group-title="港台节目",凤凰中文
@@ -7659,8 +7601,6 @@ http://jellyfin.eversouthhangzhou.com.cn:8188/rtp/233.50.201.176:5140
 #EXTINF:-1 tvg-id="杭州影视" tvg-name="杭州影视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/杭州影视.png" group-title="浙江节目",杭州影视
 http://125.117.1.236:4022/udp/233.50.201.176:5140
 #EXTINF:-1 tvg-id="杭州影视" tvg-name="杭州影视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/杭州影视.png" group-title="浙江节目",杭州影视
-http://218.74.44.179:9999/udp/233.50.201.176:5140
-#EXTINF:-1 tvg-id="杭州影视" tvg-name="杭州影视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/杭州影视.png" group-title="浙江节目",杭州影视
 http://zjhuct.icu:8889/udp/233.50.201.176:5140
 #EXTINF:-1 tvg-id="杭州影视" tvg-name="杭州影视" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/杭州影视.png" group-title="浙江节目",杭州影视
 http://guany.myds.me:25852/udp/233.50.201.176:5140
@@ -7694,8 +7634,6 @@ http://zjhuct.icu:8889/udp/233.50.201.158:5140
 http://dous.cc:4023/udp/233.50.201.158:5140
 #EXTINF:-1 tvg-id="湖州新闻" tvg-name="湖州新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/湖州新闻.png" group-title="浙江节目",湖州新闻
 http://125.117.1.236:4022/udp/233.50.201.158:5140
-#EXTINF:-1 tvg-id="湖州新闻" tvg-name="湖州新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/湖州新闻.png" group-title="浙江节目",湖州新闻
-http://218.74.44.179:9999/udp/233.50.201.158:5140
 #EXTINF:-1 tvg-id="湖州新闻" tvg-name="湖州新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/湖州新闻.png" group-title="浙江节目",湖州新闻
 http://guany.myds.me:25852/udp/233.50.201.158:5140
 #EXTINF:-1 tvg-id="金华新闻" tvg-name="金华新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/金华新闻.png" group-title="浙江节目",金华新闻
@@ -10827,6 +10765,8 @@ http://114.250.20.79:4022/rtp/239.3.1.96:8001
 #EXTINF:-1 tvg-id="房山电视台" tvg-name="房山电视台" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/房山电视台.png" group-title="其他频道",房山电视台
 http://n2.192372.xyz:8888/rtp/239.3.1.96:8001
 #EXTINF:-1 tvg-id="房山电视台" tvg-name="房山电视台" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/房山电视台.png" group-title="其他频道",房山电视台
+http://111.193.224.236:8888/rtp/239.3.1.96:8001
+#EXTINF:-1 tvg-id="房山电视台" tvg-name="房山电视台" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/房山电视台.png" group-title="其他频道",房山电视台
 http://111.197.231.173:4022/rtp/239.3.1.96:8001
 #EXTINF:-1 tvg-id="房山电视台" tvg-name="房山电视台" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/房山电视台.png" group-title="其他频道",房山电视台
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.96:8001
@@ -12642,8 +12582,6 @@ http://h.vanshun.com:8802/rtp/239.49.1.169:6000
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.85:6552
 #EXTINF:-1 tvg-id="七彩戏剧" tvg-name="七彩戏剧" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/七彩戏剧.png" group-title="其他频道",七彩戏剧
 http://h.vanshun.com:8802/rtp/239.49.1.175:6000
-#EXTINF:-1 tvg-id="七彩戏剧" tvg-name="七彩戏剧" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/七彩戏剧.png" group-title="其他频道",七彩戏剧
-http://www.frankgb.cn:4022/rtp/239.49.1.175:6000
 #EXTINF:-1 tvg-id="合肥新闻频道" tvg-name="合肥新闻频道" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/合肥新闻频道.png" group-title="其他频道",合肥新闻频道
 http://114.97.219.249:8888/rtp/238.1.78.111:6760
 #EXTINF:-1 tvg-id="合肥新闻频道" tvg-name="合肥新闻频道" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/合肥新闻频道.png" group-title="其他频道",合肥新闻频道
@@ -13422,8 +13360,6 @@ http://dous.cc:4023/udp/233.50.201.180:5140
 http://115.197.179.185:9999/udp/233.50.201.180:5140
 #EXTINF:-1 tvg-id="宁波影视高清" tvg-name="宁波影视高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁波影视高清.png" group-title="其他频道",宁波影视高清
 http://125.117.1.236:4022/udp/233.50.201.180:5140
-#EXTINF:-1 tvg-id="宁波影视高清" tvg-name="宁波影视高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁波影视高清.png" group-title="其他频道",宁波影视高清
-http://218.74.44.179:9999/udp/233.50.201.180:5140
 #EXTINF:-1 tvg-id="宁波少儿高清" tvg-name="宁波少儿高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁波少儿高清.png" group-title="其他频道",宁波少儿高清
 http://115.197.179.185:9999/udp/233.50.201.181:5140
 #EXTINF:-1 tvg-id="宁波少儿高清" tvg-name="宁波少儿高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/宁波少儿高清.png" group-title="其他频道",宁波少儿高清
@@ -13476,8 +13412,6 @@ http://dous.cc:4023/udp/233.50.201.108:5140
 http://115.197.179.185:9999/udp/233.50.201.108:5140
 #EXTINF:-1 tvg-id="中国蓝直播高清" tvg-name="中国蓝直播高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/中国蓝直播高清.png" group-title="其他频道",中国蓝直播高清
 http://125.117.1.236:4022/udp/233.50.201.108:5140
-#EXTINF:-1 tvg-id="中国蓝直播高清" tvg-name="中国蓝直播高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/中国蓝直播高清.png" group-title="其他频道",中国蓝直播高清
-http://218.74.44.179:9999/udp/233.50.201.108:5140
 #EXTINF:-1 tvg-id="中国蓝直播高清" tvg-name="中国蓝直播高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/中国蓝直播高清.png" group-title="其他频道",中国蓝直播高清
 http://guany.myds.me:25852/udp/233.50.201.108:5140
 #EXTINF:-1 tvg-id="浙江之声广播" tvg-name="浙江之声广播" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/浙江之声广播.png" group-title="其他频道",浙江之声广播
@@ -13571,8 +13505,6 @@ http://125.117.1.236:4022/udp/233.50.200.148:5140
 #EXTINF:-1 tvg-id="乐游纪实高清" tvg-name="乐游纪实高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/乐游纪实高清.png" group-title="其他频道",乐游纪实高清
 http://125.117.1.236:4022/udp/233.50.201.185:5140
 #EXTINF:-1 tvg-id="教育四套高清" tvg-name="教育四套高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/教育四套高清.png" group-title="其他频道",教育四套高清
-http://218.74.44.179:9999/udp/233.50.200.162:5140
-#EXTINF:-1 tvg-id="教育四套高清" tvg-name="教育四套高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/教育四套高清.png" group-title="其他频道",教育四套高清
 http://115.197.179.185:9999/udp/233.50.200.162:5140
 #EXTINF:-1 tvg-id="教育四套高清" tvg-name="教育四套高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/教育四套高清.png" group-title="其他频道",教育四套高清
 http://122.246.144.233:7777/udp/233.50.200.162:5140
@@ -13611,8 +13543,6 @@ http://125.117.1.236:4022/udp/233.50.202.27:5140
 #EXTINF:-1 tvg-id="晴彩篮球高清" tvg-name="晴彩篮球高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩篮球高清.png" group-title="其他频道",晴彩篮球高清
 http://125.117.1.236:4022/udp/233.50.201.194:5140
 #EXTINF:-1 tvg-id="晴彩篮球高清" tvg-name="晴彩篮球高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩篮球高清.png" group-title="其他频道",晴彩篮球高清
-http://218.74.44.179:9999/udp/233.50.202.27:5140
-#EXTINF:-1 tvg-id="晴彩篮球高清" tvg-name="晴彩篮球高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩篮球高清.png" group-title="其他频道",晴彩篮球高清
 http://zjhuct.icu:8889/udp/233.50.202.27:5140
 #EXTINF:-1 tvg-id="晴彩篮球高清" tvg-name="晴彩篮球高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩篮球高清.png" group-title="其他频道",晴彩篮球高清
 http://guany.myds.me:25852/udp/233.50.201.194:5140
@@ -13633,8 +13563,6 @@ http://125.117.1.236:4022/udp/233.50.202.28:5140
 #EXTINF:-1 tvg-id="晴彩羽毛球高清" tvg-name="晴彩羽毛球高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩羽毛球高清.png" group-title="其他频道",晴彩羽毛球高清
 http://125.117.1.236:4022/udp/233.50.201.195:5140
 #EXTINF:-1 tvg-id="晴彩羽毛球高清" tvg-name="晴彩羽毛球高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩羽毛球高清.png" group-title="其他频道",晴彩羽毛球高清
-http://218.74.44.179:9999/udp/233.50.202.28:5140
-#EXTINF:-1 tvg-id="晴彩羽毛球高清" tvg-name="晴彩羽毛球高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩羽毛球高清.png" group-title="其他频道",晴彩羽毛球高清
 http://zjhuct.icu:8889/udp/233.50.202.28:5140
 #EXTINF:-1 tvg-id="晴彩广场舞高清" tvg-name="晴彩广场舞高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩广场舞高清.png" group-title="其他频道",晴彩广场舞高清
 http://guany.myds.me:25852/udp/233.50.201.226:5140
@@ -13649,17 +13577,11 @@ http://115.197.179.185:9999/udp/233.50.202.29:5140
 #EXTINF:-1 tvg-id="晴彩广场舞高清" tvg-name="晴彩广场舞高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩广场舞高清.png" group-title="其他频道",晴彩广场舞高清
 http://dous.cc:4023/udp/233.50.201.226:5140
 #EXTINF:-1 tvg-id="晴彩广场舞高清" tvg-name="晴彩广场舞高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩广场舞高清.png" group-title="其他频道",晴彩广场舞高清
-http://125.117.1.236:4022/udp/233.50.202.29:5140
-#EXTINF:-1 tvg-id="晴彩广场舞高清" tvg-name="晴彩广场舞高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩广场舞高清.png" group-title="其他频道",晴彩广场舞高清
 http://125.117.1.236:4022/udp/233.50.201.226:5140
-#EXTINF:-1 tvg-id="晴彩广场舞高清" tvg-name="晴彩广场舞高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩广场舞高清.png" group-title="其他频道",晴彩广场舞高清
-http://218.74.44.179:9999/udp/233.50.202.29:5140
 #EXTINF:-1 tvg-id="晴彩广场舞高清" tvg-name="晴彩广场舞高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩广场舞高清.png" group-title="其他频道",晴彩广场舞高清
 http://zjhuct.icu:8889/udp/233.50.201.226:5140
 #EXTINF:-1 tvg-id="晴彩广场舞高清" tvg-name="晴彩广场舞高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/晴彩广场舞高清.png" group-title="其他频道",晴彩广场舞高清
 http://guany.myds.me:25852/udp/233.50.202.29:5140
-#EXTINF:-1 tvg-id="轮播频道高清" tvg-name="轮播频道高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/轮播频道高清.png" group-title="其他频道",轮播频道高清
-http://218.74.44.179:9999/udp/233.50.201.117:5140
 #EXTINF:-1 tvg-id="轮播频道高清" tvg-name="轮播频道高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/轮播频道高清.png" group-title="其他频道",轮播频道高清
 http://115.197.179.185:9999/udp/233.50.201.116:5140
 #EXTINF:-1 tvg-id="轮播频道高清" tvg-name="轮播频道高清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/轮播频道高清.png" group-title="其他频道",轮播频道高清
@@ -13686,10 +13608,6 @@ http://115.197.179.185:9999/udp/233.50.200.223:5140
 http://dous.cc:4023/udp/233.50.200.223:5140
 #EXTINF:-1 tvg-id="高清直播" tvg-name="高清直播" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/高清直播.png" group-title="其他频道",高清直播
 http://125.117.1.236:4022/udp/233.50.200.223:5140
-#EXTINF:-1 tvg-id="高清直播" tvg-name="高清直播" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/高清直播.png" group-title="其他频道",高清直播
-http://218.74.44.179:9999/udp/233.50.200.223:5140
-#EXTINF:-1 tvg-id="衢州新闻" tvg-name="衢州新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/衢州新闻.png" group-title="其他频道",衢州新闻
-http://125.117.1.236:4022/udp/233.50.201.155:5140
 #EXTINF:-1 tvg-id="台州新闻" tvg-name="台州新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/台州新闻.png" group-title="其他频道",台州新闻
 http://zjhuct.icu:8889/udp/233.50.201.157:5140
 #EXTINF:-1 tvg-id="台州新闻" tvg-name="台州新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/台州新闻.png" group-title="其他频道",台州新闻
@@ -13704,8 +13622,6 @@ http://zjhuct.icu:8889/udp/233.50.201.36:5140
 http://dous.cc:4023/udp/233.50.201.36:5140
 #EXTINF:-1 tvg-id="CGTN西班牙" tvg-name="CGTN西班牙" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CGTN西班牙.png" group-title="其他频道",CGTN西班牙
 http://125.117.1.236:4022/udp/233.50.201.36:5140
-#EXTINF:-1 tvg-id="CGTN西班牙" tvg-name="CGTN西班牙" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CGTN西班牙.png" group-title="其他频道",CGTN西班牙
-http://218.74.44.179:9999/udp/233.50.201.36:5140
 #EXTINF:-1 tvg-id="CGTN西班牙" tvg-name="CGTN西班牙" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CGTN西班牙.png" group-title="其他频道",CGTN西班牙
 http://guany.myds.me:25852/udp/233.50.201.36:5140
 #EXTINF:-1 tvg-id="CGTN阿拉伯" tvg-name="CGTN阿拉伯" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/CGTN阿拉伯.png" group-title="其他频道",CGTN阿拉伯
@@ -13722,10 +13638,6 @@ http://guany.myds.me:25852/udp/233.50.201.38:5140
 http://115.197.179.185:9999/udp/233.50.201.20:5140
 #EXTINF:-1 tvg-id="少儿" tvg-name="少儿" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/少儿.png" group-title="其他频道",少儿
 http://dous.cc:4023/udp/233.50.201.20:5140
-#EXTINF:-1 tvg-id="少儿" tvg-name="少儿" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/少儿.png" group-title="其他频道",少儿
-http://125.117.1.236:4022/udp/233.50.201.20:5140
-#EXTINF:-1 tvg-id="少儿" tvg-name="少儿" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/少儿.png" group-title="其他频道",少儿
-http://218.74.44.179:9999/udp/233.50.201.20:5140
 #EXTINF:-1 tvg-id="好易购" tvg-name="好易购" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/好易购.png" group-title="其他频道",好易购
 http://115.197.179.185:9999/udp/233.50.201.76:5140
 #EXTINF:-1 tvg-id="好易购" tvg-name="好易购" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/好易购.png" group-title="其他频道",好易购
@@ -13738,8 +13650,6 @@ http://guany.myds.me:25852/udp/233.50.201.76:5140
 http://dous.cc:4023/udp/233.50.201.76:5140
 #EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
 http://115.197.179.185:9999/udp/233.50.201.91:5140
-#EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
-http://125.117.1.236:4022/udp/233.50.201.91:5140
 #EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
 http://zjhuct.icu:8889/udp/233.50.201.91:5140
 #EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
@@ -13756,8 +13666,6 @@ http://dous.cc:4023/udp/233.50.201.93:5140
 http://guany.myds.me:25852/udp/233.50.201.91:5140
 #EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
 http://125.117.1.236:4022/udp/233.50.201.93:5140
-#EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
-http://218.74.44.179:9999/udp/233.50.201.90:5140
 #EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
 http://115.197.179.185:9999/udp/233.50.201.77:5140
 #EXTINF:-1 tvg-id="购物" tvg-name="购物" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/购物.png" group-title="其他频道",购物
@@ -14210,14 +14118,6 @@ http://www.sccckj.cn:8899/udp/239.10.0.19:5140
 http://www.sccckj.cn:8899/udp/239.10.0.42:5140
 #EXTINF:-1 tvg-id="咪咕视频" tvg-name="咪咕视频" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/咪咕视频.png" group-title="其他频道",咪咕视频
 http://www.sccckj.cn:8899/udp/239.10.0.40:5140
-#EXTINF:-1 tvg-id="咪咕视频" tvg-name="咪咕视频" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/咪咕视频.png" group-title="其他频道",咪咕视频
-http://183.223.22.80:1024/udp/239.10.0.18:5140
-#EXTINF:-1 tvg-id="咪咕视频" tvg-name="咪咕视频" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/咪咕视频.png" group-title="其他频道",咪咕视频
-http://183.223.22.80:1024/udp/239.10.0.19:5140
-#EXTINF:-1 tvg-id="咪咕视频" tvg-name="咪咕视频" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/咪咕视频.png" group-title="其他频道",咪咕视频
-http://183.223.22.80:1024/udp/239.10.0.20:5140
-#EXTINF:-1 tvg-id="咪咕视频" tvg-name="咪咕视频" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/咪咕视频.png" group-title="其他频道",咪咕视频
-http://183.223.22.80:1024/udp/239.10.0.21:5140
 #EXTINF:-1 tvg-id="甘孜新闻" tvg-name="甘孜新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/甘孜新闻.png" group-title="其他频道",甘孜新闻
 http://117.172.235.50:60000/udp/239.10.0.32:5140
 #EXTINF:-1 tvg-id="甘孜新闻" tvg-name="甘孜新闻" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/甘孜新闻.png" group-title="其他频道",甘孜新闻
