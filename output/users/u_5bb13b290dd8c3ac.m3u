@@ -1,122 +1,246 @@
 #EXTM3U x-tvg-url="https://registration-poker-tickets-surely.trycloudflare.com/epg/5bb13b290dd8c3ac.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="订阅信息 到期 2026-10-23" tvg-logo="https://registration-poker-tickets-surely.trycloudflare.com/logo/5bb13b290dd8c3ac.png",有效期 2026-10-22 ~ 2026-10-23（剩余 0 天）
 http://vpn.jk960.cn:8686/udp/239.77.0.244:5146
+#EXTINF:-1 tvg-name="CCTV-1 综合" group-title="央视频",CCTV-1 综合
+http://192.168.3.21:8866/live/cctv1.m3u8
+#EXTINF:-1 tvg-name="CCTV-2 财经" group-title="央视频",CCTV-2 财经
+http://192.168.3.21:8866/live/cctv2.m3u8
+#EXTINF:-1 tvg-name="CCTV-3 综艺" group-title="央视频",CCTV-3 综艺
+http://192.168.3.21:8866/live/cctv3.m3u8
+#EXTINF:-1 tvg-name="CCTV-4 中文国际" group-title="央视频",CCTV-4 中文国际
+http://192.168.3.21:8866/live/cctv4.m3u8
+#EXTINF:-1 tvg-name="CCTV-5 体育" group-title="央视频",CCTV-5 体育
+http://192.168.3.21:8866/live/cctv5.m3u8
+#EXTINF:-1 tvg-name="CCTV-5+ 体育赛事" group-title="央视频",CCTV-5+ 体育赛事
+http://192.168.3.21:8866/live/cctv5p.m3u8
+#EXTINF:-1 tvg-name="CCTV-6 电影" group-title="央视频",CCTV-6 电影
+http://192.168.3.21:8866/live/cctv6.m3u8
+#EXTINF:-1 tvg-name="CCTV-7 国防军事" group-title="央视频",CCTV-7 国防军事
+http://192.168.3.21:8866/live/cctv7.m3u8
+#EXTINF:-1 tvg-name="CCTV-8 电视剧" group-title="央视频",CCTV-8 电视剧
+http://192.168.3.21:8866/live/cctv8.m3u8
+#EXTINF:-1 tvg-name="CCTV-9 纪录" group-title="央视频",CCTV-9 纪录
+http://192.168.3.21:8866/live/cctv9.m3u8
+#EXTINF:-1 tvg-name="CCTV-10 科教" group-title="央视频",CCTV-10 科教
+http://192.168.3.21:8866/live/cctv10.m3u8
+#EXTINF:-1 tvg-name="CCTV-11 戏曲" group-title="央视频",CCTV-11 戏曲
+http://192.168.3.21:8866/live/cctv11.m3u8
+#EXTINF:-1 tvg-name="CCTV-12 社会与法" group-title="央视频",CCTV-12 社会与法
+http://192.168.3.21:8866/live/cctv12.m3u8
+#EXTINF:-1 tvg-name="CCTV-13 新闻" group-title="央视频",CCTV-13 新闻
+http://192.168.3.21:8866/live/cctv13.m3u8
+#EXTINF:-1 tvg-name="CCTV-14 少儿" group-title="央视频",CCTV-14 少儿
+http://192.168.3.21:8866/live/cctv14.m3u8
+#EXTINF:-1 tvg-name="CCTV-15 音乐" group-title="央视频",CCTV-15 音乐
+http://192.168.3.21:8866/live/cctv15.m3u8
+#EXTINF:-1 tvg-name="CCTV-16 奥林匹克" group-title="央视频",CCTV-16 奥林匹克
+http://192.168.3.21:8866/live/cctv16.m3u8
+#EXTINF:-1 tvg-name="CCTV-16 4K" group-title="央视频",CCTV-16 4K
+http://192.168.3.21:8866/live/cctv164k.m3u8
+#EXTINF:-1 tvg-name="CCTV-17 农业农村" group-title="央视频",CCTV-17 农业农村
+http://192.168.3.21:8866/live/cctv17.m3u8
+#EXTINF:-1 tvg-name="CCTV-4K 超高清" group-title="央视频",CCTV-4K 超高清
+http://192.168.3.21:8866/live/cctv4k.m3u8
+#EXTINF:-1 tvg-name="CCTV-8K 超高清" group-title="央视频",CCTV-8K 超高清
+http://192.168.3.21:8866/live/cctv8k.m3u8
+#EXTINF:-1 tvg-name="CGTN" group-title="央视频",CGTN
+http://192.168.3.21:8866/live/cgtn.m3u8
+#EXTINF:-1 tvg-name="CGTN 法语" group-title="央视频",CGTN 法语
+http://192.168.3.21:8866/live/cgtnfy.m3u8
+#EXTINF:-1 tvg-name="CGTN 俄语" group-title="央视频",CGTN 俄语
+http://192.168.3.21:8866/live/cgtney.m3u8
+#EXTINF:-1 tvg-name="CGTN 阿拉伯语" group-title="央视频",CGTN 阿拉伯语
+http://192.168.3.21:8866/live/cgtnalby.m3u8
+#EXTINF:-1 tvg-name="CGTN 西班牙语" group-title="央视频",CGTN 西班牙语
+http://192.168.3.21:8866/live/cgtnxby.m3u8
+#EXTINF:-1 tvg-name="CGTN 纪录" group-title="央视频",CGTN 纪录
+http://192.168.3.21:8866/live/cgtnwyjl.m3u8
+#EXTINF:-1 tvg-name="CCTV 风云剧场" group-title="央视频",CCTV 风云剧场
+http://192.168.3.21:8866/live/cctvfyjc.m3u8
+#EXTINF:-1 tvg-name="CCTV 第一剧场" group-title="央视频",CCTV 第一剧场
+http://192.168.3.21:8866/live/cctvdyjc.m3u8
+#EXTINF:-1 tvg-name="CCTV 怀旧剧场" group-title="央视频",CCTV 怀旧剧场
+http://192.168.3.21:8866/live/cctvhjjc.m3u8
+#EXTINF:-1 tvg-name="北京卫视" group-title="央视频",北京卫视
+http://192.168.3.21:8866/live/bjws.m3u8
+#EXTINF:-1 tvg-name="江苏卫视" group-title="央视频",江苏卫视
+http://192.168.3.21:8866/live/jsws.m3u8
+#EXTINF:-1 tvg-name="东方卫视" group-title="央视频",东方卫视
+http://192.168.3.21:8866/live/dfws.m3u8
+#EXTINF:-1 tvg-name="浙江卫视" group-title="央视频",浙江卫视
+http://192.168.3.21:8866/live/zjws.m3u8
+#EXTINF:-1 tvg-name="湖南卫视" group-title="央视频",湖南卫视
+http://192.168.3.21:8866/live/hnws.m3u8
+#EXTINF:-1 tvg-name="湖北卫视" group-title="央视频",湖北卫视
+http://192.168.3.21:8866/live/hbws.m3u8
+#EXTINF:-1 tvg-name="广东卫视" group-title="央视频",广东卫视
+http://192.168.3.21:8866/live/gdws.m3u8
+#EXTINF:-1 tvg-name="广西卫视" group-title="央视频",广西卫视
+http://192.168.3.21:8866/live/gxws.m3u8
+#EXTINF:-1 tvg-name="黑龙江卫视" group-title="央视频",黑龙江卫视
+http://192.168.3.21:8866/live/hljws.m3u8
+#EXTINF:-1 tvg-name="海南卫视" group-title="央视频",海南卫视
+http://192.168.3.21:8866/live/hnws2.m3u8
+#EXTINF:-1 tvg-name="重庆卫视" group-title="央视频",重庆卫视
+http://192.168.3.21:8866/live/cqws.m3u8
+#EXTINF:-1 tvg-name="深圳卫视" group-title="央视频",深圳卫视
+http://192.168.3.21:8866/live/szws.m3u8
+#EXTINF:-1 tvg-name="四川卫视" group-title="央视频",四川卫视
+http://192.168.3.21:8866/live/scws.m3u8
+#EXTINF:-1 tvg-name="河南卫视" group-title="央视频",河南卫视
+http://192.168.3.21:8866/live/henanws.m3u8
+#EXTINF:-1 tvg-name="东南卫视" group-title="央视频",东南卫视
+http://192.168.3.21:8866/live/fjdnhz.m3u8
+#EXTINF:-1 tvg-name="贵州卫视" group-title="央视频",贵州卫视
+http://192.168.3.21:8866/live/gzhws.m3u8
+#EXTINF:-1 tvg-name="江西卫视" group-title="央视频",江西卫视
+http://192.168.3.21:8866/live/jxws.m3u8
+#EXTINF:-1 tvg-name="辽宁卫视" group-title="央视频",辽宁卫视
+http://192.168.3.21:8866/live/lnws.m3u8
+#EXTINF:-1 tvg-name="安徽卫视" group-title="央视频",安徽卫视
+http://192.168.3.21:8866/live/ahws.m3u8
+#EXTINF:-1 tvg-name="河北卫视" group-title="央视频",河北卫视
+http://192.168.3.21:8866/live/hbws2.m3u8
+#EXTINF:-1 tvg-name="山东卫视" group-title="央视频",山东卫视
+http://192.168.3.21:8866/live/sdws.m3u8
+#EXTINF:-1 tvg-name="天津卫视" group-title="央视频",天津卫视
+http://192.168.3.21:8866/live/tjws.m3u8
+#EXTINF:-1 tvg-name="吉林卫视" group-title="央视频",吉林卫视
+http://192.168.3.21:8866/live/jlws.m3u8
+#EXTINF:-1 tvg-name="陕西卫视" group-title="央视频",陕西卫视
+http://192.168.3.21:8866/live/shanxiws.m3u8
+#EXTINF:-1 tvg-name="宁夏卫视" group-title="央视频",宁夏卫视
+http://192.168.3.21:8866/live/nxws.m3u8
+#EXTINF:-1 tvg-name="内蒙古卫视" group-title="央视频",内蒙古卫视
+http://192.168.3.21:8866/live/nmgws.m3u8
+#EXTINF:-1 tvg-name="云南卫视" group-title="央视频",云南卫视
+http://192.168.3.21:8866/live/ynws.m3u8
+#EXTINF:-1 tvg-name="山西卫视" group-title="央视频",山西卫视
+http://192.168.3.21:8866/live/shanxiws2.m3u8
+#EXTINF:-1 tvg-name="青海卫视" group-title="央视频",青海卫视
+http://192.168.3.21:8866/live/qhws.m3u8
+#EXTINF:-1 tvg-name="西藏卫视" group-title="央视频",西藏卫视
+http://192.168.3.21:8866/live/xzws.m3u8
+#EXTINF:-1 tvg-name="CETV-1 教育" group-title="央视频",CETV-1 教育
+http://192.168.3.21:8866/live/cetv1.m3u8
+#EXTINF:-1 tvg-name="国学频道" group-title="央视频",国学频道
+http://192.168.3.21:8866/live/gxpd.m3u8
+#EXTINF:-1 tvg-name="新疆卫视" group-title="央视频",新疆卫视
+http://192.168.3.21:8866/live/xjws.m3u8
 #EXTINF:-1 tvg-name="CCTV3综艺" group-title="网络直播",CCTV3综艺
 http://47.103.64.145:8014/624878271
-#EXTINF:-1 tvg-name="CCTV4中文国际" group-title="网络直播",CCTV4中文国际
-http://47.103.64.145:8014/631780421
+#EXTINF:-1 tvg-name="CCTV5体育" group-title="网络直播",CCTV5体育
+http://47.103.64.145:8014/641886683
+#EXTINF:-1 tvg-name="CCTV5+体育赛事" group-title="网络直播",CCTV5+体育赛事
+http://47.103.64.145:8014/641886773
+#EXTINF:-1 tvg-name="CCTV6电影" group-title="网络直播",CCTV6电影
+http://47.103.64.145:8014/624878396
 #EXTINF:-1 tvg-name="CCTV8电视剧" group-title="网络直播",CCTV8电视剧
 http://47.103.64.145:8014/624878356
-#EXTINF:-1 tvg-name="CCTV9纪录" group-title="网络直播",CCTV9纪录
-http://47.103.64.145:8014/673168140
+#EXTINF:-1 tvg-name="CCTV11戏曲" group-title="网络直播",CCTV11戏曲
+http://47.103.64.145:8014/667987558
+#EXTINF:-1 tvg-name="CCTV13新闻" group-title="网络直播",CCTV13新闻
+http://47.103.64.145:8014/608807423
 #EXTINF:-1 tvg-name="CCTV14少儿" group-title="网络直播",CCTV14少儿
 http://47.103.64.145:8014/624878440
-#EXTINF:-1 tvg-name="CGTN外语纪录" group-title="网络直播",CGTN外语纪录
-http://47.103.64.145:8014/609006487
+#EXTINF:-1 tvg-name="CCTV17农业农村" group-title="网络直播",CCTV17农业农村
+http://47.103.64.145:8014/673168256
+#EXTINF:-1 tvg-name="CCTV4美洲" group-title="网络直播",CCTV4美洲
+http://47.103.64.145:8014/608807416
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" group-title="网络直播",CGTN阿拉伯语
 http://47.103.64.145:8014/609154345
-#EXTINF:-1 tvg-name="CGTN西班牙语" group-title="网络直播",CGTN西班牙语
-http://47.103.64.145:8014/609006450
-#EXTINF:-1 tvg-name="河南卫视" group-title="网络直播",河南卫视
-http://47.103.64.145:8014/790187291
+#EXTINF:-1 tvg-name="CGTN俄语" group-title="网络直播",CGTN俄语
+http://47.103.64.145:8014/609006446
+#EXTINF:-1 tvg-name="老故事" group-title="网络直播",老故事
+http://47.103.64.145:8014/884121956
+#EXTINF:-1 tvg-name="发现之旅" group-title="网络直播",发现之旅
+http://47.103.64.145:8014/624878970
+#EXTINF:-1 tvg-name="东方卫视" group-title="网络直播",东方卫视
+http://47.103.64.145:8014/651632648
 #EXTINF:-1 tvg-name="陕西卫视" group-title="网络直播",陕西卫视
 http://47.103.64.145:8014/738910838
 #EXTINF:-1 tvg-name="大湾区卫视" group-title="网络直播",大湾区卫视
 http://47.103.64.145:8014/608917627
 #EXTINF:-1 tvg-name="湖北卫视" group-title="网络直播",湖北卫视
 http://47.103.64.145:8014/947472496
-#EXTINF:-1 tvg-name="东南卫视" group-title="网络直播",东南卫视
-http://47.103.64.145:8014/849116810
 #EXTINF:-1 tvg-name="海峡卫视" group-title="网络直播",海峡卫视
 http://47.103.64.145:8014/849119120
+#EXTINF:-1 tvg-name="中国农林卫视" group-title="网络直播",中国农林卫视
+http://47.103.64.145:8014/956904896
 #EXTINF:-1 tvg-name="兵团卫视" group-title="网络直播",兵团卫视
 http://47.103.64.145:8014/956923145
-#EXTINF:-1 tvg-name="南京新闻综合频道" group-title="网络直播",南京新闻综合频道
-http://47.103.64.145:8014/838109047
-#EXTINF:-1 tvg-name="南京教科频道" group-title="网络直播",南京教科频道
-http://47.103.64.145:8014/838153729
+#EXTINF:-1 tvg-name="上海新闻综合" group-title="网络直播",上海新闻综合
+http://47.103.64.145:8014/651632657
+#EXTINF:-1 tvg-name="上视东方影视" group-title="网络直播",上视东方影视
+http://47.103.64.145:8014/617290047
 #EXTINF:-1 tvg-name="南京十八频道" group-title="网络直播",南京十八频道
 http://47.103.64.145:8014/838151753
 #EXTINF:-1 tvg-name="体育休闲频道" group-title="网络直播",体育休闲频道
 http://47.103.64.145:8014/626064707
-#EXTINF:-1 tvg-name="江苏城市频道" group-title="网络直播",江苏城市频道
-http://47.103.64.145:8014/626064714
-#EXTINF:-1 tvg-name="江苏国际" group-title="网络直播",江苏国际
-http://47.103.64.145:8014/626064674
+#EXTINF:-1 tvg-name="江苏教育" group-title="网络直播",江苏教育
+http://47.103.64.145:8014/628008321
 #EXTINF:-1 tvg-name="江苏影视频道" group-title="网络直播",江苏影视频道
 http://47.103.64.145:8014/626064697
+#EXTINF:-1 tvg-name="公共新闻频道" group-title="网络直播",公共新闻频道
+http://47.103.64.145:8014/626064693
 #EXTINF:-1 tvg-name="盐城新闻综合" group-title="网络直播",盐城新闻综合
 http://47.103.64.145:8014/639731825
 #EXTINF:-1 tvg-name="淮安新闻综合" group-title="网络直播",淮安新闻综合
 http://47.103.64.145:8014/639731826
-#EXTINF:-1 tvg-name="泰州新闻综合" group-title="网络直播",泰州新闻综合
-http://47.103.64.145:8014/639731818
 #EXTINF:-1 tvg-name="连云港新闻综合" group-title="网络直播",连云港新闻综合
 http://47.103.64.145:8014/639731715
+#EXTINF:-1 tvg-name="宿迁新闻综合" group-title="网络直播",宿迁新闻综合
+http://47.103.64.145:8014/639731832
+#EXTINF:-1 tvg-name="徐州新闻综合" group-title="网络直播",徐州新闻综合
+http://47.103.64.145:8014/639731747
 #EXTINF:-1 tvg-name="优漫卡通频道" group-title="网络直播",优漫卡通频道
 http://47.103.64.145:8014/626064703
-#EXTINF:-1 tvg-name="南通新闻综合" group-title="网络直播",南通新闻综合
-http://47.103.64.145:8014/955227985
-#EXTINF:-1 tvg-name="溧水新闻综合" group-title="网络直播",溧水新闻综合
-http://47.103.64.145:8014/639737327
+#EXTINF:-1 tvg-name="宜兴新闻综合" group-title="网络直播",宜兴新闻综合
+http://47.103.64.145:8014/955227996
 #EXTINF:-1 tvg-name="陕西都市青春频道" group-title="网络直播",陕西都市青春频道
 http://47.103.64.145:8014/956909358
-#EXTINF:-1 tvg-name="陕西秦腔频道" group-title="网络直播",陕西秦腔频道
-http://47.103.64.145:8014/956909303
 #EXTINF:-1 tvg-name="财富天下" group-title="网络直播",财富天下
 http://47.103.64.145:8014/956923159
-#EXTINF:-1 tvg-name="海南广播电视总台新闻频道" group-title="网络直播",海南广播电视总台新闻频道
-http://47.103.64.145:8014/962067517
 #EXTINF:-1 tvg-name="海南广播电视总台自贸频道" group-title="网络直播",海南广播电视总台自贸频道
 http://47.103.64.145:8014/962045226
 #EXTINF:-1 tvg-name="海南广播电视总台文旅频道" group-title="网络直播",海南广播电视总台文旅频道
 http://47.103.64.145:8014/962067526
 #EXTINF:-1 tvg-name="海南广播电视总台少儿频道" group-title="网络直播",海南广播电视总台少儿频道
 http://47.103.64.145:8014/962067523
-#EXTINF:-1 tvg-name="四海钓鱼" group-title="网络直播",四海钓鱼
-http://47.103.64.145:8014/637444975
+#EXTINF:-1 tvg-name="体坛名栏汇" group-title="网络直播",体坛名栏汇
+http://47.103.64.145:8014/629943305
 #EXTINF:-1 tvg-name="陕西体育休闲频道" group-title="网络直播",陕西体育休闲频道
 http://47.103.64.145:8014/956909356
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" group-title="网络直播",24小时城市联赛轮播台
 http://47.103.64.145:8014/915512915
 #EXTINF:-1 tvg-name="快乐垂钓" group-title="网络直播",快乐垂钓
 http://47.103.64.145:8014/961930263
-#EXTINF:-1 tvg-name="新片放映厅" group-title="网络直播",新片放映厅
-http://47.103.64.145:8014/619495952
+#EXTINF:-1 tvg-name="经典香港电影" group-title="网络直播",经典香港电影
+http://47.103.64.145:8014/625703337
 #EXTINF:-1 tvg-name="CHC动作电影" group-title="网络直播",CHC动作电影
 http://47.103.64.145:8014/644368714
 #EXTINF:-1 tvg-name="CHC家庭影院" group-title="网络直播",CHC家庭影院
 http://47.103.64.145:8014/644368373
+#EXTINF:-1 tvg-name="和美乡途轮播台" group-title="网络直播",和美乡途轮播台
+http://47.103.64.145:8014/713591450
 #EXTINF:-1 tvg-name="南方影视" group-title="网络直播",南方影视
 http://47.103.64.145:8014/614961829
-#EXTINF:-1 tvg-name="CETV1" group-title="网络直播",CETV1
-http://47.103.64.145:8014/923287154
+#EXTINF:-1 tvg-name="CETV2" group-title="网络直播",CETV2
+http://47.103.64.145:8014/923287211
 #EXTINF:-1 tvg-name="CETV4" group-title="网络直播",CETV4
 http://47.103.64.145:8014/923287339
-#EXTINF:-1 tvg-name="熊猫频道01高清" group-title="网络直播",熊猫频道01高清
-http://47.103.64.145:8014/609158151
 #EXTINF:-1 tvg-name="熊猫频道1" group-title="网络直播",熊猫频道1
 http://47.103.64.145:8014/608933610
-#EXTINF:-1 tvg-name="熊猫频道3" group-title="网络直播",熊猫频道3
-http://47.103.64.145:8014/608934619
+#EXTINF:-1 tvg-name="熊猫频道2" group-title="网络直播",熊猫频道2
+http://47.103.64.145:8014/608933640
 #EXTINF:-1 tvg-name="熊猫频道4" group-title="网络直播",熊猫频道4
 http://47.103.64.145:8014/608934721
-#EXTINF:-1 tvg-name="熊猫频道6" group-title="网络直播",熊猫频道6
-http://47.103.64.145:8014/608935797
-#EXTINF:-1 tvg-name="熊猫频道9" group-title="网络直播",熊猫频道9
-http://47.103.64.145:8014/609169226
-#EXTINF:-1 tvg-name="熊猫频道10" group-title="网络直播",熊猫频道10
-http://47.103.64.145:8014/609169285
-#EXTINF:-1 tvg-name="最强综艺趴" group-title="网络直播",最强综艺趴
-http://47.103.64.145:8014/629942228
-#EXTINF:-1 tvg-name="嘉佳卡通" group-title="网络直播",嘉佳卡通
-http://47.103.64.145:8014/614952364
-#EXTINF:-1 tvg-name="中华特产" group-title="网络直播",中华特产
-http://47.103.64.145:8014/959986618
+#EXTINF:-1 tvg-name="熊猫频道8" group-title="网络直播",熊猫频道8
+http://47.103.64.145:8014/609169287
+#EXTINF:-1 tvg-name="经典动画大集合" group-title="网络直播",经典动画大集合
+http://47.103.64.145:8014/629942219
 #EXTINF:-1 tvg-name="环球旅游" group-title="网络直播",环球旅游
 http://47.103.64.145:8014/958475356
-#EXTINF:-1 tvg-name="梨园频道" group-title="网络直播",梨园频道
-http://47.103.64.145:8014/961930369
 #EXTINF:-1 tvg-name="CCTV1综合" group-title="网络直播",CCTV1综合
 http://222.213.105.65:7788/608807420
 #EXTINF:-1 tvg-name="CCTV2财经" group-title="网络直播",CCTV2财经
@@ -335,8 +459,6 @@ https://cdn13bak.bookln.cn/aj/18237995/aj/app/forever/product/bizboot/default/fa
 http://113.98.11.46:3000/608807420
 #EXTINF:-1 tvg-name="CCTV2财经" group-title="网络直播",CCTV2财经
 http://113.98.11.46:3000/631780532
-#EXTINF:-1 tvg-name="CCTV3综艺" group-title="网络直播",CCTV3综艺
-http://113.98.11.46:3000/624878271
 #EXTINF:-1 tvg-name="CCTV4中文国际" group-title="网络直播",CCTV4中文国际
 http://113.98.11.46:3000/631780421
 #EXTINF:-1 tvg-name="CCTV5体育" group-title="网络直播",CCTV5体育
@@ -349,8 +471,8 @@ http://113.98.11.46:3000/624878396
 http://113.98.11.46:3000/673168121
 #EXTINF:-1 tvg-name="CCTV8电视剧" group-title="网络直播",CCTV8电视剧
 http://113.98.11.46:3000/624878356
-#EXTINF:-1 tvg-name="CCTV10科教" group-title="网络直播",CCTV10科教
-http://113.98.11.46:3000/624878405
+#EXTINF:-1 tvg-name="CCTV9纪录" group-title="网络直播",CCTV9纪录
+http://113.98.11.46:3000/673168140
 #EXTINF:-1 tvg-name="CCTV11戏曲" group-title="网络直播",CCTV11戏曲
 http://113.98.11.46:3000/667987558
 #EXTINF:-1 tvg-name="CCTV12社会与法" group-title="网络直播",CCTV12社会与法
@@ -363,8 +485,6 @@ http://113.98.11.46:3000/624878440
 http://113.98.11.46:3000/673168223
 #EXTINF:-1 tvg-name="CCTV17农业农村" group-title="网络直播",CCTV17农业农村
 http://113.98.11.46:3000/673168256
-#EXTINF:-1 tvg-name="CCTV4欧洲" group-title="网络直播",CCTV4欧洲
-http://113.98.11.46:3000/608807419
 #EXTINF:-1 tvg-name="CCTV4美洲" group-title="网络直播",CCTV4美洲
 http://113.98.11.46:3000/608807416
 #EXTINF:-1 tvg-name="CGTN外语纪录" group-title="网络直播",CGTN外语纪录
@@ -387,10 +507,10 @@ http://113.98.11.46:3000/624878970
 http://113.98.11.46:3000/708869532
 #EXTINF:-1 tvg-name="江苏卫视" group-title="网络直播",江苏卫视
 http://113.98.11.46:3000/623899368
-#EXTINF:-1 tvg-name="广东卫视" group-title="网络直播",广东卫视
-http://113.98.11.46:3000/608831231
 #EXTINF:-1 tvg-name="北京卫视" group-title="网络直播",北京卫视
 http://113.98.11.46:3000/630287636
+#EXTINF:-1 tvg-name="辽宁卫视" group-title="网络直播",辽宁卫视
+http://113.98.11.46:3000/630291707
 #EXTINF:-1 tvg-name="河北卫视" group-title="网络直播",河北卫视
 http://113.98.11.46:3000/962042070
 #EXTINF:-1 tvg-name="江西卫视" group-title="网络直播",江西卫视
@@ -401,18 +521,12 @@ http://113.98.11.46:3000/790187291
 http://113.98.11.46:3000/738910838
 #EXTINF:-1 tvg-name="大湾区卫视" group-title="网络直播",大湾区卫视
 http://113.98.11.46:3000/608917627
-#EXTINF:-1 tvg-name="湖北卫视" group-title="网络直播",湖北卫视
-http://113.98.11.46:3000/947472496
 #EXTINF:-1 tvg-name="吉林卫视" group-title="网络直播",吉林卫视
 http://113.98.11.46:3000/947472500
 #EXTINF:-1 tvg-name="青海卫视" group-title="网络直播",青海卫视
 http://113.98.11.46:3000/947472506
 #EXTINF:-1 tvg-name="东南卫视" group-title="网络直播",东南卫视
 http://113.98.11.46:3000/849116810
-#EXTINF:-1 tvg-name="海南卫视" group-title="网络直播",海南卫视
-http://113.98.11.46:3000/947472502
-#EXTINF:-1 tvg-name="海峡卫视" group-title="网络直播",海峡卫视
-http://113.98.11.46:3000/849119120
 #EXTINF:-1 tvg-name="中国农林卫视" group-title="网络直播",中国农林卫视
 http://113.98.11.46:3000/956904896
 #EXTINF:-1 tvg-name="兵团卫视" group-title="网络直播",兵团卫视
@@ -425,8 +539,6 @@ http://113.98.11.46:3000/738910914
 http://113.98.11.46:3000/961023778
 #EXTINF:-1 tvg-name="黑龙江卫视" group-title="网络直播",黑龙江卫视
 http://113.98.11.46:3000/738906901
-#EXTINF:-1 tvg-name="上海新闻综合" group-title="网络直播",上海新闻综合
-http://113.98.11.46:3000/651632657
 #EXTINF:-1 tvg-name="上视东方影视" group-title="网络直播",上视东方影视
 http://113.98.11.46:3000/617290047
 #EXTINF:-1 tvg-name="上海第一财经" group-title="网络直播",上海第一财经
@@ -435,18 +547,12 @@ http://113.98.11.46:3000/608780988
 http://113.98.11.46:3000/838109047
 #EXTINF:-1 tvg-name="南京教科频道" group-title="网络直播",南京教科频道
 http://113.98.11.46:3000/838153729
-#EXTINF:-1 tvg-name="南京十八频道" group-title="网络直播",南京十八频道
-http://113.98.11.46:3000/838151753
-#EXTINF:-1 tvg-name="体育休闲频道" group-title="网络直播",体育休闲频道
-http://113.98.11.46:3000/626064707
 #EXTINF:-1 tvg-name="江苏城市频道" group-title="网络直播",江苏城市频道
 http://113.98.11.46:3000/626064714
 #EXTINF:-1 tvg-name="江苏国际" group-title="网络直播",江苏国际
 http://113.98.11.46:3000/626064674
 #EXTINF:-1 tvg-name="江苏教育" group-title="网络直播",江苏教育
 http://113.98.11.46:3000/628008321
-#EXTINF:-1 tvg-name="江苏影视频道" group-title="网络直播",江苏影视频道
-http://113.98.11.46:3000/626064697
 #EXTINF:-1 tvg-name="江苏综艺频道" group-title="网络直播",江苏综艺频道
 http://113.98.11.46:3000/626065193
 #EXTINF:-1 tvg-name="公共新闻频道" group-title="网络直播",公共新闻频道
@@ -469,10 +575,6 @@ http://113.98.11.46:3000/626064703
 http://113.98.11.46:3000/955227979
 #EXTINF:-1 tvg-name="南通新闻综合" group-title="网络直播",南通新闻综合
 http://113.98.11.46:3000/955227985
-#EXTINF:-1 tvg-name="宜兴新闻综合" group-title="网络直播",宜兴新闻综合
-http://113.98.11.46:3000/955227996
-#EXTINF:-1 tvg-name="溧水新闻综合" group-title="网络直播",溧水新闻综合
-http://113.98.11.46:3000/639737327
 #EXTINF:-1 tvg-name="陕西银龄频道" group-title="网络直播",陕西银龄频道
 http://113.98.11.46:3000/956909362
 #EXTINF:-1 tvg-name="陕西都市青春频道" group-title="网络直播",陕西都市青春频道
@@ -491,16 +593,14 @@ http://113.98.11.46:3000/639731952
 http://113.98.11.46:3000/646596895
 #EXTINF:-1 tvg-name="体坛名栏汇" group-title="网络直播",体坛名栏汇
 http://113.98.11.46:3000/629943305
-#EXTINF:-1 tvg-name="四海钓鱼" group-title="网络直播",四海钓鱼
-http://113.98.11.46:3000/637444975
 #EXTINF:-1 tvg-name="陕西体育休闲频道" group-title="网络直播",陕西体育休闲频道
 http://113.98.11.46:3000/956909356
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" group-title="网络直播",24小时城市联赛轮播台
 http://113.98.11.46:3000/915512915
+#EXTINF:-1 tvg-name="武术世界" group-title="网络直播",武术世界
+http://113.98.11.46:3000/958475359
 #EXTINF:-1 tvg-name="快乐垂钓" group-title="网络直播",快乐垂钓
 http://113.98.11.46:3000/961930263
-#EXTINF:-1 tvg-name="建党105周年巡礼" group-title="网络直播",建党105周年巡礼
-http://113.98.11.46:3000/713600957
 #EXTINF:-1 tvg-name="经典香港电影" group-title="网络直播",经典香港电影
 http://113.98.11.46:3000/625703337
 #EXTINF:-1 tvg-name="新片放映厅" group-title="网络直播",新片放映厅
@@ -511,6 +611,8 @@ http://113.98.11.46:3000/952383261
 http://113.98.11.46:3000/644368714
 #EXTINF:-1 tvg-name="CHC家庭影院" group-title="网络直播",CHC家庭影院
 http://113.98.11.46:3000/644368373
+#EXTINF:-1 tvg-name="和美乡途轮播台" group-title="网络直播",和美乡途轮播台
+http://113.98.11.46:3000/713591450
 #EXTINF:-1 tvg-name="南方影视" group-title="网络直播",南方影视
 http://113.98.11.46:3000/614961829
 #EXTINF:-1 tvg-name="中国天气" group-title="网络直播",中国天气
@@ -519,8 +621,6 @@ http://113.98.11.46:3000/959986621
 http://113.98.11.46:3000/923287154
 #EXTINF:-1 tvg-name="CETV2" group-title="网络直播",CETV2
 http://113.98.11.46:3000/923287211
-#EXTINF:-1 tvg-name="CETV4" group-title="网络直播",CETV4
-http://113.98.11.46:3000/923287339
 #EXTINF:-1 tvg-name="CCTV1(QF)" group-title="网络直播",CCTV1(QF)
 http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv1hd
 #EXTINF:-1 tvg-name="CCTV2" group-title="网络直播",CCTV2
@@ -535,8 +635,6 @@ http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv5hd
 http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv5p
 #EXTINF:-1 tvg-name="CCTV6" group-title="网络直播",CCTV6
 http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd
-#EXTINF:-1 tvg-name="CCTV7" group-title="网络直播",CCTV7
-http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd
 #EXTINF:-1 tvg-name="CCTV8" group-title="网络直播",CCTV8
 http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv8hd
 #EXTINF:-1 tvg-name="CCTV9" group-title="网络直播",CCTV9
@@ -613,22 +711,14 @@ http://107.150.60.122/live/qhws.m3u8
 http://107.150.60.122/live/xzws.m3u8
 #EXTINF:-1 tvg-name="大湾区卫视" group-title="网络直播",大湾区卫视
 http://107.150.60.122/live/nfws.m3u8
-#EXTINF:-1 tvg-name="CCTV1(三网4)" group-title="网络直播",CCTV1(三网4)
-http://204.12.221.218:8181/3m1080p/cctv1.m3u8
 #EXTINF:-1 tvg-name="CCTV2" group-title="网络直播",CCTV2
 http://204.12.221.218:8181/3m1080p/cctv2.m3u8
 #EXTINF:-1 tvg-name="CCTV3" group-title="网络直播",CCTV3
 http://204.12.221.218:8181/3m1080p/cctv3.m3u8
 #EXTINF:-1 tvg-name="CCTV4" group-title="网络直播",CCTV4
 http://204.12.221.218:8181/3m1080p/cctv4.m3u8
-#EXTINF:-1 tvg-name="CCTV6" group-title="网络直播",CCTV6
-http://204.12.221.218:8181/3m1080p/cctv6.m3u8
 #EXTINF:-1 tvg-name="CCTV8" group-title="网络直播",CCTV8
 http://204.12.221.218:8181/3m1080p/cctv8.m3u8
-#EXTINF:-1 tvg-name="CCTV14" group-title="网络直播",CCTV14
-http://204.12.221.218:8181/3m1080p/cctv14.m3u8
-#EXTINF:-1 tvg-name="CCTV15" group-title="网络直播",CCTV15
-http://204.12.221.218:8181/3m1080p/cctv15.m3u8
 #EXTINF:-1 tvg-name="CCTV16" group-title="网络直播",CCTV16
 http://204.12.221.218:8181/3m1080p/cctv16.m3u8
 #EXTINF:-1 tvg-name="CCTV17" group-title="网络直播",CCTV17
@@ -665,6 +755,8 @@ http://204.12.221.218:8181/3m1080p/hbws.m3u8
 http://204.12.221.218:8181/3m1080p/xmws.m3u8
 #EXTINF:-1 tvg-name="山西卫视" group-title="网络直播",山西卫视
 http://204.12.221.218:8181/3m1080p/sxws.m3u8
+#EXTINF:-1 tvg-name="河南卫视" group-title="网络直播",河南卫视
+http://204.12.221.218:8181/3m1080p/haws.m3u8
 #EXTINF:-1 tvg-name="四川卫视" group-title="网络直播",四川卫视
 http://204.12.221.218:8181/3m1080p/scws.m3u8
 #EXTINF:-1 tvg-name="陕西卫视" group-title="网络直播",陕西卫视
@@ -711,10 +803,16 @@ http://107.150.60.122/live/cctv1hd.m3u8
 http://38.75.136.137:98/gslb/dsdqbv/cctv1hd.m3u8?auth=test20251009
 #EXTINF:-1 tvg-name="CCTV-2" group-title="网络直播",CCTV-2
 http://107.150.60.122/live/cctv2hd.m3u8
+#EXTINF:-1 tvg-name="CCTV-2" group-title="网络直播",CCTV-2
+http://38.75.136.137:98/gslb/dsdqbv/cctv2hd.m3u8?auth=test20251009
 #EXTINF:-1 tvg-name="CCTV-3" group-title="网络直播",CCTV-3
 http://107.150.60.122/live/cctv3hd.m3u8
+#EXTINF:-1 tvg-name="CCTV-3" group-title="网络直播",CCTV-3
+http://38.75.136.137:98/gslb/dsdqbv/cctv3hd.m3u8?auth=test20251009
 #EXTINF:-1 tvg-name="CCTV-4" group-title="网络直播",CCTV-4
 http://107.150.60.122/live/cctv4hd.m3u8
+#EXTINF:-1 tvg-name="CCTV-4" group-title="网络直播",CCTV-4
+http://38.75.136.137:98/gslb/dsdqbv/cctv4hd.m3u8?auth=test20251009
 #EXTINF:-1 tvg-name="CCTV-5" group-title="网络直播",CCTV-5
 http://107.150.60.122/live/cctv5hd.m3u8
 #EXTINF:-1 tvg-name="CCTV-5+" group-title="网络直播",CCTV-5+
@@ -801,8 +899,6 @@ http://38.75.136.137:98/gslb/dsdqpub/zjwshd.m3u8?auth=testpub
 http://38.75.136.137:98/gslb/dsdqpub/szwshd.m3u8?auth=testpub
 #EXTINF:-1 tvg-name="湖北卫视" group-title="网络直播",湖北卫视
 http://38.75.136.137:98/gslb/dsdqpub/hbwshd.m3u8?auth=testpub
-#EXTINF:-1 tvg-name="湖南卫视" group-title="网络直播",湖南卫视
-http://38.75.136.137:98/gslb/dsdqbv/hnwshd.m3u8?auth=test20251009
 #EXTINF:-1 tvg-name="甘肃卫视" group-title="网络直播",甘肃卫视
 http://38.75.136.137:98/gslb/dsdqpub/gswshd.m3u8?auth=testpub
 #EXTINF:-1 tvg-name="辽宁卫视" group-title="网络直播",辽宁卫视
@@ -839,12 +935,8 @@ http://74.91.26.218:82/live/cctv10hd.m3u8
 http://74.91.26.218:82/live/cctv11hd.m3u8
 #EXTINF:-1 tvg-name="CCTV-12" group-title="网络直播",CCTV-12
 http://74.91.26.218:82/live/cctv12hd.m3u8
-#EXTINF:-1 tvg-name="CCTV-13" group-title="网络直播",CCTV-13
-http://74.91.26.218:82/live/cctv13hd.m3u8
 #EXTINF:-1 tvg-name="CCTV-14" group-title="网络直播",CCTV-14
 http://74.91.26.218:82/live/cctv14hd.m3u8
-#EXTINF:-1 tvg-name="CCTV-15" group-title="网络直播",CCTV-15
-http://74.91.26.218:82/live/cctv15hd.m3u8
 #EXTINF:-1 tvg-name="CCTV-16" group-title="网络直播",CCTV-16
 http://74.91.26.218:82/live/cctv16hd.m3u8
 #EXTINF:-1 tvg-name="CCTV-17" group-title="网络直播",CCTV-17
@@ -907,8 +999,6 @@ http://8.155.43.98:35455/yy/1382736877
 http://8.155.43.98:35455/yy/1382736795
 #EXTINF:-1 tvg-name="YY轮播4" group-title="网络直播",YY轮播4
 http://8.155.43.98:35455/yy/1354931580
-#EXTINF:-1 tvg-name="YY轮播5" group-title="网络直播",YY轮播5
-http://8.155.43.98:35455/yy/1382851148
 #EXTINF:-1 tvg-name="YY轮播6" group-title="网络直播",YY轮播6
 http://8.155.43.98:35455/yy/1382749917
 #EXTINF:-1 tvg-name="YY轮播7" group-title="网络直播",YY轮播7
@@ -937,8 +1027,6 @@ http://8.155.43.98:35455/yy/1382737892
 http://8.155.43.98:35455/yy/1354933540
 #EXTINF:-1 tvg-name="YY轮播20" group-title="网络直播",YY轮播20
 http://8.155.43.98:35455/yy/1382851591
-#EXTINF:-1 tvg-name="YY轮播21" group-title="网络直播",YY轮播21
-http://8.155.43.98:35455/yy/1354932355
 #EXTINF:-1 tvg-name="YY轮播23" group-title="网络直播",YY轮播23
 http://8.155.43.98:35455/yy/1354888726
 #EXTINF:-1 tvg-name="YY轮播24" group-title="网络直播",YY轮播24
@@ -969,8 +1057,6 @@ http://8.155.43.98:35455/yy/1382736803
 http://8.155.43.98:35455/yy/1354930939
 #EXTINF:-1 tvg-name="YY轮播39" group-title="网络直播",YY轮播39
 http://8.155.43.98:35455/yy/1382735624
-#EXTINF:-1 tvg-name="YY轮播40" group-title="网络直播",YY轮播40
-http://8.155.43.98:35455/yy/1382851578
 #EXTINF:-1 tvg-name="YY轮播41" group-title="网络直播",YY轮播41
 http://8.155.43.98:35455/yy/1382736911
 #EXTINF:-1 tvg-name="YY轮播49" group-title="网络直播",YY轮播49
@@ -985,8 +1071,6 @@ http://8.155.43.98:35455/yy/1382745089
 http://8.155.43.98:35455/yy/1354930964
 #EXTINF:-1 tvg-name="YY轮播60" group-title="网络直播",YY轮播60
 http://8.155.43.98:35455/yy/1382745083
-#EXTINF:-1 tvg-name="YY轮播64" group-title="网络直播",YY轮播64
-http://8.155.43.98:35455/yy/1382736873
 #EXTINF:-1 tvg-name="YY轮播68" group-title="网络直播",YY轮播68
 http://8.155.43.98:35455/yy/1354932438
 #EXTINF:-1 tvg-name="YY轮播70" group-title="网络直播",YY轮播70
@@ -1087,6 +1171,8 @@ http://8.155.43.98:35455/yy/1382735567
 http://8.155.43.98:35455/yy/1382736900
 #EXTINF:-1 tvg-name="亲爱的热爱的" group-title="网络直播",亲爱的热爱的
 http://8.155.43.98:35455/yy/1354932433
+#EXTINF:-1 tvg-name="无敌县令" group-title="网络直播",无敌县令
+http://8.155.43.98:35455/yy/1354932390
 #EXTINF:-1 tvg-name="非常保镖-经典港剧" group-title="网络直播",非常保镖-经典港剧
 http://8.155.43.98:35455/yy/1382736903
 #EXTINF:-1 tvg-name="欢乐集结号3" group-title="网络直播",欢乐集结号3
@@ -1147,8 +1233,6 @@ http://8.155.43.98:35455/yy/1382736868
 http://8.155.43.98:35455/yy/1382736717
 #EXTINF:-1 tvg-name="陈情令" group-title="网络直播",陈情令
 http://8.155.43.98:35455/yy/1382745121
-#EXTINF:-1 tvg-name="猩球崛起-怪兽片合集" group-title="网络直播",猩球崛起-怪兽片合集
-http://8.155.43.98:35455/yy/1354930181
 #EXTINF:-1 tvg-name="魔幻手机" group-title="网络直播",魔幻手机
 http://8.155.43.98:35455/yy/1382851541
 #EXTINF:-1 tvg-name="复仇者联盟全季" group-title="网络直播",复仇者联盟全季
@@ -1159,8 +1243,6 @@ http://8.155.43.98:35455/yy/1382749900
 http://8.155.43.98:35455/yy/1354889024
 #EXTINF:-1 tvg-name="苦乐村官" group-title="网络直播",苦乐村官
 http://8.155.43.98:35455/yy/1382736864
-#EXTINF:-1 tvg-name="周星星系列" group-title="网络直播",周星星系列
-http://8.155.43.98:35455/yy/1354888671
 #EXTINF:-1 tvg-name="粟裕大将-影视" group-title="网络直播",粟裕大将-影视
 http://8.155.43.98:35455/yy/1354926542
 #EXTINF:-1 tvg-name="我爱我家" group-title="网络直播",我爱我家
@@ -1541,6 +1623,8 @@ http://cfss.cc/cdn/huya/23903123.flv
 http://cfss.cc/cdn/huya/23864973.flv
 #EXTINF:-1 tvg-name="电影_武侠" group-title="网络直播",电影_武侠
 http://cfss.cc/cdn/huya/11342427.flv
+#EXTINF:-1 tvg-name="电影_玄幻" group-title="网络直播",电影_玄幻
+http://cfss.cc/cdn/huya/11342414.flv
 #EXTINF:-1 tvg-name="电影_国产" group-title="网络直播",电影_国产
 http://cfss.cc/cdn/huya/11352973.flv
 #EXTINF:-1 tvg-name="电影_斯坦森" group-title="网络直播",电影_斯坦森
@@ -1609,8 +1693,6 @@ http://8.155.43.98:35455/huya/11342412
 http://222.186.39.21:35466/huya/11602081
 #EXTINF:-1 tvg-name="新三国演义" group-title="网络直播",新三国演义
 http://222.186.39.21:35466/huya/11352944
-#EXTINF:-1 tvg-name="寻秦记" group-title="网络直播",寻秦记
-http://222.186.39.21:35466/huya/30080146
 #EXTINF:-1 tvg-name="大宋提刑官" group-title="网络直播",大宋提刑官
 http://222.186.39.21:35466/huya/26355856
 #EXTINF:-1 tvg-name="与凤行" group-title="网络直播",与凤行
@@ -1733,6 +1815,8 @@ https://live.ottiptv.cc/yy/1382851594
 https://live.ottiptv.cc/yy/1382736890
 #EXTINF:-1 tvg-name="士兵突击" group-title="网络直播",士兵突击
 https://live.ottiptv.cc/yy/1382851600
+#EXTINF:-1 tvg-name="YY用户" group-title="网络直播",YY用户
+https://live.ottiptv.cc/yy/1382736910
 #EXTINF:-1 tvg-name="香港院线大片-最新" group-title="网络直播",香港院线大片-最新
 https://live.ottiptv.cc/yy/1354936242
 #EXTINF:-1 tvg-name="爆笑小品大合集" group-title="网络直播",爆笑小品大合集
@@ -1849,8 +1933,6 @@ https://live.ottiptv.cc/yy/1382735553
 https://live.ottiptv.cc/yy/1382735576
 #EXTINF:-1 tvg-name="小鬼当家-童年回忆" group-title="网络直播",小鬼当家-童年回忆
 https://live.ottiptv.cc/yy/1382745104
-#EXTINF:-1 tvg-name="叛逆者" group-title="网络直播",叛逆者
-https://live.ottiptv.cc/yy/1382736868
 #EXTINF:-1 tvg-name="密子君" group-title="网络直播",密子君
 https://live.ottiptv.cc/yy/1382736717
 #EXTINF:-1 tvg-name="陈情令" group-title="网络直播",陈情令
@@ -1859,6 +1941,8 @@ https://live.ottiptv.cc/yy/1382745121
 https://live.ottiptv.cc/yy/1354930181
 #EXTINF:-1 tvg-name="复仇者联盟全季" group-title="网络直播",复仇者联盟全季
 https://live.ottiptv.cc/yy/1354936167
+#EXTINF:-1 tvg-name="你的回忆有我吗" group-title="网络直播",你的回忆有我吗
+https://live.ottiptv.cc/yy/1354889024
 #EXTINF:-1 tvg-name="苦乐村官" group-title="网络直播",苦乐村官
 https://live.ottiptv.cc/yy/1382736864
 #EXTINF:-1 tvg-name="YY用户" group-title="网络直播",YY用户
@@ -1973,8 +2057,6 @@ https://live.ottiptv.cc/yy/1382735540
 https://live.ottiptv.cc/yy/1354931631
 #EXTINF:-1 tvg-name="燃爆动作片" group-title="网络直播",燃爆动作片
 https://live.ottiptv.cc/yy/1382736801
-#EXTINF:-1 tvg-name="躺平还是奋斗？搞笑中见真谛" group-title="网络直播",躺平还是奋斗？搞笑中见真谛
-https://live.ottiptv.cc/yy/1382851586
 #EXTINF:-1 tvg-name="嘻嘻熙熙" group-title="网络直播",嘻嘻熙熙
 https://live.ottiptv.cc/yy/1382735585
 #EXTINF:-1 tvg-name="最美的青春" group-title="网络直播",最美的青春
@@ -1993,8 +2075,6 @@ https://live.ottiptv.cc/yy/1382736867
 https://live.ottiptv.cc/yy/1382745095
 #EXTINF:-1 tvg-name="YY用户" group-title="网络直播",YY用户
 https://live.ottiptv.cc/yy/1382736807
-#EXTINF:-1 tvg-name="流金岁月-经典港剧" group-title="网络直播",流金岁月-经典港剧
-https://live.ottiptv.cc/yy/1382736891
 #EXTINF:-1 tvg-name="能耐大了第1季" group-title="网络直播",能耐大了第1季
 https://live.ottiptv.cc/yy/1354930195
 #EXTINF:-1 tvg-name="国外科幻" group-title="网络直播",国外科幻
@@ -2041,10 +2121,16 @@ https://live.ottiptv.cc/yy/1382745173
 https://live.ottiptv.cc/yy/1382749952
 #EXTINF:-1 tvg-name="溏心风暴之家好月圆" group-title="网络直播",溏心风暴之家好月圆
 https://live.ottiptv.cc/yy/1354888747
+#EXTINF:-1 tvg-name="太空荒野求生记-火星救援" group-title="网络直播",太空荒野求生记-火星救援
+https://live.ottiptv.cc/yy/1354930957
 #EXTINF:-1 tvg-name="贾玲春晚小品" group-title="网络直播",贾玲春晚小品
 https://live.ottiptv.cc/yy/1382736720
 #EXTINF:-1 tvg-name="科幻电影" group-title="网络直播",科幻电影
 https://live.ottiptv.cc/yy/1354930209
+#EXTINF:-1 tvg-name="来看修牛蹄" group-title="网络直播",来看修牛蹄
+https://live.ottiptv.cc/yy/1382749887
+#EXTINF:-1 tvg-name="蔡明春晚小品" group-title="网络直播",蔡明春晚小品
+https://live.ottiptv.cc/yy/1354936177
 #EXTINF:-1 tvg-name="抗日神片，燃爆抗战热血魂" group-title="网络直播",抗日神片，燃爆抗战热血魂
 https://live.ottiptv.cc/yy/1354926600
 #EXTINF:-1 tvg-name="一起来笑吧" group-title="网络直播",一起来笑吧
@@ -2067,6 +2153,8 @@ https://live.ottiptv.cc/yy/1382736887
 https://live.ottiptv.cc/yy/1354930912
 #EXTINF:-1 tvg-name="电视剧-流金岁月" group-title="网络直播",电视剧-流金岁月
 https://live.ottiptv.cc/yy/1382749906
+#EXTINF:-1 tvg-name="致敬星爷致敬经典" group-title="网络直播",致敬星爷致敬经典
+https://live.ottiptv.cc/yy/1354889048
 #EXTINF:-1 tvg-name="高分动作片——创可贴" group-title="网络直播",高分动作片——创可贴
 https://live.ottiptv.cc/yy/1382735568
 #EXTINF:-1 tvg-name="本山快乐营1" group-title="网络直播",本山快乐营1
@@ -2103,10 +2191,10 @@ https://live.ottiptv.cc/yy/1354932431
 https://live.ottiptv.cc/yy/1382736892
 #EXTINF:-1 tvg-name="高能博弈—大事件" group-title="网络直播",高能博弈—大事件
 https://live.ottiptv.cc/yy/1382749898
-#EXTINF:-1 tvg-name="碟中谍系列电影" group-title="网络直播",碟中谍系列电影
-https://live.ottiptv.cc/yy/1382736836
 #EXTINF:-1 tvg-name="另类猪妖爆笑逆袭" group-title="网络直播",另类猪妖爆笑逆袭
 https://live.ottiptv.cc/yy/1354936155
+#EXTINF:-1 tvg-name="忠诚无畏，战犬出击" group-title="网络直播",忠诚无畏，战犬出击
+https://live.ottiptv.cc/yy/1354930225
 #EXTINF:-1 tvg-name="超燃科幻大片：明日边缘" group-title="网络直播",超燃科幻大片：明日边缘
 https://live.ottiptv.cc/yy/1382736835
 #EXTINF:-1 tvg-name="霹雳火：速度与激情" group-title="网络直播",霹雳火：速度与激情
@@ -2135,6 +2223,8 @@ https://live.ottiptv.cc/yy/1354926671
 https://live.ottiptv.cc/yy/1382749909
 #EXTINF:-1 tvg-name="每天都要快乐哦！" group-title="网络直播",每天都要快乐哦！
 https://live.ottiptv.cc/yy/1354930909
+#EXTINF:-1 tvg-name="一段关于救赎与坚守的西部传奇" group-title="网络直播",一段关于救赎与坚守的西部传奇
+https://live.ottiptv.cc/yy/1382741640
 #EXTINF:-1 tvg-name="封神：祸商" group-title="网络直播",封神：祸商
 https://live.ottiptv.cc/yy/1354932407
 #EXTINF:-1 tvg-name="娘亲舅大" group-title="网络直播",娘亲舅大
@@ -2167,12 +2257,12 @@ https://live.ottiptv.cc/yy/1354930904
 https://live.ottiptv.cc/yy/1354936142
 #EXTINF:-1 tvg-name="高分经典动作片" group-title="网络直播",高分经典动作片
 https://live.ottiptv.cc/yy/1382749944
+#EXTINF:-1 tvg-name="了不起的萝莉小玲" group-title="网络直播",了不起的萝莉小玲
+https://live.ottiptv.cc/yy/1382736799
 #EXTINF:-1 tvg-name="牧野诡事之赤丹珠" group-title="网络直播",牧野诡事之赤丹珠
 https://live.ottiptv.cc/yy/1382736863
 #EXTINF:-1 tvg-name="美好的意外治愈邂逅" group-title="网络直播",美好的意外治愈邂逅
 https://live.ottiptv.cc/yy/1382828766
-#EXTINF:-1 tvg-name="全村一起搞艺术" group-title="网络直播",全村一起搞艺术
-https://live.ottiptv.cc/yy/1354936210
 #EXTINF:-1 tvg-name="不可能的任务-碟中谍4" group-title="网络直播",不可能的任务-碟中谍4
 https://live.ottiptv.cc/yy/1354930967
 #EXTINF:-1 tvg-name="岳云鹏宋小宝也来演电影了？" group-title="网络直播",岳云鹏宋小宝也来演电影了？
@@ -2185,6 +2275,8 @@ https://live.ottiptv.cc/yy/1354889009
 https://live.ottiptv.cc/yy/1354930984
 #EXTINF:-1 tvg-name="新木乃伊：古埃及公主复活的灾难对决" group-title="网络直播",新木乃伊：古埃及公主复活的灾难对决
 https://live.ottiptv.cc/yy/1354936169
+#EXTINF:-1 tvg-name="高分港剧合集" group-title="网络直播",高分港剧合集
+https://live.ottiptv.cc/yy/1382735542
 #EXTINF:-1 tvg-name="匪帮传奇故事" group-title="网络直播",匪帮传奇故事
 https://live.ottiptv.cc/yy/1382749941
 #EXTINF:-1 tvg-name="新时代农村青年的热血奋斗记" group-title="网络直播",新时代农村青年的热血奋斗记
@@ -2221,18 +2313,16 @@ https://live.ottiptv.cc/yy/1382745092
 https://live.ottiptv.cc/yy/1354658051
 #EXTINF:-1 tvg-name="追踪神秘狐影" group-title="网络直播",追踪神秘狐影
 https://live.ottiptv.cc/yy/1382749953
+#EXTINF:-1 tvg-name="快递小哥变身英雄" group-title="网络直播",快递小哥变身英雄
+https://live.ottiptv.cc/yy/1354932405
 #EXTINF:-1 tvg-name="Storm憋了一年大招" group-title="网络直播",Storm憋了一年大招
 https://live.ottiptv.cc/yy/1382735559
 #EXTINF:-1 tvg-name="熊出没之探险日记-森林探险记" group-title="网络直播",熊出没之探险日记-森林探险记
 https://live.ottiptv.cc/yy/1382745122
-#EXTINF:-1 tvg-name="异类入侵高能反转" group-title="网络直播",异类入侵高能反转
-https://live.ottiptv.cc/yy/1354936217
 #EXTINF:-1 tvg-name="杀机四伏" group-title="网络直播",杀机四伏
 https://live.ottiptv.cc/yy/1354936195
 #EXTINF:-1 tvg-name="旺达·塞克丝：怼遍全场" group-title="网络直播",旺达·塞克丝：怼遍全场
 https://live.ottiptv.cc/yy/1354936221
-#EXTINF:-1 tvg-name="为妈妈点赞" group-title="网络直播",为妈妈点赞
-https://live.ottiptv.cc/yy/1382745098
 #EXTINF:-1 tvg-name="狼爸硬核带娃" group-title="网络直播",狼爸硬核带娃
 https://live.ottiptv.cc/yy/1382735627
 #EXTINF:-1 tvg-name="龙师傅来接招" group-title="网络直播",龙师傅来接招
@@ -2265,6 +2355,8 @@ https://live.ottiptv.cc/yy/1354889042
 https://live.ottiptv.cc/yy/1354932365
 #EXTINF:-1 tvg-name="你好现任" group-title="网络直播",你好现任
 https://live.ottiptv.cc/yy/1382735566
+#EXTINF:-1 tvg-name="非典型恋爱" group-title="网络直播",非典型恋爱
+https://live.ottiptv.cc/yy/1354936157
 #EXTINF:-1 tvg-name="侏罗纪复活战" group-title="网络直播",侏罗纪复活战
 https://live.ottiptv.cc/yy/1354930945
 #EXTINF:-1 tvg-name="花木兰巾帼英雄" group-title="网络直播",花木兰巾帼英雄
@@ -2273,8 +2365,6 @@ https://live.ottiptv.cc/yy/1354926622
 https://live.ottiptv.cc/yy/1354926643
 #EXTINF:-1 tvg-name="铁甲狂猴雷霆" group-title="网络直播",铁甲狂猴雷霆
 https://live.ottiptv.cc/yy/1382735552
-#EXTINF:-1 tvg-name="大闹三界奇幻冒险" group-title="网络直播",大闹三界奇幻冒险
-https://live.ottiptv.cc/yy/1382736804
 #EXTINF:-1 tvg-name="赵牡丹，辛辣开麦" group-title="网络直播",赵牡丹，辛辣开麦
 https://live.ottiptv.cc/yy/1382736893
 #EXTINF:-1 tvg-name="闲暇观看综艺" group-title="网络直播",闲暇观看综艺
@@ -2305,12 +2395,16 @@ https://live.ottiptv.cc/yy/1354932441
 https://live.ottiptv.cc/yy/1354936122
 #EXTINF:-1 tvg-name="热烈的玫瑰" group-title="网络直播",热烈的玫瑰
 https://live.ottiptv.cc/yy/1382736798
+#EXTINF:-1 tvg-name="爱情拯救计划" group-title="网络直播",爱情拯救计划
+https://live.ottiptv.cc/yy/1354936238
 #EXTINF:-1 tvg-name="巨蛛嗜血狂" group-title="网络直播",巨蛛嗜血狂
 https://live.ottiptv.cc/yy/1354930903
 #EXTINF:-1 tvg-name="守护千年雄关" group-title="网络直播",守护千年雄关
 https://live.ottiptv.cc/yy/1354936228
 #EXTINF:-1 tvg-name="太空异种惊魂" group-title="网络直播",太空异种惊魂
 https://live.ottiptv.cc/yy/1382745094
+#EXTINF:-1 tvg-name="公主战俘记" group-title="网络直播",公主战俘记
+https://live.ottiptv.cc/yy/1354931488
 #EXTINF:-1 tvg-name="破解终极密码" group-title="网络直播",破解终极密码
 https://live.ottiptv.cc/yy/1382735571
 #EXTINF:-1 tvg-name="哮天犬闹龙宫" group-title="网络直播",哮天犬闹龙宫
@@ -2323,8 +2417,6 @@ https://live.ottiptv.cc/yy/1354932371
 https://live.ottiptv.cc/yy/1354933556
 #EXTINF:-1 tvg-name="冰峰惊魂夜" group-title="网络直播",冰峰惊魂夜
 https://live.ottiptv.cc/yy/1354936136
-#EXTINF:-1 tvg-name="绝对忠诚使命" group-title="网络直播",绝对忠诚使命
-https://live.ottiptv.cc/yy/1354936178
 #EXTINF:-1 tvg-name="横行不霸道" group-title="网络直播",横行不霸道
 https://live.ottiptv.cc/yy/1354930189
 #EXTINF:-1 tvg-name="特派先锋出击" group-title="网络直播",特派先锋出击
@@ -2341,6 +2433,8 @@ https://live.ottiptv.cc/yy/1355652820
 https://live.ottiptv.cc/yy/1355635293
 #EXTINF:-1 tvg-name="武林外传" group-title="网络直播",武林外传
 https://live.ottiptv.cc/yy/1355344777
+#EXTINF:-1 tvg-name="【周星驰】搞笑电影" group-title="网络直播",【周星驰】搞笑电影
+https://live.ottiptv.cc/yy/38670875
 #EXTINF:-1 tvg-name="弹幕天团 下饭神剧" group-title="网络直播",弹幕天团 下饭神剧
 https://live.ottiptv.cc/yy/23512910
 #EXTINF:-1 tvg-name="狄仁杰" group-title="网络直播",狄仁杰
@@ -2383,18 +2477,16 @@ http://38.75.136.137:98/gslb/dsdqpub/lbssdy.m3u8?auth=testpub
 http://38.75.136.137:98/gslb/dsdqpub/lbsswx.m3u8?auth=testpub
 #EXTINF:-1 tvg-name="邵氏动作" group-title="网络直播",邵氏动作
 http://38.75.136.137:98/gslb/dsdqpub/lbssdz.m3u8?auth=testpub
-#EXTINF:-1 tvg-name="林正英系列" group-title="网络直播",林正英系列
-http://107.150.60.122/live/lblzy.m3u8
 #EXTINF:-1 tvg-name="CHC家庭影院" group-title="网络直播",CHC家庭影院
 http://38.75.136.137:98/gslb/dsdqpub/chcjt.m3u8?auth=testpub
 #EXTINF:-1 tvg-name="CHC动作电影" group-title="网络直播",CHC动作电影
 http://38.75.136.137:98/gslb/dsdqpub/chcdz.m3u8?auth=testpub
 #EXTINF:-1 tvg-name="CHC影迷电影" group-title="网络直播",CHC影迷电影
 http://38.75.136.137:98/gslb/dsdqpub/chchd.m3u8?auth=testpub
-#EXTINF:-1 tvg-name="拳击" group-title="网络直播",拳击
-http://file.dokor.cn:35455/huya/20072837
-#EXTINF:-1 tvg-name="机车🏍️" group-title="网络直播",机车🏍️
-http://file.dokor.cn:35455/huya/19197407
+#EXTINF:-1 tvg-name="摔跤🤼‍♂️" group-title="网络直播",摔跤🤼‍♂️
+http://file.dokor.cn:35455/huya/20072812
+#EXTINF:-1 tvg-name="格斗" group-title="网络直播",格斗
+http://file.dokor.cn:35455/huya/20072796
 #EXTINF:-1 tvg-name="睛彩广场舞「移动」" group-title="网络直播",睛彩广场舞「移动」
 http://gslbserv.itv.cmvideo.cn/index.m3u8?channel-id=FifastbLive&Contentid=3000000020000011523&livemode=1&stbId=YanG-1989
 #EXTINF:-1 tvg-name="睛彩青少「移动」" group-title="网络直播",睛彩青少「移动」
@@ -2523,28 +2615,18 @@ http://mg.hmysapp.cn:177/gdtv.php?id=44
 http://mg.hmysapp.cn:177/gdtv.php?id=45
 #EXTINF:-1 tvg-name="广东民生台" group-title="网络直播",广东民生台
 http://mg.hmysapp.cn:177/gdtv.php?id=48
-#EXTINF:-1 tvg-name="广东体育台" group-title="网络直播",广东体育台
-http://mg.hmysapp.cn:177/gdtv.php?id=47
-#EXTINF:-1 tvg-name="大湾区卫视台" group-title="网络直播",大湾区卫视台
-http://mg.hmysapp.cn:177/gdtv.php?id=51
 #EXTINF:-1 tvg-name="大湾区卫视（海外版）台" group-title="网络直播",大湾区卫视（海外版）台
 http://mg.hmysapp.cn:177/gdtv.php?id=46
-#EXTINF:-1 tvg-name="广东影视台" group-title="网络直播",广东影视台
-http://mg.hmysapp.cn:177/gdtv.php?id=53
 #EXTINF:-1 tvg-name="4K超高清台" group-title="网络直播",4K超高清台
 http://mg.hmysapp.cn:177/gdtv.php?id=16
 #EXTINF:-1 tvg-name="广东少儿台" group-title="网络直播",广东少儿台
 http://mg.hmysapp.cn:177/gdtv.php?id=54
-#EXTINF:-1 tvg-name="嘉佳卡通台" group-title="网络直播",嘉佳卡通台
-http://mg.hmysapp.cn:177/gdtv.php?id=66
 #EXTINF:-1 tvg-name="南方购物台" group-title="网络直播",南方购物台
 http://mg.hmysapp.cn:177/gdtv.php?id=42
 #EXTINF:-1 tvg-name="岭南戏曲台" group-title="网络直播",岭南戏曲台
 http://mg.hmysapp.cn:177/gdtv.php?id=15
 #EXTINF:-1 tvg-name="广东移动台" group-title="网络直播",广东移动台
 http://mg.hmysapp.cn:177/gdtv.php?id=74
-#EXTINF:-1 tvg-name="广东台经典剧台" group-title="网络直播",广东台经典剧台
-http://mg.hmysapp.cn:177/gdtv.php?id=100
 #EXTINF:-1 tvg-name="纪录片台" group-title="网络直播",纪录片台
 http://mg.hmysapp.cn:177/gdtv.php?id=94
 #EXTINF:-1 tvg-name="GRTN健康频道台" group-title="网络直播",GRTN健康频道台
@@ -2567,12 +2649,6 @@ https://tencentplay.gztv.com/live/nanguodushi.m3u8?txSecret=cb146186851d06b9aff7
 https://tencentplay.gztv.com/live/nanguodushi.m3u8?txSecret=c8f8cdb566361489c7ecc33c19745c5a&txTime=18d048f5667
 #EXTINF:-1 tvg-name="南国都市" group-title="网络直播",南国都市
 https://tencentplay.gztv.com/live/nanguodushi.m3u8?txSecret=627498b93bc6f5d6e2460d0823bf81a3&txTime=18e6df74fc2
-#EXTINF:-1 tvg-name="南国都市" group-title="网络直播",南国都市
-https://tencentplaygsm.gztv.com/live/nanguodushi.m3u8?txTime=65815752&txSecret=1f6ebc04eacad6cf81f9140ab8b3fe81
-#EXTINF:-1 tvg-name="南国都市" group-title="网络直播",南国都市
-https://tencentplaygsm.gztv.com/live/nanguodushi.m3u8?txTime=659e2566&txSecret=d8eb99df0e0231bd050d3e0471d9fb01
-#EXTINF:-1 tvg-name="南国都市" group-title="网络直播",南国都市
-https://tencentplaygsm.gztv.com/live/nanguodushi.m3u8?txTime=65797d79&txSecret=c9b4bd020dcf8dde2d53c1240ba7ae7d
 #EXTINF:-1 tvg-name="广州综合" group-title="网络直播",广州综合
 https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=f0147ae6453a80f5989f382368b72aad&txTime=18d00acf487
 #EXTINF:-1 tvg-name="广州新闻" group-title="网络直播",广州新闻
@@ -2607,8 +2683,6 @@ https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=9dd8bdb55106c41c87ad50d6
 https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=1b3fcaebe0459e7ca2876c2d5493cfac&txTime=18d047b699e
 #EXTINF:-1 tvg-name="广州综合" group-title="网络直播",广州综合
 https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=a484293b0e6036fb053179bdffaf7127&txTime=18e0d9e3c22
-#EXTINF:-1 tvg-name="广州综合" group-title="网络直播",广州综合
-https://tencentplaygsm.gztv.com/live/zonghes.m3u8?txTime=65797c44&txSecret=7e4590b2320037d7ce49ce9eac2dd6c0
 #EXTINF:-1 tvg-name="广州综合" group-title="网络直播",广州综合
 https://tencentplay.gztv.com/live/zonghes.m3u8?txSecret=870cb528156f761b62bf8b8a7eec176a&txTime=18f4b58d76a
 #EXTINF:-1 tvg-name="广州综合" group-title="网络直播",广州综合
