@@ -236,9 +236,11 @@ def build_gd(channels, relays):
         if not fb:
             return [], []
         alive = fb
-    # 标记当前在用的线路
+    # 标记当前在用的线路 + 地区（池子都是广东电信组播 239.77.x，所以都是广东电信）
     for r in relays:
         r["in_use"] = (r in alive)
+        if not r.get("region"):
+            r["region"] = "广东电信"
     blocks = []
     seen = set()
     for c in channels:

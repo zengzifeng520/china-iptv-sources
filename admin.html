@@ -85,12 +85,13 @@
   </div>
 
   <div class="card">
-    <div class="sub" style="margin-bottom:10px">中转池状态 <span id="poolChecked" class="small"></span> <button id="poolRefresh" class="ghost" style="float:right;padding:4px 12px">刷新</button></div>
-    <table>
-      <thead><tr><th>状态</th><th>中转</th><th>风格</th><th>码率</th><th>线路</th><th>上次检查</th></tr></thead>
+    <div class="sub" style="margin-bottom:10px">中转池状态 <button id="poolRefresh" class="ghost" style="float:right;padding:3px 10px">刷新</button></div>
+    <div id="poolActive" class="sub" style="color:var(--ok);margin-bottom:8px"></div>
+    <table style="font-size:12px">
+      <thead><tr><th>状态</th><th>中转</th><th>地区</th><th>码率</th><th>线路</th><th>检查</th></tr></thead>
       <tbody id="poolRows"><tr><td colspan="6" class="small">加载中…</td></tr></tbody>
     </table>
-    <div class="hint">「在用」表示当前订阅里正在使用的线路（每频道取最快 3 台）。数据每 30 分钟由管线自动探测更新。</div>
+    <div class="hint">「在用」= 订阅里正在使用的线路（每频道取最快 3 台）。数据每 30 分钟自动探测更新。</div>
   </div>
 </div>
 
@@ -249,8 +250,11 @@ async function loadPool(){
   try{
     const j = await gh("GET", API+"/contents/nas/data/relays.json");
     const d = JSON.parse(atob(j.content.replace(/\s/g,"")));
-    document.getElementById("poolChecked").textContent = d.checked ? ("检测于 " + d.checked) : "";
     const relays = d.relays || [];
+    const active = relays.filter(r=>r.in_use).map(r=>r.host);
+    document.getElementById("poolActive").textContent = active.length
+      ? ("当前使用：" + active.join("、") + (d.checked ? "（检测于 " + d.checked + "）" : ""))
+      : (d.checked ? "检测于 " + d.checked : "");
     const rows = relays.map(r=>{
       const ok = r.ok;
       const tag = ok ? '<span class="tag ok">正常</span>' : '<span class="tag bad">失效</span>';
@@ -258,8 +262,8 @@ async function loadPool(){
       return `<tr>
         <td>${tag}</td>
         <td><code>${r.host||""}</code></td>
-        <td>${r.mode||""}</td>
-        <td>${r.kbps||0} kbps</td>
+        <td>${r.region||"广东电信"}</td>
+        <td>${r.kbps||0}</td>
         <td>${use}</td>
         <td>${r.last_check||""}</td>
       </tr>`;
