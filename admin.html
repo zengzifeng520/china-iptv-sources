@@ -87,6 +87,11 @@ function fmtExpire(d){ // "2026-12-08" -> "2026-12-8"
   const [y,m,dd]=d.split("-"); return y+"-"+parseInt(m)+"-"+parseInt(dd);
 }
 function daysLeft(ts){ const now=Math.floor(Date.now()/1000); return Math.max(0, Math.floor((ts-now)/86400)); }
+function padDate(d){ // "2026-12-8" / "2026-12-08" -> "2026-12-08"
+  const p = String(d||"").split("-");
+  if(p.length!==3) return d||"";
+  return p[0]+"-"+p[1].padStart(2,"0")+"-"+p[2].padStart(2,"0");
+}
 
 async function gh(method, url, body){
   const tk = token();
@@ -127,7 +132,7 @@ function render(users){
     return `<tr>
       <td>${name}</td>
       <td><code>${u.token||""}</code></td>
-      <td><input type="date" id="d_${name}" value="${expire}" style="width:150px"></td>
+      <td><input type="date" id="d_${name}" value="${padDate(expire)}" style="width:150px"></td>
       <td>${expired?'<span class="tag bad">已过期</span>':'<span class="tag ok">'+left+' 天</span>'}</td>
       <td><span class="link" onclick="copy('${link}')">复制链接</span></td>
       <td>
