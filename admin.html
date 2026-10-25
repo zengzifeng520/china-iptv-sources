@@ -165,7 +165,8 @@ async function gh(method, url, body){
 
 async function loadUsers(){
   const j = await gh("GET", API+"/contents/"+PATH);
-  const users = JSON.parse(atob(j.content.replace(/\s/g,"")));
+  const bin = atob(j.content.replace(/\s/g,""));
+    const users = JSON.parse(new TextDecoder("utf-8").decode(new Uint8Array([...bin].map(c=>c.charCodeAt(0)))));
   return { users, sha: j.sha };
 }
 async function saveUsers(users, sha, msg){
