@@ -75,6 +75,15 @@
     </table>
     <button id="triggerBtn" class="ghost" style="margin-top:12px">触发立即更新</button>
   </div>
+
+  <div class="card">
+    <div class="sub" style="margin-bottom:10px">中转池状态 <span id="poolChecked" class="small"></span> <button id="poolRefresh" class="ghost" style="float:right;padding:4px 12px">刷新</button></div>
+    <table>
+      <thead><tr><th>状态</th><th>中转</th><th>风格</th><th>码率</th><th>线路</th><th>上次检查</th></tr></thead>
+      <tbody id="poolRows"><tr><td colspan="6" class="small">加载中…</td></tr></tbody>
+    </table>
+    <div class="hint">「在用」表示当前订阅里正在使用的线路（每频道取最快 3 台）。数据每 30 分钟由管线自动探测更新。</div>
+  </div>
 </div>
 
 <script>
@@ -207,9 +216,35 @@ async function trigger(){
 
 function copy(t){ navigator.clipboard.writeText(t).then(()=>msg("已复制订阅链接","ok")); }
 
+async function loadPool(){
+  try{
+    const j = await gh("GET", API+"/contents/nas/data/relays.json");
+    const d = JSON.parse(atob(j.content.replace(/\s/g,"")));
+    document.getElementById("poolChecked").textContent = d.checked ? ("检测于 " + d.checked) : "";
+    const relays = d.relays || [];
+    const rows = relays.map(r=>{
+      const ok = r.ok;
+      const tag = ok ? '<span class="tag ok">正常</span>' : '<span class="tag bad">失效</span>';
+      const use = r.in_use ? '<span class="tag ok">在用</span>' : "—";
+      return `<tr>
+        <td>${tag}</td>
+        <td><code>${r.host||""}</code></td>
+        <td>${r.mode||""}</td>
+        <td>${r.kbps||0} kbps</td>
+        <td>${use}</td>
+        <td>${r.last_check||""}</td>
+      </tr>`;
+    }).join("");
+    document.getElementById("poolRows").innerHTML = rows;
+  }catch(e){
+    document.getElementById("poolRows").innerHTML = '<tr><td colspan="6" class="small">加载失败：' + (e.message||e) + '</td></tr>';
+  }
+}
+
 document.getElementById("saveTk").onclick = ()=>{ localStorage.setItem(LS_KEY, document.getElementById("tk").value.trim()); msg("token 已保存"); };
 document.getElementById("addBtn").onclick = add;
 document.getElementById("refreshBtn").onclick = refresh;
+document.getElementById("poolRefresh").onclick = loadPool;
 document.getElementById("triggerBtn").onclick = trigger;
 document.getElementById("tk").value = token();
 
@@ -228,6 +263,7 @@ if(!savedTheme){ savedTheme = (window.matchMedia && window.matchMedia("(prefers-
 applyTheme(savedTheme);
 
 refresh();
+loadPool();
 </script>
 </body>
 </html>

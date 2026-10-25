@@ -209,9 +209,10 @@ def _probe(host, mode, mcast, secs=5):
 
 
 def build_gd(channels, relays):
-    """返回 (nas_blocks, alive_list)。alive 为空时返回空块（不覆盖旧文件）。"""
+    """探测所有中转，把 ok/kbps/last_check 写回 relays；返回 (nas_blocks, alive_list)。"""
     samples = [channels[0]["mcast"], channels[len(channels) // 2]["mcast"]]
     scored = []
+    now = datetime.now(CST).strftime("%m-%d %H:%M")
     with ThreadPoolExecutor(max_workers=8) as ex:
         futures = {ex.submit(_probe, r["host"], r.get("mode", "udp"), samples[0]): r
                    for r in relays}
@@ -219,16 +220,25 @@ def build_gd(channels, relays):
             r = futures[f]
             b1 = f.result()
             b2 = _probe(r["host"], r.get("mode", "udp"), samples[1])
+            r["last_check"] = now
             if b1 > 20000 and b2 > 20000:
+                r["ok"] = True
+                r["kbps"] = int((b1 + b2) * 8 / (2 * 5) / 1000)
                 scored.append((b1 + b2, r))
+            else:
+                r["ok"] = False
+                r["kbps"] = 0
     scored.sort(key=lambda x: -x[0])
     alive = [r for _b, r in scored][:LINES]
     if not alive:
-        # 美国节点测不通国内 udpxy 时，回退用 relays.json 里最后一次 NAS 判定 ok 的（按 kbps）
+        # 美国节点测不通国内 udpxy 时，回退用 relays.json 里最后一次判定 ok 的（按 kbps）
         fb = sorted([r for r in relays if r.get("ok")], key=lambda r: -r.get("kbps", 0))[:LINES]
         if not fb:
             return [], []
         alive = fb
+    # 标记当前在用的线路
+    for r in relays:
+        r["in_use"] = (r in alive)
     blocks = []
     seen = set()
     for c in channels:
@@ -387,6 +397,11 @@ def main():
         log("  广东 %d 条（%d 台中转）" % (len(gd_blocks), len(alive)))
     else:
         log("  广东中转全部探测失败，保留线上旧 nas.m3u")
+    # 把探测结果写回 relays.json（供后台/状态页查看）
+    pool_state = {"relays": relays, "active_host": alive[0]["host"] if alive else "",
+                  "checked": push_time}
+    files.append(("nas/data/relays.json",
+                  json.dumps(pool_state, ensure_ascii=False, indent=1).encode("utf-8")))
 
     # 4) 用户订阅
     blocks = full_blocks + nl_blocks + gd_blocks
