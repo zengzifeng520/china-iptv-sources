@@ -6,6 +6,13 @@
 <title>订阅用户管理</title>
 <style>
   :root{--bg:#f6f7f9;--card:#fff;--line:#e3e6ea;--txt:#1a1d21;--muted:#7a828e;--acc:#2f6fed;--ok:#1d9e75;--warn:#d85a30;--danger:#d64545}
+  [data-theme="dark"]{--bg:#0f1115;--card:#1a1d24;--line:#2c313a;--txt:#e6e8eb;--muted:#8b93a0;--acc:#5b8cff;--ok:#3dbf8f;--warn:#e08a54;--danger:#e06c6c}
+  [data-theme="dark"] code{background:#262b34}
+  [data-theme="dark"] .tag.ok{background:#16302a;color:#4cd0a0}
+  [data-theme="dark"] .tag.bad{background:#3a1f22;color:#f08a8a}
+  [data-theme="dark"] .msg.ok{background:#16302a;color:#4cd0a0}
+  [data-theme="dark"] .msg.err{background:#3a1f22;color:#f08a8a}
+  [data-theme="dark"] input{background:#262b34;color:#e6e8eb;border-color:#2c313a}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;padding:20px}
   .wrap{max-width:960px;margin:0 auto}
@@ -38,7 +45,7 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>订阅用户管理</h1>
+  <h1>订阅用户管理 <button id="themeBtn" class="ghost" style="float:right;padding:5px 14px">深色</button></h1>
   <div class="sub">添加 / 续期 / 删除订阅用户，限制使用时间。数据保存在仓库 nas/users.json，30 分钟内自动生效（可手动触发立即更新）。</div>
 
   <div class="card">
@@ -205,6 +212,20 @@ document.getElementById("addBtn").onclick = add;
 document.getElementById("refreshBtn").onclick = refresh;
 document.getElementById("triggerBtn").onclick = trigger;
 document.getElementById("tk").value = token();
+
+const THEME_KEY = "iptv_admin_theme";
+function applyTheme(t){
+  document.documentElement.setAttribute("data-theme", t);
+  document.getElementById("themeBtn").textContent = (t==="dark") ? "浅色" : "深色";
+}
+document.getElementById("themeBtn").onclick = ()=>{
+  const cur = document.documentElement.getAttribute("data-theme")==="dark" ? "light" : "dark";
+  localStorage.setItem(THEME_KEY, cur);
+  applyTheme(cur);
+};
+let savedTheme = localStorage.getItem(THEME_KEY);
+if(!savedTheme){ savedTheme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light"; }
+applyTheme(savedTheme);
 
 refresh();
 </script>
