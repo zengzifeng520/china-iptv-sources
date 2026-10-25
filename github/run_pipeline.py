@@ -43,6 +43,7 @@ GROUP_ORDER = [
     "重庆节目", "湖南节目", "港台节目", "四川节目", "北京节目", "江苏节目",
     "中数传媒", "IPTV", "其他频道",
 ]
+PROMO_URL = "https://zengzifeng.ccwu.cc/output/media/promo.mp4"
 TOP_PER_CHANNEL = 20
 LINES = 3
 NL_CAT = {"央视": 0, "卫视": 1, "广东": 2, "深圳": 3, "地区": 4}
@@ -303,7 +304,7 @@ def build_user(blocks, expire, created, push_time, ts=None):
                    f'group-title="订阅信息 到期 {expire}",有效期 {created} ~ {expire}（剩余 {days} 天）')
     push_extinf = (f'#EXTINF:-1 tvg-id="推送" tvg-name="推送" '
                    f'group-title="推送时间 {push_time}",{push_time} 推送')
-    allb = [(info_extinf, info_url), (push_extinf, info_url)] + list(blocks)
+    allb = [(info_extinf, PROMO_URL), (push_extinf, PROMO_URL)] + list(blocks)
     # 丢弃「更新时间」分组
     allb = [b for b in allb if 'group-title="更新时间' not in b[0]]
     # 网络直播组内排序
