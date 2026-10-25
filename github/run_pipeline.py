@@ -71,6 +71,13 @@ def natkey(s):
     return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", s)]
 
 
+def extinf(group, name):
+    """统一生成 EXTINF 行，自动带 tvg-id/tvg-name/tvg-logo（便于 EPG 匹配）。"""
+    nm = (name or "").strip()
+    logo = "https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/%s.png" % urllib.parse.quote(nm, safe="")
+    return f'#EXTINF:-1 tvg-id="{nm}" tvg-name="{nm}" tvg-logo="{logo}" group-title="{group}",{nm}'
+
+
 def name_of(extinf):
     return (extinf or "").rsplit(",", 1)[-1].strip()
 
@@ -113,7 +120,7 @@ def parse_netlive_txt(text):
         name = name.strip()
         url = url.strip()
         if name and url.startswith("http"):
-            out.append((f'#EXTINF:-1 group-title="网络直播",{name}', url))
+            out.append((extinf("网络直播", name), url))
     return out
 
 
@@ -173,7 +180,7 @@ def reorganize_netlive(blocks):
     out = []
     for nm in order:
         for u in merged[nm]:
-            out.append((f'#EXTINF:-1 group-title="网络直播",{nm}', u))
+            out.append((extinf("网络直播", nm), u))
     return rest + out
 
 
@@ -249,7 +256,7 @@ def build_gd(channels, relays):
             continue
         seen.add(mc)
         for r in alive:
-            blocks.append((f'#EXTINF:-1 group-title="电信组播",{c.get("name")}',
+            blocks.append((extinf("电信组播", c.get("name")),
                            "http://%s/%s/%s" % (r["host"], r.get("mode", "udp"), mc)))
     return blocks, alive
 
