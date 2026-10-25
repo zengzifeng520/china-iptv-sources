@@ -1,0 +1,67 @@
+name: 每小时巡检
+
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hourly-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: 安装依赖
+      run: pip install aiohttp
+    - name: 恢复失败计数
+      uses: actions/cache/restore@v4
+      continue-on-error: true
+      with:
+        path: crawl/checked/state.json
+        key: check-state-${{ github.run_id }}
+        restore-keys: |
+          check-state-
+    - name: 探测并剔除失效线路
+      env:
+        CHECK_TIMEOUT: '6'
+        CHECK_CONCURRENCY: '150'
+        CHECK_ATTEMPTS: '2'
+        LENIENT_UDPXY: '1'
+        MAX_FAILS: '2'
+        MIN_ALIVE_RATIO: '0.3'
+        PYTHONIOENCODING: 'utf-8'
+      run: cd crawl && python check_live.py
+    - name: 保存失败计数
+      if: always()
+      uses: actions/cache/save@v4
+      continue-on-error: true
+      with:
+        path: crawl/checked/state.json
+        key: check-state-${{ github.run_id }}
+    - name: 提交巡检结果
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add -f crawl/checked/live.m3u crawl/checked/live.txt crawl/checked/stats.json
+        if git diff --staged --quiet; then echo "无变化，跳过提交"; exit 0; fi
+        git commit -m "Hourly check: prune dead sources"
+        for attempt in 1 2 3 4 5; do
+          if git pull --rebase --autostash -X theirs origin main && git push origin HEAD:main; then
+            echo "推送成功"; exit 0
+          fi
+          git rebase --abort 2>/dev/null || true
+          sleep 5
+        done
+        echo "::error::连续 5 次推送失败"; exit 1
+    env:
+      TZ: Asia/Shanghai

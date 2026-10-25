@@ -404,10 +404,18 @@ def main():
     push_time = datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")
     files = []
 
-    # 1) 全量组播：IPTVZB 巡检 → 每频道≤20 → top20.m3u
-    log("拉取 IPTVZB 巡检列表…")
+    # 1) 全量组播：优先读仓库本地 crawl/checked/live.m3u，失败回退远程 zzf.new.tg
+    log("拉取全量组播巡检列表…")
     try:
-        checked = parse_m3u(fetch(SRC_CHECKED))
+        local_checked = os.path.join(ROOT, "crawl", "checked", "live.m3u")
+        checked_text = ""
+        if os.path.exists(local_checked) and os.path.getsize(local_checked) > 100:
+            checked_text = open(local_checked, encoding="utf-8", errors="ignore").read()
+            log("  使用本地 crawl/checked/live.m3u")
+        if not checked_text.strip():
+            checked_text = fetch(SRC_CHECKED)
+            log("  本地为空，回退远程 %s" % SRC_CHECKED)
+        checked = parse_m3u(checked_text)
         full_blocks = trim_top(checked, TOP_PER_CHANNEL)
         top20 = "#EXTM3U\n# 每频道最多 %d 条 %s\n" % (TOP_PER_CHANNEL, push_time)
         top20 += "\n".join(e + "\n" + u for e, u in full_blocks) + "\n"

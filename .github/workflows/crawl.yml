@@ -1,0 +1,54 @@
+name: 抓取组播源
+
+on:
+  schedule:
+    - cron: '30 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: multicast-crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: 安装依赖
+      run: |
+        sudo apt-get install -y ffmpeg
+        pip install requests aiohttp
+    - name: 抓取组播源并检测
+      run: cd crawl && python main.py
+    - name: 校验输出
+      run: |
+        after=$(wc -l < crawl/live.txt 2>/dev/null || echo 0)
+        echo "crawl/live.txt: $after 行"
+        if [ "$after" -lt 50 ]; then
+          echo "::error::生成结果异常（$after 行），本轮不发布"
+          exit 1
+        fi
+    - name: 提交
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add -f crawl/live.m3u crawl/live.txt crawl/function.log
+        if git diff --staged --quiet; then echo "无变化，跳过提交"; exit 0; fi
+        git commit -m "Auto-update multicast playlists"
+        for attempt in 1 2 3 4 5; do
+          if git pull --rebase --autostash -X theirs origin main && git push origin HEAD:main; then
+            echo "推送成功"; exit 0
+          fi
+          git rebase --abort 2>/dev/null || true
+          sleep 5
+        done
+        echo "::error::连续 5 次推送失败"; exit 1
+    env:
+      TZ: Asia/Shanghai
