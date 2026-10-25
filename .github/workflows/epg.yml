@@ -1,0 +1,48 @@
+name: 同步 EPG
+
+on:
+  schedule:
+    - cron: '45 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: epg-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 拉取 IPTV 仓库生成的 EPG
+        run: |
+          curl -sL --max-time 180 -o output/epg.new.xml \
+            "https://raw.githubusercontent.com/zengzifeng520/IPTV/gh-pages/e.xml"
+          size=$(wc -c < output/epg.new.xml 2>/dev/null || echo 0)
+          echo "下载 EPG: $size 字节"
+          if [ "$size" -lt 100000 ]; then
+            echo "::error::EPG 异常（$size 字节），本轮不更新"
+            exit 1
+          fi
+          head -c 200 output/epg.new.xml | grep -q "<?xml" || { echo "::error::不是有效 XML"; exit 1; }
+          mv output/epg.new.xml output/epg.xml
+      - name: 提交
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -f output/epg.xml
+          if git diff --staged --quiet; then echo "EPG 无变化，跳过提交"; exit 0; fi
+          git commit -m "Auto-sync EPG from IPTV repo"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase --autostash -X theirs origin main && git push origin HEAD:main; then
+              echo "推送成功（第 $attempt 次）"; exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep 5
+          done
+          echo "::error::连续 5 次推送失败"; exit 1
+    env:
+      TZ: Asia/Shanghai
