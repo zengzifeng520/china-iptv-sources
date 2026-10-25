@@ -336,16 +336,18 @@ def cleanup_orphans(token, users, keep_tokens):
         listing = _gh("GET", "%s/contents/output/users" % API, token)
     except Exception:
         return 0
-    removed = 0
+    EMPTY = "#EXTM3U\n# 订阅已过期或已被删除\n".encode("utf-8")
+    n = 0
     for it in listing:
         fname = it.get("name", "")
         path = "output/users/" + fname
         if fname.endswith(".m3u") and path not in keep:
-            _gh("DELETE", "%s/contents/%s" % (API, urllib.parse.quote(path)), token,
-                {"message": "chore: 删除孤儿订阅 " + fname, "sha": it.get("sha")})
-            removed += 1
-            log("  [清理] 删除孤儿 " + fname)
-    return removed
+            _gh("PUT", "%s/contents/%s" % (API, urllib.parse.quote(path)), token,
+                {"message": "chore: 清空已删除用户订阅 " + fname,
+                 "content": base64.b64encode(EMPTY).decode("ascii"), "sha": it.get("sha")})
+            n += 1
+            log("  [清理] 清空 " + fname)
+    return n
 
 
 def push_batch(token, files, message="chore: 更新订阅"):
@@ -450,6 +452,13 @@ def main():
                 continue
             expire = info.get("expire", "")
             created = info.get("created", "")
+            ts_val = info.get("ts")
+            now_ts = int(time.time())
+            if ts_val and int(ts_val) < now_ts:
+                empty = "#EXTM3U\n# 订阅已过期，请联系管理员续期\n"
+                files.append(("output/users/u_%s.m3u" % tok, empty.encode("utf-8")))
+                log("  [%s] 已过期 -> 订阅清空" % name)
+                continue
             text = build_user(blocks, expire, created, push_time, info.get("ts"))
             files.append(("output/users/u_%s.m3u" % tok, text.encode("utf-8")))
             log("  [%s] %d 条" % (name, text.count("#EXTINF")))
