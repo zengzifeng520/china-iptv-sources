@@ -3,6 +3,9 @@ name: 更新订阅
 on:
   schedule:
     - cron: "20,50 * * * *"
+  push:
+    paths:
+      - "nas/users.json"
   workflow_dispatch:
 
 permissions:
