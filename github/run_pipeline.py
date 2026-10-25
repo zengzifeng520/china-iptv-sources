@@ -291,6 +291,23 @@ def build_user(blocks, expire, created, push_time, ts=None):
     return "\n".join(out) + "\n"
 
 
+def build_shared(blocks):
+    """共享订阅（网关 UPSTREAM 用）：三源合并、排序、封顶，但不带每用户的订阅信息头。"""
+    allb = [b for b in blocks if 'group-title="更新时间' not in b[0]]
+    allb = reorder_netlive_run(allb)
+    allb.sort(key=lambda b: (rank_of(GROUP_RE.search(b[0]).group(1) if GROUP_RE.search(b[0]) else ""),
+                             natkey(name_of(b[0]))))
+    cnt, out = {}, ["#EXTM3U url-tvg=\"https://zengzifeng.ccwu.cc/output/epg.xml\""]
+    for e, u in allb:
+        nm = name_of(e)
+        if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
+            continue
+        cnt[nm] = cnt.get(nm, 0) + 1
+        out.append(e)
+        out.append(u)
+    return "\n".join(out) + "\n"
+
+
 # ---------- GitHub 推送 ----------
 def _git_blob_sha(data):
     h = hashlib.sha1()
@@ -444,6 +461,11 @@ def main():
             cleanup_orphans(token, users, keep_tokens)
         except Exception as exc:
             log("  孤儿清理跳过: %s" % exc)
+
+    # 5.5) 共享订阅（网关 UPSTREAM）
+    if blocks:
+        files.append(("output/gateway.m3u", build_shared(blocks).encode("utf-8")))
+        log("  共享订阅 gateway.m3u 已生成")
 
     # 6) 推送
     n = push_batch(token, files)
