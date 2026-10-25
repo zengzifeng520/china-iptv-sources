@@ -1,0 +1,39 @@
+{
+  "_说明": "本配置供 push_nas.py 使用。直播源文件由你维护在 NAS 上，本工具负责把它生成订阅并推送到 GitHub。",
+  "nas": {
+    "_示例": "把下面的 source_file 改成你 NAS 上直播源文件的真实路径（m3u 或 txt 均可）。",
+    "source_file": "/vol1/1000/docker/iptv-manager/data/uploads",
+    "_定时": "在 NAS 上执行 crontab -e 添加： 0 0,5,8,11,14,17,20 * * * cd /vol1/1000/docker/china-iptv-sources && python3 push_nas.py --latest-dir /vol1/1000/docker/iptv-manager/data/uploads --validate --sync-epg --sync-logo >> push.log 2>&1（每天 5/8/11/14/17/20/24 点七轮：更新+检测+立即推送，cron 中 24 点写作 0 点）"
+  },
+  "validator": {
+    "timeout": 8,
+    "workers": 20,
+    "retries": 1
+  },
+  "output_dir": "output",
+  "base_url": "https://zengzifeng.ccwu.cc",
+  "epg_source": "https://ghproxy.net/https://raw.githubusercontent.com/alantang1977/iptv_api/main/output/epg.xml",
+  "group_icons": {
+    "_说明": "分组图标文件名使用英文/拼音（GitHub Pages 对中文文件名访问不稳定，会 404）。key 为订阅中的分组名，value 为 output/logo/groups/ 下的图标文件名（不含 .png）。",
+    "卫视频道": "weishi",
+    "其他": "qita",
+    "央视频道": "yangshi",
+    "中数传媒": "zhongshu",
+    "地方频道": "difang",
+    "4K节目": "4k",
+    "广东频道": "guangdong",
+    "上海节目": "shanghai",
+    "浙江节目": "zhejiang",
+    "重庆节目": "chongqing",
+    "湖南节目": "hunan",
+    "IPTV": "iptv",
+    "港台节目": "gangtai",
+    "四川节目": "sichuan",
+    "北京节目": "beijing",
+    "江苏节目": "jiangsu",
+    "福建节目": "fujian",
+    "山东节目": "shandong",
+    "系统": "xitong",
+    "电信组播": "dianxin"
+  }
+}

@@ -1,0 +1,13 @@
+# 中转候选源清单（每行一个 URL，# 开头为注释）
+# harvest_relays.py 会逐个拉取，提取其中服务 239.77.* / 239.253.43.* 的中转主机，
+# 再用服务自己的频道实测，能出流才收进中转池。
+# 加新源直接往下追加即可，不用改代码。
+
+# --- 你自己的仓库（云端巡检产物，最新）---
+https://zzf.new.tg/checked/live.m3u
+https://zzf.new.tg/guangdong.txt
+
+# --- maowei1125/spider-iptv 的广东切片（静态快照，更新到 2024-07，命中率低但零成本）---
+https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/multicast/%E5%B9%BF%E4%B8%9C-%E7%94%B5%E4%BF%A1-239.77.0.txt
+https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/multicast/%E5%B9%BF%E4%B8%9C-%E7%94%B5%E4%BF%A1-239.77.1.txt
+https://raw.githubusercontent.com/maowei1125/spider-iptv/main/source/multicast/%E5%B9%BF%E4%B8%9C-%E8%81%94%E9%80%9A-239.77.1.txt

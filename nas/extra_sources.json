@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "name": "广东电信（本地中转池）",
+      "url": "https://zengzifeng.ccwu.cc/output/nas.m3u",
+      "group": "电信组播"
+    },
+    {
+      "name": "全量组播（每频道≤20条）",
+      "group": "全量组播",
+      "url": "https://zengzifeng.ccwu.cc/output/top20.m3u",
+      "enabled": true
+    },
+    {
+      "name": "网络直播",
+      "group": "网络直播",
+      "url": "https://mpimg.cn/down.php/8a7c70ba5d709b2876b54c63d0acda08.txt",
+      "enabled": true
+    }
+  ]
+}
