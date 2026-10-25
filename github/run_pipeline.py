@@ -243,12 +243,16 @@ def build_gd(channels, relays):
 
 
 # ---------- 生成 ----------
-def build_user(blocks, expire, created, push_time):
+def build_user(blocks, expire, created, push_time, ts=None):
     info_url = next((u for _e, u in blocks if u.startswith("http")), "https://zengzifeng.ccwu.cc")
     now = datetime.now(CST)
     try:
-        exp = datetime.strptime(expire, "%Y-%m-%d").replace(tzinfo=CST)
-    except ValueError:
+        if ts:
+            exp = datetime.fromtimestamp(int(ts), CST)
+        else:
+            exp = datetime.strptime(str(expire).replace("年", "-").replace("月", "-").replace("日", ""),
+                                    "%Y-%m-%d").replace(tzinfo=CST)
+    except Exception:
         exp = now + timedelta(days=365)
     days = max(0, (exp - now).days)
     info_extinf = (f'#EXTINF:-1 tvg-id="订阅" tvg-name="订阅" '
@@ -393,7 +397,7 @@ def main():
                 continue
             expire = info.get("expire", "")
             created = info.get("created", "")
-            text = build_user(blocks, expire, created, push_time)
+            text = build_user(blocks, expire, created, push_time, info.get("ts"))
             files.append(("output/users/u_%s.m3u" % tok, text.encode("utf-8")))
             log("  [%s] %d 条" % (name, text.count("#EXTINF")))
 
