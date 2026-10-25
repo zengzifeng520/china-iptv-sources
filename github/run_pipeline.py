@@ -312,6 +312,25 @@ def _gh(method, url, token, payload=None, timeout=120):
     return json.loads(raw) if raw.strip() else {}
 
 
+def cleanup_orphans(token, users, keep_tokens):
+    """删除 output/users 里已不存在于 users.json 的孤儿订阅文件。"""
+    keep = {("output/users/u_%s.m3u" % tok) for tok in keep_tokens}
+    try:
+        listing = _gh("GET", "%s/contents/output/users" % API, token)
+    except Exception:
+        return 0
+    removed = 0
+    for it in listing:
+        fname = it.get("name", "")
+        path = "output/users/" + fname
+        if fname.endswith(".m3u") and path not in keep:
+            _gh("DELETE", "%s/contents/%s" % (API, urllib.parse.quote(path)), token,
+                {"message": "chore: 删除孤儿订阅 " + fname, "sha": it.get("sha")})
+            removed += 1
+            log("  [清理] 删除孤儿 " + fname)
+    return removed
+
+
 def push_batch(token, files, message="chore: 更新订阅"):
     """files: [(path, bytes)] 合并成一次 commit，内容没变就不提交。"""
     if not files:
@@ -418,7 +437,15 @@ def main():
             files.append(("output/users/u_%s.m3u" % tok, text.encode("utf-8")))
             log("  [%s] %d 条" % (name, text.count("#EXTINF")))
 
-    # 5) 推送
+    # 5) 清理孤儿订阅（删掉的用户）
+    keep_tokens = {u["token"] for u in users.values() if u.get("token")}
+    if keep_tokens and gd_blocks:
+        try:
+            cleanup_orphans(token, users, keep_tokens)
+        except Exception as exc:
+            log("  孤儿清理跳过: %s" % exc)
+
+    # 6) 推送
     n = push_batch(token, files)
     log("推送完成：%d 个文件有变化" % n)
     return 0
