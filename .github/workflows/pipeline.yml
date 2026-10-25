@@ -16,5 +16,5 @@ jobs:
           python-version: "3.12"
       - name: 运行订阅管线
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: python github/run_pipeline.py
