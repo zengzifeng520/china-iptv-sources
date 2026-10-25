@@ -1,0 +1,20 @@
+name: 更新订阅（备用，NAS 故障时手动触发）
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 运行订阅管线
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: python github/run_pipeline.py

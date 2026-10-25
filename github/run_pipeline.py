@@ -1,0 +1,403 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""GitHub Actions 版订阅管线 —— 替代 NAS 上的 sync_users + extra_source + local_sub。
+
+每轮执行：
+  1. 拉 IPTVZB 巡检列表 → 每频道≤20 裁剪 → output/top20.m3u
+  2. 探测广东中转池 → 选能连通的最快 N 台 → output/nas.m3u（每频道 N 条）
+  3. 合并三源（全量组播 + 网络直播 + 广东电信）→ 分组排序/网络直播重组/每频道封顶
+     → 7 个用户订阅 output/users/u_*.m3u
+  4. 批量提交（一次 commit 推全部文件，减少 Pages 构建）
+
+环境变量：
+  GH_TOKEN  GitHub token（Actions secrets 注入，或本地运行时读取）
+"""
+import base64
+import hashlib
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+import urllib.parse
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta, timezone
+
+UA = "Mozilla/5.0 (compatible; github-pipeline/1.0)"
+CST = timezone(timedelta(hours=8))
+BASE = os.path.dirname(os.path.abspath(__file__))   # .../github
+ROOT = os.path.dirname(BASE)                          # repo root
+OUT = os.path.join(ROOT, "output")
+
+REPO = "zengzifeng520/china-iptv-sources"
+API = "https://api.github.com/repos/" + REPO
+
+SRC_CHECKED = "https://zzf.new.tg/checked/live.m3u"
+SRC_NETLIVE = "https://mpimg.cn/down.php/8a7c70ba5d709b2876b54c63d0acda08.txt"
+
+GROUP_ORDER = [
+    "订阅信息", "推送时间", "电信组播", "网络直播", "央视频道", "卫视频道",
+    "地区频道", "4K节目", "广东频道", "深圳频道", "上海节目", "浙江节目",
+    "重庆节目", "湖南节目", "港台节目", "四川节目", "北京节目", "江苏节目",
+    "中数传媒", "IPTV", "其他频道",
+]
+TOP_PER_CHANNEL = 20
+LINES = 3
+NL_CAT = {"央视": 0, "卫视": 1, "广东": 2, "深圳": 3, "地区": 4}
+GROUP_RE = re.compile(r'group-title="([^"]*)"')
+HOST_RE = re.compile(r"https?://([^/\s]+)/(rtp|udp)/", re.I)
+
+
+def log(msg):
+    print(msg, flush=True)
+
+
+def fetch(url, timeout=90):
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", "ignore")
+
+
+def load_json(path, default):
+    try:
+        return json.load(open(path, encoding="utf-8"))
+    except Exception:
+        return default
+
+
+def natkey(s):
+    return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", s)]
+
+
+def name_of(extinf):
+    return (extinf or "").rsplit(",", 1)[-1].strip()
+
+
+def rank_of(group):
+    g = group.strip()
+    for i, k in enumerate(GROUP_ORDER):
+        if g == k or g.startswith(k):
+            return i
+    return len(GROUP_ORDER)
+
+
+# ---------- 解析 ----------
+def parse_m3u(text):
+    """[(extinf, url)]"""
+    out, pend = [], None
+    for ln in text.replace("\r", "").split("\n"):
+        s = ln.strip()
+        if not s:
+            continue
+        if s.startswith("#EXTINF"):
+            pend = s
+            continue
+        if s.startswith("#") or not s.startswith("http"):
+            continue
+        if pend:
+            out.append((pend, s))
+            pend = None
+    return out
+
+
+def parse_netlive_txt(text):
+    """网络直播源是 txt：name,url，按行；忽略 #genre# 分组行。"""
+    out = []
+    for ln in text.replace("\r", "").split("\n"):
+        s = ln.strip()
+        if not s or s.startswith("#") or "," not in s:
+            continue
+        name, _, url = s.partition(",")
+        name = name.strip()
+        url = url.strip()
+        if name and url.startswith("http"):
+            out.append((f'#EXTINF:-1 group-title="网络直播",{name}', url))
+    return out
+
+
+def trim_top(blocks, n):
+    """每频道最多 n 条（保序）。"""
+    seen, out = {}, []
+    for e, u in blocks:
+        nm = name_of(e)
+        if seen.get(nm, 0) >= n:
+            continue
+        seen[nm] = seen.get(nm, 0) + 1
+        out.append((e, u))
+    return out
+
+
+# ---------- 网络直播重组 ----------
+def _nl_cat(name):
+    u = name.upper()
+    if "CCTV" in u:
+        return "央视"
+    if "深圳" in name:
+        return "深圳"
+    if "广东" in name or name.startswith("珠江") or name.startswith("南方"):
+        return "广东"
+    if "卫视" in name:
+        return "卫视"
+    return "地区"
+
+
+def _norm_name(name):
+    n = name.strip()
+    for op, cl in (("(", ")"), ("（", "）"), ("【", "】")):
+        if n.endswith(cl):
+            i = n.rfind(op)
+            if i > 0:
+                n = n[:i].strip()
+    return n
+
+
+def reorganize_netlive(blocks):
+    """网络直播：同名（去后缀）归并成多线路，组名保持「网络直播」。"""
+    net, rest = [], []
+    for e, u in blocks:
+        (net if 'group-title="网络直播"' in e else rest).append((e, u))
+    if not net:
+        return blocks
+    merged, order = {}, []
+    for e, u in net:
+        nm = _norm_name(name_of(e))
+        if not nm:
+            rest.append((e, u))
+            continue
+        if nm not in merged:
+            merged[nm] = []
+            order.append(nm)
+        merged[nm].append(u)
+    out = []
+    for nm in order:
+        for u in merged[nm]:
+            out.append((f'#EXTINF:-1 group-title="网络直播",{nm}', u))
+    return rest + out
+
+
+def reorder_netlive_run(blocks):
+    """把连续的「网络直播」块按 央视→卫视→广东→深圳→地区（再按名字）重排。"""
+    out, i, n = [], 0, len(blocks)
+    while i < n:
+        if 'group-title="网络直播"' in blocks[i][0]:
+            j = i
+            while j < n and 'group-title="网络直播"' in blocks[j][0]:
+                j += 1
+            run = sorted(blocks[i:j],
+                         key=lambda p: (NL_CAT.get(_nl_cat(_norm_name(name_of(p[0]))), 9),
+                                        natkey(_norm_name(name_of(p[0])))))
+            out += run
+            i = j
+        else:
+            out.append(blocks[i])
+            i += 1
+    return out
+
+
+# ---------- 广东中转探测 ----------
+def _probe(host, mode, mcast, secs=5):
+    url = "http://%s/%s/%s" % (host, mode, mcast)
+    try:
+        r = subprocess.run(["curl", "-s", "-o", os.devnull, "--max-time", str(secs),
+                            "-w", "%{size_download}", "-A", UA, url],
+                           capture_output=True, text=True, timeout=secs + 6)
+        return int(r.stdout.strip() or 0)
+    except Exception:
+        return 0
+
+
+def build_gd(channels, relays):
+    """返回 (nas_blocks, alive_list)。alive 为空时返回空块（不覆盖旧文件）。"""
+    samples = [channels[0]["mcast"], channels[len(channels) // 2]["mcast"]]
+    scored = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        futures = {ex.submit(_probe, r["host"], r.get("mode", "udp"), samples[0]): r
+                   for r in relays}
+        for f in futures:
+            r = futures[f]
+            b1 = f.result()
+            b2 = _probe(r["host"], r.get("mode", "udp"), samples[1])
+            if b1 > 20000 and b2 > 20000:
+                scored.append((b1 + b2, r))
+    scored.sort(key=lambda x: -x[0])
+    alive = [r for _b, r in scored][:LINES]
+    if not alive:
+        return [], []
+    blocks = []
+    seen = set()
+    for c in channels:
+        mc = c.get("mcast")
+        if not mc or mc in seen:
+            continue
+        seen.add(mc)
+        for r in alive:
+            blocks.append((f'#EXTINF:-1 group-title="电信组播",{c.get("name")}',
+                           "http://%s/%s/%s" % (r["host"], r.get("mode", "udp"), mc)))
+    return blocks, alive
+
+
+# ---------- 生成 ----------
+def build_user(blocks, expire, created, push_time):
+    info_url = next((u for _e, u in blocks if u.startswith("http")), "https://zengzifeng.ccwu.cc")
+    now = datetime.now(CST)
+    try:
+        exp = datetime.strptime(expire, "%Y-%m-%d").replace(tzinfo=CST)
+    except ValueError:
+        exp = now + timedelta(days=365)
+    days = max(0, (exp - now).days)
+    info_extinf = (f'#EXTINF:-1 tvg-id="订阅" tvg-name="订阅" '
+                   f'group-title="订阅信息 到期 {expire}",有效期 {created} ~ {expire}（剩余 {days} 天）')
+    push_extinf = (f'#EXTINF:-1 tvg-id="推送" tvg-name="推送" '
+                   f'group-title="推送时间 {push_time}",{push_time} 推送')
+    allb = [(info_extinf, info_url), (push_extinf, info_url)] + list(blocks)
+    # 丢弃「更新时间」分组
+    allb = [b for b in allb if 'group-title="更新时间' not in b[0]]
+    # 网络直播组内排序
+    allb = reorder_netlive_run(allb)
+    # 全局排序：分组顺序 + 组内自然序
+    allb.sort(key=lambda b: (rank_of(GROUP_RE.search(b[0]).group(1) if GROUP_RE.search(b[0]) else ""),
+                             natkey(name_of(b[0]))))
+    # 每频道封顶
+    cnt, out = {}, ["#EXTM3U"]
+    for e, u in allb:
+        nm = name_of(e)
+        if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
+            continue
+        cnt[nm] = cnt.get(nm, 0) + 1
+        out.append(e)
+        out.append(u)
+    return "\n".join(out) + "\n"
+
+
+# ---------- GitHub 推送 ----------
+def _git_blob_sha(data):
+    h = hashlib.sha1()
+    h.update(b"blob %d\0" % len(data))
+    h.update(data)
+    return h.hexdigest()
+
+
+def _gh(method, url, token, payload=None, timeout=120):
+    body = json.dumps(payload).encode() if payload is not None else None
+    req = urllib.request.Request(url, data=body, method=method, headers={
+        "Authorization": "Bearer " + token,
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "github-pipeline",
+        "Content-Type": "application/json",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        raw = r.read().decode()
+    return json.loads(raw) if raw.strip() else {}
+
+
+def push_batch(token, files, message="chore: 更新订阅"):
+    """files: [(path, bytes)] 合并成一次 commit，内容没变就不提交。"""
+    if not files:
+        return 0
+    for attempt in range(3):
+        try:
+            ref = _gh("GET", "%s/git/ref/heads/main" % API, token)
+            base = ref["object"]["sha"]
+            base_tree = _gh("GET", "%s/git/commits/%s" % (API, base), token)["tree"]["sha"]
+            existing = {}
+            d = os.path.dirname(files[0][0])
+            try:
+                for it in _gh("GET", "%s/contents/%s" % (API, urllib.parse.quote(d, safe="/")), token):
+                    existing[it.get("name")] = it.get("sha")
+            except Exception:
+                pass
+            entries = []
+            for path, data in files:
+                if existing.get(os.path.basename(path)) == _git_blob_sha(data):
+                    continue
+                blob = _gh("POST", "%s/git/blobs" % API, token,
+                           {"content": base64.b64encode(data).decode("ascii"), "encoding": "base64"})
+                entries.append({"path": path, "mode": "100644", "type": "blob", "sha": blob["sha"]})
+            if not entries:
+                return 0
+            tree = _gh("POST", "%s/git/trees" % API, token,
+                       {"base_tree": base_tree, "tree": entries})
+            commit = _gh("POST", "%s/git/commits" % API, token,
+                         {"message": message, "tree": tree["sha"], "parents": [base]})
+            _gh("PATCH", "%s/git/refs/heads/main" % API, token, {"sha": commit["sha"]})
+            return len(entries)
+        except Exception as exc:
+            log("  推送第 %d 次失败: %s" % (attempt + 1, exc))
+            if attempt == 2:
+                raise
+            time.sleep(3)
+    return 0
+
+
+# ---------- 主流程 ----------
+def main():
+    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+    if not token:
+        log("缺少 GH_TOKEN")
+        return 1
+
+    users = load_json(os.path.join(BASE, "users.json"), {})
+    relays = load_json(os.path.join(BASE, "relays.json"), {}).get("relays", [])
+    channels = load_json(os.path.join(BASE, "channels_core.json"), [])
+    channels = [c for c in channels if str(c.get("name", "")).strip() != "0"]
+
+    push_time = datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")
+    files = []
+
+    # 1) 全量组播：IPTVZB 巡检 → 每频道≤20 → top20.m3u
+    log("拉取 IPTVZB 巡检列表…")
+    try:
+        checked = parse_m3u(fetch(SRC_CHECKED))
+        full_blocks = trim_top(checked, TOP_PER_CHANNEL)
+        top20 = "#EXTM3U\n# 每频道最多 %d 条 %s\n" % (TOP_PER_CHANNEL, push_time)
+        top20 += "\n".join(e + "\n" + u for e, u in full_blocks) + "\n"
+        files.append(("output/top20.m3u", top20.encode("utf-8")))
+        log("  全量组播 %d 条" % len(full_blocks))
+    except Exception as exc:
+        log("  全量组播拉取失败: %s" % exc)
+        full_blocks = []
+
+    # 2) 网络直播
+    log("拉取网络直播…")
+    try:
+        nl_blocks = parse_netlive_txt(fetch(SRC_NETLIVE))
+        nl_blocks = reorganize_netlive(nl_blocks)
+        log("  网络直播 %d 条" % len(nl_blocks))
+    except Exception as exc:
+        log("  网络直播拉取失败: %s" % exc)
+        nl_blocks = []
+
+    # 3) 广东电信：探测中转 → 最快 N 台 → nas.m3u
+    log("探测广东中转池（%d 台）…" % len(relays))
+    gd_blocks, alive = build_gd(channels, relays)
+    if gd_blocks:
+        nas = "#EXTM3U\n# 本地订阅 %s 中转 %s\n" % (push_time, alive[0]["host"])
+        nas += "\n".join(e + "\n" + u for e, u in gd_blocks) + "\n"
+        files.append(("output/nas.m3u", nas.encode("utf-8")))
+        log("  广东 %d 条（%d 台中转）" % (len(gd_blocks), len(alive)))
+    else:
+        log("  广东中转全部探测失败，保留线上旧 nas.m3u")
+
+    # 4) 用户订阅
+    blocks = full_blocks + nl_blocks + gd_blocks
+    if blocks:
+        for name, info in sorted(users.items()):
+            tok = info.get("token")
+            if not tok:
+                continue
+            expire = info.get("expire", "")
+            created = info.get("created", "")
+            text = build_user(blocks, expire, created, push_time)
+            files.append(("output/users/u_%s.m3u" % tok, text.encode("utf-8")))
+            log("  [%s] %d 条" % (name, text.count("#EXTINF")))
+
+    # 5) 推送
+    n = push_batch(token, files)
+    log("推送完成：%d 个文件有变化" % n)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
