@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>订阅用户管理</title>
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--line:#e3e6ea;--txt:#1a1d21;--muted:#7a828e;--acc:#2f6fed;--ok:#1d9e75;--warn:#d85a30;--danger:#d64545}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;padding:20px}
+  .wrap{max-width:960px;margin:0 auto}
+  h1{font-size:20px;font-weight:600;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+  input[type=password],input[type=text],input[type=date]{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+  input:focus{outline:none;border-color:var(--acc)}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .row>*{flex:1;min-width:140px}
+  button{background:var(--acc);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:14px;cursor:pointer}
+  button:hover{opacity:.92}
+  button.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+  button.danger{background:transparent;color:var(--danger);border:1px solid var(--danger)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+  th{color:var(--muted);font-weight:500;font-size:12px}
+  .tag{display:inline-block;padding:1px 8px;border-radius:20px;font-size:12px}
+  .tag.ok{background:#e6f6f0;color:var(--ok)}
+  .tag.bad{background:#fdeaea;color:var(--danger)}
+  code{background:#f1f3f5;padding:1px 6px;border-radius:5px;font-size:12px}
+  .link{color:var(--acc);cursor:pointer;word-break:break-all}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px}
+  .msg{padding:9px 12px;border-radius:8px;font-size:13px;margin:8px 0;display:none}
+  .msg.ok{background:#e6f6f0;color:var(--ok);display:block}
+  .msg.err{background:#fdeaea;color:var(--danger);display:block}
+  .small{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>订阅用户管理</h1>
+  <div class="sub">添加 / 续期 / 删除订阅用户，限制使用时间。数据保存在仓库 nas/users.json，30 分钟内自动生效（可手动触发立即更新）。</div>
+
+  <div class="card">
+    <label for="tk">GitHub Token（仅存你本浏览器，用于读写仓库）</label>
+    <div class="row">
+      <input type="password" id="tk" placeholder="粘贴你的 GitHub token（需要仓库读写权限）" style="flex:4">
+      <button id="saveTk" style="flex:1">保存</button>
+    </div>
+    <div class="hint">token 只保存在你的浏览器 localStorage，不会上传到任何服务器。可用你 D:\token.txt 里的那个 ghp_ 开头 token。</div>
+  </div>
+
+  <div class="card">
+    <div class="sub" style="margin-bottom:10px">添加用户</div>
+    <div class="row">
+      <div><label>用户名</label><input type="text" id="newName" placeholder="如：张三"></div>
+      <div><label>到期日期</label><input type="date" id="newExpire"></div>
+      <div style="flex:0"><label>&nbsp;</label><button id="addBtn">添加用户</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sub" style="margin-bottom:10px">用户列表 <button id="refreshBtn" class="ghost" style="float:right;padding:4px 12px">刷新</button></div>
+    <div id="msg" class="msg"></div>
+    <table>
+      <thead><tr><th>用户名</th><th>Token</th><th>到期</th><th>剩余</th><th>订阅链接</th><th>操作</th></tr></thead>
+      <tbody id="rows"><tr><td colspan="6" class="small">加载中…</td></tr></tbody>
+    </table>
+    <button id="triggerBtn" class="ghost" style="margin-top:12px">触发立即更新</button>
+  </div>
+</div>
+
+<script>
+const REPO = "zengzifeng520/china-iptv-sources";
+const PATH = "nas/users.json";
+const API = "https://api.github.com/repos/" + REPO;
+const LS_KEY = "iptv_admin_token";
+
+function token(){ return localStorage.getItem(LS_KEY) || ""; }
+function msg(t, cls){ const m = document.getElementById("msg"); m.textContent = t; m.className = "msg " + (cls||"ok"); }
+function hex16(){
+  const a = new Uint8Array(8); crypto.getRandomValues(a);
+  return [...a].map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function toTS(dateStr){ return Math.floor(new Date(dateStr + "T23:59:59+08:00").getTime()/1000); }
+function fmtExpire(d){ // "2026-12-08" -> "2026-12-8"
+  const [y,m,dd]=d.split("-"); return y+"-"+parseInt(m)+"-"+parseInt(dd);
+}
+function daysLeft(ts){ const now=Math.floor(Date.now()/1000); return Math.max(0, Math.floor((ts-now)/86400)); }
+
+async function gh(method, url, body){
+  const tk = token();
+  if(!tk) throw new Error("请先保存 token");
+  const res = await fetch(url, {
+    method, headers: { "Authorization":"token "+tk, "Accept":"application/vnd.github+json", "Content-Type":"application/json" },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if(!res.ok){
+    let e = "HTTP " + res.status;
+    try{ const j = await res.json(); e = j.message || e; }catch(_){}
+    throw new Error(e);
+  }
+  const ct = res.headers.get("content-type")||"";
+  return ct.includes("json") ? res.json() : res.text();
+}
+
+async function loadUsers(){
+  const j = await gh("GET", API+"/contents/"+PATH);
+  const users = JSON.parse(atob(j.content.replace(/\s/g,"")));
+  return { users, sha: j.sha };
+}
+async function saveUsers(users, sha, msg){
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(users, null, 2))));
+  await gh("PUT", API+"/contents/"+PATH, { message: msg, content, sha });
+}
+
+function render(users){
+  const rows = document.getElementById("rows");
+  const now = Math.floor(Date.now()/1000);
+  if(!Object.keys(users).length){ rows.innerHTML = '<tr><td colspan="6" class="small">暂无用户</td></tr>'; return; }
+  rows.innerHTML = Object.entries(users).map(([name, u])=>{
+    const ts = parseInt(u.ts||"0");
+    const left = daysLeft(ts);
+    const expired = ts && ts < now;
+    const link = "https://zengzifeng.ccwu.cc/output/users/u_" + u.token + ".m3u";
+    const expire = u.expire || (new Date(ts*1000).toISOString().slice(0,10));
+    return `<tr>
+      <td>${name}</td>
+      <td><code>${u.token||""}</code></td>
+      <td><input type="date" id="d_${name}" value="${expire}" style="width:150px"></td>
+      <td>${expired?'<span class="tag bad">已过期</span>':'<span class="tag ok">'+left+' 天</span>'}</td>
+      <td><span class="link" onclick="copy('${link}')">复制链接</span></td>
+      <td>
+        <button class="ghost" style="padding:4px 10px" onclick="extend('${name}')">续期</button>
+        <button class="danger" style="padding:4px 10px" onclick="remove('${name}')">删除</button>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+async function refresh(){
+  try{
+    const { users } = await loadUsers();
+    render(users);
+  }catch(e){ msg(e.message, "err"); }
+}
+
+async function add(){
+  const name = document.getElementById("newName").value.trim();
+  const d = document.getElementById("newExpire").value;
+  if(!name || !d){ msg("请填用户名和到期日期", "err"); return; }
+  try{
+    const { users, sha } = await loadUsers();
+    if(users[name]){ msg("用户名已存在", "err"); return; }
+    users[name] = { token: hex16(), expire: fmtExpire(d), ts: String(toTS(d)), created: new Date().toISOString().slice(0,10) };
+    await saveUsers(users, sha, "admin: 添加用户 " + name);
+    msg("已添加 " + name + "（到期 " + d + "）");
+    document.getElementById("newName").value = "";
+    refresh();
+  }catch(e){ msg(e.message, "err"); }
+}
+
+async function extend(name){
+  const inp = document.getElementById("d_"+name);
+  const d = inp.value;
+  if(!d){ msg("请选择日期", "err"); return; }
+  try{
+    const { users, sha } = await loadUsers();
+    if(!users[name]) return;
+    users[name].expire = fmtExpire(d);
+    users[name].ts = String(toTS(d));
+    await saveUsers(users, sha, "admin: 续期 " + name + " 至 " + d);
+    msg(name + " 已续期到 " + d);
+    refresh();
+  }catch(e){ msg(e.message, "err"); }
+}
+
+async function remove(name){
+  if(!confirm("确定删除用户 " + name + "？")) return;
+  try{
+    const { users, sha } = await loadUsers();
+    delete users[name];
+    await saveUsers(users, sha, "admin: 删除用户 " + name);
+    msg("已删除 " + name);
+    refresh();
+  }catch(e){ msg(e.message, "err"); }
+}
+
+async function trigger(){
+  try{
+    await gh("POST", API+"/actions/workflows/pipeline.yml/dispatches", { ref: "main" });
+    msg("已触发更新，约 2 分钟后新用户订阅生成");
+  }catch(e){ msg(e.message, "err"); }
+}
+
+function copy(t){ navigator.clipboard.writeText(t).then(()=>msg("已复制订阅链接","ok")); }
+
+document.getElementById("saveTk").onclick = ()=>{ localStorage.setItem(LS_KEY, document.getElementById("tk").value.trim()); msg("token 已保存"); };
+document.getElementById("addBtn").onclick = add;
+document.getElementById("refreshBtn").onclick = refresh;
+document.getElementById("triggerBtn").onclick = trigger;
+document.getElementById("tk").value = token();
+
+refresh();
+</script>
+</body>
+</html>
