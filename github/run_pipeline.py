@@ -49,6 +49,31 @@ NL_CAT = {"央视": 0, "卫视": 1, "广东": 2, "深圳": 3, "地区": 4}
 GROUP_RE = re.compile(r'group-title="([^"]*)"')
 HOST_RE = re.compile(r"https?://([^/\s]+)/(rtp|udp)/", re.I)
 
+GROUP_EMOJI = {
+    "订阅信息": "ℹ️", "推送时间": "🕒", "电信组播": "🌐", "网络直播": "📶",
+    "央视频道": "📺", "卫视频道": "📡", "地方频道": "🏙️", "地区频道": "🗺️",
+    "4K节目": "🎬", "中数传媒": "💠", "其他频道": "📌", "IPTV": "🌍",
+    "广东频道": "🌴", "深圳频道": "🌆", "上海节目": "🌃", "浙江节目": "🌊",
+    "江苏节目": "🌸", "四川节目": "🐼", "重庆节目": "🏔️", "山东节目": "⛰️",
+    "湖南节目": "🎤", "福建节目": "🏝️", "港台节目": "🎌", "北京节目": "🏯",
+    "系统": "⚙️",
+}
+
+
+def with_emoji(extinf_line):
+    """给 group-title 加 Emoji 前缀（按基础组名匹配，已加过则跳过）。"""
+    m = GROUP_RE.search(extinf_line)
+    if not m:
+        return extinf_line
+    g = m.group(1)
+    for base, emoji in GROUP_EMOJI.items():
+        if g == base or g.startswith(base):
+            if g.startswith(emoji):
+                return extinf_line
+            return extinf_line.replace('group-title="%s"' % g,
+                                       'group-title="%s %s"' % (emoji, g), 1)
+    return extinf_line
+
 
 def log(msg):
     print(msg, flush=True)
@@ -293,7 +318,7 @@ def build_user(blocks, expire, created, push_time, ts=None):
         if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
             continue
         cnt[nm] = cnt.get(nm, 0) + 1
-        out.append(e)
+        out.append(with_emoji(e))
         out.append(u)
     return "\n".join(out) + "\n"
 
@@ -310,7 +335,7 @@ def build_shared(blocks):
         if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
             continue
         cnt[nm] = cnt.get(nm, 0) + 1
-        out.append(e)
+        out.append(with_emoji(e))
         out.append(u)
     return "\n".join(out) + "\n"
 
