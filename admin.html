@@ -80,17 +80,6 @@
       <div style="flex:0"><label>&nbsp;</label><button id="addBtn">添加用户</button></div>
     </div>
   </div>
-
-  <div class="card">
-    <div class="sub" style="margin-bottom:10px">网关设置（可选，用于真正限制到期/删除即失效）</div>
-    <div class="row">
-      <div style="flex:2"><label>SUB_KEY（网关密钥）</label><input type="password" id="gwKey" placeholder="和 Cloudflare 里配的 SUB_KEY 一致"></div>
-      <div style="flex:2"><label>网关域名</label><input type="text" id="gwDomain" placeholder="如 xxx.workers.dev"></div>
-      <div style="flex:0"><label>&nbsp;</label><button id="saveGw">保存</button></div>
-    </div>
-    <div class="hint">设置后，「复制链接」会生成带签名的网关地址（到期自动 403）。留空则复制普通 Pages 地址。</div>
-  </div>
-
   <div class="grid">
   <div class="card">
     <div class="sub" style="margin-bottom:10px">用户列表 <button id="refreshBtn" class="ghost" style="float:right;padding:4px 12px">刷新</button></div>
@@ -331,13 +320,6 @@ async function loadPool(){
 }
 
 document.getElementById("saveTk").onclick = ()=>{ localStorage.setItem(LS_KEY, document.getElementById("tk").value.trim()); msg("token 已保存"); };
-document.getElementById("saveGw").onclick = ()=>{
-  localStorage.setItem("gw_key", document.getElementById("gwKey").value.trim());
-  localStorage.setItem("gw_domain", document.getElementById("gwDomain").value.trim().replace(/^https?:\/\//,""));
-  msg("网关配置已保存");
-};
-document.getElementById("gwKey").value = localStorage.getItem("gw_key") || "";
-document.getElementById("gwDomain").value = localStorage.getItem("gw_domain") || "";
 document.getElementById("addBtn").onclick = add;
 document.getElementById("refreshBtn").onclick = refresh;
 document.getElementById("poolRefresh").onclick = loadPool;
