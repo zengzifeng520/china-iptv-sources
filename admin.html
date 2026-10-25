@@ -95,7 +95,7 @@
 </div>
 
 <script>
-const PWD_HASH = "aaffebecec560fec66e75f24062224ffa4e07696d2ae9a1fee3707c3f8fd9373";
+const PWD_HASH = "f0da09760044816ca290be50daaadb65242270734545586a5f96bb292c64a459";
 async function sha256(s){
   const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,"0")).join("");
