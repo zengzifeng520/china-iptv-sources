@@ -224,7 +224,11 @@ def build_gd(channels, relays):
     scored.sort(key=lambda x: -x[0])
     alive = [r for _b, r in scored][:LINES]
     if not alive:
-        return [], []
+        # 美国节点测不通国内 udpxy 时，回退用 relays.json 里最后一次 NAS 判定 ok 的（按 kbps）
+        fb = sorted([r for r in relays if r.get("ok")], key=lambda r: -r.get("kbps", 0))[:LINES]
+        if not fb:
+            return [], []
+        alive = fb
     blocks = []
     seen = set()
     for c in channels:
@@ -260,7 +264,7 @@ def build_user(blocks, expire, created, push_time):
     allb.sort(key=lambda b: (rank_of(GROUP_RE.search(b[0]).group(1) if GROUP_RE.search(b[0]) else ""),
                              natkey(name_of(b[0]))))
     # 每频道封顶
-    cnt, out = {}, ["#EXTM3U"]
+    cnt, out = {}, ["#EXTM3U url-tvg=\"https://zengzifeng.ccwu.cc/output/epg.xml\""]
     for e, u in allb:
         nm = name_of(e)
         if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
@@ -338,9 +342,9 @@ def main():
         log("缺少 GH_TOKEN")
         return 1
 
-    users = load_json(os.path.join(BASE, "users.json"), {})
-    relays = load_json(os.path.join(BASE, "relays.json"), {}).get("relays", [])
-    channels = load_json(os.path.join(BASE, "channels_core.json"), [])
+    users = load_json(os.path.join(ROOT, "nas", "users.json"), {})
+    relays = load_json(os.path.join(ROOT, "nas", "data", "relays.json"), {}).get("relays", [])
+    channels = load_json(os.path.join(ROOT, "nas", "data", "channels_core.json"), [])
     channels = [c for c in channels if str(c.get("name", "")).strip() != "0"]
 
     push_time = datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")

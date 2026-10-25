@@ -1,6 +1,8 @@
-name: 更新订阅（备用，NAS 故障时手动触发）
+name: 更新订阅
 
 on:
+  schedule:
+    - cron: "20,50 * * * *"
   workflow_dispatch:
 
 permissions:
