@@ -15,22 +15,14 @@
   [data-theme="dark"] input{background:#262b34;color:#e6e8eb;border-color:#2c313a}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;padding:20px}
-  .wrap{max-width:960px;margin:0 auto}
+  .wrap{max-width:1200px;margin:0 auto}
   h1{font-size:20px;font-weight:600;margin-bottom:4px}
   .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
-  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-  input[type=password],input[type=text],input[type=date]{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:14px}
-  input:focus{outline:none;border-color:var(--acc)}
-  .row{display:flex;gap:10px;flex-wrap:wrap}
-  .row>*{flex:1;min-width:140px}
-  button{background:var(--acc);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:14px;cursor:pointer}
-  button:hover{opacity:.92}
-  button.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}
-  button.danger{background:transparent;color:var(--danger);border:1px solid var(--danger)}
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
-  th{color:var(--muted);font-weight:500;font-size:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  @media (max-width:820px){.grid{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{text-align:left;padding:6px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
   .tag{display:inline-block;padding:1px 8px;border-radius:20px;font-size:12px}
   .tag.ok{background:#e6f6f0;color:var(--ok)}
   .tag.bad{background:#fdeaea;color:var(--danger)}
@@ -74,6 +66,7 @@
     </div>
   </div>
 
+  <div class="grid">
   <div class="card">
     <div class="sub" style="margin-bottom:10px">用户列表 <button id="refreshBtn" class="ghost" style="float:right;padding:4px 12px">刷新</button></div>
     <div id="msg" class="msg"></div>
@@ -82,14 +75,16 @@
       <tbody id="rows"><tr><td colspan="6" class="small">加载中…</td></tr></tbody>
     </table>
     <button id="triggerBtn" class="ghost" style="margin-top:12px">触发立即更新</button>
-    <hr style="border:none;border-top:1px solid var(--line);margin:18px 0">
+  </div>
+  <div class="card">
     <div class="sub" style="margin-bottom:10px">中转池状态 <button id="poolRefresh" class="ghost" style="float:right;padding:3px 10px">刷新</button></div>
     <div id="poolActive" class="sub" style="color:var(--ok);margin-bottom:8px"></div>
-    <table style="font-size:12px">
+    <table>
       <thead><tr><th>状态</th><th>中转</th><th>地区</th><th>码率</th><th>线路</th><th>检查</th></tr></thead>
       <tbody id="poolRows"><tr><td colspan="6" class="small">加载中…</td></tr></tbody>
     </table>
     <div class="hint">「在用」= 订阅里正在使用的线路（每频道取最快 3 台）。数据每 30 分钟自动探测更新。</div>
+  </div>
   </div>
 </div>
 
@@ -247,7 +242,8 @@ function copy(t){ navigator.clipboard.writeText(t).then(()=>msg("已复制订阅
 async function loadPool(){
   try{
     const j = await gh("GET", API+"/contents/nas/data/relays.json");
-    const d = JSON.parse(atob(j.content.replace(/\s/g,"")));
+    const bin = atob(j.content.replace(/\s/g,""));
+    const d = JSON.parse(new TextDecoder("utf-8").decode(new Uint8Array([...bin].map(c=>c.charCodeAt(0)))));
     const relays = d.relays || [];
     const active = relays.filter(r=>r.in_use).map(r=>r.host);
     document.getElementById("poolActive").textContent = active.length
