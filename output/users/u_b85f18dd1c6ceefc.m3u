@@ -1,7 +1,7 @@
 #EXTM3U x-tvg-url="https://justify-votes-bald-mumbai.trycloudflare.com/epg/b85f18dd1c6ceefc.xml" url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="订阅信息 到期 2026-10-26" tvg-logo="https://justify-votes-bald-mumbai.trycloudflare.com/logo/b85f18dd1c6ceefc.png",有效期 2026-10-25 ~ 2026-10-26（剩余 1 天）
 http://117.64.100.107:4022/rtp/238.1.79.27:4328
-#EXTINF:-1 tvg-id="更新" tvg-name="更新" group-title="更新时间 2026-10-25 15:22:09",2026-10-25 15:22:09 更新
+#EXTINF:-1 tvg-id="推送" tvg-name="推送" group-title="推送时间 2026-10-25 22:10:37",2026-10-25 22:10:37 推送
 http://117.64.100.107:4022/rtp/238.1.79.27:4328
 #EXTINF:-1 group-title="电信组播",0
 http://183.47.2.156:16883/rtp/239.77.0.185:5146
@@ -9719,8 +9719,6 @@ http://123.117.237.144:5222/rtp/239.3.1.249:8001
 http://111.197.231.173:4022/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/4K超清.png" group-title="其他频道",4K超清
 http://123.120.6.99:4022/rtp/239.3.1.249:8001
-#EXTINF:-1 tvg-id="推送" tvg-name="推送" group-title="推送时间 2026-10-25 21:58:11",2026-10-25 21:58:11 推送
-http://117.64.100.107:4022/rtp/238.1.79.27:4328
 #EXTINF:-1 tvg-id="BRTV体育休闲" tvg-name="BRTV体育休闲" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/BRTV体育休闲.png" group-title="其他频道",BRTV体育休闲
 http://114.250.20.79:4022/rtp/239.3.1.243:8000
 #EXTINF:-1 tvg-id="BRTV体育休闲" tvg-name="BRTV体育休闲" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/BRTV体育休闲.png" group-title="其他频道",BRTV体育休闲
