@@ -1,4 +1,4 @@
-name: 每小时巡检
+name: 巡检并更新订阅
 
 on:
   schedule:
@@ -20,7 +20,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
@@ -68,5 +68,11 @@ jobs:
           sleep 5
         done
         echo "::error::连续 5 次推送失败"; exit 1
+    - name: 巡检完成，立即更新订阅
+      if: always()
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PYTHONIOENCODING: 'utf-8'
+      run: python github/run_pipeline.py
     env:
       TZ: Asia/Shanghai
