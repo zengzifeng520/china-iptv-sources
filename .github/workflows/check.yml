@@ -2,7 +2,8 @@ name: 每小时巡检
 
 on:
   schedule:
-    - cron: '7 * * * *'
+    # 北京时间 06:00-22:00 每小时巡检（UTC 22,23,0-14 点，分钟 7）；0-7 点不巡检
+    - cron: '7 22,23,0-14 * * *'
   workflow_dispatch:
 
 permissions:
