@@ -432,10 +432,10 @@ def updateChannelUrlsM3U(matched, leftover, epg_id_map=None, check_results=None)
                     new_url = base_url
 
                 tvg_id = epg_id_map.get(channel_name, channel_name)
-                # 台标查 ZZF 台标库；查不到再退回旧的猜文件名（多数字段是死链，仅兜底）
-                logo = logo_source.resolve(channel_name) or (
-                    "https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/%s.png" % channel_name)
-                f_m3u.write(f"#EXTINF:-1 tvg-id=\"{tvg_id}\" tvg-name=\"{channel_name}\" tvg-logo=\"{logo}\" group-title=\"{category}\",{channel_name}\n")
+                # 台标查 ZZF 台标库；查不到就不写 tvg-logo（旧猜法几乎全是 404）
+                logo = logo_source.resolve(channel_name)
+                logo_attr = f' tvg-logo="{logo}"' if logo else ""
+                f_m3u.write(f"#EXTINF:-1 tvg-id=\"{tvg_id}\" tvg-name=\"{channel_name}\"{logo_attr} group-title=\"{category}\",{channel_name}\n")
                 f_m3u.write(new_url + "\n")
                 f_txt.write(f"{channel_name},{new_url}\n")
 

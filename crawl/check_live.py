@@ -17,6 +17,10 @@ import os
 import re
 import sys
 import time
+
+# 台标统一查 zengzifeng520/ZZF 的台标库（仓库根目录 logo_source.py）
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import logo_source  # noqa: E402
 from collections import OrderedDict
 from datetime import datetime, timedelta, timezone
 
@@ -147,6 +151,8 @@ def main():
     started = time.time()
     now = datetime.now(CST).isoformat(timespec="seconds")
 
+    logo_source.load_table()      # 台标表；拉不到就沿用原 tvg-logo，不阻塞巡检
+
     header, m3u_entries = (parse_m3u(SRC_M3U) if os.path.exists(SRC_M3U) else ("#EXTM3U", []))
     txt_groups = parse_txt(SRC_TXT) if os.path.exists(SRC_TXT) else OrderedDict()
 
@@ -220,7 +226,9 @@ def main():
     m3u_lines = [header, f"# 更新时间：{stamp}（北京时间）"]
     for e in kept_m3u:
         if e["extinf"]:
-            m3u_lines.append(e["extinf"])
+            # 巡检不改线路，但台标统一换成 ZZF 台标库的地址
+            line, _ok = logo_source.rewrite_extinf(e["extinf"])
+            m3u_lines.append(line)
         m3u_lines.append(e["url_line"])
     m3u_content = "\n".join(m3u_lines) + "\n"
 

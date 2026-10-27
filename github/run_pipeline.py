@@ -110,8 +110,11 @@ def extinf(group, name):
     —— 那个猜法实测绝大多数 404，只能当兜底。
     """
     nm = (name or "").strip()
-    logo = logo_source.resolve(nm) or (GUESS_LOGO % urllib.parse.quote(nm, safe=""))
-    return f'#EXTINF:-1 tvg-id="{nm}" tvg-name="{nm}" tvg-logo="{logo}" group-title="{group}",{nm}'
+    logo = logo_source.resolve(nm)
+    # 查不到就不写 tvg-logo：以前这里是拼 yuanzl77 的文件名，实测几乎全是 404，
+    # 播放器拿到的是裂图，还不如让它显示默认图标。
+    attr = f' tvg-logo="{logo}"' if logo else ""
+    return f'#EXTINF:-1 tvg-id="{nm}" tvg-name="{nm}"{attr} group-title="{group}",{nm}'
 
 
 def name_of(extinf):

@@ -115,10 +115,18 @@ _LOGO_RE = re.compile(r'\stvg-logo="[^"]*"')
 _NAME_RE = re.compile(r',([^,]*)$')
 
 
+# 「猜文件名」时代的死链特征：yuanzl77/TVlogo@master/png/<频道名>.png
+# 这种地址绝大多数 404，播放器拿到的是一张裂图，不如直接不写这个属性。
+_DEAD_GUESS = re.compile(r'^https?://[^\s"]*TVlogo@master/png/')
+
+
 def rewrite_extinf(line: str) -> tuple[str, bool]:
     """把一行 #EXTINF 的 tvg-logo 换成台标库里的地址。
 
-    返回 (新行, 是否命中)。没命中就原样返回，绝不把已有台标删掉。
+    返回 (新行, 是否命中)。
+    - 命中：换成台标库地址
+    - 没命中但原来是「猜文件名」的死链：删掉 tvg-logo，别留裂图
+    - 其它情况：原样返回（不删人家已有的可用台标）
     """
     if not line.startswith("#EXTINF"):
         return line, False
@@ -128,6 +136,9 @@ def rewrite_extinf(line: str) -> tuple[str, bool]:
     name = m.group(1).strip()
     url = resolve(name)
     if not url:
+        cur = _LOGO_RE.search(line)
+        if cur and _DEAD_GUESS.match(cur.group(0).split('"')[1]):
+            return _LOGO_RE.sub("", line), False
         return line, False
     new = _LOGO_RE.sub(' tvg-logo="%s"' % url, line)
     if 'tvg-logo="' not in new:            # 原本没有这个属性 -> 插在 group-title 前
