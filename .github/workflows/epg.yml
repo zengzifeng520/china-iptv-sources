@@ -1,8 +1,9 @@
 name: 同步 EPG
 
+# 已停用定时同步：EPG 统一从 IPTV 仓库直接读，不再往本仓库复制一份。
+# 播放器里请直接把 EPG 地址设为 IPTV 仓库的 e_all.xml（见 README）。
+# 留 workflow_dispatch 只是为了需要时能手动补一次。
 on:
-  schedule:
-    - cron: '45 */6 * * *'
   workflow_dispatch:
 
 permissions:
