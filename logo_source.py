@@ -120,6 +120,15 @@ def resolve(name: str) -> str | None:
         url = _TABLE.get(key)
         if url:
             return url
+    # 频道名带逗号（如「人狠话不多,王宝强经典电影！」）时，逐段再查一次：
+    # 源数据的标题经常是「正片名, 一句话简介」，而库里存的是干净的片名。
+    if "," in name or "，" in name or "、" in name:
+        parts = [p.strip() for p in re.split(r"[,，、]", name) if p.strip()]
+        for part in reversed(parts):
+            for key in _candidates(part):
+                url = _TABLE.get(key)
+                if url:
+                    return url
     return None
 
 

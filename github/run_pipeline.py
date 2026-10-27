@@ -41,7 +41,7 @@ SRC_CHECKED = "https://zzf.new.tg/checked/live.m3u"
 SRC_NETLIVE = "https://mpimg.cn/down.php/8a7c70ba5d709b2876b54c63d0acda08.txt"
 
 GROUP_ORDER = [
-    "订阅信息", "推送时间", "电信组播", "网络直播", "央视频道", "卫视频道",
+    "订阅信息", "推送时间", "咪咕直播", "电信组播", "网络直播", "央视频道", "卫视频道",
     "地区频道", "4K节目", "广东频道", "深圳频道", "上海节目", "浙江节目",
     "重庆节目", "湖南节目", "港台节目", "四川节目", "北京节目", "江苏节目",
     "中数传媒", "IPTV", "其他频道",
@@ -54,7 +54,7 @@ GROUP_RE = re.compile(r'group-title="([^"]*)"')
 HOST_RE = re.compile(r"https?://([^/\s]+)/(rtp|udp)/", re.I)
 
 GROUP_EMOJI = {
-    "订阅信息": "ℹ️", "推送时间": "🕒", "电信组播": "🌐", "网络直播": "📶",
+    "订阅信息": "ℹ️", "推送时间": "🕒", "咪咕直播": "🎯", "电信组播": "🌐", "网络直播": "📶",
     "央视频道": "📺", "卫视频道": "📡", "地方频道": "🏙️", "地区频道": "🗺️",
     "4K节目": "🎬", "中数传媒": "💠", "其他频道": "📌", "IPTV": "🌍",
     "广东频道": "🌴", "深圳频道": "🌆", "上海节目": "🌃", "浙江节目": "🌊",
@@ -453,6 +453,21 @@ def main():
     push_time = datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")
     files = []
 
+    # 0) 咪咕直播：静态订阅，不探测（用户提供的 47.103 中转，group-title「咪咕直播」排最前）
+    migu_blocks = []
+    try:
+        migu_path = os.path.join(ROOT, "crawl", "extra", "migu.m3u")
+        if os.path.exists(migu_path) and os.path.getsize(migu_path) > 100:
+            migu_text = open(migu_path, encoding="utf-8", errors="ignore").read()
+            migu_blocks = parse_m3u(migu_text)
+            migu_out = "#EXTM3U x-tvg-url=\"https://zzf.new.tg/epg.xml\"\n"
+            migu_out += "\n".join(with_emoji(e) + "\n" + u for e, u in migu_blocks) + "\n"
+            files.append(("output/migu.m3u", migu_out.encode("utf-8")))
+            log("  咪咕直播 %d 条（静态，不巡检）" % len(migu_blocks))
+    except Exception as exc:
+        log("  咪咕直播读取失败: %s" % exc)
+        migu_blocks = []
+
     # 1) 全量组播：优先读仓库本地 crawl/checked/live.m3u，失败回退远程 zzf.new.tg
     log("拉取全量组播巡检列表…")
     try:
@@ -503,8 +518,8 @@ def main():
     files.append(("nas/data/relays.json",
                   json.dumps(pool_state, ensure_ascii=False, indent=1).encode("utf-8")))
 
-    # 4) 用户订阅
-    blocks = full_blocks + nl_blocks + gd_blocks
+    # 4) 用户订阅（咪咕直播排最前，其次是组播/网络直播/广东电信）
+    blocks = migu_blocks + full_blocks + nl_blocks + gd_blocks
     if blocks:
         for name, info in sorted(users.items()):
             tok = info.get("token")
