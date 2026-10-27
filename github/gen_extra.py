@@ -43,6 +43,14 @@ LISTS = {
     "yy": ("crawl/extra/yy.txt", "output/yy.m3u", "YY轮播"),
 }
 
+# 分组 emoji（与 run_pipeline.py 的 GROUP_EMOJI 风格一致）
+GROUP_EMOJI = {
+    "经典轮播": "🎞️",
+    "明星剧场": "⭐",
+    "虎牙一起看": "🐯",
+    "YY轮播": "🎤",
+}
+
 
 def parse_src(path: str) -> list[tuple[str, str]]:
     """读 name,url 列表；同一地址只留第一条（避免播放器里同一路出现两次）。"""
@@ -70,21 +78,22 @@ def build(key: str) -> int:
         return 1
     entries = parse_src(src)
     stamp = datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")
+    disp = f"{GROUP_EMOJI.get(group, '')} {group}".strip()
     lines = ['#EXTM3U x-tvg-url="https://zzf.new.tg/epg.xml"',
              f"# 更新时间：{stamp}（北京时间）",
-             f"# {group} {len(entries)} 条（独立订阅，不参与巡检）"]
+             f"# {disp} {len(entries)} 条（独立订阅，不参与巡检）"]
     hit = 0
     for name, url in entries:
         logo = logo_source.resolve(name)
         hit += 1 if logo else 0
         attr = f' tvg-logo="{logo}"' if logo else ""
         lines.append(f'#EXTINF:-1 tvg-id="{name}" tvg-name="{name}"{attr} '
-                     f'group-title="{group}",{name}')
+                     f'group-title="{disp}",{name}')
         lines.append(url)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
-    print(f"[{key}] {out_rel}：{len(entries)} 条，台标 {hit} 条，分组「{group}」")
+    print(f"[{key}] {out_rel}：{len(entries)} 条，台标 {hit} 条，分组「{disp}」")
     return 0
 
 
