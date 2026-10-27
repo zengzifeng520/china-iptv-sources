@@ -41,7 +41,8 @@ SRC_CHECKED = "https://zzf.new.tg/checked/live.m3u"
 SRC_NETLIVE = "https://mpimg.cn/down.php/8a7c70ba5d709b2876b54c63d0acda08.txt"
 
 GROUP_ORDER = [
-    "订阅信息", "推送时间", "咪咕直播", "电信组播", "网络直播", "央视频道", "卫视频道",
+    "订阅信息", "推送时间", "咪咕直播", "经典轮播", "明星剧场", "虎牙一起看", "YY轮播",
+    "电信组播", "央视频道", "卫视频道",
     "地区频道", "4K节目", "广东频道", "深圳频道", "上海节目", "浙江节目",
     "重庆节目", "湖南节目", "港台节目", "四川节目", "北京节目", "江苏节目",
     "中数传媒", "IPTV", "其他频道",
@@ -54,7 +55,8 @@ GROUP_RE = re.compile(r'group-title="([^"]*)"')
 HOST_RE = re.compile(r"https?://([^/\s]+)/(rtp|udp)/", re.I)
 
 GROUP_EMOJI = {
-    "订阅信息": "ℹ️", "推送时间": "🕒", "咪咕直播": "🎯", "电信组播": "🌐", "网络直播": "📶",
+    "订阅信息": "ℹ️", "推送时间": "🕒", "咪咕直播": "🎯", "经典轮播": "🎞️",
+    "明星剧场": "⭐", "虎牙一起看": "🐯", "YY轮播": "🎤", "电信组播": "🌐",
     "央视频道": "📺", "卫视频道": "📡", "地方频道": "🏙️", "地区频道": "🗺️",
     "4K节目": "🎬", "中数传媒": "💠", "其他频道": "📌", "IPTV": "🌍",
     "广东频道": "🌴", "深圳频道": "🌆", "上海节目": "🌃", "浙江节目": "🌊",
@@ -119,6 +121,33 @@ def extinf(group, name):
 
 def name_of(extinf):
     return (extinf or "").rsplit(",", 1)[-1].strip()
+
+
+# 轮播类独立订阅（并入主订阅，但来源不进巡检）：txt 的 name,url 格式
+EXTRA_LISTS = [
+    ("crawl/extra/jingdian.txt", "经典轮播"),
+    ("crawl/extra/mingxing.txt", "明星剧场"),
+    ("crawl/extra/huya.txt", "虎牙一起看"),
+    ("crawl/extra/yy.txt", "YY轮播"),
+]
+
+
+def load_extra_blocks():
+    """读 crawl/extra/*.txt，生成 (extinf, url) 块；分组名见 EXTRA_LISTS。"""
+    blocks = []
+    for rel, group in EXTRA_LISTS:
+        path = os.path.join(ROOT, rel)
+        if not os.path.exists(path):
+            continue
+        for raw in open(path, encoding="utf-8", errors="replace"):
+            s = raw.strip()
+            if not s or s.endswith("#genre#") or "://" not in s:
+                continue
+            name, url = s.rsplit(",", 1)
+            name, url = name.strip(), url.strip()
+            if name and url.startswith("http"):
+                blocks.append((extinf(group, name), url))
+    return blocks
 
 
 def rank_of(group):
@@ -492,15 +521,14 @@ def main():
         log("  全量组播拉取失败: %s" % exc)
         full_blocks = []
 
-    # 2) 网络直播
-    log("拉取网络直播…")
+    # 2) 轮播类独立订阅（经典轮播/明星剧场/虎牙一起看/YY轮播）：静态，不探测
+    log("读取轮播类订阅（经典轮播/明星剧场/虎牙/YY）…")
     try:
-        nl_blocks = parse_netlive_txt(fetch(SRC_NETLIVE))
-        nl_blocks = reorganize_netlive(nl_blocks)
-        log("  网络直播 %d 条" % len(nl_blocks))
+        extra_blocks = load_extra_blocks()
+        log("  轮播类 %d 条" % len(extra_blocks))
     except Exception as exc:
-        log("  网络直播拉取失败: %s" % exc)
-        nl_blocks = []
+        log("  轮播类读取失败: %s" % exc)
+        extra_blocks = []
 
     # 3) 广东电信：探测中转 → 最快 N 台 → nas.m3u
     log("探测广东中转池（%d 台）…" % len(relays))
@@ -518,8 +546,8 @@ def main():
     files.append(("nas/data/relays.json",
                   json.dumps(pool_state, ensure_ascii=False, indent=1).encode("utf-8")))
 
-    # 4) 用户订阅（咪咕直播排最前，其次是组播/网络直播/广东电信）
-    blocks = migu_blocks + full_blocks + nl_blocks + gd_blocks
+    # 4) 用户订阅（咪咕直播 + 轮播类排最前，其次是组播/广东电信）
+    blocks = migu_blocks + extra_blocks + full_blocks + gd_blocks
     if blocks:
         for name, info in sorted(users.items()):
             tok = info.get("token")
