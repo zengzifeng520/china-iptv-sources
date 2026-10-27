@@ -41,6 +41,7 @@ LISTS = {
     "mingxing": ("crawl/extra/mingxing.txt", "output/mingxing.m3u", "明星剧场"),
     "huya": ("crawl/extra/huya.txt", "output/huya.m3u", "虎牙一起看"),
     "yy": ("crawl/extra/yy.txt", "output/yy.m3u", "YY轮播"),
+    "chunwan": ("crawl/extra/chunwan.txt", "output/chunwan.m3u", "历届春晚"),
 }
 
 # 分组 emoji（与 run_pipeline.py 的 GROUP_EMOJI 风格一致）
@@ -49,6 +50,7 @@ GROUP_EMOJI = {
     "明星剧场": "⭐",
     "虎牙一起看": "🐯",
     "YY轮播": "🎤",
+    "历届春晚": "🎆",
 }
 
 
