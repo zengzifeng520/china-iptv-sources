@@ -31,6 +31,9 @@ BASE = os.path.dirname(os.path.abspath(__file__))   # .../github
 ROOT = os.path.dirname(BASE)                          # repo root
 OUT = os.path.join(ROOT, "output")
 
+sys.path.insert(0, ROOT)
+import logo_source  # noqa: E402  台标统一查 ZZF 仓库的台标库
+
 REPO = "zengzifeng520/china-iptv-sources"
 API = "https://api.github.com/repos/" + REPO
 
@@ -97,10 +100,17 @@ def natkey(s):
     return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", s)]
 
 
+GUESS_LOGO = "https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/%s.png"
+
+
 def extinf(group, name):
-    """统一生成 EXTINF 行，自动带 tvg-id/tvg-name/tvg-logo（便于 EPG 匹配）。"""
+    """统一生成 EXTINF 行，自动带 tvg-id/tvg-name/tvg-logo（便于 EPG 匹配）。
+
+    台标优先查 ZZF 的台标库（logo_source），查不到才退回旧的猜文件名
+    —— 那个猜法实测绝大多数 404，只能当兜底。
+    """
     nm = (name or "").strip()
-    logo = "https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/%s.png" % urllib.parse.quote(nm, safe="")
+    logo = logo_source.resolve(nm) or (GUESS_LOGO % urllib.parse.quote(nm, safe=""))
     return f'#EXTINF:-1 tvg-id="{nm}" tvg-name="{nm}" tvg-logo="{logo}" group-title="{group}",{nm}'
 
 
@@ -429,6 +439,9 @@ def main():
         log("缺少 GH_TOKEN")
         return 1
 
+    # 台标表：一次拉取，后面 extinf() 和组播来源行都靠它改写 tvg-logo
+    logo_source.load_table()
+
     users = load_json(os.path.join(ROOT, "nas", "users.json"), {})
     relays = load_json(os.path.join(ROOT, "nas", "data", "relays.json"), {}).get("relays", [])
     channels = load_json(os.path.join(ROOT, "nas", "data", "channels_core.json"), [])
@@ -449,6 +462,9 @@ def main():
             checked_text = fetch(SRC_CHECKED)
             log("  本地为空，回退远程 %s" % SRC_CHECKED)
         checked = parse_m3u(checked_text)
+        # 组播来源自带的 tvg-logo 是「猜文件名」的旧地址（多数 404），先统一换成台标库的
+        checked, logo_hit = logo_source.apply(checked)
+        log("  台标命中 %d/%d" % (logo_hit, len(checked)))
         full_blocks = trim_top(checked, TOP_PER_CHANNEL)
         top20 = "#EXTM3U\n# 每频道最多 %d 条 %s\n" % (TOP_PER_CHANNEL, push_time)
         top20 += "\n".join(e + "\n" + u for e, u in full_blocks) + "\n"

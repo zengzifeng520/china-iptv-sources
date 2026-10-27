@@ -1,4 +1,6 @@
+import os
 import re
+import sys
 import asyncio
 import requests
 import logging
@@ -7,6 +9,10 @@ from datetime import datetime
 import config
 import check as quality_checker
 import fetch_mcast
+
+# 台标统一查 zengzifeng520/ZZF 的台标库（仓库根目录的 logo_source.py）
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import logo_source  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", handlers=[logging.FileHandler("function.log", "w", encoding="utf-8"), logging.StreamHandler()])
 
@@ -426,7 +432,10 @@ def updateChannelUrlsM3U(matched, leftover, epg_id_map=None, check_results=None)
                     new_url = base_url
 
                 tvg_id = epg_id_map.get(channel_name, channel_name)
-                f_m3u.write(f"#EXTINF:-1 tvg-id=\"{tvg_id}\" tvg-name=\"{channel_name}\" tvg-logo=\"https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/{channel_name}.png\" group-title=\"{category}\",{channel_name}\n")
+                # 台标查 ZZF 台标库；查不到再退回旧的猜文件名（多数字段是死链，仅兜底）
+                logo = logo_source.resolve(channel_name) or (
+                    "https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@master/png/%s.png" % channel_name)
+                f_m3u.write(f"#EXTINF:-1 tvg-id=\"{tvg_id}\" tvg-name=\"{channel_name}\" tvg-logo=\"{logo}\" group-title=\"{category}\",{channel_name}\n")
                 f_m3u.write(new_url + "\n")
                 f_txt.write(f"{channel_name},{new_url}\n")
 
@@ -476,6 +485,7 @@ def updateChannelUrlsM3U(matched, leftover, epg_id_map=None, check_results=None)
 
 if __name__ == "__main__":
     try:
+        logo_source.load_table()      # 台标表：拉不到就退回旧猜法，不阻塞抓取
         asyncio.run(async_main())
     finally:
         quality_checker._shutdown_ffprobe_executor()
