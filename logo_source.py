@@ -85,11 +85,23 @@ def _strip_suffix(s: str) -> str:
     return s
 
 
+_CCTV_RE = re.compile(r"^(CCTV|CGTN)[\s\-]?(\d+\+?)(.+)$", re.I)
+
+
 def _candidates(name: str) -> list[str]:
-    """按优先级给出候选键：原样 → 规范化 → 剥后缀 → 剥品牌前缀。"""
+    """按优先级给出候选键：原样 → 规范化 → 剥后缀 → 剥品牌前缀。
+
+    另外补一条央视专用规则：CCTV10科教 / CCTV-1综合 / CCTV5+体育赛事
+    这类「台号 + 语义后缀」的写法，退化成台号本身（CCTV10 / CCTV-1 / CCTV5+），
+    库里存的就是裸台号。
+    """
     out: list[str] = []
     for base in (name, _strip_suffix(name)):
         out += [base, _norm(base)]
+        m0 = _CCTV_RE.match(base.strip())
+        if m0:
+            bare = m0.group(1).upper() + m0.group(2)
+            out += [bare, bare.replace("-", ""), _norm(bare), _norm(bare.replace("-", ""))]
     m = re.match(r"^([A-Za-z]{2,6})[\s\-_]?(.+)$", _strip_suffix(name))
     if m and re.search(r"[\u4e00-\u9fff]", m.group(2)):
         tail = m.group(2)
