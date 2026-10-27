@@ -19,8 +19,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: 拉取 IPTV 仓库生成的 EPG
         run: |
-          curl -sL --max-time 180 -o output/epg.new.xml \
-            "https://raw.githubusercontent.com/zengzifeng520/IPTV/gh-pages/e.xml"
+          # 拉 e_all.xml 而不是 e.xml：
+          #   e.xml     = 只有国内频道（615 个）
+          #   e_all.xml = e.xml + 港澳台（652 个，由 IPTV 仓库那边的
+          #               build_epg.py 合并 epg.pw 的香港/台湾节目单生成）
+          # 这样本站 EPG 也统一从 IPTV 仓库读，不再分几个源
+          curl -sL --max-time 300 -o output/epg.new.xml \
+            "https://raw.githubusercontent.com/zengzifeng520/IPTV/gh-pages/e_all.xml"
           size=$(wc -c < output/epg.new.xml 2>/dev/null || echo 0)
           echo "下载 EPG: $size 字节"
           if [ "$size" -lt 100000 ]; then
