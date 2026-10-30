@@ -1,28 +1,43 @@
 name: 巡检并更新订阅
 
+# 为什么这么写
+# ------------
+# GitHub 免费账户的 schedule 在高峰期会延迟甚至**丢弃**触发，实测设定 22 次/天
+# 只跑到 4~5 次。所以不再靠「多写几条 cron」，改成：
+#   · cron 每小时一条（能触发就触发）
+#   · 每次运行内部循环 5 轮巡检，每轮间隔 1 小时
+#   · concurrency 不取消进行中的任务 → 同一时间只有一个 job 在跑，
+#     排队中的新触发会合并成 1 个，于是「4~5 次触发 × 5 轮」≈ 覆盖全天
 on:
   schedule:
-    # 北京 06:07 预热 + 07:07-18:07 每小时（UTC 22,23,0-10 点，分钟 7）
-    - cron: '7 22,23,0-10 * * *'
-    # 北京 19:07-22:37 每半小时（UTC 11-14 点，分钟 7/37）
-    - cron: '7,37 11-14 * * *'
-    # 北京 23:07 收尾（UTC 15 点）
-    - cron: '7 15 * * *'
+    # 每小时 :07（UTC，即北京 :07）
+    - cron: '7 * * * *'
   workflow_dispatch:
+    inputs:
+      rounds:
+        description: '循环轮数（每轮间隔 1 小时）'
+        required: false
+        default: '5'
 
 permissions:
   contents: write
 
 concurrency:
   group: hourly-check
+  # 必须 false：true 会让每小时的新触发杀掉正在跑的 job，5 轮永远跑不完
   cancel-in-progress: false
 
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 5 轮 × 1 小时 + 最后一轮巡检，留足余量（GitHub 单 job 上限 360 分钟）
+    timeout-minutes: 350
+    env:
+      TZ: Asia/Shanghai
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
@@ -36,7 +51,7 @@ jobs:
         key: check-state-${{ github.run_id }}
         restore-keys: |
           check-state-
-    - name: 探测并剔除失效线路
+    - name: 循环巡检（每轮间隔 1 小时）
       env:
         CHECK_TIMEOUT: '6'
         CHECK_CONCURRENCY: '150'
@@ -45,7 +60,51 @@ jobs:
         MAX_FAILS: '2'
         MIN_ALIVE_RATIO: '0.3'
         PYTHONIOENCODING: 'utf-8'
-      run: cd crawl && python check_live.py
+        GH_TOKEN: ${{ github.token }}
+        ROUNDS: ${{ github.event.inputs.rounds || '5' }}
+      run: |
+        set +e
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+
+        for i in $(seq 1 "$ROUNDS"); do
+          START=$(date +%s)
+          echo "::group::第 $i/$ROUNDS 轮巡检  $(date +'%F %T')"
+
+          # 1) 探测并剔除失效线路（check_live.py 会读写 crawl/checked/state.json）
+          ( cd crawl && python check_live.py )
+          echo "巡检退出码 $?"
+
+          # 2) 提交巡检结果（有变化才提交）
+          git add -f crawl/checked/live.m3u crawl/checked/live.txt crawl/checked/stats.json
+          if git diff --staged --quiet; then
+            echo "本轮无变化，跳过提交"
+          else
+            git commit -m "Hourly check: prune dead sources (round $i)"
+            for attempt in 1 2 3 4 5; do
+              if git pull --rebase --autostash -X theirs origin main && git push origin HEAD:main; then
+                echo "推送成功"
+                break
+              fi
+              git rebase --abort 2>/dev/null || true
+              sleep 5
+            done
+          fi
+
+          # 3) 巡检完立即重建订阅
+          python github/run_pipeline.py
+          echo "::endgroup::"
+
+          # 4) 补足到 1 小时再进下一轮
+          if [ "$i" -lt "$ROUNDS" ]; then
+            ELAPSED=$(( $(date +%s) - START ))
+            REMAIN=$(( 3600 - ELAPSED ))
+            if [ "$REMAIN" -lt 60 ]; then REMAIN=60; fi
+            echo "第 $i 轮耗时 ${ELAPSED}s，等待 ${REMAIN}s 后进入第 $((i+1)) 轮"
+            sleep "$REMAIN"
+          fi
+        done
+        echo "全部 $ROUNDS 轮巡检完成  $(date +'%F %T')"
     - name: 保存失败计数
       if: always()
       uses: actions/cache/save@v4
@@ -53,26 +112,3 @@ jobs:
       with:
         path: crawl/checked/state.json
         key: check-state-${{ github.run_id }}
-    - name: 提交巡检结果
-      run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        git add -f crawl/checked/live.m3u crawl/checked/live.txt crawl/checked/stats.json
-        if git diff --staged --quiet; then echo "无变化，跳过提交"; exit 0; fi
-        git commit -m "Hourly check: prune dead sources"
-        for attempt in 1 2 3 4 5; do
-          if git pull --rebase --autostash -X theirs origin main && git push origin HEAD:main; then
-            echo "推送成功"; exit 0
-          fi
-          git rebase --abort 2>/dev/null || true
-          sleep 5
-        done
-        echo "::error::连续 5 次推送失败"; exit 1
-    - name: 巡检完成，立即更新订阅
-      if: always()
-      env:
-        GH_TOKEN: ${{ github.token }}
-        PYTHONIOENCODING: 'utf-8'
-      run: python github/run_pipeline.py
-    env:
-      TZ: Asia/Shanghai
