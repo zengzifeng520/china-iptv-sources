@@ -41,10 +41,21 @@ SRC_CHECKED = "https://zzf.new.tg/checked/live.m3u"
 SRC_NETLIVE = "https://mpimg.cn/down.php/8a7c70ba5d709b2876b54c63d0acda08.txt"
 
 GROUP_ORDER = [
-    "订阅信息", "推送时间", "咪咕直播", "电信组播", "央视频道", "卫视频道",
-    "地方频道", "4K节目", "广东频道", "深圳频道", "上海节目", "浙江节目",
-    "重庆节目", "湖南节目", "港台节目", "四川节目", "北京节目", "江苏节目",
-    "福建节目", "中数传媒", "IPTV", "其他频道",
+    "订阅信息", "推送时间",
+    # 自建/特殊源（咪咕排最前，电信组播紧随）
+    "咪咕直播", "电信组播",
+    # ---- 以下 38 个分组按 crawl/extra/template_national.txt 的顺序 ----
+    "央视频道", "中数传媒", "4K节目", "卫视频道", "港台节目",
+    "北京节目", "天津节目", "河北节目", "山西节目", "内蒙古节目",
+    "辽宁节目", "吉林节目", "黑龙江节目", "上海节目", "江苏节目",
+    "浙江节目", "安徽节目", "福建节目", "江西节目", "山东节目",
+    "河南节目", "湖北节目", "湖南节目", "广东频道", "广西节目",
+    "海南节目", "重庆节目", "四川节目", "贵州节目", "云南节目",
+    "西藏节目", "陕西节目", "甘肃节目", "青海节目", "宁夏节目",
+    "新疆节目", "IPTV", "地方频道",
+    # 模板里没有的频道落到这里
+    "其他频道",
+    # 自建轮播组统一排最后
     "经典轮播", "明星剧场", "虎牙一起看", "YY轮播", "历届春晚",
 ]
 PROMO_URL = "https://zengzifeng.ccwu.cc/output/media/promo.mp4"
@@ -55,14 +66,20 @@ GROUP_RE = re.compile(r'group-title="([^"]*)"')
 HOST_RE = re.compile(r"https?://([^/\s]+)/(rtp|udp)/", re.I)
 
 GROUP_EMOJI = {
-    "订阅信息": "ℹ️", "推送时间": "🕒", "咪咕直播": "🎯", "经典轮播": "🎞️",
-    "明星剧场": "⭐", "虎牙一起看": "🐯", "YY轮播": "🎤", "历届春晚": "🎆", "电信组播": "🌐",
-    "央视频道": "📺", "卫视频道": "📡", "地方频道": "🏙️", "地区频道": "🗺️",
-    "4K节目": "🎬", "中数传媒": "💠", "其他频道": "📌", "IPTV": "🌍",
-    "广东频道": "🌴", "深圳频道": "🌆", "上海节目": "🌃", "浙江节目": "🌊",
-    "江苏节目": "🌸", "四川节目": "🐼", "重庆节目": "🏔️", "山东节目": "⛰️",
-    "湖南节目": "🎤", "福建节目": "🏝️", "港台节目": "🎌", "北京节目": "🏯",
-    "系统": "⚙️",
+    "订阅信息": "ℹ️", "推送时间": "🕒", "咪咕直播": "🎯", "电信组播": "🌐",
+    "央视频道": "📺", "中数传媒": "💠", "4K节目": "🎬", "卫视频道": "📡",
+    "港台节目": "🎌",
+    "北京节目": "🏯", "天津节目": "🎡", "河北节目": "🏔️", "山西节目": "⛰️",
+    "内蒙古节目": "🐎", "辽宁节目": "🌊", "吉林节目": "🌲", "黑龙江节目": "❄️",
+    "上海节目": "🌃", "江苏节目": "🌸", "浙江节目": "🌉", "安徽节目": "🏞️",
+    "福建节目": "🏝️", "江西节目": "🏯", "山东节目": "🗻", "河南节目": "🌾",
+    "湖北节目": "🌾", "湖南节目": "🎤", "广东频道": "🌴", "广西节目": "🐘",
+    "海南节目": "🥥", "重庆节目": "🏔️", "四川节目": "🐼", "贵州节目": "🍃",
+    "云南节目": "🦚", "西藏节目": "🏔️", "陕西节目": "🏛️", "甘肃节目": "🐫",
+    "青海节目": "🏔️", "宁夏节目": "🕌", "新疆节目": "🍇",
+    "IPTV": "🌍", "地方频道": "🏙️", "其他频道": "📌",
+    "经典轮播": "🎞️", "明星剧场": "⭐", "虎牙一起看": "🐯", "YY轮播": "🎤",
+    "历届春晚": "🎆", "系统": "⚙️",
 }
 
 
@@ -157,6 +174,126 @@ def rank_of(group):
         if g == k or g.startswith(k):
             return i
     return len(GROUP_ORDER)
+
+
+# ---------- 频道名模板（38 分组 / 1435 标准名 / 1.9 万别名）----------
+# 文件：crawl/extra/template_national.txt
+# 作用：把订阅里五花八门的频道名（XX卫视HD、CCTV1综合高清、汕头综合…）
+#       映射到标准频道名对应的标准分组。匹配不上就保持原分组——绝不瞎猜。
+TEMPLATE_PATH = os.path.join(ROOT, "crawl", "extra", "template_national.txt")
+_TPL_CACHE = None
+
+_QUALITY_RE = re.compile(
+    r"(?:[\s\-]*(?:蓝光高清|超高清|高清版|超清版|标清版|高清|超清|标清|蓝光|"
+    r"FHD|UHD|4K|8K|HD|SD|H265|50P|1080P|720P))+$", re.I)
+
+
+def _strip_quality(name: str) -> str:
+    prev = None
+    while prev != name:
+        prev = name
+        name = _QUALITY_RE.sub("", name).strip()
+    return name
+
+
+def _norm_key(name: str) -> str:
+    return re.sub(r"[\s·\-_.—–()（）]", "", name).lower()
+
+
+def load_template():
+    """返回 (alias2std, norm2std)；alias -> (标准名, 标准分组)。"""
+    global _TPL_CACHE
+    if _TPL_CACHE is not None:
+        return _TPL_CACHE
+    alias2std: dict[str, tuple[str, str]] = {}
+    norm2std: dict[str, tuple[str, str]] = {}
+    if not os.path.exists(TEMPLATE_PATH):
+        log("  未找到频道名模板 %s，跳过重分组" % TEMPLATE_PATH)
+        _TPL_CACHE = ({}, {})
+        return _TPL_CACHE
+    try:
+        text = open(TEMPLATE_PATH, encoding="utf-8", errors="ignore").read()
+    except Exception as exc:  # noqa: BLE001
+        log("  模板读取失败: %s" % exc)
+        _TPL_CACHE = ({}, {})
+        return _TPL_CACHE
+
+    group = None
+    for raw in text.replace("\r\n", "\n").split("\n"):
+        s = raw.strip()
+        if not s:
+            continue
+        if s.endswith("#genre#"):
+            group = s[:-7].strip().rstrip(",").strip()
+            continue
+        if not group:
+            continue
+        sep = "：" if "：" in s else ":"
+        if sep not in s:
+            continue
+        std, rest = s.split(sep, 1)
+        std = std.strip()
+        if not std:
+            continue
+        for a in rest.split("#"):
+            a = a.strip()
+            if a:
+                alias2std[a] = (std, group)
+                norm2std.setdefault(_norm_key(a), (std, group))
+
+    _TPL_CACHE = (alias2std, norm2std)
+    log("  模板载入 %d 个别名 / %d 个标准名" % (len(alias2std), len({v[0] for v in alias2std.values()})))
+    return _TPL_CACHE
+
+
+def _tpl_resolve(name: str, tpl) -> tuple[str, str] | None:
+    alias2std, norm2std = tpl
+    if not alias2std:
+        return None
+    stripped = _strip_quality(name)
+    for key in (name, stripped):
+        if key in alias2std:
+            return alias2std[key]
+    for key in (_norm_key(name), _norm_key(stripped)):
+        if key in norm2std:
+            return norm2std[key]
+    return None
+
+
+def regroup_by_template(blocks):
+    """按模板把频道改到标准分组；模板里没有的保持原分组。返回 (blocks, 改动条数)。
+
+    自建分组（咪咕直播/轮播系列/电信组播）**不参与**模板重分组——它们本来
+    就是我们自己划的类，被模板按频道名拆散就乱了（例如咪咕的 CCTV1 会被
+    分到「央视频道」）。
+    """
+    keep = {"订阅信息", "推送时间", "咪咕直播", "电信组播",
+            "经典轮播", "明星剧场", "虎牙一起看", "YY轮播", "历届春晚"}
+    tpl = load_template()
+    if not tpl[0]:
+        return blocks, 0
+    out, moved = [], 0
+    for e, u in blocks:
+        m = GROUP_RE.search(e)
+        if not m:
+            out.append((e, u))
+            continue
+        old = m.group(1)
+        if old in keep:
+            out.append((e, u))
+            continue
+        hit = _tpl_resolve(name_of(e), tpl)
+        if not hit:
+            out.append((e, u))
+            continue
+        new = hit[1]
+        if new and new != old:
+            out.append((e.replace('group-title="%s"' % old,
+                                  'group-title="%s"' % new, 1), u))
+            moved += 1
+        else:
+            out.append((e, u))
+    return out, moved
 
 
 # ---------- 解析 ----------
@@ -549,6 +686,9 @@ def main():
 
     # 4) 用户订阅（咪咕直播 + 轮播类排最前，其次是组播/广东电信）
     blocks = migu_blocks + extra_blocks + full_blocks + gd_blocks
+    # 用频道名模板把分组校正到标准 38 组（模板里没有的保持原样，不瞎猜）
+    blocks, _regrouped = regroup_by_template(blocks)
+    log("  按模板重分组：%d 条改到标准分组" % _regrouped)
     if blocks:
         for name, info in sorted(users.items()):
             tok = info.get("token")
