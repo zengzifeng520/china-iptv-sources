@@ -4,8 +4,8 @@
    "host": "121.10.7.16:4000",
    "mode": "rtp",
    "ok": true,
-   "kbps": 6960,
-   "last_check": "10-31 05:05",
+   "kbps": 6962,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
    "in_use": true,
    "region": "广东电信"
@@ -14,8 +14,8 @@
    "host": "yanshifen.top:8889",
    "mode": "udp",
    "ok": true,
-   "kbps": 5944,
-   "last_check": "10-31 05:05",
+   "kbps": 6067,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
    "in_use": false,
    "region": "广东电信"
@@ -25,7 +25,7 @@
    "mode": "rtp",
    "ok": false,
    "kbps": 0,
-   "last_check": "10-31 05:05",
+   "last_check": "10-31 06:06",
    "in_use": false,
    "region": "广东电信"
   },
@@ -33,8 +33,8 @@
    "host": "14.127.213.91:4022",
    "mode": "udp",
    "ok": true,
-   "kbps": 6344,
-   "last_check": "10-31 05:05",
+   "kbps": 6301,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
    "in_use": true,
    "region": "广东电信"
@@ -42,9 +42,9 @@
   {
    "host": "ddns.cyruslee.top:8888",
    "mode": "udp",
-   "ok": false,
-   "kbps": 0,
-   "last_check": "10-31 05:05",
+   "ok": true,
+   "kbps": 6163,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
    "in_use": false,
    "region": "广东电信"
@@ -53,8 +53,8 @@
    "host": "home.szjim.top:4000",
    "mode": "udp",
    "ok": true,
-   "kbps": 2043,
-   "last_check": "10-31 05:05",
+   "kbps": 1150,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
    "in_use": false,
    "region": "广东电信"
@@ -63,8 +63,8 @@
    "host": "rfx2025.shunderen.top:2345",
    "mode": "udp",
    "ok": true,
-   "kbps": 4494,
-   "last_check": "10-31 05:05",
+   "kbps": 4918,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
    "in_use": false,
    "region": "广东电信"
@@ -73,18 +73,18 @@
    "host": "183.16.200.24:55555",
    "mode": "udp",
    "ok": true,
-   "kbps": 6326,
-   "last_check": "10-31 05:05",
+   "kbps": 6407,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
-   "in_use": false,
+   "in_use": true,
    "region": "广东电信"
   },
   {
    "host": "vpn.jk960.cn:8686",
    "mode": "udp",
-   "ok": true,
-   "kbps": 6014,
-   "last_check": "10-31 05:05",
+   "ok": false,
+   "kbps": 0,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:03",
    "in_use": false,
    "region": "广东电信"
@@ -93,10 +93,10 @@
    "host": "183.47.2.156:16883",
    "mode": "rtp",
    "ok": true,
-   "kbps": 6953,
-   "last_check": "10-31 05:05",
+   "kbps": 5803,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:25",
-   "in_use": true,
+   "in_use": false,
    "region": "广东电信"
   },
   {
@@ -104,7 +104,7 @@
    "mode": "rtp",
    "ok": false,
    "kbps": 0,
-   "last_check": "10-31 05:05",
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:26",
    "in_use": false,
    "region": "广东电信"
@@ -113,8 +113,8 @@
    "host": "14.157.24.38:2345",
    "mode": "rtp",
    "ok": true,
-   "kbps": 5890,
-   "last_check": "10-31 05:05",
+   "kbps": 6042,
+   "last_check": "10-31 06:06",
    "last_ok": "10-25 23:26",
    "in_use": false,
    "region": "广东电信"
@@ -124,7 +124,7 @@
    "mode": "udp",
    "ok": false,
    "kbps": 0,
-   "last_check": "10-31 05:05",
+   "last_check": "10-31 06:06",
    "in_use": false,
    "region": "广东电信"
   },
@@ -133,7 +133,7 @@
    "mode": "udp",
    "ok": false,
    "kbps": 0,
-   "last_check": "10-31 05:05",
+   "last_check": "10-31 06:06",
    "in_use": false,
    "region": "广东电信"
   },
@@ -142,11 +142,11 @@
    "mode": "udp",
    "ok": false,
    "kbps": 0,
-   "last_check": "10-31 05:05",
+   "last_check": "10-31 06:06",
    "in_use": false,
    "region": "广东电信"
   }
  ],
  "active_host": "121.10.7.16:4000",
- "checked": "2026-10-31 05:05:44"
+ "checked": "2026-10-31 06:06:07"
 }
