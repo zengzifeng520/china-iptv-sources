@@ -42,9 +42,9 @@ SRC_NETLIVE = "https://mpimg.cn/down.php/8a7c70ba5d709b2876b54c63d0acda08.txt"
 
 GROUP_ORDER = [
     "订阅信息", "推送时间",
-    # 自建/特殊源（咪咕排最前，电信组播紧随）
-    "咪咕直播", "电信组播",
-    # ---- 以下 38 个分组按 crawl/extra/template_national.txt 的顺序 ----
+    # 自建/特殊源（电信组播已取消，不再出现）
+    "咪咕直播",
+    # ---- 以下按 crawl/extra/template_national.txt 的顺序（IPTV 除外）----
     "央视频道", "中数传媒", "4K节目", "卫视频道", "港台节目",
     "北京节目", "天津节目", "河北节目", "山西节目", "内蒙古节目",
     "辽宁节目", "吉林节目", "黑龙江节目", "上海节目", "江苏节目",
@@ -52,11 +52,9 @@ GROUP_ORDER = [
     "河南节目", "湖北节目", "湖南节目", "广东频道", "广西节目",
     "海南节目", "重庆节目", "四川节目", "贵州节目", "云南节目",
     "西藏节目", "陕西节目", "甘肃节目", "青海节目", "宁夏节目",
-    "新疆节目", "IPTV", "地方频道",
-    # 模板自带的兜底组（购物/九画面/专区/导视这类非标准频道，模板里已明确归类）
-    "其他",
-    # 模板里完全没有的频道落到这里
-    "其他频道",
+    "新疆节目", "地方频道", "其他频道",
+    # 用户要求：IPTV 排在其他分组之后
+    "IPTV",
     # 自建轮播组统一排最后
     "经典轮播", "明星剧场", "虎牙一起看", "YY轮播", "历届春晚",
 ]
@@ -68,7 +66,7 @@ GROUP_RE = re.compile(r'group-title="([^"]*)"')
 HOST_RE = re.compile(r"https?://([^/\s]+)/(rtp|udp)/", re.I)
 
 GROUP_EMOJI = {
-    "订阅信息": "ℹ️", "推送时间": "🕒", "咪咕直播": "🎯", "电信组播": "🌐",
+    "订阅信息": "ℹ️", "推送时间": "🕒", "咪咕直播": "🎯",
     "央视频道": "📺", "中数传媒": "💠", "4K节目": "🎬", "卫视频道": "📡",
     "港台节目": "🎌",
     "北京节目": "🏯", "天津节目": "🎡", "河北节目": "🏔️", "山西节目": "⛰️",
@@ -79,7 +77,7 @@ GROUP_EMOJI = {
     "海南节目": "🥥", "重庆节目": "🏔️", "四川节目": "🐼", "贵州节目": "🍃",
     "云南节目": "🦚", "西藏节目": "🏔️", "陕西节目": "🏛️", "甘肃节目": "🐫",
     "青海节目": "🏔️", "宁夏节目": "🕌", "新疆节目": "🍇",
-    "IPTV": "🌍", "地方频道": "🏙️", "其他": "🗂️", "其他频道": "📌",
+    "IPTV": "🌍", "地方频道": "🏙️", "其他频道": "📌",
     "经典轮播": "🎞️", "明星剧场": "⭐", "虎牙一起看": "🐯", "YY轮播": "🎤",
     "历届春晚": "🎆", "系统": "⚙️",
 }
@@ -679,21 +677,17 @@ def main():
         log("  轮播类读取失败: %s" % exc)
         extra_blocks = []
 
-    # 3) 广东电信：探测中转 → 最快 N 台 → nas.m3u
-    log("探测广东中转池（%d 台）…" % len(relays))
-    gd_blocks, alive = build_gd(channels, relays)
-    if gd_blocks:
-        nas = "#EXTM3U\n# 本地订阅 %s 中转 %s\n" % (push_time, alive[0]["host"])
-        nas += "\n".join(e + "\n" + u for e, u in gd_blocks) + "\n"
-        files.append(("output/nas.m3u", nas.encode("utf-8")))
-        log("  广东 %d 条（%d 台中转）" % (len(gd_blocks), len(alive)))
-    else:
-        log("  广东中转全部探测失败，保留线上旧 nas.m3u")
-    # 把探测结果写回 relays.json（供后台/状态页查看）
-    pool_state = {"relays": relays, "active_host": alive[0]["host"] if alive else "",
-                  "checked": push_time}
+    # 3) 广东电信中转：**已按用户要求取消订阅**
+    #    - 不再探测中转、不再生成「电信组播」分组
+    #    - relays.json 池子 IP 清空并写回（防止旧 IP 残留）
+    #    - 旧的 nas.m3u 写成空订阅，避免播放器还在读历史中转地址
+    gd_blocks, alive = [], []
     files.append(("nas/data/relays.json",
-                  json.dumps(pool_state, ensure_ascii=False, indent=1).encode("utf-8")))
+                  json.dumps({"relays": [], "active_host": "", "checked": push_time},
+                             ensure_ascii=False, indent=1).encode("utf-8")))
+    files.append(("output/nas.m3u",
+                  ("#EXTM3U\n# 电信组播订阅已取消（%s）\n" % push_time).encode("utf-8")))
+    log("  电信组播：已取消，不探测中转 / 不生成分组 / 池子 IP 清空")
 
     # 4) 用户订阅（咪咕直播 + 轮播类排最前，其次是组播/广东电信）
     blocks = migu_blocks + extra_blocks + full_blocks + gd_blocks
