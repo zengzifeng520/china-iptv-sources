@@ -187,7 +187,13 @@ def load_extra_blocks():
 
 
 def rank_of(group):
+    """分组在 GROUP_ORDER 里的位置；已带 emoji 前缀的组名先剥掉再比，
+    否则「🕒 推送时间」匹配不上「推送时间」，会被排到最后。"""
     g = group.strip()
+    for e in GROUP_EMOJI.values():
+        if g.startswith(e):
+            g = g[len(e):].strip()
+            break
     for i, k in enumerate(GROUP_ORDER):
         if g == k or g.startswith(k):
             return i
@@ -608,9 +614,10 @@ def build_user(blocks, expire, created, push_time, ts=None):
     days = max(0, (exp - now).days)
     info_extinf = (f'#EXTINF:-1 tvg-id="订阅" tvg-name="订阅" '
                    f'group-title="订阅信息 到期 {expire}",有效期 {created} ~ {expire}（剩余 {days} 天）')
-    push_extinf = (f'#EXTINF:-1 tvg-id="推送" tvg-name="推送" '
-                   f'group-title="推送时间 {push_time}",{push_time} 推送')
-    allb = [(info_extinf, PROMO_URL), (push_extinf, PROMO_URL)] + list(blocks)
+    # 推送时间组统一写法（与 gateway/独立订阅一致）：
+    #   group-title="🕒 推送时间"，频道名是「YYYY-MM-DD HH:MM:SS 推送」
+    push_line = push_extinf(push_time)
+    allb = [(info_extinf, PROMO_URL), (push_line, PROMO_URL)] + list(blocks)
     # 丢弃「更新时间」分组
     allb = [b for b in allb if 'group-title="更新时间' not in b[0]]
     # 网络直播组内排序
