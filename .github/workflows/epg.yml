@@ -1,0 +1,63 @@
+name: 同步 EPG
+
+# 订阅头部统一写 https://zengzifeng.ccwu.cc/output/epg.xml，
+# 所以本仓库必须自己有一份 EPG 成品 —— 这个工作流负责每小时从
+# zzf.new.tg 拉最新的瘦身版 EPG 落到 output/epg.xml 并提交。
+#
+# 为什么拉 .gz：zzf 那边成品是 5.5MB 未压缩 / 439KB gzip，
+# 拉 gz 再本地解压，速度快十几倍，Actions 也不会因为大文件超时。
+on:
+  schedule:
+    # 每小时 :17（UTC，即北京 :17）。zzf 那边每天 00:28/09:26/17:59 重建 EPG，
+    # 这里每小时跟一次，没变化会自动跳过提交。
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: epg-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 拉取 EPG（zzf 瘦身版）
+        run: |
+          set -e
+          curl -sL --max-time 300 -o /tmp/epg.xml.gz "https://zzf.new.tg/epg.xml.gz"
+          gz=$(wc -c < /tmp/epg.xml.gz 2>/dev/null || echo 0)
+          echo "下载 gz: $gz 字节"
+          if [ "$gz" -lt 50000 ]; then
+            echo "::error::EPG gz 异常（$gz 字节），本轮不更新"
+            exit 1
+          fi
+          gzip -dc /tmp/epg.xml.gz > output/epg.new.xml
+          size=$(wc -c < output/epg.new.xml 2>/dev/null || echo 0)
+          echo "解压后: $size 字节"
+          if [ "$size" -lt 1000000 ]; then
+            echo "::error::EPG 解压异常（$size 字节），本轮不更新"
+            exit 1
+          fi
+          head -c 200 output/epg.new.xml | grep -q "<?xml" || { echo "::error::不是有效 XML"; exit 1; }
+          mv output/epg.new.xml output/epg.xml
+      - name: 提交
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -f output/epg.xml
+          if git diff --staged --quiet; then echo "EPG 无变化，跳过提交"; exit 0; fi
+          git commit -m "chore(epg): 同步 EPG $(date -u '+%Y-%m-%d %H:%M UTC')"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase --autostash -X theirs origin main && git push origin HEAD:main; then
+              echo "推送成功（第 $attempt 次）"; exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep 5
+          done
+          echo "::error::连续 5 次推送失败"; exit 1
+    env:
+      TZ: Asia/Shanghai
