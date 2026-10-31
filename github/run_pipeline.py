@@ -340,22 +340,22 @@ def regroup_by_template(blocks):
             out.append((e, u))
             continue
         old = m.group(1)
-        if old in keep:
-            out.append((e, u))
-            continue
+        keep_grp = old in keep
         hit = _tpl_resolve(name, tpl)
         if not hit:
             out.append((e, u))
             continue
         std, grp = hit
-        # 2) 名字对齐 EPG 写法；同标准名自然合并成一个频道
+        # 2) 名字统一对齐 EPG 写法（自建分组也做，否则咪咕的 CCTV1综合
+        #    对不上 EPG 的 CCTV-1 综合）；但自建分组不改分组
         disp = epg.get(_norm_key(std), std)
-        if disp == name and grp == old:
+        new_grp = old if keep_grp else grp
+        if disp == name and new_grp == old:
             out.append((e, u))
             continue
-        out.append((extinf(grp, disp), u))
+        out.append((extinf(new_grp, disp), u))
         stat["renamed"] += 1
-        if grp != old:
+        if new_grp != old:
             stat["moved"] += 1
     return out, stat
 
