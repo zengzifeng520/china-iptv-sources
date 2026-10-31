@@ -531,6 +531,51 @@ def build_gd(channels, relays):
 
 
 # ---------- 生成 ----------
+def _emoji_group(g):
+    """给分组名加 emoji（规则与 with_emoji 一致：精确优先、最长前缀兜底）。"""
+    if any(g.startswith(e) for e in GROUP_EMOJI.values()):
+        return g
+    emoji = GROUP_EMOJI.get(g)
+    if emoji is None:
+        for base in sorted(GROUP_EMOJI, key=len, reverse=True):
+            if g.startswith(base):
+                emoji = GROUP_EMOJI[base]
+                break
+    return ("%s %s" % (emoji, g)) if emoji else g
+
+
+def build_txt(blocks, with_info=None):
+    """生成 txt 订阅：`分组,#genre#` + `频道名,地址`（DIYP / 酷9 / TVBox 通用）。
+
+    排序、封顶与 m3u 完全同一套逻辑，两种格式内容一致。
+    with_info=(到期说明, 推送时间) 时，头部加「订阅信息 / 推送时间」两组。
+    """
+    allb = [b for b in blocks if 'group-title="更新时间' not in b[0]]
+    allb = reorder_netlive_run(allb)
+    allb.sort(key=lambda b: (rank_of(GROUP_RE.search(b[0]).group(1) if GROUP_RE.search(b[0]) else ""),
+                             natkey(name_of(b[0]))))
+    out, cur, cnt = [], None, {}
+    if with_info:
+        info_line, push_line = with_info
+        out.append("订阅信息,#genre#")
+        out.append("%s,%s" % (info_line, PROMO_URL))
+        out.append("推送时间,#genre#")
+        out.append("%s,%s" % (push_line, PROMO_URL))
+        cur = "推送时间"          # 让第一组一定重开
+    for e, u in allb:
+        m = GROUP_RE.search(e)
+        grp = m.group(1) if m else "其他频道"
+        nm = name_of(e)
+        if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
+            continue
+        cnt[nm] = cnt.get(nm, 0) + 1
+        if grp != cur:
+            out.append("%s,#genre#" % _emoji_group(grp))
+            cur = grp
+        out.append("%s,%s" % (nm, u))
+    return "\n".join(out) + "\n"
+
+
 def build_user(blocks, expire, created, push_time, ts=None):
     info_url = next((u for _e, u in blocks if u.startswith("http")), "https://zengzifeng.ccwu.cc")
     now = datetime.now(CST)
@@ -693,6 +738,7 @@ def main():
             migu_out = "#EXTM3U x-tvg-url=\"https://zzf.new.tg/epg.xml\"\n"
             migu_out += "\n".join(with_emoji(e) + "\n" + u for e, u in migu_blocks) + "\n"
             files.append(("output/migu.m3u", migu_out.encode("utf-8")))
+            files.append(("output/migu.txt", build_txt(migu_blocks).encode("utf-8")))
             log("  咪咕直播 %d 条（静态，不巡检）" % len(migu_blocks))
     except Exception as exc:
         log("  咪咕直播读取失败: %s" % exc)
@@ -759,11 +805,16 @@ def main():
             if ts_val and int(ts_val) < now_ts:
                 empty = "#EXTM3U\n# 订阅已过期，请联系管理员续期\n"
                 files.append(("output/users/u_%s.m3u" % tok, empty.encode("utf-8")))
+                files.append(("output/users/u_%s.txt" % tok, empty.encode("utf-8")))
                 log("  [%s] 已过期 -> 订阅清空" % name)
                 continue
             text = build_user(blocks, expire, created, push_time, info.get("ts"))
             files.append(("output/users/u_%s.m3u" % tok, text.encode("utf-8")))
-            log("  [%s] %d 条" % (name, text.count("#EXTINF")))
+            # 同一份内容再出一版 txt（DIYP/酷9 直接吃 txt）
+            txt = build_txt(blocks, ("有效期 %s ~ %s" % (created, expire),
+                                     "%s 推送" % push_time))
+            files.append(("output/users/u_%s.txt" % tok, txt.encode("utf-8")))
+            log("  [%s] %d 条（m3u + txt）" % (name, text.count("#EXTINF")))
 
     # 5) 清理孤儿订阅（删掉的用户）
     keep_tokens = {u["token"] for u in users.values() if u.get("token")}
@@ -776,7 +827,8 @@ def main():
     # 5.5) 共享订阅（网关 UPSTREAM）
     if blocks:
         files.append(("output/gateway.m3u", build_shared(blocks).encode("utf-8")))
-        log("  共享订阅 gateway.m3u 已生成")
+        files.append(("output/gateway.txt", build_txt(blocks).encode("utf-8")))
+        log("  共享订阅 gateway.m3u / gateway.txt 已生成")
 
     # 6) 推送
     n = push_batch(token, files)

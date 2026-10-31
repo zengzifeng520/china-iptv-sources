@@ -95,7 +95,12 @@ def build(key: str) -> int:
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
-    print(f"[{key}] {out_rel}：{len(entries)} 条，台标 {hit} 条，分组「{disp}」")
+    # 同名 .txt（DIYP / 酷9 直接读 txt）：分组,#genre# + 频道名,地址
+    txt_out = os.path.splitext(out)[0] + ".txt"
+    tlines = [f"{disp},#genre#"] + [f"{n},{u}" for n, u in entries]
+    with open(txt_out, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(tlines) + "\n")
+    print(f"[{key}] {out_rel} + .txt：{len(entries)} 条，台标 {hit} 条，分组「{disp}」")
     return 0
 
 
