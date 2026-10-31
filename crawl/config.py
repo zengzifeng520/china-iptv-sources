@@ -84,7 +84,15 @@ mcast_quake = {
 #   title : 仅用于日志显示
 # 发布地址：https://zengzifeng.ccwu.cc/crawl/<file>.m3u
 split_outputs = [
-    {"file": "guangxi", "title": "广西电信", "groups": ["广西", "电信"]},
+    {
+        "file": "guangxi",
+        "title": "广西电信",
+        "groups": ["广西", "电信"],
+        "verify": True,            # 发布前实测拉流，只留真能出流的线路
+        "verify_timeout": 6,       # 单条线路拉流超时（秒）；组播建连慢，别设太小
+        "verify_min_bytes": 50000, # 6 秒内至少读到这么多字节才算可播
+        "verify_workers": 16,
+    },
 ]
 
 # ── URL 黑名单 ───────────────────────────────────────────────────────

@@ -1,10 +1,13 @@
 import os
 import re
 import sys
+import time
 import asyncio
+import urllib.request
 import requests
 import logging
 from collections import OrderedDict
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 import config
 import check as quality_checker
@@ -349,6 +352,22 @@ def _print_domain_suggestions(fail_domains: dict):
         logging.info(f"  {domain}  {info}")
 
 
+def _stream_alive(url, timeout=6.0, min_bytes=50000):
+    """真实拉流判断：组播/rtp 没有元数据，读满 min_bytes 才算可播"""
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        start, total = time.time(), 0
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            while total < min_bytes and time.time() - start < timeout:
+                chunk = resp.read(16384)
+                if not chunk:
+                    break
+                total += len(chunk)
+        return total >= min_bytes
+    except Exception:
+        return False
+
+
 def write_split_outputs(channels, epg_id_map=None, check_results=None):
     """
     把命中的分类单独写成 crawl/<file>.m3u / <file>.txt（用于「广西电信」这类独立订阅）。
@@ -374,6 +393,40 @@ def write_split_outputs(channels, epg_id_map=None, check_results=None):
 
         m3u_path = f"{name}.m3u"
         txt_path = f"{name}.txt"
+
+        # 先收集候选线路，可选做一次真实拉流校验（组播源跨网时，上游质检不一定准）
+        plan = []
+        for category, ch_dict in picked.items():
+            for channel_name, url_list in ch_dict.items():
+                urls = sorted(url_list,
+                              key=lambda u: _url_sort_key(u, check_results, category))
+                picked_urls = []
+                for url in urls:
+                    if not url or url in picked_urls:
+                        continue
+                    if any(b in url for b in config.url_blacklist):
+                        continue
+                    picked_urls.append(url)
+                if config.max_lines_per_channel > 0:
+                    picked_urls = picked_urls[:config.max_lines_per_channel]
+                for url in picked_urls:
+                    plan.append((category, channel_name, url.split("$", 1)[0] if "$" in url else url))
+
+        if item.get("verify", True) and plan:
+            uniq = list(dict.fromkeys(u for _, _, u in plan))
+            timeout = float(item.get("verify_timeout", 6))
+            min_bytes = int(item.get("verify_min_bytes", 50000))
+            workers = int(item.get("verify_workers", 16))
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                alive = dict(zip(uniq, pool.map(
+                    lambda u: _stream_alive(u, timeout, min_bytes), uniq)))
+            kept = [p for p in plan if alive.get(p[2])]
+            logging.info("[拆分输出] %s 校验：%d/%d 条线路实测可出流", title, len(kept), len(plan))
+            if kept:
+                plan = kept
+            else:
+                logging.warning("[拆分输出] %s 校验后 0 条可播，退回完整列表", title)
+
         lines = 0
         with open(m3u_path, "w", encoding="utf-8") as f_m3u, \
                 open(txt_path, "w", encoding="utf-8") as f_txt:
@@ -382,35 +435,21 @@ def write_split_outputs(channels, epg_id_map=None, check_results=None):
             f_m3u.write(f"# 更新时间：{stamp}（北京时间）\n")
             f_txt.write(f"# 更新时间：{stamp}（北京时间）\n")
 
-            for category, ch_dict in picked.items():
-                f_txt.write(f"{category},#genre#\n")
-                for channel_name, url_list in ch_dict.items():
-                    urls = sorted(url_list,
-                                  key=lambda u: _url_sort_key(u, check_results, category))
-                    picked_urls = []
-                    for url in urls:
-                        if not url or url in picked_urls:
-                            continue
-                        if any(b in url for b in config.url_blacklist):
-                            continue
-                        picked_urls.append(url)
-                    if config.max_lines_per_channel > 0:
-                        picked_urls = picked_urls[:config.max_lines_per_channel]
-                    if not picked_urls:
-                        continue
-
-                    tvg_id = epg_id_map.get(channel_name, channel_name)
-                    logo = logo_source.resolve(channel_name)
-                    logo_attr = f' tvg-logo="{logo}"' if logo else ""
-                    for url in picked_urls:
-                        base_url = url.split("$", 1)[0] if "$" in url else url
-                        f_m3u.write(
-                            f'#EXTINF:-1 tvg-id="{tvg_id}" tvg-name="{channel_name}"'
-                            f'{logo_attr} group-title="{category}",{channel_name}\n'
-                        )
-                        f_m3u.write(base_url + "\n")
-                        f_txt.write(f"{channel_name},{base_url}\n")
-                        lines += 1
+            current_cat = None
+            for category, channel_name, base_url in plan:
+                if category != current_cat:
+                    f_txt.write(f"{category},#genre#\n")
+                    current_cat = category
+                tvg_id = epg_id_map.get(channel_name, channel_name)
+                logo = logo_source.resolve(channel_name)
+                logo_attr = f' tvg-logo="{logo}"' if logo else ""
+                f_m3u.write(
+                    f'#EXTINF:-1 tvg-id="{tvg_id}" tvg-name="{channel_name}"'
+                    f'{logo_attr} group-title="{category}",{channel_name}\n'
+                )
+                f_m3u.write(base_url + "\n")
+                f_txt.write(f"{channel_name},{base_url}\n")
+                lines += 1
 
         logging.info("[拆分输出] %s → %s / %s（%d 条线路）", title, m3u_path, txt_path, lines)
 
