@@ -209,6 +209,37 @@ def _norm_key(name: str) -> str:
     return re.sub(r"[\s·\-_.—–()（）]", "", name).lower()
 
 
+# 标清后缀：用户要求「带 SD 后缀的频道一律删除」
+_SD_RE = re.compile(r"(?:^|[\s\-_])(?:SD|标清)$", re.I)
+
+
+def _is_sd(name: str) -> bool:
+    return bool(_SD_RE.search(name)) or name.upper().endswith("SD")
+
+
+# EPG 的 channel id 列表（crawl/extra/epg_ids.json，615 个）。
+# 作用：把模板标准名对齐到 EPG 的写法（CCTV8 → CCTV-8），保证节目单能匹配上。
+EPG_IDS_PATH = os.path.join(ROOT, "crawl", "extra", "epg_ids.json")
+_EPG_INDEX = None
+
+
+def load_epg_ids():
+    """返回 {规范化频道名: EPG 原样 id}；文件缺失时返回空 dict（不影响主流程）。"""
+    global _EPG_INDEX
+    if _EPG_INDEX is not None:
+        return _EPG_INDEX
+    idx: dict[str, str] = {}
+    if os.path.exists(EPG_IDS_PATH):
+        try:
+            for i in json.load(open(EPG_IDS_PATH, encoding="utf-8")):
+                if i:
+                    idx.setdefault(_norm_key(i), i)
+        except Exception as exc:  # noqa: BLE001
+            log("  EPG id 读取失败: %s" % exc)
+    _EPG_INDEX = idx
+    return idx
+
+
 def load_template():
     """返回 (alias2std, norm2std)；alias -> (标准名, 标准分组)。"""
     global _TPL_CACHE
@@ -270,19 +301,32 @@ def _tpl_resolve(name: str, tpl) -> tuple[str, str] | None:
 
 
 def regroup_by_template(blocks):
-    """按模板把频道改到标准分组；模板里没有的保持原分组。返回 (blocks, 改动条数)。
+    """按模板重分组 + 去标清 + 合并同频道。
 
-    自建分组（咪咕直播/轮播系列/电信组播）**不参与**模板重分组——它们本来
-    就是我们自己划的类，被模板按频道名拆散就乱了（例如咪咕的 CCTV1 会被
-    分到「央视频道」）。
+    规则：
+      1. 名字以 SD/标清 结尾的条目**直接丢弃**（用户要求）；
+      2. 命中模板的频道改到标准分组，并把名字对齐 EPG 写法
+         （模板名 CCTV8 → EPG 的 CCTV-8），于是「CCTV8 / CCTV8HD / CCTV-8高清」
+         会合并成同一个频道名，播放器里不再重复；
+      3. 自建分组（咪咕直播/轮播系列）只做 SD 过滤，不改名也不改分组；
+      4. 模板里没有的频道保持原样——绝不瞎猜。
+
+    返回 (blocks, {"moved":改分组数, "dropped":丢SD数, "renamed":改名数})
     """
-    keep = {"订阅信息", "推送时间", "咪咕直播", "电信组播",
+    keep = {"订阅信息", "推送时间", "咪咕直播",
             "经典轮播", "明星剧场", "虎牙一起看", "YY轮播", "历届春晚"}
+    stat = {"moved": 0, "dropped": 0, "renamed": 0}
     tpl = load_template()
     if not tpl[0]:
-        return blocks, 0
-    out, moved = [], 0
+        return blocks, stat
+    epg = load_epg_ids()
+    out = []
     for e, u in blocks:
+        name = name_of(e)
+        # 1) 标清一律丢
+        if _is_sd(name):
+            stat["dropped"] += 1
+            continue
         m = GROUP_RE.search(e)
         if not m:
             out.append((e, u))
@@ -291,19 +335,21 @@ def regroup_by_template(blocks):
         if old in keep:
             out.append((e, u))
             continue
-        hit = _tpl_resolve(name_of(e), tpl)
+        hit = _tpl_resolve(name, tpl)
         if not hit:
             out.append((e, u))
             continue
-        new = hit[1]
-        if new and new != old:
-            out.append((e.replace('group-title="%s"' % old,
-                                  'group-title="%s"' % new, 1), u))
-            moved += 1
-        else:
+        std, grp = hit
+        # 2) 名字对齐 EPG 写法；同标准名自然合并成一个频道
+        disp = epg.get(_norm_key(std), std)
+        if disp == name and grp == old:
             out.append((e, u))
-    return out, moved
-
+            continue
+        out.append((extinf(grp, disp), u))
+        stat["renamed"] += 1
+        if grp != old:
+            stat["moved"] += 1
+    return out, stat
 
 # ---------- 解析 ----------
 def parse_m3u(text):
@@ -690,8 +736,9 @@ def main():
     # 4) 用户订阅（咪咕直播 + 轮播类排最前，其次是组播/广东电信）
     blocks = migu_blocks + extra_blocks + full_blocks + gd_blocks
     # 用频道名模板把分组校正到标准 38 组（模板里没有的保持原样，不瞎猜）
-    blocks, _regrouped = regroup_by_template(blocks)
-    log("  按模板重分组：%d 条改到标准分组" % _regrouped)
+    blocks, _stat = regroup_by_template(blocks)
+    log("  重分组：改分组 %d 条 / 丢标清(SD) %d 条 / 合并同频道改名 %d 条"
+        % (_stat["moved"], _stat["dropped"], _stat["renamed"]))
     if blocks:
         for name, info in sorted(users.items()):
             tok = info.get("token")
