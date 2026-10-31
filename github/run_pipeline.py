@@ -125,6 +125,14 @@ def load_json(path, default):
 
 
 def natkey(s):
+    """频道名自然排序键。
+
+    先抹掉空格/横杠/下划线/间隔点：否则「CCTV4欧洲」的 'cctv' 会小于
+    「CCTV-1」的 'cctv-'，导致 4 套变体跑到 1 套前面（央视频道乱序的根因）。
+    抹掉之后 CCTV-1 / CCTV1 / CCTV4欧洲 / CCTV5+ 都按台号自然比较，
+    同台号的「主台」在前、变体在后（'' < '欧洲' < '美洲'）。
+    """
+    s = re.sub(r"[\s\-_·]", "", s)
     return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", s)]
 
 
