@@ -11,6 +11,7 @@ import json
 import logging
 import aiohttp
 import config
+import fetch_quake
 
 logger = logging.getLogger(__name__)
 
@@ -48,12 +49,8 @@ def _append_node(channels, node):
             channels.setdefault(cat, {}).setdefault(name, []).append(channel_url)
 
 
-async def fetch_multicast():
-    """
-    主入口：调用列表提取 API（/extract_multicast），返回 channels 格式。
-    返回: {category: {channel_name: [urls]}}
-    category 形如 "组播源-安徽省 安徽电信"
-    """
+async def _fetch_primary():
+    """主接口：/extract_multicast，返回 channels 格式（空 dict 表示没拿到）"""
     mcast_api = (config.mcast_config.get("mcast_api") or "").rstrip("/")
     if not mcast_api:
         logger.warning("[组播源] 未配置 mcast_api")
@@ -70,7 +67,51 @@ async def fetch_multicast():
             region = (node.get("region") or "").strip()
             node["_cat"] = f"组播源-{region}" if region else "组播源"
             _append_node(channels, node)
-        logger.info(f"[组播源] 获取 {len(results)} 个组播节点")
+        logger.info(f"[组播源] 主接口返回 {len(results)} 个组播节点")
+    return channels
+
+
+def _merge(base, extra):
+    """把 extra 合并进 base（去重）"""
+    for cat, ch_dict in (extra or {}).items():
+        bucket = base.setdefault(cat, {})
+        for name, urls in ch_dict.items():
+            cur = bucket.setdefault(name, [])
+            for u in urls:
+                if u not in cur:
+                    cur.append(u)
+    return base
+
+
+async def fetch_multicast():
+    """
+    主入口：主接口优先，失败/为空时用 Quake + udpxy 备用链路补齐。
+    返回: {category: {channel_name: [urls]}}
+    category 形如 "组播源-安徽省 安徽电信"
+    """
+    channels = await _fetch_primary()
+
+    quake_cfg = getattr(config, "mcast_quake", {}) or {}
+    mode = (quake_cfg.get("mode") or "fallback").lower()
+
+    if quake_cfg.get("enabled") and quake_cfg.get("token"):
+        try:
+            if not channels or mode == "always":
+                reason = "主接口无结果" if not channels else "always 模式补充"
+                logger.info(f"[组播源] 启用 Quake 备用链路（{reason}）")
+                extra = await fetch_quake.fetch_quake_multicast(channels or None)
+                channels = _merge(channels, extra)
+        except Exception as e:
+            logger.warning(f"[组播源] Quake 备用链路异常: {e}", exc_info=True)
+    elif not channels:
+        logger.info("[组播源] 未配置 mcast_quake.token，无法走 Quake 备用链路")
+
+    # 成功结果存快照，供下次主接口挂掉时复用 /rtp/ 路径
+    if channels:
+        try:
+            fetch_quake.save_snapshot(channels)
+        except Exception as e:
+            logger.warning(f"[组播源] 保存快照失败: {e}")
 
     # 按 频道名 去重（同名频道保留不同 URL）
     for cat in channels:

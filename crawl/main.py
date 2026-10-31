@@ -349,6 +349,72 @@ def _print_domain_suggestions(fail_domains: dict):
         logging.info(f"  {domain}  {info}")
 
 
+def write_split_outputs(channels, epg_id_map=None, check_results=None):
+    """
+    把命中的分类单独写成 crawl/<file>.m3u / <file>.txt（用于「广西电信」这类独立订阅）。
+    必须在 remap_by_template 之前调用，否则「组播源-XX」分类已被并入模板分组。
+    """
+    items = getattr(config, "split_outputs", []) or []
+    if not items:
+        return
+    epg_id_map = epg_id_map or {}
+    stamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    for item in items:
+        keywords = item.get("groups") or []
+        name = item.get("file") or "split"
+        title = item.get("title") or name
+        if not keywords:
+            continue
+        picked = {c: ch for c, ch in channels.items()
+                  if all(k in c for k in keywords)}
+        if not picked:
+            logging.warning("[拆分输出] %s 未匹配到分类（关键字 %s），跳过", title, keywords)
+            continue
+
+        m3u_path = f"{name}.m3u"
+        txt_path = f"{name}.txt"
+        lines = 0
+        with open(m3u_path, "w", encoding="utf-8") as f_m3u, \
+                open(txt_path, "w", encoding="utf-8") as f_txt:
+            epg_attr = ",".join(chr(34) + u + chr(34) for u in config.epg_urls)
+            f_m3u.write(f"#EXTM3U x-tvg-url={epg_attr}\n")
+            f_m3u.write(f"# 更新时间：{stamp}（北京时间）\n")
+            f_txt.write(f"# 更新时间：{stamp}（北京时间）\n")
+
+            for category, ch_dict in picked.items():
+                f_txt.write(f"{category},#genre#\n")
+                for channel_name, url_list in ch_dict.items():
+                    urls = sorted(url_list,
+                                  key=lambda u: _url_sort_key(u, check_results, category))
+                    picked_urls = []
+                    for url in urls:
+                        if not url or url in picked_urls:
+                            continue
+                        if any(b in url for b in config.url_blacklist):
+                            continue
+                        picked_urls.append(url)
+                    if config.max_lines_per_channel > 0:
+                        picked_urls = picked_urls[:config.max_lines_per_channel]
+                    if not picked_urls:
+                        continue
+
+                    tvg_id = epg_id_map.get(channel_name, channel_name)
+                    logo = logo_source.resolve(channel_name)
+                    logo_attr = f' tvg-logo="{logo}"' if logo else ""
+                    for url in picked_urls:
+                        base_url = url.split("$", 1)[0] if "$" in url else url
+                        f_m3u.write(
+                            f'#EXTINF:-1 tvg-id="{tvg_id}" tvg-name="{channel_name}"'
+                            f'{logo_attr} group-title="{category}",{channel_name}\n'
+                        )
+                        f_m3u.write(base_url + "\n")
+                        f_txt.write(f"{channel_name},{base_url}\n")
+                        lines += 1
+
+        logging.info("[拆分输出] %s → %s / %s（%d 条线路）", title, m3u_path, txt_path, lines)
+
+
 async def async_main():
     """异步主入口：fetch -> check -> remap -> write"""
     epg_id_map = fetch_epg_id_map()
@@ -375,6 +441,9 @@ async def async_main():
         channels = quality_checker.filter_dead_urls(channels, check_results)
         _print_domain_suggestions(fail_domains)
         logging.info("[质量检测] 完成")
+
+    # 独立订阅（如「广西电信」）要在模板归一之前拆出来
+    write_split_outputs(channels, epg_id_map, check_results)
 
     matched, leftover = remap_by_template(channels, template_map)
     updateChannelUrlsM3U(matched, leftover, epg_id_map, check_results)

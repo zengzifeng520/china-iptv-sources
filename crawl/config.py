@@ -2,6 +2,20 @@
 # IPTV 直播源自动聚合工具 — 配置文件
 # 所有开关和阈值均可在此调整
 # ═══════════════════════════════════════════════════════════════════
+import os
+
+
+def _load_quake_token():
+    """Quake token 优先取环境变量，其次读本地文件 crawl/.quake_token（已 gitignore）"""
+    token = (os.environ.get("QUAKE_TOKEN") or "").strip()
+    if token:
+        return token
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".quake_token")
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    except OSError:
+        return ""
 
 # ── IP 优先级 ───────────────────────────────────────────────────────
 # "ipv6" = IPv6 地址优先排在前面；"ipv4" = IPv4 优先
@@ -32,6 +46,46 @@ mcast_config = {
     "mcast_keyword": "",
     "enabled": True,
 }
+
+# ── 组播源 · Quake 备用链路 ──────────────────────────────────────────
+# 主接口（mcast_api）拿不到数据 / 需要额外补充时，用 360 Quake 测绘接口
+# 搜索各运营商暴露在公网的 udpxy 节点，把组播地址重新绑到可用节点上。
+#
+# token        : 360 Quake 的 API token，注册 quake.360.net 后在个人中心获取（必填）
+# mode         : "fallback"=仅当主接口无结果时启用；"always"=每次都额外补充
+# regions      : 指定地区，格式 ["广西-电信", "广东-电信"]；空=沿用主接口结果的地区
+#                （主接口也无结果时，取地址库里前 max_regions 个组合）
+# max_regions  : regions 为空且没有快照时，最多试几个地区（省 Quake 额度）
+# pages        : Quake 每个地区的翻页数（每页 10 条）
+# cdn_prefix   : GitHub raw 加速前缀，地址库下载走它（国内直连 raw 常失败）
+mcast_quake = {
+    "enabled": True,
+    "token": _load_quake_token(),      # 环境变量 QUAKE_TOKEN 或 crawl/.quake_token
+    "api": "https://quake.360.net/api/v3/search/quake_service",
+    "shortcut": "",                    # 快捷检索 ID（账号维度，留空即可）
+    "mode": "always",                  # fallback=主接口挂了才用；always=每次都用 Quake 补广西电信
+    "regions": ["广西-电信"],
+    "max_regions": 6,
+    "max_udpxy_per_region": 3,
+    "max_udpxy_probe": 10,
+    "max_channels_per_region": 400,
+    "max_urls_per_channel": 4,         # 每频道最多保留几条备用线路，防止线路数爆炸
+    "pages": 1,                        # 每地区翻页数；每页 10 条 ≈ 10 积分（基础会员 3000 积分/月）
+    "timeout": 10,
+    "cache_days": 7,
+    "library_index": "https://raw.githubusercontent.com/maowei1125/spider-iptv/main/data/iptv_data.sql",
+    "library_base": "https://raw.githubusercontent.com/maowei1125/spider-iptv/main/",
+    "cdn_prefix": "https://gh-proxy.org/",
+}
+
+# ── 额外拆分输出 ────────────────────────────────────────────────────
+# 把命中的组播分类单独发布成一条订阅链接（生成 crawl/<file>.m3u 和 <file>.txt）
+#   groups: 分类名需要同时包含的关键字，如 ["广西", "电信"] 命中「组播源-广西电信」
+#   title : 仅用于日志显示
+# 发布地址：https://zengzifeng.ccwu.cc/crawl/<file>.m3u
+split_outputs = [
+    {"file": "guangxi", "title": "广西电信", "groups": ["广西", "电信"]},
+]
 
 # ── URL 黑名单 ───────────────────────────────────────────────────────
 # 播放地址包含以下任意子串时会被自动过滤掉

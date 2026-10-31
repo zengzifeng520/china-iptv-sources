@@ -2,7 +2,8 @@ name: 抓取组播源
 
 on:
   schedule:
-    - cron: '30 7 * * *'
+    # UTC 22:30 = 北京 06:30，早上第一时间更新订阅
+    - cron: '30 22 * * *'
   workflow_dispatch:
 
 permissions:
@@ -35,11 +36,16 @@ jobs:
           echo "::error::生成结果异常（$after 行），本轮不发布"
           exit 1
         fi
+        gx=$(grep -c "rtp/" crawl/guangxi.txt 2>/dev/null || echo 0)
+        echo "crawl/guangxi.txt: $gx 条线路"
+        if [ "$gx" -lt 20 ]; then
+          echo "::warning::广西电信独立订阅只有 $gx 条线路，请检查组播链路"
+        fi
     - name: 提交
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add -f crawl/live.m3u crawl/live.txt crawl/function.log
+        git add -f crawl/live.m3u crawl/live.txt crawl/guangxi.m3u crawl/guangxi.txt crawl/function.log
         if git diff --staged --quiet; then echo "无变化，跳过提交"; exit 0; fi
         git commit -m "Auto-update multicast playlists"
         for attempt in 1 2 3 4 5; do
@@ -52,3 +58,4 @@ jobs:
         echo "::error::连续 5 次推送失败"; exit 1
     env:
       TZ: Asia/Shanghai
+      QUAKE_TOKEN: ${{ secrets.QUAKE_TOKEN }}
