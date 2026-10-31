@@ -547,11 +547,25 @@ def _emoji_group(g):
     return ("%s %s" % (emoji, g)) if emoji else g
 
 
-def build_txt(blocks, with_info=None):
+def _push_label(ts=None):
+    """统一的推送时间文案：`2026-10-31 22:57:38 推送`。"""
+    ts = ts or datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S")
+    return ts if ts.endswith("推送") else "%s 推送" % ts
+
+
+def push_extinf(push_time=None):
+    """m3u 版的「推送时间」条目：单频道一组，指向推广页。"""
+    return ('#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" '
+            'group-title="🕒 推送时间",%s' % _push_label(push_time))
+
+
+def build_txt(blocks, with_info=None, push_time=None):
     """生成 txt 订阅：`分组,#genre#` + `频道名,地址`（DIYP / 酷9 / TVBox 通用）。
 
     排序、封顶与 m3u 完全同一套逻辑，两种格式内容一致。
-    with_info=(到期说明, 推送时间) 时，头部加「订阅信息 / 推送时间」两组。
+
+    头部**固定**带「🕒 推送时间」组（所有订阅都有，方便判断源是否还在更新）；
+    with_info=(到期说明, 推送时间) 时额外加「订阅信息」组，仅用户专属订阅用。
     """
     allb = [b for b in blocks if 'group-title="更新时间' not in b[0]]
     allb = reorder_netlive_run(allb)
@@ -562,9 +576,10 @@ def build_txt(blocks, with_info=None):
         info_line, push_line = with_info
         out.append("订阅信息,#genre#")
         out.append("%s,%s" % (info_line, PROMO_URL))
-        out.append("推送时间,#genre#")
-        out.append("%s,%s" % (push_line, PROMO_URL))
-        cur = "推送时间"          # 让第一组一定重开
+        push_time = push_time or push_line
+    out.append("🕒 推送时间,#genre#")
+    out.append("%s,%s" % (_push_label(push_time), PROMO_URL))
+    cur = "推送时间"          # 让第一组一定重开
     for e, u in allb:
         m = GROUP_RE.search(e)
         grp = m.group(1) if m else "其他频道"
@@ -615,13 +630,18 @@ def build_user(blocks, expire, created, push_time, ts=None):
     return "\n".join(out) + "\n"
 
 
-def build_shared(blocks):
-    """共享订阅（网关 UPSTREAM 用）：三源合并、排序、封顶，但不带每用户的订阅信息头。"""
+def build_shared(blocks, push_time=None):
+    """共享订阅（网关 UPSTREAM 用）：三源合并、排序、封顶。
+
+    头部带「🕒 推送时间」组（不含每用户的订阅信息头）。
+    """
     allb = [b for b in blocks if 'group-title="更新时间' not in b[0]]
     allb = reorder_netlive_run(allb)
     allb.sort(key=lambda b: (rank_of(GROUP_RE.search(b[0]).group(1) if GROUP_RE.search(b[0]) else ""),
                              natkey(name_of(b[0]))))
-    cnt, out = {}, ["#EXTM3U url-tvg=\"https://zengzifeng.ccwu.cc/output/epg.xml\""]
+    cnt = {}
+    out = ["#EXTM3U url-tvg=\"https://zengzifeng.ccwu.cc/output/epg.xml\"",
+           push_extinf(push_time), PROMO_URL]
     for e, u in allb:
         nm = name_of(e)
         if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
@@ -738,10 +758,12 @@ def main():
         if os.path.exists(migu_path) and os.path.getsize(migu_path) > 100:
             migu_text = open(migu_path, encoding="utf-8", errors="ignore").read()
             migu_blocks = parse_m3u(migu_text)
-            migu_out = "#EXTM3U x-tvg-url=\"https://zzf.new.tg/epg.xml\"\n"
+            migu_out = '#EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"\n'
+            migu_out += push_extinf(push_time) + "\n" + PROMO_URL + "\n"
             migu_out += "\n".join(with_emoji(e) + "\n" + u for e, u in migu_blocks) + "\n"
             files.append(("output/migu.m3u", migu_out.encode("utf-8")))
-            files.append(("output/migu.txt", build_txt(migu_blocks).encode("utf-8")))
+            files.append(("output/migu.txt",
+                          build_txt(migu_blocks, push_time=push_time).encode("utf-8")))
             log("  咪咕直播 %d 条（静态，不巡检）" % len(migu_blocks))
     except Exception as exc:
         log("  咪咕直播读取失败: %s" % exc)
@@ -815,7 +837,7 @@ def main():
             files.append(("output/users/u_%s.m3u" % tok, text.encode("utf-8")))
             # 同一份内容再出一版 txt（DIYP/酷9 直接吃 txt）
             txt = build_txt(blocks, ("有效期 %s ~ %s" % (created, expire),
-                                     "%s 推送" % push_time))
+                                     "%s 推送" % push_time), push_time=push_time)
             files.append(("output/users/u_%s.txt" % tok, txt.encode("utf-8")))
             log("  [%s] %d 条（m3u + txt）" % (name, text.count("#EXTINF")))
 
@@ -835,18 +857,34 @@ def main():
             ck_blocks = parse_m3u(open(ck_path, encoding="utf-8", errors="ignore").read())
             if ck_blocks:
                 ck_m3u = '#EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"\n'
+                ck_m3u += push_extinf(push_time) + "\n" + PROMO_URL + "\n"
                 ck_m3u += "\n".join(e + "\n" + u for e, u in ck_blocks) + "\n"
                 files.append(("output/checked.m3u", ck_m3u.encode("utf-8")))
-                files.append(("output/checked.txt", build_txt(ck_blocks).encode("utf-8")))
+                files.append(("output/checked.txt",
+                              build_txt(ck_blocks, push_time=push_time).encode("utf-8")))
                 log("  巡检原始源：checked.m3u / checked.txt  %d 条" % len(ck_blocks))
     except Exception as exc:  # noqa: BLE001
         log("  巡检原始源输出失败: %s" % exc)
 
     # 5.5) 共享订阅（网关 UPSTREAM）
     if blocks:
-        files.append(("output/gateway.m3u", build_shared(blocks).encode("utf-8")))
-        files.append(("output/gateway.txt", build_txt(blocks).encode("utf-8")))
+        files.append(("output/gateway.m3u",
+                      build_shared(blocks, push_time).encode("utf-8")))
+        files.append(("output/gateway.txt",
+                      build_txt(blocks, push_time=push_time).encode("utf-8")))
         log("  共享订阅 gateway.m3u / gateway.txt 已生成")
+
+    # 5.8) 独立订阅（经典轮播/明星剧场/虎牙/YY/历届春晚）
+    #      以前只有手动跑 gen_extra.py 才生成，推送时间一直停在手跑那一刻。
+    #      现在并进每轮管线，推送时间与巡检同一时刻，订阅里能看到「几点巡检过」。
+    try:
+        sys.path.insert(0, BASE)          # BASE = .../github，gen_extra 就在旁边
+        import gen_extra  # noqa: PLC0415
+        extra_files = gen_extra.build_batch(push_time)
+        files.extend(extra_files)
+        log("  独立订阅 %d 个文件已随本轮巡检刷新" % len(extra_files))
+    except Exception as exc:  # noqa: BLE001
+        log("  独立订阅生成失败（不影响主订阅）: %s" % exc)
 
     # 6) 推送
     n = push_batch(token, files)
