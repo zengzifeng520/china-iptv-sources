@@ -83,6 +83,19 @@ mcast_quake = {
 #   groups: 分类名需要同时包含的关键字，如 ["广西", "电信"] 命中「组播源-广西电信」
 #   title : 仅用于日志显示
 # 发布地址：https://zengzifeng.ccwu.cc/crawl/<file>.m3u
+# ── 额外组播源（并入「广西电信」分类）──────────────────────────────
+# 第三方 txt 列表，链接里带密钥，不能写进公开仓库：
+#   优先读环境变量 CQSHUSHU_URL（Actions 用 secrets 注入），其次读 crawl/.cq_url
+#   源站对非浏览器 UA 返回 403，抓取时固定带浏览器 UA + Referer
+mcast_extra = {
+    "enabled": True,
+    "url_env": "CQSHUSHU_URL",
+    "url_file": ".cq_url",
+    "referer": "https://iptv.cqshushu.com/",
+    "group": "组播源-广西电信",
+    "timeout": 30,
+}
+
 split_outputs = [
     {
         "file": "guangxi",

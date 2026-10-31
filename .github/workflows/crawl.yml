@@ -59,3 +59,4 @@ jobs:
     env:
       TZ: Asia/Shanghai
       QUAKE_TOKEN: ${{ secrets.QUAKE_TOKEN }}
+      CQSHUSHU_URL: ${{ secrets.CQSHUSHU_URL }}

@@ -12,6 +12,7 @@ import logging
 import aiohttp
 import config
 import fetch_quake
+import fetch_extra
 
 logger = logging.getLogger(__name__)
 
@@ -105,6 +106,17 @@ async def fetch_multicast():
             logger.warning(f"[组播源] Quake 备用链路异常: {e}", exc_info=True)
     elif not channels:
         logger.info("[组播源] 未配置 mcast_quake.token，无法走 Quake 备用链路")
+
+    # 第三方附加源（如广西钦州列表），并入同一分类
+    try:
+        extra = await fetch_extra.fetch_extra_multicast()
+        if extra:
+            before = sum(len(v) for ch in channels.values() for v in ch.values())
+            channels = _merge(channels, extra)
+            after = sum(len(v) for ch in channels.values() for v in ch.values())
+            logger.info(f"[组播源] 附加源并入 {after - before} 条线路")
+    except Exception as e:
+        logger.warning(f"[组播源] 附加源异常: {e}")
 
     # 成功结果存快照，供下次主接口挂掉时复用 /rtp/ 路径
     if channels:
