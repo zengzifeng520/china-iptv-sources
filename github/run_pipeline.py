@@ -14,6 +14,7 @@
 """
 import base64
 import hashlib
+import html
 import json
 import os
 import re
@@ -373,7 +374,9 @@ def parse_m3u(text):
         if s.startswith("#") or not s.startswith("http"):
             continue
         if pend:
-            out.append((pend, s))
+            # 源站常把 & 写成 &amp;（HTML 实体），播放器会把 "amp;playlive"
+            # 当成参数名，导致 401/404。这里统一反转义。
+            out.append((pend, html.unescape(s)))
             pend = None
     return out
 
@@ -823,6 +826,21 @@ def main():
             cleanup_orphans(token, users, keep_tokens)
         except Exception as exc:
             log("  孤儿清理跳过: %s" % exc)
+
+    # 5.2) 巡检原始源：单独出一份订阅（不改名、不按模板重分组，保持巡检结果原样）
+    #      用户要的是「巡检完的链接」本身，所以这里不做任何清洗，只转格式。
+    try:
+        ck_path = os.path.join(ROOT, "crawl", "checked", "live.m3u")
+        if os.path.exists(ck_path):
+            ck_blocks = parse_m3u(open(ck_path, encoding="utf-8", errors="ignore").read())
+            if ck_blocks:
+                ck_m3u = '#EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"\n'
+                ck_m3u += "\n".join(e + "\n" + u for e, u in ck_blocks) + "\n"
+                files.append(("output/checked.m3u", ck_m3u.encode("utf-8")))
+                files.append(("output/checked.txt", build_txt(ck_blocks).encode("utf-8")))
+                log("  巡检原始源：checked.m3u / checked.txt  %d 条" % len(ck_blocks))
+    except Exception as exc:  # noqa: BLE001
+        log("  巡检原始源输出失败: %s" % exc)
 
     # 5.5) 共享订阅（网关 UPSTREAM）
     if blocks:
