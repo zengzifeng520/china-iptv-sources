@@ -86,18 +86,27 @@ GROUP_EMOJI = {
 
 
 def with_emoji(extinf_line):
-    """给 group-title 加 Emoji 前缀（按基础组名匹配，已加过则跳过）。"""
+    """给 group-title 加 Emoji 前缀。
+
+    匹配顺序：**精确组名优先**，其次按最长前缀兜底。
+    否则「其他频道」会先撞上「其他」拿到同一个图标（曾经的真实 bug）。
+    """
     m = GROUP_RE.search(extinf_line)
     if not m:
         return extinf_line
     g = m.group(1)
-    for base, emoji in GROUP_EMOJI.items():
-        if g == base or g.startswith(base):
-            if g.startswith(emoji):
-                return extinf_line
-            return extinf_line.replace('group-title="%s"' % g,
-                                       'group-title="%s %s"' % (emoji, g), 1)
-    return extinf_line
+    if any(g.startswith(e) for e in GROUP_EMOJI.values()):
+        return extinf_line  # 已经加过
+    emoji = GROUP_EMOJI.get(g)
+    if emoji is None:
+        for base in sorted(GROUP_EMOJI, key=len, reverse=True):
+            if g.startswith(base):
+                emoji = GROUP_EMOJI[base]
+                break
+    if not emoji:
+        return extinf_line
+    return extinf_line.replace('group-title="%s"' % g,
+                               'group-title="%s %s"' % (emoji, g), 1)
 
 
 def log(msg):
