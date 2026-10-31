@@ -502,7 +502,7 @@ def build_user(blocks, expire, created, push_time, ts=None):
     allb.sort(key=lambda b: (rank_of(GROUP_RE.search(b[0]).group(1) if GROUP_RE.search(b[0]) else ""),
                              natkey(name_of(b[0]))))
     # 每频道封顶
-    cnt, out = {}, ["#EXTM3U url-tvg=\"https://zengzifeng.ccwu.cc/output/epg.xml\""]
+    cnt, out = {}, ["#EXTM3U url-tvg=\"https://zzf.new.tg/epg.xml\""]
     for e, u in allb:
         nm = name_of(e)
         if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
@@ -519,7 +519,7 @@ def build_shared(blocks):
     allb = reorder_netlive_run(allb)
     allb.sort(key=lambda b: (rank_of(GROUP_RE.search(b[0]).group(1) if GROUP_RE.search(b[0]) else ""),
                              natkey(name_of(b[0]))))
-    cnt, out = {}, ["#EXTM3U url-tvg=\"https://zengzifeng.ccwu.cc/output/epg.xml\""]
+    cnt, out = {}, ["#EXTM3U url-tvg=\"https://zzf.new.tg/epg.xml\""]
     for e, u in allb:
         nm = name_of(e)
         if cnt.get(nm, 0) >= TOP_PER_CHANNEL:
@@ -685,8 +685,6 @@ def main():
     files.append(("nas/data/relays.json",
                   json.dumps({"relays": [], "active_host": "", "checked": push_time},
                              ensure_ascii=False, indent=1).encode("utf-8")))
-    files.append(("output/nas.m3u",
-                  ("#EXTM3U\n# 电信组播订阅已取消（%s）\n" % push_time).encode("utf-8")))
     log("  电信组播：已取消，不探测中转 / 不生成分组 / 池子 IP 清空")
 
     # 4) 用户订阅（咪咕直播 + 轮播类排最前，其次是组播/广东电信）
