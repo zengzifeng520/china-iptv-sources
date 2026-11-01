@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-01 14:08:44 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-01 15:30:52 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -4416,8 +4416,6 @@ http://114.250.20.79:4022/rtp/239.3.1.142:8048
 #EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="📡 卫视频道",广东卫视
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.142:8048
 #EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="📡 卫视频道",广东卫视
-http://triq.cc:8012/rtp/239.3.1.142:8048
-#EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="📡 卫视频道",广东卫视
 http://n2.192372.xyz:8888/rtp/239.3.1.142:8048
 #EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="📡 卫视频道",广东卫视
 http://59.173.122.230:10001/rtp/239.254.96.140:8914
@@ -4441,6 +4439,8 @@ http://113.90.154.189:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=
 http://rfx2025.shunderen.top:2345/udp/239.77.0.84:5146
 #EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="📡 卫视频道",广东卫视
 http://121.10.7.16:4000/udp/239.77.1.19:5146
+#EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="📡 卫视频道",广东卫视
+http://121.10.7.16:4000/udp/239.77.0.84:5146
 #EXTINF:-1 tvg-id="广西卫视" tvg-name="广西卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/eb3e5dc90c59.png" group-title="📡 卫视频道",广西卫视
 http://www.rongrong.me:14022/rtp/233.18.204.107:5140
 #EXTINF:-1 tvg-id="广西卫视" tvg-name="广西卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/eb3e5dc90c59.png" group-title="📡 卫视频道",广西卫视
@@ -10250,7 +10250,11 @@ http://xmzj.f3322.net:8188/udp/239.94.0.164:5140
 #EXTINF:-1 tvg-id="内江新闻综合" tvg-name="内江新闻综合" group-title="🐼 四川节目",内江新闻综合
 http://vpn.ydcb.top:40000/udp/239.94.0.164:5140
 #EXTINF:-1 tvg-id="内江科教生活" tvg-name="内江科教生活" tvg-logo="https://zzf.new.tg/data/logos/0ac7c86ddba0.png" group-title="🐼 四川节目",内江科教生活
+http://home.pkucd.cn:4022/udp/239.94.0.181:5140
+#EXTINF:-1 tvg-id="内江科教生活" tvg-name="内江科教生活" tvg-logo="https://zzf.new.tg/data/logos/0ac7c86ddba0.png" group-title="🐼 四川节目",内江科教生活
 http://vpn.ydcb.top:40000/udp/239.94.0.181:5140
+#EXTINF:-1 tvg-id="内江科教生活" tvg-name="内江科教生活" tvg-logo="https://zzf.new.tg/data/logos/0ac7c86ddba0.png" group-title="🐼 四川节目",内江科教生活
+http://118.113.123.6:8686/udp/239.94.0.181:5140
 #EXTINF:-1 tvg-id="内江科教生活" tvg-name="内江科教生活" tvg-logo="https://zzf.new.tg/data/logos/0ac7c86ddba0.png" group-title="🐼 四川节目",内江科教生活
 http://www.893224162.xyz:8188/udp/239.94.0.181:5140
 #EXTINF:-1 tvg-id="内江科教生活" tvg-name="内江科教生活" tvg-logo="https://zzf.new.tg/data/logos/0ac7c86ddba0.png" group-title="🐼 四川节目",内江科教生活
@@ -10454,8 +10458,6 @@ http://www.893224162.xyz:8188/udp/239.94.0.172:5140
 #EXTINF:-1 tvg-id="宜宾公共" tvg-name="宜宾公共" tvg-logo="https://zzf.new.tg/data/logos/0ed71a5fe5f1.png" group-title="🐼 四川节目",宜宾公共
 http://www.sccckj.cn:8899/udp/239.10.0.81:5140
 #EXTINF:-1 tvg-id="宜宾新闻综合" tvg-name="宜宾新闻综合" group-title="🐼 四川节目",宜宾新闻综合
-http://home.pkucd.cn:4022/udp/239.94.0.161:5140
-#EXTINF:-1 tvg-id="宜宾新闻综合" tvg-name="宜宾新闻综合" group-title="🐼 四川节目",宜宾新闻综合
 http://www.893224162.xyz:8188/udp/239.94.0.161:5140
 #EXTINF:-1 tvg-id="宜宾新闻综合" tvg-name="宜宾新闻综合" group-title="🐼 四川节目",宜宾新闻综合
 http://xmzj.f3322.net:8188/udp/239.94.0.161:5140
@@ -10492,8 +10494,6 @@ http://www.sccckj.cn:8899/udp/239.10.0.58:5140
 #EXTINF:-1 tvg-id="康巴藏语综合" tvg-name="康巴藏语综合" tvg-logo="https://zzf.new.tg/data/logos/bc33dc000603.png" group-title="🐼 四川节目",康巴藏语综合
 http://101.wifi98.com:9001/rtp/232.0.0.109:1234
 #EXTINF:-1 tvg-id="德阳2" tvg-name="德阳2" tvg-logo="https://zzf.new.tg/data/logos/eda2bc8a8491.png" group-title="🐼 四川节目",德阳2
-http://home.pkucd.cn:4022/udp/239.94.0.165:5140
-#EXTINF:-1 tvg-id="德阳2" tvg-name="德阳2" tvg-logo="https://zzf.new.tg/data/logos/eda2bc8a8491.png" group-title="🐼 四川节目",德阳2
 http://xmzj.f3322.net:8188/udp/239.94.0.165:5140
 #EXTINF:-1 tvg-id="德阳2" tvg-name="德阳2" tvg-logo="https://zzf.new.tg/data/logos/eda2bc8a8491.png" group-title="🐼 四川节目",德阳2
 http://www.893224162.xyz:8188/udp/239.94.0.165:5140
@@ -10501,8 +10501,6 @@ http://www.893224162.xyz:8188/udp/239.94.0.165:5140
 http://vpn.ydcb.top:40000/udp/239.94.0.165:5140
 #EXTINF:-1 tvg-id="德阳2" tvg-name="德阳2" tvg-logo="https://zzf.new.tg/data/logos/eda2bc8a8491.png" group-title="🐼 四川节目",德阳2
 http://www.sccckj.cn:8899/udp/239.10.0.57:5140
-#EXTINF:-1 tvg-id="德阳新闻综合" tvg-name="德阳新闻综合" tvg-logo="https://zzf.new.tg/data/logos/3fd8d7ecb0a0.png" group-title="🐼 四川节目",德阳新闻综合
-http://118.113.123.6:8686/udp/239.94.0.176:5140
 #EXTINF:-1 tvg-id="德阳新闻综合" tvg-name="德阳新闻综合" tvg-logo="https://zzf.new.tg/data/logos/3fd8d7ecb0a0.png" group-title="🐼 四川节目",德阳新闻综合
 http://xmzj.f3322.net:8188/udp/239.94.0.176:5140
 #EXTINF:-1 tvg-id="德阳新闻综合" tvg-name="德阳新闻综合" tvg-logo="https://zzf.new.tg/data/logos/3fd8d7ecb0a0.png" group-title="🐼 四川节目",德阳新闻综合
@@ -12274,8 +12272,6 @@ http://vpn.ydcb.top:40000/udp/239.94.2.134:5140
 #EXTINF:-1 tvg-id="九画面卫视2" tvg-name="九画面卫视2" tvg-logo="https://zzf.new.tg/data/logos/8434227e9869.png" group-title="📌 其他频道",九画面卫视2
 http://vpn.ydcb.top:40000/udp/239.94.2.135:5140
 #EXTINF:-1 tvg-id="九画面卫视3" tvg-name="九画面卫视3" tvg-logo="https://zzf.new.tg/data/logos/69adcf661d40.png" group-title="📌 其他频道",九画面卫视3
-http://118.113.123.6:8686/udp/239.94.2.137:5140
-#EXTINF:-1 tvg-id="九画面卫视3" tvg-name="九画面卫视3" tvg-logo="https://zzf.new.tg/data/logos/69adcf661d40.png" group-title="📌 其他频道",九画面卫视3
 http://xmzj.f3322.net:8188/udp/239.94.2.136:5140
 #EXTINF:-1 tvg-id="九画面卫视3" tvg-name="九画面卫视3" tvg-logo="https://zzf.new.tg/data/logos/69adcf661d40.png" group-title="📌 其他频道",九画面卫视3
 http://xmzj.f3322.net:8188/udp/239.94.2.137:5140
@@ -12295,8 +12291,6 @@ http://vpn.ydcb.top:40000/udp/239.94.2.139:5140
 http://118.113.123.6:8686/udp/239.94.2.139:5140
 #EXTINF:-1 tvg-id="九画面卫视4" tvg-name="九画面卫视4" tvg-logo="https://zzf.new.tg/data/logos/3a3a64b1034a.png" group-title="📌 其他频道",九画面卫视4
 http://118.113.123.6:8686/udp/239.94.2.141:5140
-#EXTINF:-1 tvg-id="九画面卫视4" tvg-name="九画面卫视4" tvg-logo="https://zzf.new.tg/data/logos/3a3a64b1034a.png" group-title="📌 其他频道",九画面卫视4
-http://home.pkucd.cn:4022/udp/239.94.2.139:5140
 #EXTINF:-1 tvg-id="九画面卫视4" tvg-name="九画面卫视4" tvg-logo="https://zzf.new.tg/data/logos/3a3a64b1034a.png" group-title="📌 其他频道",九画面卫视4
 http://xmzj.f3322.net:8188/udp/239.94.2.139:5140
 #EXTINF:-1 tvg-id="九画面卫视4" tvg-name="九画面卫视4" tvg-logo="https://zzf.new.tg/data/logos/3a3a64b1034a.png" group-title="📌 其他频道",九画面卫视4
@@ -12788,6 +12782,8 @@ http://j1900.silicaite.top:58888/rtp/239.49.1.98:6000
 #EXTINF:-1 tvg-id="密云" tvg-name="密云" tvg-logo="https://zzf.new.tg/data/logos/7866a47d8bb2.png" group-title="📌 其他频道",密云
 http://115.171.216.32:4000/udp/225.1.8.75:8002
 #EXTINF:-1 tvg-id="导视" tvg-name="导视" tvg-logo="https://zzf.new.tg/data/logos/0b520ccf5340.png" group-title="📌 其他频道",导视
+http://home.pkucd.cn:4022/udp/239.94.1.64:5140
+#EXTINF:-1 tvg-id="导视" tvg-name="导视" tvg-logo="https://zzf.new.tg/data/logos/0b520ccf5340.png" group-title="📌 其他频道",导视
 http://www.893224162.xyz:8188/udp/239.94.1.64:5140
 #EXTINF:-1 tvg-id="导视" tvg-name="导视" tvg-logo="https://zzf.new.tg/data/logos/0b520ccf5340.png" group-title="📌 其他频道",导视
 http://xmzj.f3322.net:8188/udp/239.94.1.64:5140
@@ -13200,6 +13196,8 @@ http://z2m.eversouthhangzhou.com.cn:8188/rtp/233.50.201.224:5140
 #EXTINF:-1 tvg-id="未识别" tvg-name="未识别" tvg-logo="https://zzf.new.tg/data/logos/469a178342bd.png" group-title="📌 其他频道",未识别
 http://jellyfin.eversouthhangzhou.com.cn:8188/rtp/233.50.201.224:5140
 #EXTINF:-1 tvg-id="来钓鱼吧" tvg-name="来钓鱼吧" tvg-logo="https://zzf.new.tg/data/logos/7f29869e1308.png" group-title="📌 其他频道",来钓鱼吧
+http://118.113.123.6:8686/udp/239.94.1.148:5140
+#EXTINF:-1 tvg-id="来钓鱼吧" tvg-name="来钓鱼吧" tvg-logo="https://zzf.new.tg/data/logos/7f29869e1308.png" group-title="📌 其他频道",来钓鱼吧
 http://www.893224162.xyz:8188/udp/239.94.1.148:5140
 #EXTINF:-1 tvg-id="来钓鱼吧" tvg-name="来钓鱼吧" tvg-logo="https://zzf.new.tg/data/logos/7f29869e1308.png" group-title="📌 其他频道",来钓鱼吧
 http://xmzj.f3322.net:8188/udp/239.94.1.148:5140
@@ -13587,8 +13585,6 @@ http://e3.woc.iiiya.cn:18888/rtp/239.61.3.62:9890
 http://woc.iiiya.cn:18888/rtp/239.61.3.62:9890
 #EXTINF:-1 tvg-id="直播室1" tvg-name="直播室1" tvg-logo="https://zzf.new.tg/data/logos/554ea24ebded.png" group-title="📌 其他频道",直播室1
 http://vpn.ydcb.top:40000/udp/239.94.2.11:5140
-#EXTINF:-1 tvg-id="直播室1" tvg-name="直播室1" tvg-logo="https://zzf.new.tg/data/logos/554ea24ebded.png" group-title="📌 其他频道",直播室1
-http://home.pkucd.cn:4022/udp/239.94.2.11:5140
 #EXTINF:-1 tvg-id="直播室1" tvg-name="直播室1" tvg-logo="https://zzf.new.tg/data/logos/554ea24ebded.png" group-title="📌 其他频道",直播室1
 http://www.893224162.xyz:8188/udp/239.94.2.11:5140
 #EXTINF:-1 tvg-id="直播室1" tvg-name="直播室1" tvg-logo="https://zzf.new.tg/data/logos/554ea24ebded.png" group-title="📌 其他频道",直播室1
@@ -14036,8 +14032,6 @@ http://ak.cj022.com:10080/udp/225.1.2.58:5002
 #EXTINF:-1 tvg-id="风景" tvg-name="风景" tvg-logo="https://zzf.new.tg/data/logos/fc30335a7324.png" group-title="📌 其他频道",风景
 http://xmzj.f3322.net:8188/udp/239.94.2.74:5140
 #EXTINF:-1 tvg-id="风景" tvg-name="风景" tvg-logo="https://zzf.new.tg/data/logos/fc30335a7324.png" group-title="📌 其他频道",风景
-http://118.113.123.6:8686/udp/239.94.2.74:5140
-#EXTINF:-1 tvg-id="风景" tvg-name="风景" tvg-logo="https://zzf.new.tg/data/logos/fc30335a7324.png" group-title="📌 其他频道",风景
 http://www.893224162.xyz:8188/udp/239.94.2.74:5140
 #EXTINF:-1 tvg-id="风景" tvg-name="风景" tvg-logo="https://zzf.new.tg/data/logos/fc30335a7324.png" group-title="📌 其他频道",风景
 http://vpn.ydcb.top:40000/udp/239.94.2.74:5140
@@ -14117,6 +14111,8 @@ http://j1900.silicaite.top:58888/rtp/239.49.8.181:6000
 http://www.893224162.xyz:8188/udp/239.94.1.149:5140
 #EXTINF:-1 tvg-id="麻辣体育" tvg-name="麻辣体育" tvg-logo="https://zzf.new.tg/data/logos/a79e8fdc51bb.png" group-title="📌 其他频道",麻辣体育
 http://xmzj.f3322.net:8188/udp/239.94.1.149:5140
+#EXTINF:-1 tvg-id="麻辣体育" tvg-name="麻辣体育" tvg-logo="https://zzf.new.tg/data/logos/a79e8fdc51bb.png" group-title="📌 其他频道",麻辣体育
+http://118.113.123.6:8686/udp/239.94.1.149:5140
 #EXTINF:-1 tvg-id="BesTV电影介绍HD" tvg-name="BesTV电影介绍HD" group-title="🌍 IPTV",BesTV电影介绍HD
 http://www.rongrong.me:14022/rtp/233.18.204.116:5140
 #EXTINF:-1 tvg-id="BesTV电影介绍HD" tvg-name="BesTV电影介绍HD" group-title="🌍 IPTV",BesTV电影介绍HD
@@ -14152,6 +14148,8 @@ http://www.893224162.xyz:8188/udp/239.94.1.135:5140
 #EXTINF:-1 tvg-id="iHOT爱历史" tvg-name="iHOT爱历史" tvg-logo="https://zzf.new.tg/data/logos/lib/21e1bf863604.png" group-title="🌍 IPTV",iHOT爱历史
 http://xmzj.f3322.net:8188/udp/239.94.1.135:5140
 #EXTINF:-1 tvg-id="iHOT爱喜剧" tvg-name="iHOT爱喜剧" tvg-logo="https://zzf.new.tg/data/logos/lib/ee41a61e09be.png" group-title="🌍 IPTV",iHOT爱喜剧
+http://home.pkucd.cn:4022/udp/239.94.2.71:5140
+#EXTINF:-1 tvg-id="iHOT爱喜剧" tvg-name="iHOT爱喜剧" tvg-logo="https://zzf.new.tg/data/logos/lib/ee41a61e09be.png" group-title="🌍 IPTV",iHOT爱喜剧
 http://vpn.ydcb.top:40000/udp/239.94.2.71:5140
 #EXTINF:-1 tvg-id="iHOT爱喜剧" tvg-name="iHOT爱喜剧" tvg-logo="https://zzf.new.tg/data/logos/lib/ee41a61e09be.png" group-title="🌍 IPTV",iHOT爱喜剧
 http://vpn.ydcb.top:40000/udp/239.94.1.129:5140
@@ -14182,8 +14180,6 @@ http://www.893224162.xyz:8188/udp/239.94.1.139:5140
 #EXTINF:-1 tvg-id="iHOT爱幼教" tvg-name="iHOT爱幼教" tvg-logo="https://zzf.new.tg/data/logos/lib/8bc8fb9ac072.png" group-title="🌍 IPTV",iHOT爱幼教
 http://xmzj.f3322.net:8188/udp/239.94.1.139:5140
 #EXTINF:-1 tvg-id="iHOT爱悬疑" tvg-name="iHOT爱悬疑" tvg-logo="https://zzf.new.tg/data/logos/lib/1d4cf3589af7.png" group-title="🌍 IPTV",iHOT爱悬疑
-http://home.pkucd.cn:4022/udp/239.94.1.136:5140
-#EXTINF:-1 tvg-id="iHOT爱悬疑" tvg-name="iHOT爱悬疑" tvg-logo="https://zzf.new.tg/data/logos/lib/1d4cf3589af7.png" group-title="🌍 IPTV",iHOT爱悬疑
 http://www.893224162.xyz:8188/udp/239.94.1.136:5140
 #EXTINF:-1 tvg-id="iHOT爱悬疑" tvg-name="iHOT爱悬疑" tvg-logo="https://zzf.new.tg/data/logos/lib/1d4cf3589af7.png" group-title="🌍 IPTV",iHOT爱悬疑
 http://xmzj.f3322.net:8188/udp/239.94.1.136:5140
@@ -14199,8 +14195,6 @@ http://www.893224162.xyz:8188/udp/239.94.1.137:5140
 http://vpn.ydcb.top:40000/udp/239.94.1.137:5140
 #EXTINF:-1 tvg-id="iHOT爱浪漫" tvg-name="iHOT爱浪漫" tvg-logo="https://zzf.new.tg/data/logos/lib/409ae9ce6f22.png" group-title="🌍 IPTV",iHOT爱浪漫
 http://vpn.ydcb.top:40000/udp/239.94.1.128:5140
-#EXTINF:-1 tvg-id="iHOT爱浪漫" tvg-name="iHOT爱浪漫" tvg-logo="https://zzf.new.tg/data/logos/lib/409ae9ce6f22.png" group-title="🌍 IPTV",iHOT爱浪漫
-http://118.113.123.6:8686/udp/239.94.1.128:5140
 #EXTINF:-1 tvg-id="iHOT爱浪漫" tvg-name="iHOT爱浪漫" tvg-logo="https://zzf.new.tg/data/logos/lib/409ae9ce6f22.png" group-title="🌍 IPTV",iHOT爱浪漫
 http://xmzj.f3322.net:8188/udp/239.94.1.128:5140
 #EXTINF:-1 tvg-id="iHOT爱浪漫" tvg-name="iHOT爱浪漫" tvg-logo="https://zzf.new.tg/data/logos/lib/409ae9ce6f22.png" group-title="🌍 IPTV",iHOT爱浪漫
@@ -14596,8 +14590,6 @@ http://114.250.20.79:4022/rtp/239.3.1.69:4120
 #EXTINF:-1 tvg-id="古装剧场" tvg-name="古装剧场" tvg-logo="https://zzf.new.tg/data/logos/lib/26950f2ec800.png" group-title="🌍 IPTV",古装剧场
 http://123.120.6.99:4022/rtp/239.3.1.69:4120
 #EXTINF:-1 tvg-id="古装剧场" tvg-name="古装剧场" tvg-logo="https://zzf.new.tg/data/logos/lib/26950f2ec800.png" group-title="🌍 IPTV",古装剧场
-http://triq.cc:8012/rtp/239.3.1.69:4120
-#EXTINF:-1 tvg-id="古装剧场" tvg-name="古装剧场" tvg-logo="https://zzf.new.tg/data/logos/lib/26950f2ec800.png" group-title="🌍 IPTV",古装剧场
 http://n2.192372.xyz:8888/rtp/239.3.1.69:4120
 #EXTINF:-1 tvg-id="古装剧场" tvg-name="古装剧场" tvg-logo="https://zzf.new.tg/data/logos/lib/26950f2ec800.png" group-title="🌍 IPTV",古装剧场
 http://www.221111.best:8012/rtp/239.3.1.69:4120
@@ -14706,6 +14698,8 @@ http://xmzj.f3322.net:8188/udp/239.94.2.57:5140
 #EXTINF:-1 tvg-id="百事通" tvg-name="百事通" tvg-logo="https://zzf.new.tg/data/logos/7b0bd748bde1.png" group-title="🌍 IPTV",百事通
 http://home.pkucd.cn:4022/udp/239.94.2.57:5140
 #EXTINF:-1 tvg-id="百事通" tvg-name="百事通" tvg-logo="https://zzf.new.tg/data/logos/7b0bd748bde1.png" group-title="🌍 IPTV",百事通
+http://118.113.123.6:8686/udp/239.94.2.57:5140
+#EXTINF:-1 tvg-id="百事通" tvg-name="百事通" tvg-logo="https://zzf.new.tg/data/logos/7b0bd748bde1.png" group-title="🌍 IPTV",百事通
 http://www.893224162.xyz:8188/udp/239.94.2.57:5140
 #EXTINF:-1 tvg-id="百事通" tvg-name="百事通" tvg-logo="https://zzf.new.tg/data/logos/7b0bd748bde1.png" group-title="🌍 IPTV",百事通
 http://vpn.ydcb.top:40000/udp/239.94.2.57:5140
@@ -14739,8 +14733,6 @@ http://h.vanshun.com:8802/rtp/239.49.1.74:6000
 http://h.vanshun.com:8802/rtp/239.49.1.183:6000
 #EXTINF:-1 tvg-id="百事通" tvg-name="百事通" tvg-logo="https://zzf.new.tg/data/logos/7b0bd748bde1.png" group-title="🌍 IPTV",百事通
 http://wddpmpc.sosos.run:4022/rtp/239.111.205.23:5140
-#EXTINF:-1 tvg-id="百事通" tvg-name="百事通" tvg-logo="https://zzf.new.tg/data/logos/7b0bd748bde1.png" group-title="🌍 IPTV",百事通
-http://wddpmpc.sosos.run:4022/rtp/239.111.205.25:5140
 #EXTINF:-1 tvg-id="百事通宣传" tvg-name="百事通宣传" tvg-logo="https://zzf.new.tg/data/logos/277c0a9d7eea.png" group-title="🌍 IPTV",百事通宣传
 http://17782331118.top:8188/rtp/235.254.197.131:7980
 #EXTINF:-1 tvg-id="百事通宣传" tvg-name="百事通宣传" tvg-logo="https://zzf.new.tg/data/logos/277c0a9d7eea.png" group-title="🌍 IPTV",百事通宣传
