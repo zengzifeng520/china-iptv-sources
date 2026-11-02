@@ -1,7 +1,7 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="ℹ️ 订阅信息 到期 2027-10-8",有效期 2026-10-26 ~ 2027-10-8（剩余 340 天）
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-02 15:57:38 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-02 16:57:36 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -4822,8 +4822,6 @@ http://123.120.6.99:4022/rtp/239.3.1.122:8160
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="📡 卫视频道",重庆卫视
 http://bit.famcloud.top:9878/rtp/239.3.1.122:8160
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="📡 卫视频道",重庆卫视
-http://triq.cc:8012/rtp/239.3.1.122:8160
-#EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="📡 卫视频道",重庆卫视
 http://www.rongrong.me:14022/rtp/233.18.204.100:5140
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="📡 卫视频道",重庆卫视
 http://120.238.84.45:9901/tsfile/live/1063_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -4845,6 +4843,8 @@ http://www.sccckj.cn:8899/udp/239.11.0.116:5140
 http://family-ph.vividnian.com:8188/udp/233.50.201.143:5140
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="📡 卫视频道",重庆卫视
 http://17782331118.top:8188/rtp/235.254.197.237:7980
+#EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="📡 卫视频道",重庆卫视
+http://www.siyao.xin:4000/rtp/225.1.4.157:1308
 #EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://zzf.new.tg/data/logos/lib/72bcad92b6a5.png" group-title="📡 卫视频道",金鹰卡通
 http://120.238.84.45:9901/tsfile/live/1036_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="金鹰卡通" tvg-name="金鹰卡通" tvg-logo="https://zzf.new.tg/data/logos/lib/72bcad92b6a5.png" group-title="📡 卫视频道",金鹰卡通
@@ -5261,8 +5261,6 @@ http://n2.192372.xyz:8888/rtp/239.3.1.117:8000
 http://114.250.20.79:4022/rtp/239.3.1.117:8000
 #EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
 http://111.197.231.173:4022/rtp/239.3.1.117:8000
-#EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
-http://triq.cc:8012/rtp/239.3.1.117:8000
 #EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
 http://111.199.3.80:8686/rtp/239.3.1.117:8000
 #EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
@@ -6311,8 +6309,6 @@ http://zhgx.app.sccncd.com:80/rtp/239.0.0.34:5140
 http://h.vanshun.com:8802/rtp/239.49.1.244:6000
 #EXTINF:-1 tvg-id="中国蓝直播" tvg-name="中国蓝直播" tvg-logo="https://zzf.new.tg/data/logos/98280c427b18.png" group-title="🌉 浙江节目",中国蓝直播
 http://zjhuct.icu:8889/udp/233.50.201.108:5140
-#EXTINF:-1 tvg-id="中国蓝直播" tvg-name="中国蓝直播" tvg-logo="https://zzf.new.tg/data/logos/98280c427b18.png" group-title="🌉 浙江节目",中国蓝直播
-http://www.liangcl.top:8686/udp/233.50.201.108:5140
 #EXTINF:-1 tvg-id="中国蓝直播" tvg-name="中国蓝直播" tvg-logo="https://zzf.new.tg/data/logos/98280c427b18.png" group-title="🌉 浙江节目",中国蓝直播
 http://family-ph.vividnian.com:8188/udp/233.50.201.108:5140
 #EXTINF:-1 tvg-id="中国蓝直播" tvg-name="中国蓝直播" tvg-logo="https://zzf.new.tg/data/logos/98280c427b18.png" group-title="🌉 浙江节目",中国蓝直播
@@ -9864,6 +9860,8 @@ http://111.197.231.173:4022/rtp/239.3.1.73:4120
 #EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://zzf.new.tg/data/logos/a632acd88921.png" group-title="🏙️ 地方频道",美人
 http://111.199.3.80:8686/rtp/239.3.1.73:4120
 #EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://zzf.new.tg/data/logos/a632acd88921.png" group-title="🏙️ 地方频道",美人
+http://1.30.81.147:4022/udp/239.125.44.9:4120
+#EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://zzf.new.tg/data/logos/a632acd88921.png" group-title="🏙️ 地方频道",美人
 http://tv.zhangzp.top:4022/udp/239.125.44.9:4120
 #EXTINF:-1 tvg-id="美妆" tvg-name="美妆" tvg-logo="https://zzf.new.tg/data/logos/1b39e3456bcf.png" group-title="🏙️ 地方频道",美妆
 http://www.221111.best:8012/rtp/239.3.1.72:4120
@@ -9921,8 +9919,6 @@ http://114.250.20.79:4022/rtp/239.3.1.75:4120
 http://123.120.6.99:4022/rtp/239.3.1.75:4120
 #EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="🏙️ 地方频道",解密
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.75:4120
-#EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="🏙️ 地方频道",解密
-http://triq.cc:8012/rtp/239.3.1.75:4120
 #EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="🏙️ 地方频道",解密
 http://n2.192372.xyz:8888/rtp/239.3.1.75:4120
 #EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="🏙️ 地方频道",解密
@@ -11471,10 +11467,6 @@ http://vpn.ydcb.top:40000/udp/239.94.2.19:5140
 http://xmzj.f3322.net:8188/udp/239.94.2.19:5140
 #EXTINF:-1 tvg-id="风景直播1" tvg-name="风景直播1" tvg-logo="https://zzf.new.tg/data/logos/bef695e67500.png" group-title="📌 其他频道",风景直播1
 http://www.893224162.xyz:8188/udp/239.94.2.19:5140
-#EXTINF:-1 tvg-id="风景直播1" tvg-name="风景直播1" tvg-logo="https://zzf.new.tg/data/logos/bef695e67500.png" group-title="📌 其他频道",风景直播1
-http://118.113.123.6:8686/udp/239.94.2.19:5140
-#EXTINF:-1 tvg-id="风景直播2" tvg-name="风景直播2" tvg-logo="https://zzf.new.tg/data/logos/1db6b5b1ff2a.png" group-title="📌 其他频道",风景直播2
-http://118.113.123.6:8686/udp/239.94.2.20:5140
 #EXTINF:-1 tvg-id="风景直播2" tvg-name="风景直播2" tvg-logo="https://zzf.new.tg/data/logos/1db6b5b1ff2a.png" group-title="📌 其他频道",风景直播2
 http://www.893224162.xyz:8188/udp/239.94.2.20:5140
 #EXTINF:-1 tvg-id="风景直播2" tvg-name="风景直播2" tvg-logo="https://zzf.new.tg/data/logos/1db6b5b1ff2a.png" group-title="📌 其他频道",风景直播2
