@@ -1,5 +1,5 @@
 """
-额外组播源（第三方 txt 列表）— 目前用于并入「广西电信」分类
+额外组播源（第三方 txt 列表）— 解析后并入 config.mcast_extra["group"] 指定的分类
 
 源地址带密钥，不能写进公开仓库，按下面顺序读取：
     1. 环境变量 CQSHUSHU_URL（GitHub Actions 用 secrets 注入）

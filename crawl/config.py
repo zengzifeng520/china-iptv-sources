@@ -53,7 +53,7 @@ mcast_config = {
 #
 # token        : 360 Quake 的 API token，注册 quake.360.net 后在个人中心获取（必填）
 # mode         : "fallback"=仅当主接口无结果时启用；"always"=每次都额外补充
-# regions      : 指定地区，格式 ["广西-电信", "广东-电信"]；空=沿用主接口结果的地区
+# regions      : 指定地区，格式 ["江西-电信", "广东-电信"]；空=沿用主接口结果的地区
 #                （主接口也无结果时，取地址库里前 max_regions 个组合）
 # max_regions  : regions 为空且没有快照时，最多试几个地区（省 Quake 额度）
 # pages        : Quake 每个地区的翻页数（每页 10 条）
@@ -78,7 +78,7 @@ mcast_quake = {
     "cdn_prefix": "https://gh-proxy.org/",
 }
 
-# ── 额外组播源（并入「广西电信」分类）──────────────────────────────
+# ── 额外组播源（第三方 txt 列表，可并入指定分类）─────────────────
 # 第三方 txt 列表，链接里带密钥，不能写进公开仓库：
 #   优先读环境变量 CQSHUSHU_URL（Actions 用 secrets 注入），其次读 crawl/.cq_url
 #   源站对非浏览器 UA 返回 403，抓取时固定带浏览器 UA + Referer
@@ -87,13 +87,13 @@ mcast_extra = {
     "url_env": "CQSHUSHU_URL",
     "url_file": ".cq_url",
     "referer": "https://iptv.cqshushu.com/",
-    "group": "组播源-广西电信",
+    "group": "组播源-附加源",
     "timeout": 30,
 }
 
 # ── 额外拆分输出 ────────────────────────────────────────────────────
 # 把命中的组播分类单独发布成一条订阅链接（生成 crawl/<file>.m3u 和 <file>.txt）
-#   groups: 分类名需要同时包含的关键字，如 ["广西", "电信"] 命中「组播源-广西电信」
+#   groups: 分类名需要同时包含的关键字，如 ["广东", "电信"] 命中「组播源-广东电信」
 #   title : 仅用于日志显示
 # 发布地址：https://zengzifeng.ccwu.cc/crawl/<file>.m3u
 # 2026-11-02：广西订阅按用户要求撤下，留空即不再生成

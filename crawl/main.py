@@ -370,7 +370,7 @@ def _stream_alive(url, timeout=6.0, min_bytes=50000):
 
 def write_split_outputs(channels, epg_id_map=None, check_results=None):
     """
-    把命中的分类单独写成 crawl/<file>.m3u / <file>.txt（用于「广西电信」这类独立订阅）。
+    把命中的分类单独写成 crawl/<file>.m3u / <file>.txt（用于按地区单独出订阅）。
     必须在 remap_by_template 之前调用，否则「组播源-XX」分类已被并入模板分组。
     """
     items = getattr(config, "split_outputs", []) or []
@@ -481,7 +481,7 @@ async def async_main():
         _print_domain_suggestions(fail_domains)
         logging.info("[质量检测] 完成")
 
-    # 独立订阅（如「广西电信」）要在模板归一之前拆出来
+    # 独立订阅要在模板归一之前拆出来
     write_split_outputs(channels, epg_id_map, check_results)
 
     matched, leftover = remap_by_template(channels, template_map)
