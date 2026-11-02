@@ -4,6 +4,7 @@ import sys
 import time
 import asyncio
 import urllib.request
+import urllib.parse
 import requests
 import logging
 from collections import OrderedDict
@@ -352,18 +353,32 @@ def _print_domain_suggestions(fail_domains: dict):
         logging.info(f"  {domain}  {info}")
 
 
+def _read_bytes(url, timeout, min_bytes):
+    """读满 min_bytes 或超时即停，返回已读字节数"""
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    start, total = time.time(), 0
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        while total < min_bytes and time.time() - start < timeout:
+            chunk = resp.read(16384)
+            if not chunk:
+                break
+            total += len(chunk)
+    return total
+
+
 def _stream_alive(url, timeout=6.0, min_bytes=50000):
-    """真实拉流判断：组播/rtp 没有元数据，读满 min_bytes 才算可播"""
+    """真实拉流判断：组播/rtp 没有元数据，读满 min_bytes 才算可播；HLS 要跟到分片"""
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        start, total = time.time(), 0
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            while total < min_bytes and time.time() - start < timeout:
-                chunk = resp.read(16384)
-                if not chunk:
-                    break
-                total += len(chunk)
-        return total >= min_bytes
+        if ".m3u8" in url:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                text = resp.read(65536).decode("utf-8", "ignore")
+            seg = next((l.strip() for l in text.splitlines()
+                        if l.strip() and not l.startswith("#")), "")
+            if not seg:
+                return False
+            url = urllib.parse.urljoin(url, seg)
+        return _read_bytes(url, timeout, min_bytes) >= min_bytes
     except Exception:
         return False
 

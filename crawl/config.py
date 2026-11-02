@@ -97,7 +97,17 @@ mcast_extra = {
 #   title : 仅用于日志显示
 # 发布地址：https://zengzifeng.ccwu.cc/crawl/<file>.m3u
 # 2026-11-02：广西订阅按用户要求撤下，留空即不再生成
-split_outputs = []
+split_outputs = [
+    {
+        "file": "hkmo",
+        "title": "港台节目",
+        "groups": ["港台"],
+        "verify": True,            # 发布前实测拉流（HLS 会跟到分片），只留真能出流的
+        "verify_timeout": 8,
+        "verify_min_bytes": 50000,
+        "verify_workers": 12,
+    },
+]
 
 # ── URL 黑名单 ───────────────────────────────────────────────────────
 # 播放地址包含以下任意子串时会被自动过滤掉

@@ -40,7 +40,7 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add -f crawl/live.m3u crawl/live.txt crawl/function.log
+        git add -f crawl/live.m3u crawl/live.txt crawl/hkmo.m3u crawl/hkmo.txt crawl/function.log
         if git diff --staged --quiet; then echo "无变化，跳过提交"; exit 0; fi
         git commit -m "Auto-update multicast playlists"
         for attempt in 1 2 3 4 5; do
