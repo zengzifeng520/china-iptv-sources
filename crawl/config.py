@@ -59,12 +59,12 @@ mcast_config = {
 # pages        : Quake 每个地区的翻页数（每页 10 条）
 # cdn_prefix   : GitHub raw 加速前缀，地址库下载走它（国内直连 raw 常失败）
 mcast_quake = {
-    "enabled": True,
+    "enabled": False,                  # 广西订阅已撤下，暂不消耗 Quake 额度
     "token": _load_quake_token(),      # 环境变量 QUAKE_TOKEN 或 crawl/.quake_token
     "api": "https://quake.360.net/api/v3/search/quake_service",
     "shortcut": "",                    # 快捷检索 ID（账号维度，留空即可）
-    "mode": "always",                  # fallback=主接口挂了才用；always=每次都用 Quake 补广西电信
-    "regions": ["广西-电信"],
+    "mode": "fallback",                # fallback=主接口挂了才用；always=每次都补
+    "regions": [],                     # 例 ["江西-电信"]；留空则沿用主接口结果的地区
     "max_regions": 6,
     "max_udpxy_per_region": 3,
     "max_udpxy_probe": 10,
@@ -78,17 +78,12 @@ mcast_quake = {
     "cdn_prefix": "https://gh-proxy.org/",
 }
 
-# ── 额外拆分输出 ────────────────────────────────────────────────────
-# 把命中的组播分类单独发布成一条订阅链接（生成 crawl/<file>.m3u 和 <file>.txt）
-#   groups: 分类名需要同时包含的关键字，如 ["广西", "电信"] 命中「组播源-广西电信」
-#   title : 仅用于日志显示
-# 发布地址：https://zengzifeng.ccwu.cc/crawl/<file>.m3u
 # ── 额外组播源（并入「广西电信」分类）──────────────────────────────
 # 第三方 txt 列表，链接里带密钥，不能写进公开仓库：
 #   优先读环境变量 CQSHUSHU_URL（Actions 用 secrets 注入），其次读 crawl/.cq_url
 #   源站对非浏览器 UA 返回 403，抓取时固定带浏览器 UA + Referer
 mcast_extra = {
-    "enabled": True,
+    "enabled": False,                  # 广西专用源，已随广西订阅一起停用
     "url_env": "CQSHUSHU_URL",
     "url_file": ".cq_url",
     "referer": "https://iptv.cqshushu.com/",
@@ -96,17 +91,13 @@ mcast_extra = {
     "timeout": 30,
 }
 
-split_outputs = [
-    {
-        "file": "guangxi",
-        "title": "广西电信",
-        "groups": ["广西", "电信"],
-        "verify": True,            # 发布前实测拉流，只留真能出流的线路
-        "verify_timeout": 6,       # 单条线路拉流超时（秒）；组播建连慢，别设太小
-        "verify_min_bytes": 50000, # 6 秒内至少读到这么多字节才算可播
-        "verify_workers": 16,
-    },
-]
+# ── 额外拆分输出 ────────────────────────────────────────────────────
+# 把命中的组播分类单独发布成一条订阅链接（生成 crawl/<file>.m3u 和 <file>.txt）
+#   groups: 分类名需要同时包含的关键字，如 ["广西", "电信"] 命中「组播源-广西电信」
+#   title : 仅用于日志显示
+# 发布地址：https://zengzifeng.ccwu.cc/crawl/<file>.m3u
+# 2026-11-02：广西订阅按用户要求撤下，留空即不再生成
+split_outputs = []
 
 # ── URL 黑名单 ───────────────────────────────────────────────────────
 # 播放地址包含以下任意子串时会被自动过滤掉
