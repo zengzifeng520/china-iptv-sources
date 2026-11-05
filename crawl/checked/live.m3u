@@ -1,5 +1,5 @@
 #EXTM3U x-tvg-url="https://zengzifeng.ccwu.cc/output/epg.xml"
-# 更新时间：2026-11-05 09:40:47（北京时间）
+# 更新时间：2026-11-05 10:40:41（北京时间）
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="卫视频道",重庆卫视
 http://120.198.86.186:9901/tsfile/live/1073_1.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="卫视频道",重庆卫视
@@ -124,6 +124,8 @@ http://125.123.176.112:9999/udp/233.50.201.100:5140
 http://125.123.176.112:9999/udp/233.50.200.145:5140
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/a12a07484c8f.png" group-title="卫视频道",浙江卫视
 http://zjhuct.icu:8889/udp/233.50.200.145:5140
+#EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/a12a07484c8f.png" group-title="卫视频道",浙江卫视
+http://www.liangcl.top:8686/udp/233.50.201.100:5140
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/a12a07484c8f.png" group-title="卫视频道",浙江卫视
 http://114.250.20.79:4022/rtp/239.3.1.137:8036
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/a12a07484c8f.png" group-title="卫视频道",浙江卫视
@@ -9825,8 +9827,6 @@ http://www.ct123.online:8188/rtp/239.69.1.189:10776
 #EXTINF:-1 tvg-id="书法频道SD" tvg-name="书法频道SD" tvg-logo="https://zzf.new.tg/data/logos/621276522869.png" group-title="其他频道",书法频道SD
 http://www.3872327.top:1225/rtp/239.69.1.189:10776
 #EXTINF:-1 tvg-id="书法频道SD" tvg-name="书法频道SD" tvg-logo="https://zzf.new.tg/data/logos/621276522869.png" group-title="其他频道",书法频道SD
-http://hiliu.myds.me:18088/rtp/239.69.1.189:10776
-#EXTINF:-1 tvg-id="书法频道SD" tvg-name="书法频道SD" tvg-logo="https://zzf.new.tg/data/logos/621276522869.png" group-title="其他频道",书法频道SD
 http://59.173.122.230:10001/rtp/239.69.1.189:10776
 #EXTINF:-1 tvg-id="书法频道SD" tvg-name="书法频道SD" tvg-logo="https://zzf.new.tg/data/logos/621276522869.png" group-title="其他频道",书法频道SD
 http://yy15238.netyiyang.com:8800/rtp/239.69.1.189:10776
@@ -9866,6 +9866,8 @@ http://yy15238.netyiyang.com:8800/rtp/239.69.1.187:10764
 http://alist.xicp.fun:52057/rtp/239.69.1.187:10764
 #EXTINF:-1 tvg-id="新动漫SD" tvg-name="新动漫SD" tvg-logo="https://zzf.new.tg/data/logos/lib/f540bb93ae1d.png" group-title="其他频道",新动漫SD
 http://www.ct123.online:8188/rtp/239.69.1.187:10764
+#EXTINF:-1 tvg-id="新动漫SD" tvg-name="新动漫SD" tvg-logo="https://zzf.new.tg/data/logos/lib/f540bb93ae1d.png" group-title="其他频道",新动漫SD
+http://hiliu.myds.me:18088/rtp/239.69.1.187:10764
 #EXTINF:-1 tvg-id="老故事SD" tvg-name="老故事SD" tvg-logo="https://zzf.new.tg/data/logos/68f0e440ad3a.png" group-title="其他频道",老故事SD
 http://59.173.122.230:10001/rtp/239.69.1.85:10150
 #EXTINF:-1 tvg-id="老故事SD" tvg-name="老故事SD" tvg-logo="https://zzf.new.tg/data/logos/68f0e440ad3a.png" group-title="其他频道",老故事SD
@@ -10065,8 +10067,6 @@ http://www.ct123.online:8188/rtp/239.69.2.15:11244
 #EXTINF:-1 tvg-id="优购物SD" tvg-name="优购物SD" tvg-logo="https://zzf.new.tg/data/logos/0b9b2832ac2c.png" group-title="其他频道",优购物SD
 http://www.3872327.top:1225/rtp/239.69.2.15:11244
 #EXTINF:-1 tvg-id="优购物SD" tvg-name="优购物SD" tvg-logo="https://zzf.new.tg/data/logos/0b9b2832ac2c.png" group-title="其他频道",优购物SD
-http://hiliu.myds.me:18088/rtp/239.69.1.65:10030
-#EXTINF:-1 tvg-id="优购物SD" tvg-name="优购物SD" tvg-logo="https://zzf.new.tg/data/logos/0b9b2832ac2c.png" group-title="其他频道",优购物SD
 http://alist.xicp.fun:52057/rtp/239.69.1.65:10030
 #EXTINF:-1 tvg-id="优购物SD" tvg-name="优购物SD" tvg-logo="https://zzf.new.tg/data/logos/0b9b2832ac2c.png" group-title="其他频道",优购物SD
 http://alist.xicp.fun:52057/rtp/239.69.2.15:11244
@@ -10080,6 +10080,8 @@ http://alist.xicp.fun:52057/rtp/239.69.2.14:11238
 http://www.3872327.top:1225/rtp/239.69.2.14:11238
 #EXTINF:-1 tvg-id="聚鲨环球精选SD" tvg-name="聚鲨环球精选SD" tvg-logo="https://zzf.new.tg/data/logos/f99beabc6bda.png" group-title="其他频道",聚鲨环球精选SD
 http://www.zyhfm.com:8088/rtp/239.69.2.14:11238
+#EXTINF:-1 tvg-id="聚鲨环球精选SD" tvg-name="聚鲨环球精选SD" tvg-logo="https://zzf.new.tg/data/logos/f99beabc6bda.png" group-title="其他频道",聚鲨环球精选SD
+http://hiliu.myds.me:18088/rtp/239.69.2.14:11238
 #EXTINF:-1 tvg-id="聚鲨环球精选SD" tvg-name="聚鲨环球精选SD" tvg-logo="https://zzf.new.tg/data/logos/f99beabc6bda.png" group-title="其他频道",聚鲨环球精选SD
 http://59.173.122.230:10001/rtp/239.69.2.14:11238
 #EXTINF:-1 tvg-id="聚鲨环球精选SD" tvg-name="聚鲨环球精选SD" tvg-logo="https://zzf.new.tg/data/logos/f99beabc6bda.png" group-title="其他频道",聚鲨环球精选SD
