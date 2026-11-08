@@ -1,5 +1,5 @@
 #EXTM3U
-# 每频道最多 20 条 2026-11-08 12:58:15
+# 每频道最多 20 条 2026-11-08 15:17:44
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://120.238.84.45:9901/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
@@ -5223,8 +5223,6 @@ http://60.0.97.175:9999/rtp/239.253.93.204:6382
 #EXTINF:-1 tvg-id="优漫卡通" tvg-name="优漫卡通" tvg-logo="https://zzf.new.tg/data/logos/lib/5ee5a78880f4.png" group-title="江苏节目",优漫卡通
 http://jyb7928.host:8066/udp/239.1.1.72:8072
 #EXTINF:-1 tvg-id="江苏城市" tvg-name="江苏城市" tvg-logo="https://zzf.new.tg/data/logos/lib/7a562e6cb864.png" group-title="江苏节目",江苏城市
-http://www.frankgb.cn:4022/rtp/239.49.8.107:8000
-#EXTINF:-1 tvg-id="江苏城市" tvg-name="江苏城市" tvg-logo="https://zzf.new.tg/data/logos/lib/7a562e6cb864.png" group-title="江苏节目",江苏城市
 http://home.amucn.net:8800/rtp/239.49.8.107:8000
 #EXTINF:-1 tvg-id="江苏城市" tvg-name="江苏城市" tvg-logo="https://zzf.new.tg/data/logos/lib/7a562e6cb864.png" group-title="江苏节目",江苏城市
 http://home.amucn.net:8800/rtp/239.49.1.17:6000
@@ -5583,8 +5581,6 @@ http://125.70.123.52:3000/udp/239.94.0.113:5140
 #EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
 http://h.vanshun.com:8802/rtp/239.49.1.27:8000
 #EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
-http://www.frankgb.cn:4022/rtp/239.49.1.28:8000
-#EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
 http://www.745612.xyz:7788/rtp/235.254.197.56:7980
 #EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
 http://121.10.7.16:4000/udp/239.77.0.67:5146
@@ -5612,6 +5608,8 @@ http://www.ct123.online:8188/rtp/239.69.2.28:11322
 http://xmzj.f3322.net:8188/udp/239.94.0.113:5140
 #EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
 http://114.252.117.159:7000/rtp/239.3.1.202:2000
+#EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
+http://61.49.164.102:1314/rtp/239.3.1.202:2000
 #EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="4K节目",湖南卫视4K
 http://www.zyhfm.com:8088/rtp/239.69.1.27:9802
 #EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="4K节目",湖南卫视4K
@@ -12417,6 +12415,8 @@ http://114.250.20.79:4022/rtp/239.3.1.219:4220
 #EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
 http://123.120.6.99:4022/rtp/239.3.1.219:4220
 #EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
+http://triq.cc:8012/rtp/239.3.1.219:4220
+#EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
 http://n2.192372.xyz:8888/rtp/239.3.1.219:4220
 #EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
 http://61.49.164.102:1314/rtp/239.3.1.127:8001
@@ -12426,6 +12426,8 @@ http://114.250.20.79:4022/rtp/239.3.1.127:8001
 http://123.120.6.99:4022/rtp/239.3.1.127:8001
 #EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
 http://bit.famcloud.top:9878/rtp/239.3.1.127:8001
+#EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
+http://triq.cc:8012/rtp/239.3.1.127:8001
 #EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
 http://111.199.3.80:8686/rtp/239.3.1.127:8001
 #EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
