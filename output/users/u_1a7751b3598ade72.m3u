@@ -1,7 +1,7 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="ℹ️ 订阅信息 到期 2027-10-8",有效期 2026-10-26 ~ 2027-10-8（剩余 334 天）
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-08 19:17:53 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-08 23:08:33 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -718,6 +718,8 @@ http://61.49.164.102:1314/rtp/239.3.1.64:8124
 #EXTINF:-1 tvg-id="CCTV-12" tvg-name="CCTV-12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="📺 央视频道",CCTV-12
 http://114.250.20.79:4022/rtp/239.3.1.64:8124
 #EXTINF:-1 tvg-id="CCTV-12" tvg-name="CCTV-12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="📺 央视频道",CCTV-12
+http://triq.cc:8012/rtp/239.3.1.64:8124
+#EXTINF:-1 tvg-id="CCTV-12" tvg-name="CCTV-12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="📺 央视频道",CCTV-12
 http://e3.woc.iiiya.cn:18888/rtp/239.61.2.177:9050
 #EXTINF:-1 tvg-id="CCTV-12" tvg-name="CCTV-12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="📺 央视频道",CCTV-12
 http://123.53.39.56:4022/rtp/239.16.10.110:2000
@@ -739,8 +741,6 @@ http://home.pinkfloyd.cn:5000/rtp/238.1.78.242:7808
 http://family-ph.vividnian.com:8188/udp/233.50.201.123:5140
 #EXTINF:-1 tvg-id="CCTV-12" tvg-name="CCTV-12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="📺 央视频道",CCTV-12
 http://14.127.213.91:4022/udp/239.77.1.109:5146
-#EXTINF:-1 tvg-id="CCTV-12" tvg-name="CCTV-12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="📺 央视频道",CCTV-12
-http://118.79.114.31:6001/rtp/226.0.2.29:8144
 #EXTINF:-1 tvg-id="CCTV-13" tvg-name="CCTV-13" tvg-logo="https://zzf.new.tg/data/logos/lib/7cb318300bc8.png" group-title="📺 央视频道",CCTV-13
 http://1.192.242.239:8188/rtp/239.16.10.111:2000
 #EXTINF:-1 tvg-id="CCTV-13" tvg-name="CCTV-13" tvg-logo="https://zzf.new.tg/data/logos/lib/7cb318300bc8.png" group-title="📺 央视频道",CCTV-13
@@ -5200,6 +5200,8 @@ http://zhgx.app.sccncd.com:80/rtp/239.0.0.75:5140
 #EXTINF:-1 tvg-id="北京国际" tvg-name="北京国际" tvg-logo="https://zzf.new.tg/data/logos/a0ab59c77994.png" group-title="🏯 北京节目",北京国际
 http://114.250.20.79:4022/rtp/239.3.1.235:8000
 #EXTINF:-1 tvg-id="北京国际" tvg-name="北京国际" tvg-logo="https://zzf.new.tg/data/logos/a0ab59c77994.png" group-title="🏯 北京节目",北京国际
+http://triq.cc:8012/rtp/239.3.1.235:8000
+#EXTINF:-1 tvg-id="北京国际" tvg-name="北京国际" tvg-logo="https://zzf.new.tg/data/logos/a0ab59c77994.png" group-title="🏯 北京节目",北京国际
 http://bit.famcloud.top:9878/rtp/239.3.1.235:8000
 #EXTINF:-1 tvg-id="北京国际" tvg-name="北京国际" tvg-logo="https://zzf.new.tg/data/logos/a0ab59c77994.png" group-title="🏯 北京节目",北京国际
 http://114.252.117.159:7000/rtp/239.3.1.235:8000
@@ -5219,8 +5221,6 @@ http://61.49.164.102:1314/rtp/239.3.1.154:8001
 http://111.199.3.80:8686/rtp/239.3.1.154:8001
 #EXTINF:-1 tvg-id="北京密云" tvg-name="北京密云" tvg-logo="https://zzf.new.tg/data/logos/8b241ebd5da7.png" group-title="🏯 北京节目",北京密云
 http://114.250.20.79:4022/rtp/239.3.1.154:8001
-#EXTINF:-1 tvg-id="北京密云" tvg-name="北京密云" tvg-logo="https://zzf.new.tg/data/logos/8b241ebd5da7.png" group-title="🏯 北京节目",北京密云
-http://triq.cc:8012/rtp/239.3.1.154:8001
 #EXTINF:-1 tvg-id="北京密云" tvg-name="北京密云" tvg-logo="https://zzf.new.tg/data/logos/8b241ebd5da7.png" group-title="🏯 北京节目",北京密云
 http://n2.192372.xyz:8888/rtp/239.3.1.154:8001
 #EXTINF:-1 tvg-id="北京密云" tvg-name="北京密云" tvg-logo="https://zzf.new.tg/data/logos/8b241ebd5da7.png" group-title="🏯 北京节目",北京密云
@@ -5439,6 +5439,8 @@ http://111.199.3.80:8686/rtp/239.3.1.102:8001
 http://114.250.20.79:4022/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="🏯 北京节目",萌宠TV
 http://bit.famcloud.top:9878/rtp/239.3.1.102:8001
+#EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="🏯 北京节目",萌宠TV
+http://triq.cc:8012/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="🏯 北京节目",萌宠TV
 http://n2.192372.xyz:8888/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="🏯 北京节目",萌宠TV
@@ -9637,6 +9639,8 @@ http://111.199.3.80:8686/rtp/239.3.1.84:4120
 http://114.250.20.79:4022/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="🏙️ 地方频道",光影
 http://n2.192372.xyz:8888/rtp/239.3.1.84:4120
+#EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="🏙️ 地方频道",光影
+http://triq.cc:8012/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="🏙️ 地方频道",光影
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="🏙️ 地方频道",光影
