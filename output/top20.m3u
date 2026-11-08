@@ -1,5 +1,5 @@
 #EXTM3U
-# 每频道最多 20 条 2026-11-09 01:08:32
+# 每频道最多 20 条 2026-11-09 02:08:29
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://120.238.84.45:9901/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
@@ -1242,6 +1242,8 @@ http://111.199.3.80:8686/rtp/239.3.1.93:4120
 http://114.250.20.79:4022/rtp/239.3.1.93:4120
 #EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
 http://123.120.6.99:4022/rtp/239.3.1.93:4120
+#EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
+http://triq.cc:8012/rtp/239.3.1.93:4120
 #EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
 http://n2.192372.xyz:8888/rtp/239.3.1.93:4120
 #EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
@@ -10264,8 +10266,6 @@ http://www.893224162.xyz:8188/udp/239.94.2.28:5140
 http://vpn.ydcb.top:40000/udp/239.94.2.28:5140
 #EXTINF:-1 tvg-id="解密专区" tvg-name="解密专区" tvg-logo="https://zzf.new.tg/data/logos/a3cc5cdf21a2.png" group-title="其他频道",解密专区
 http://125.70.123.52:3000/udp/239.94.1.53:5140
-#EXTINF:-1 tvg-id="解密专区" tvg-name="解密专区" tvg-logo="https://zzf.new.tg/data/logos/a3cc5cdf21a2.png" group-title="其他频道",解密专区
-http://118.113.123.6:8686/udp/239.94.1.53:5140
 #EXTINF:-1 tvg-id="解密专区" tvg-name="解密专区" tvg-logo="https://zzf.new.tg/data/logos/a3cc5cdf21a2.png" group-title="其他频道",解密专区
 http://www.893224162.xyz:8188/udp/239.94.1.53:5140
 #EXTINF:-1 tvg-id="解密专区" tvg-name="解密专区" tvg-logo="https://zzf.new.tg/data/logos/a3cc5cdf21a2.png" group-title="其他频道",解密专区
