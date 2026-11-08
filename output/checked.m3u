@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-08 17:17:50 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-08 18:17:46 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://120.238.84.45:9901/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -1688,8 +1688,6 @@ http://114.250.20.79:4022/rtp/239.3.1.93:4120
 #EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
 http://123.120.6.99:4022/rtp/239.3.1.93:4120
 #EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
-http://triq.cc:8012/rtp/239.3.1.93:4120
-#EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
 http://n2.192372.xyz:8888/rtp/239.3.1.93:4120
 #EXTINF:-1 tvg-id="家庭影院" tvg-name="家庭影院" tvg-logo="https://zzf.new.tg/data/logos/lib/9f91081a4437.png" group-title="地方频道",家庭影院
 http://110.7.131.163:4022/udp/239.125.1.54:5000
@@ -1929,6 +1927,8 @@ http://111.199.3.80:8686/rtp/239.3.1.79:4120
 http://114.250.20.79:4022/rtp/239.3.1.79:4120
 #EXTINF:-1 tvg-id="早教" tvg-name="早教" tvg-logo="https://zzf.new.tg/data/logos/894744bbb0e9.png" group-title="地方频道",早教
 http://123.120.6.99:4022/rtp/239.3.1.79:4120
+#EXTINF:-1 tvg-id="早教" tvg-name="早教" tvg-logo="https://zzf.new.tg/data/logos/894744bbb0e9.png" group-title="地方频道",早教
+http://triq.cc:8012/rtp/239.3.1.79:4120
 #EXTINF:-1 tvg-id="早教" tvg-name="早教" tvg-logo="https://zzf.new.tg/data/logos/894744bbb0e9.png" group-title="地方频道",早教
 http://n2.192372.xyz:8888/rtp/239.3.1.79:4120
 #EXTINF:-1 tvg-id="早教" tvg-name="早教" tvg-logo="https://zzf.new.tg/data/logos/894744bbb0e9.png" group-title="地方频道",早教
@@ -13996,6 +13996,8 @@ http://111.199.3.80:8686/rtp/239.3.1.154:8001
 #EXTINF:-1 tvg-id="密云电视台HD" tvg-name="密云电视台HD" tvg-logo="https://zzf.new.tg/data/logos/a20e655b7403.png" group-title="其他频道",密云电视台HD
 http://114.250.20.79:4022/rtp/239.3.1.154:8001
 #EXTINF:-1 tvg-id="密云电视台HD" tvg-name="密云电视台HD" tvg-logo="https://zzf.new.tg/data/logos/a20e655b7403.png" group-title="其他频道",密云电视台HD
+http://triq.cc:8012/rtp/239.3.1.154:8001
+#EXTINF:-1 tvg-id="密云电视台HD" tvg-name="密云电视台HD" tvg-logo="https://zzf.new.tg/data/logos/a20e655b7403.png" group-title="其他频道",密云电视台HD
 http://n2.192372.xyz:8888/rtp/239.3.1.154:8001
 #EXTINF:-1 tvg-id="密云电视台HD" tvg-name="密云电视台HD" tvg-logo="https://zzf.new.tg/data/logos/a20e655b7403.png" group-title="其他频道",密云电视台HD
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.154:8001
@@ -14023,6 +14025,8 @@ http://114.252.117.159:7000/rtp/239.3.1.214:4220
 http://n2.192372.xyz:8888/rtp/239.3.1.214:4220
 #EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
 http://114.250.20.79:4022/rtp/239.3.1.215:4220
+#EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
+http://triq.cc:8012/rtp/239.3.1.215:4220
 #EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
 http://114.252.117.159:7000/rtp/239.3.1.215:4220
 #EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
@@ -14081,6 +14085,8 @@ http://114.250.20.79:4022/rtp/239.3.1.127:8001
 http://123.120.6.99:4022/rtp/239.3.1.127:8001
 #EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
 http://bit.famcloud.top:9878/rtp/239.3.1.127:8001
+#EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
+http://triq.cc:8012/rtp/239.3.1.127:8001
 #EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
 http://111.199.3.80:8686/rtp/239.3.1.127:8001
 #EXTINF:-1 tvg-id="睛彩羽毛球HD" tvg-name="睛彩羽毛球HD" tvg-logo="https://zzf.new.tg/data/logos/c5fa25247c0f.png" group-title="其他频道",睛彩羽毛球HD
