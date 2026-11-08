@@ -1,5 +1,5 @@
 #EXTM3U x-tvg-url="https://zengzifeng.ccwu.cc/output/epg.xml"
-# 更新时间：2026-11-08 18:17:43（北京时间）
+# 更新时间：2026-11-08 19:17:51（北京时间）
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://120.238.84.45:9901/tsfile/live/1018_1.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
@@ -778,8 +778,6 @@ http://114.252.117.159:7000/rtp/239.3.1.64:8124
 http://61.49.164.102:1314/rtp/239.3.1.64:8124
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
 http://114.250.20.79:4022/rtp/239.3.1.64:8124
-#EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
-http://triq.cc:8012/rtp/239.3.1.64:8124
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
 http://e3.woc.iiiya.cn:18888/rtp/239.61.2.177:9050
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
@@ -1659,8 +1657,6 @@ http://114.250.20.79:4022/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="地方频道",光影
 http://n2.192372.xyz:8888/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="地方频道",光影
-http://triq.cc:8012/rtp/239.3.1.84:4120
-#EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="地方频道",光影
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.84:4120
 #EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="地方频道",光影
 http://123.120.6.99:4022/rtp/239.3.1.84:4120
@@ -1672,6 +1668,8 @@ http://110.7.131.163:4022/udp/239.125.1.49:5000
 http://111.199.3.80:8686/rtp/239.3.1.91:4120
 #EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="地方频道",喜剧影院
 http://114.250.20.79:4022/rtp/239.3.1.91:4120
+#EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="地方频道",喜剧影院
+http://triq.cc:8012/rtp/239.3.1.91:4120
 #EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="地方频道",喜剧影院
 http://n2.192372.xyz:8888/rtp/239.3.1.91:4120
 #EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="地方频道",喜剧影院
@@ -2380,8 +2378,6 @@ http://111.199.3.80:8686/rtp/239.3.1.102:8001
 http://114.250.20.79:4022/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
 http://bit.famcloud.top:9878/rtp/239.3.1.102:8001
-#EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
-http://triq.cc:8012/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
 http://n2.192372.xyz:8888/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
@@ -13911,8 +13907,6 @@ http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.115:8000
 #EXTINF:-1 tvg-id="BRTV卡酷少儿HD" tvg-name="BRTV卡酷少儿HD" tvg-logo="https://zzf.new.tg/data/logos/lib/745db28cde29.png" group-title="其他频道",BRTV卡酷少儿HD
 http://114.252.117.159:7000/rtp/239.3.1.189:8000
 #EXTINF:-1 tvg-id="BRTV卡酷少儿HD" tvg-name="BRTV卡酷少儿HD" tvg-logo="https://zzf.new.tg/data/logos/lib/745db28cde29.png" group-title="其他频道",BRTV卡酷少儿HD
-http://triq.cc:8012/rtp/239.3.1.189:8000
-#EXTINF:-1 tvg-id="BRTV卡酷少儿HD" tvg-name="BRTV卡酷少儿HD" tvg-logo="https://zzf.new.tg/data/logos/lib/745db28cde29.png" group-title="其他频道",BRTV卡酷少儿HD
 http://114.250.20.79:4022/rtp/239.3.1.189:8000
 #EXTINF:-1 tvg-id="BRTV卡酷少儿HD" tvg-name="BRTV卡酷少儿HD" tvg-logo="https://zzf.new.tg/data/logos/lib/745db28cde29.png" group-title="其他频道",BRTV卡酷少儿HD
 http://123.120.6.99:4022/rtp/239.3.1.189:8000
@@ -13926,8 +13920,6 @@ http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.189:8000
 http://n2.192372.xyz:8888/rtp/239.3.1.189:8000
 #EXTINF:-1 tvg-id="BTV国际频道" tvg-name="BTV国际频道" tvg-logo="https://zzf.new.tg/data/logos/5a0c163f4909.png" group-title="其他频道",BTV国际频道
 http://114.250.20.79:4022/rtp/239.3.1.235:8000
-#EXTINF:-1 tvg-id="BTV国际频道" tvg-name="BTV国际频道" tvg-logo="https://zzf.new.tg/data/logos/5a0c163f4909.png" group-title="其他频道",BTV国际频道
-http://triq.cc:8012/rtp/239.3.1.235:8000
 #EXTINF:-1 tvg-id="BTV国际频道" tvg-name="BTV国际频道" tvg-logo="https://zzf.new.tg/data/logos/5a0c163f4909.png" group-title="其他频道",BTV国际频道
 http://bit.famcloud.top:9878/rtp/239.3.1.235:8000
 #EXTINF:-1 tvg-id="BTV国际频道" tvg-name="BTV国际频道" tvg-logo="https://zzf.new.tg/data/logos/5a0c163f4909.png" group-title="其他频道",BTV国际频道
@@ -13964,8 +13956,6 @@ http://61.49.164.102:1314/rtp/239.3.1.163:8001
 http://114.250.20.79:4022/rtp/239.3.1.163:8001
 #EXTINF:-1 tvg-id="朝阳融媒HD" tvg-name="朝阳融媒HD" tvg-logo="https://zzf.new.tg/data/logos/359891e732ba.png" group-title="其他频道",朝阳融媒HD
 http://123.120.6.99:4022/rtp/239.3.1.163:8001
-#EXTINF:-1 tvg-id="朝阳融媒HD" tvg-name="朝阳融媒HD" tvg-logo="https://zzf.new.tg/data/logos/359891e732ba.png" group-title="其他频道",朝阳融媒HD
-http://triq.cc:8012/rtp/239.3.1.163:8001
 #EXTINF:-1 tvg-id="朝阳融媒HD" tvg-name="朝阳融媒HD" tvg-logo="https://zzf.new.tg/data/logos/359891e732ba.png" group-title="其他频道",朝阳融媒HD
 http://111.199.3.80:8686/rtp/239.3.1.163:8001
 #EXTINF:-1 tvg-id="朝阳融媒HD" tvg-name="朝阳融媒HD" tvg-logo="https://zzf.new.tg/data/logos/359891e732ba.png" group-title="其他频道",朝阳融媒HD
@@ -14058,6 +14048,8 @@ http://111.199.3.80:8686/rtp/239.3.1.217:4220
 http://114.250.20.79:4022/rtp/239.3.1.217:4220
 #EXTINF:-1 tvg-id="CGTN 西班牙语HD" tvg-name="CGTN 西班牙语HD" tvg-logo="https://zzf.new.tg/data/logos/7b52759fc1d4.png" group-title="其他频道",CGTN 西班牙语HD
 http://bit.famcloud.top:9878/rtp/239.3.1.217:4220
+#EXTINF:-1 tvg-id="CGTN 西班牙语HD" tvg-name="CGTN 西班牙语HD" tvg-logo="https://zzf.new.tg/data/logos/7b52759fc1d4.png" group-title="其他频道",CGTN 西班牙语HD
+http://triq.cc:8012/rtp/239.3.1.217:4220
 #EXTINF:-1 tvg-id="CGTN 西班牙语HD" tvg-name="CGTN 西班牙语HD" tvg-logo="https://zzf.new.tg/data/logos/7b52759fc1d4.png" group-title="其他频道",CGTN 西班牙语HD
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.217:4220
 #EXTINF:-1 tvg-id="CGTN 西班牙语HD" tvg-name="CGTN 西班牙语HD" tvg-logo="https://zzf.new.tg/data/logos/7b52759fc1d4.png" group-title="其他频道",CGTN 西班牙语HD
