@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-08 15:17:44 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-08 16:17:51 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://120.238.84.45:9901/tsfile/live/1018_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -6668,6 +6668,8 @@ http://60.0.97.175:9999/rtp/239.253.93.204:6382
 #EXTINF:-1 tvg-id="优漫卡通" tvg-name="优漫卡通" tvg-logo="https://zzf.new.tg/data/logos/lib/5ee5a78880f4.png" group-title="江苏节目",优漫卡通
 http://jyb7928.host:8066/udp/239.1.1.72:8072
 #EXTINF:-1 tvg-id="江苏城市" tvg-name="江苏城市" tvg-logo="https://zzf.new.tg/data/logos/lib/7a562e6cb864.png" group-title="江苏节目",江苏城市
+http://www.frankgb.cn:4022/rtp/239.49.8.107:8000
+#EXTINF:-1 tvg-id="江苏城市" tvg-name="江苏城市" tvg-logo="https://zzf.new.tg/data/logos/lib/7a562e6cb864.png" group-title="江苏节目",江苏城市
 http://home.amucn.net:8800/rtp/239.49.8.107:8000
 #EXTINF:-1 tvg-id="江苏城市" tvg-name="江苏城市" tvg-logo="https://zzf.new.tg/data/logos/lib/7a562e6cb864.png" group-title="江苏节目",江苏城市
 http://home.amucn.net:8800/rtp/239.49.1.17:6000
@@ -7139,6 +7141,8 @@ http://home.szjim.top:4000/udp/239.77.1.14:5146
 http://125.70.123.52:3000/udp/239.94.0.113:5140
 #EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
 http://h.vanshun.com:8802/rtp/239.49.1.27:8000
+#EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
+http://www.frankgb.cn:4022/rtp/239.49.1.28:8000
 #EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
 http://www.745612.xyz:7788/rtp/235.254.197.56:7980
 #EXTINF:-1 tvg-id="深圳卫视4K" tvg-name="深圳卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="4K节目",深圳卫视4K
