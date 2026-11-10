@@ -1,7 +1,7 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="ℹ️ 订阅信息 到期 2027-10-8",有效期 2026-10-26 ~ 2027-10-8（剩余 332 天）
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-10 18:45:34 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-10 19:46:13 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -2922,8 +2922,6 @@ http://114.252.117.159:7000/rtp/239.3.1.119:3006
 #EXTINF:-1 tvg-id="东方卫视4K" tvg-name="东方卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/08f03c1a2d88.png" group-title="🎬 4K节目",东方卫视4K
 http://home.szjim.top:4000/udp/239.77.0.59:5146
 #EXTINF:-1 tvg-id="东方卫视4K" tvg-name="东方卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/08f03c1a2d88.png" group-title="🎬 4K节目",东方卫视4K
-http://triq.cc:8012/rtp/239.3.1.119:3006
-#EXTINF:-1 tvg-id="东方卫视4K" tvg-name="东方卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/08f03c1a2d88.png" group-title="🎬 4K节目",东方卫视4K
 http://bit.famcloud.top:9878/rtp/239.3.1.119:3006
 #EXTINF:-1 tvg-id="东方卫视4K" tvg-name="东方卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/08f03c1a2d88.png" group-title="🎬 4K节目",东方卫视4K
 http://61.49.164.102:1314/rtp/239.3.1.119:3006
@@ -2943,6 +2941,8 @@ http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.119:3006
 http://www.ct123.online:8188/rtp/239.69.2.37:11376
 #EXTINF:-1 tvg-id="东方卫视4K" tvg-name="东方卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/08f03c1a2d88.png" group-title="🎬 4K节目",东方卫视4K
 http://110.7.131.163:4022/udp/239.125.1.235:4120
+#EXTINF:-1 tvg-id="东方卫视4K" tvg-name="东方卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/08f03c1a2d88.png" group-title="🎬 4K节目",东方卫视4K
+http://www.893224162.xyz:8188/udp/239.94.0.119:5140
 #EXTINF:-1 tvg-id="亲子趣学4k" tvg-name="亲子趣学4k" tvg-logo="https://zzf.new.tg/data/logos/cf6653a18b98.png" group-title="🎬 4K节目",亲子趣学4k
 http://vpn.ydcb.top:40000/udp/239.94.1.156:5140
 #EXTINF:-1 tvg-id="亲子趣学4k" tvg-name="亲子趣学4k" tvg-logo="https://zzf.new.tg/data/logos/cf6653a18b98.png" group-title="🎬 4K节目",亲子趣学4k
@@ -5277,8 +5277,6 @@ http://114.252.117.159:7000/rtp/239.3.1.116:8000
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.116:8000
 #EXTINF:-1 tvg-id="北京通州" tvg-name="北京通州" tvg-logo="https://zzf.new.tg/data/logos/c89c775ba027.png" group-title="🏯 北京节目",北京通州
 http://111.199.3.80:8686/rtp/239.3.1.221:8001
-#EXTINF:-1 tvg-id="北京通州" tvg-name="北京通州" tvg-logo="https://zzf.new.tg/data/logos/c89c775ba027.png" group-title="🏯 北京节目",北京通州
-http://triq.cc:8012/rtp/239.3.1.221:8001
 #EXTINF:-1 tvg-id="北京通州" tvg-name="北京通州" tvg-logo="https://zzf.new.tg/data/logos/c89c775ba027.png" group-title="🏯 北京节目",北京通州
 http://114.252.117.159:7000/rtp/239.3.1.221:8001
 #EXTINF:-1 tvg-id="北京通州" tvg-name="北京通州" tvg-logo="https://zzf.new.tg/data/logos/c89c775ba027.png" group-title="🏯 北京节目",北京通州
@@ -8903,8 +8901,6 @@ http://114.250.20.79:4022/rtp/239.3.1.91:4120
 http://123.120.6.99:4022/rtp/239.3.1.91:4120
 #EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="🏙️ 地方频道",喜剧影院
 http://bit.famcloud.top:9878/rtp/239.3.1.91:4120
-#EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="🏙️ 地方频道",喜剧影院
-http://triq.cc:8012/rtp/239.3.1.91:4120
 #EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="🏙️ 地方频道",喜剧影院
 http://n2.192372.xyz:8888/rtp/239.3.1.91:4120
 #EXTINF:-1 tvg-id="喜剧影院" tvg-name="喜剧影院" tvg-logo="https://zzf.new.tg/data/logos/962834ae1bd3.png" group-title="🏙️ 地方频道",喜剧影院
