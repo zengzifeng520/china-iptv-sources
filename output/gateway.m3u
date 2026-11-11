@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-11 16:04:23 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-11 17:04:01 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -5892,8 +5892,6 @@ http://116.179.130.176:6001/rtp/226.0.2.185:9392
 #EXTINF:-1 tvg-id="朔州新闻综合" tvg-name="朔州新闻综合" group-title="⛰️ 山西节目",朔州新闻综合
 http://124.165.232.26:8084/rtp/226.0.2.185:9392
 #EXTINF:-1 tvg-id="河东卫视" tvg-name="河东卫视" tvg-logo="https://zzf.new.tg/data/logos/88a5480cea80.png" group-title="⛰️ 山西节目",河东卫视
-http://117.9.46.100:4022/udp/225.1.2.2:5002
-#EXTINF:-1 tvg-id="河东卫视" tvg-name="河东卫视" tvg-logo="https://zzf.new.tg/data/logos/88a5480cea80.png" group-title="⛰️ 山西节目",河东卫视
 http://home.techua.net:8000/udp/225.1.2.2:5002
 #EXTINF:-1 tvg-id="河东卫视" tvg-name="河东卫视" tvg-logo="https://zzf.new.tg/data/logos/88a5480cea80.png" group-title="⛰️ 山西节目",河东卫视
 http://ak.cj022.com:10080/udp/225.1.2.2:5002
@@ -7290,8 +7288,6 @@ http://www.ct123.online:8188/rtp/239.69.1.60:9994
 #EXTINF:-1 tvg-id="武汉教育" tvg-name="武汉教育" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="🌾 湖北节目",武汉教育
 http://alist.xicp.fun:52057/rtp/239.69.1.60:9994
 #EXTINF:-1 tvg-id="武汉教育" tvg-name="武汉教育" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="🌾 湖北节目",武汉教育
-http://www.3872327.top:1225/rtp/239.69.1.60:9994
-#EXTINF:-1 tvg-id="武汉教育" tvg-name="武汉教育" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="🌾 湖北节目",武汉教育
 http://59.173.122.230:10001/rtp/239.69.1.60:9994
 #EXTINF:-1 tvg-id="武汉教育" tvg-name="武汉教育" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="🌾 湖北节目",武汉教育
 http://www.zyhfm.com:8088/rtp/239.69.1.60:9994
@@ -7710,8 +7706,6 @@ http://www.yao87.com:4022/udp/239.76.248.14:1234
 #EXTINF:-1 tvg-id="衡阳公共" tvg-name="衡阳公共" tvg-logo="https://zzf.new.tg/data/logos/7765a0fc0ffd.png" group-title="🎤 湖南节目",衡阳公共
 http://www.tk1986.top:8889/udp/239.76.248.14:1234
 #EXTINF:-1 tvg-id="衡阳综合" tvg-name="衡阳综合" tvg-logo="https://zzf.new.tg/data/logos/f2abad82bc46.png" group-title="🎤 湖南节目",衡阳综合
-http://www.yao87.com:4022/udp/239.76.248.13:1234
-#EXTINF:-1 tvg-id="衡阳综合" tvg-name="衡阳综合" tvg-logo="https://zzf.new.tg/data/logos/f2abad82bc46.png" group-title="🎤 湖南节目",衡阳综合
 http://demo1.ruisilink.top:9000/udp/239.76.248.13:1234
 #EXTINF:-1 tvg-id="衡阳综合" tvg-name="衡阳综合" tvg-logo="https://zzf.new.tg/data/logos/f2abad82bc46.png" group-title="🎤 湖南节目",衡阳综合
 http://175.0.79.127:8888/udp/239.76.248.13:1234
@@ -7765,6 +7759,8 @@ http://demo1.ruisilink.top:9000/udp/239.76.253.121:9000
 http://175.0.79.127:8888/udp/239.76.253.121:9000
 #EXTINF:-1 tvg-id="长沙综合" tvg-name="长沙综合" group-title="🎤 湖南节目",长沙综合
 http://www.yao87.com:4022/udp/239.76.246.121:1234
+#EXTINF:-1 tvg-id="长沙综合" tvg-name="长沙综合" group-title="🎤 湖南节目",长沙综合
+http://www.yao87.com:4022/udp/239.76.253.121:9000
 #EXTINF:-1 tvg-id="长沙综合" tvg-name="长沙综合" group-title="🎤 湖南节目",长沙综合
 http://www.tk1986.top:8889/udp/239.76.246.121:1234
 #EXTINF:-1 tvg-id="长沙综合" tvg-name="长沙综合" group-title="🎤 湖南节目",长沙综合
@@ -10126,6 +10122,8 @@ http://123.53.39.56:4022/rtp/239.16.20.70:10700
 #EXTINF:-1 tvg-id="家有购物" tvg-name="家有购物" tvg-logo="https://zzf.new.tg/data/logos/22572d2896ba.png" group-title="🏙️ 地方频道",家有购物
 http://www.sccckj.cn:8899/udp/239.10.0.226:5140
 #EXTINF:-1 tvg-id="家有购物" tvg-name="家有购物" tvg-logo="https://zzf.new.tg/data/logos/22572d2896ba.png" group-title="🏙️ 地方频道",家有购物
+http://117.9.46.100:4022/udp/225.1.1.226:5002
+#EXTINF:-1 tvg-id="家有购物" tvg-name="家有购物" tvg-logo="https://zzf.new.tg/data/logos/22572d2896ba.png" group-title="🏙️ 地方频道",家有购物
 http://60.30.67.44:8834/udp/225.1.1.226:5002
 #EXTINF:-1 tvg-id="家有购物" tvg-name="家有购物" tvg-logo="https://zzf.new.tg/data/logos/22572d2896ba.png" group-title="🏙️ 地方频道",家有购物
 http://60.30.67.45:8834/udp/225.1.1.226:5002
@@ -10301,6 +10299,8 @@ http://175.0.79.127:8888/udp/239.76.246.133:1234
 http://175.0.79.127:8888/udp/239.76.253.133:9000
 #EXTINF:-1 tvg-id="极速汽车" tvg-name="极速汽车" tvg-logo="https://zzf.new.tg/data/logos/lib/e898fcebd4dd.png" group-title="🏙️ 地方频道",极速汽车
 http://www.yao87.com:4022/udp/239.76.246.133:1234
+#EXTINF:-1 tvg-id="极速汽车" tvg-name="极速汽车" tvg-logo="https://zzf.new.tg/data/logos/lib/e898fcebd4dd.png" group-title="🏙️ 地方频道",极速汽车
+http://www.yao87.com:4022/udp/239.76.253.133:9000
 #EXTINF:-1 tvg-id="欢腾购物" tvg-name="欢腾购物" tvg-logo="https://zzf.new.tg/data/logos/2c6c7383ddf9.png" group-title="🏙️ 地方频道",欢腾购物
 http://123.53.39.56:4022/rtp/239.16.10.125:2000
 #EXTINF:-1 tvg-id="欢腾购物" tvg-name="欢腾购物" tvg-logo="https://zzf.new.tg/data/logos/2c6c7383ddf9.png" group-title="🏙️ 地方频道",欢腾购物
@@ -10935,8 +10935,6 @@ http://36.49.50.4:8800/rtp/239.37.0.248:5540
 http://36.49.50.4:8800/rtp/239.37.0.249:5540
 #EXTINF:-1 tvg-id="三少卫视" tvg-name="三少卫视" tvg-logo="https://zzf.new.tg/data/logos/9ba0011bb38d.png" group-title="📌 其他频道",三少卫视
 http://120.198.86.186:9901/tsfile/live/1038_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-id="三角英语" tvg-name="三角英语" tvg-logo="https://zzf.new.tg/data/logos/6925bd1ed58e.png" group-title="📌 其他频道",三角英语
-http://117.9.46.100:4022/udp/225.1.2.182:5002
 #EXTINF:-1 tvg-id="三角英语" tvg-name="三角英语" tvg-logo="https://zzf.new.tg/data/logos/6925bd1ed58e.png" group-title="📌 其他频道",三角英语
 http://home.techua.net:8000/udp/225.1.2.182:5002
 #EXTINF:-1 tvg-id="三角英语" tvg-name="三角英语" tvg-logo="https://zzf.new.tg/data/logos/6925bd1ed58e.png" group-title="📌 其他频道",三角英语
@@ -12079,8 +12077,6 @@ http://home.pinkfloyd.cn:5000/rtp/238.1.78.133:6936
 http://60.0.97.175:9999/rtp/239.253.92.218:6100
 #EXTINF:-1 tvg-id="滦州电视" tvg-name="滦州电视" tvg-logo="https://zzf.new.tg/data/logos/057764e5f12a.png" group-title="📌 其他频道",滦州电视
 http://60.0.97.175:9999/rtp/239.253.92.97:6138
-#EXTINF:-1 tvg-id="滨海1" tvg-name="滨海1" tvg-logo="https://zzf.new.tg/data/logos/ad8754b21fd2.png" group-title="📌 其他频道",滨海1
-http://117.9.46.100:4022/udp/225.1.2.7:5002
 #EXTINF:-1 tvg-id="滨海1" tvg-name="滨海1" tvg-logo="https://zzf.new.tg/data/logos/ad8754b21fd2.png" group-title="📌 其他频道",滨海1
 http://ak.cj022.com:10080/udp/225.1.2.7:5002
 #EXTINF:-1 tvg-id="滨海1" tvg-name="滨海1" tvg-logo="https://zzf.new.tg/data/logos/ad8754b21fd2.png" group-title="📌 其他频道",滨海1
