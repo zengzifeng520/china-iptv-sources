@@ -1,5 +1,5 @@
 #EXTM3U
-# 每频道最多 20 条 2026-11-11 17:04:01
+# 每频道最多 20 条 2026-11-11 18:04:07
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="卫视频道",重庆卫视
 http://59.173.122.230:10001/rtp/239.69.1.149:10530
 #EXTINF:-1 tvg-id="重庆卫视" tvg-name="重庆卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/306389d13979.png" group-title="卫视频道",重庆卫视
@@ -625,8 +625,6 @@ http://114.250.20.79:4022/rtp/239.3.1.210:8056
 #EXTINF:-1 tvg-id="辽宁卫视" tvg-name="辽宁卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/93bb6085bcd6.png" group-title="卫视频道",辽宁卫视
 http://bit.famcloud.top:9878/rtp/239.3.1.210:8056
 #EXTINF:-1 tvg-id="辽宁卫视" tvg-name="辽宁卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/93bb6085bcd6.png" group-title="卫视频道",辽宁卫视
-http://triq.cc:8012/rtp/239.3.1.210:8056
-#EXTINF:-1 tvg-id="辽宁卫视" tvg-name="辽宁卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/93bb6085bcd6.png" group-title="卫视频道",辽宁卫视
 http://vpn.famcloud.top:9878/rtp/239.3.1.210:8056
 #EXTINF:-1 tvg-id="辽宁卫视" tvg-name="辽宁卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/93bb6085bcd6.png" group-title="卫视频道",辽宁卫视
 http://remote.jackye.site:8000/rtp/239.61.2.181:9074
@@ -640,6 +638,8 @@ http://14.127.213.91:4022/udp/239.77.1.103:5146
 http://121.10.7.16:4000/udp/239.77.1.103:5146
 #EXTINF:-1 tvg-id="辽宁卫视" tvg-name="辽宁卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/93bb6085bcd6.png" group-title="卫视频道",辽宁卫视
 http://120.238.84.45:9901/tsfile/live/1056_1.m3u8?key=txiptv&playlive=1&authid=0
+#EXTINF:-1 tvg-id="辽宁卫视" tvg-name="辽宁卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/93bb6085bcd6.png" group-title="卫视频道",辽宁卫视
+http://120.198.86.186:9901/tsfile/live/1069_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="湖南卫视" tvg-name="湖南卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="卫视频道",湖南卫视
 http://123.53.39.56:4022/rtp/239.16.20.72:10720
 #EXTINF:-1 tvg-id="湖南卫视" tvg-name="湖南卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="卫视频道",湖南卫视
@@ -6733,6 +6733,8 @@ http://www.yao87.com:4022/udp/239.76.248.10:1234
 #EXTINF:-1 tvg-id="常德综合" tvg-name="常德综合" tvg-logo="https://zzf.new.tg/data/logos/2d2af5486ddc.png" group-title="湖南节目",常德综合
 http://www.tk1986.top:8889/udp/239.76.248.10:1234
 #EXTINF:-1 tvg-id="衡阳综合" tvg-name="衡阳综合" tvg-logo="https://zzf.new.tg/data/logos/f2abad82bc46.png" group-title="湖南节目",衡阳综合
+http://www.yao87.com:4022/udp/239.76.248.13:1234
+#EXTINF:-1 tvg-id="衡阳综合" tvg-name="衡阳综合" tvg-logo="https://zzf.new.tg/data/logos/f2abad82bc46.png" group-title="湖南节目",衡阳综合
 http://demo1.ruisilink.top:9000/udp/239.76.248.13:1234
 #EXTINF:-1 tvg-id="衡阳综合" tvg-name="衡阳综合" tvg-logo="https://zzf.new.tg/data/logos/f2abad82bc46.png" group-title="湖南节目",衡阳综合
 http://175.0.79.127:8888/udp/239.76.248.13:1234
@@ -10925,8 +10927,6 @@ http://60.30.67.44:8834/udp/225.1.1.125:5002
 #EXTINF:-1 tvg-id="天津少儿" tvg-name="天津少儿" tvg-logo="https://zzf.new.tg/data/logos/lib/e600d2c86b62.png" group-title="其他频道",天津少儿
 http://60.30.67.45:8834/udp/225.1.1.125:5002
 #EXTINF:-1 tvg-id="天津购物" tvg-name="天津购物" tvg-logo="https://zzf.new.tg/data/logos/a81425f5a32c.png" group-title="其他频道",天津购物
-http://117.9.46.100:4022/udp/225.1.1.151:5002
-#EXTINF:-1 tvg-id="天津购物" tvg-name="天津购物" tvg-logo="https://zzf.new.tg/data/logos/a81425f5a32c.png" group-title="其他频道",天津购物
 http://60.30.67.44:8834/udp/225.1.1.151:5002
 #EXTINF:-1 tvg-id="天津购物" tvg-name="天津购物" tvg-logo="https://zzf.new.tg/data/logos/a81425f5a32c.png" group-title="其他频道",天津购物
 http://60.30.67.45:8834/udp/225.1.1.151:5002
@@ -11375,8 +11375,6 @@ http://alist.xicp.fun:52057/rtp/239.69.1.145:10506
 #EXTINF:-1 tvg-id="武汉综合HD" tvg-name="武汉综合HD" tvg-logo="https://zzf.new.tg/data/logos/d882fc6bdb84.png" group-title="其他频道",武汉综合HD
 http://www.ct123.online:8188/rtp/239.69.1.145:10506
 #EXTINF:-1 tvg-id="武汉综合HD" tvg-name="武汉综合HD" tvg-logo="https://zzf.new.tg/data/logos/d882fc6bdb84.png" group-title="其他频道",武汉综合HD
-http://www.3872327.top:1225/rtp/239.69.1.145:10506
-#EXTINF:-1 tvg-id="武汉综合HD" tvg-name="武汉综合HD" tvg-logo="https://zzf.new.tg/data/logos/d882fc6bdb84.png" group-title="其他频道",武汉综合HD
 http://59.173.122.230:10001/rtp/239.69.1.145:10506
 #EXTINF:-1 tvg-id="武汉综合HD" tvg-name="武汉综合HD" tvg-logo="https://zzf.new.tg/data/logos/d882fc6bdb84.png" group-title="其他频道",武汉综合HD
 http://yy15238.netyiyang.com:8800/rtp/239.69.1.145:10506
@@ -11384,6 +11382,8 @@ http://yy15238.netyiyang.com:8800/rtp/239.69.1.145:10506
 http://www.ct123.online:8188/rtp/239.69.1.60:9994
 #EXTINF:-1 tvg-id="武汉教育HD" tvg-name="武汉教育HD" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="其他频道",武汉教育HD
 http://alist.xicp.fun:52057/rtp/239.69.1.60:9994
+#EXTINF:-1 tvg-id="武汉教育HD" tvg-name="武汉教育HD" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="其他频道",武汉教育HD
+http://www.3872327.top:1225/rtp/239.69.1.60:9994
 #EXTINF:-1 tvg-id="武汉教育HD" tvg-name="武汉教育HD" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="其他频道",武汉教育HD
 http://59.173.122.230:10001/rtp/239.69.1.60:9994
 #EXTINF:-1 tvg-id="武汉教育HD" tvg-name="武汉教育HD" tvg-logo="https://zzf.new.tg/data/logos/lib/feab2c042cf5.png" group-title="其他频道",武汉教育HD
@@ -11396,14 +11396,10 @@ http://yy15238.netyiyang.com:8800/rtp/239.69.1.147:10518
 http://alist.xicp.fun:52057/rtp/239.69.1.147:10518
 #EXTINF:-1 tvg-id="武汉文体HD" tvg-name="武汉文体HD" tvg-logo="https://zzf.new.tg/data/logos/lib/6bc456a4e55c.png" group-title="其他频道",武汉文体HD
 http://www.ct123.online:8188/rtp/239.69.1.147:10518
-#EXTINF:-1 tvg-id="武汉文体HD" tvg-name="武汉文体HD" tvg-logo="https://zzf.new.tg/data/logos/lib/6bc456a4e55c.png" group-title="其他频道",武汉文体HD
-http://www.3872327.top:1225/rtp/239.69.1.147:10518
 #EXTINF:-1 tvg-id="武汉电视剧HD" tvg-name="武汉电视剧HD" tvg-logo="https://zzf.new.tg/data/logos/lib/bfeb5673ed5f.png" group-title="其他频道",武汉电视剧HD
 http://www.zyhfm.com:8088/rtp/239.69.1.146:10512
 #EXTINF:-1 tvg-id="武汉电视剧HD" tvg-name="武汉电视剧HD" tvg-logo="https://zzf.new.tg/data/logos/lib/bfeb5673ed5f.png" group-title="其他频道",武汉电视剧HD
 http://www.ct123.online:8188/rtp/239.69.1.146:10512
-#EXTINF:-1 tvg-id="武汉电视剧HD" tvg-name="武汉电视剧HD" tvg-logo="https://zzf.new.tg/data/logos/lib/bfeb5673ed5f.png" group-title="其他频道",武汉电视剧HD
-http://www.3872327.top:1225/rtp/239.69.1.146:10512
 #EXTINF:-1 tvg-id="武汉电视剧HD" tvg-name="武汉电视剧HD" tvg-logo="https://zzf.new.tg/data/logos/lib/bfeb5673ed5f.png" group-title="其他频道",武汉电视剧HD
 http://hiliu.myds.me:18088/rtp/239.69.1.146:10512
 #EXTINF:-1 tvg-id="武汉电视剧HD" tvg-name="武汉电视剧HD" tvg-logo="https://zzf.new.tg/data/logos/lib/bfeb5673ed5f.png" group-title="其他频道",武汉电视剧HD
@@ -11622,8 +11618,6 @@ http://yy15238.netyiyang.com:8800/rtp/239.69.1.187:10764
 http://alist.xicp.fun:52057/rtp/239.69.1.187:10764
 #EXTINF:-1 tvg-id="新动漫SD" tvg-name="新动漫SD" tvg-logo="https://zzf.new.tg/data/logos/lib/f540bb93ae1d.png" group-title="其他频道",新动漫SD
 http://www.ct123.online:8188/rtp/239.69.1.187:10764
-#EXTINF:-1 tvg-id="新动漫SD" tvg-name="新动漫SD" tvg-logo="https://zzf.new.tg/data/logos/lib/f540bb93ae1d.png" group-title="其他频道",新动漫SD
-http://www.3872327.top:1225/rtp/239.69.1.187:10764
 #EXTINF:-1 tvg-id="老故事SD" tvg-name="老故事SD" tvg-logo="https://zzf.new.tg/data/logos/68f0e440ad3a.png" group-title="其他频道",老故事SD
 http://59.173.122.230:10001/rtp/239.69.1.85:10150
 #EXTINF:-1 tvg-id="老故事SD" tvg-name="老故事SD" tvg-logo="https://zzf.new.tg/data/logos/68f0e440ad3a.png" group-title="其他频道",老故事SD
