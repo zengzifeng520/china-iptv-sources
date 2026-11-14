@@ -1,5 +1,5 @@
 #EXTM3U x-tvg-url="https://zengzifeng.ccwu.cc/output/epg.xml"
-# 更新时间：2026-11-14 09:36:34（北京时间）
+# 更新时间：2026-11-14 10:36:34（北京时间）
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
 http://www.zyhfm.com:8088/rtp/239.69.2.22:11286
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
@@ -3007,6 +3007,8 @@ http://124.165.232.26:8084/rtp/226.0.2.194:9464
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="中数传媒",中国交通
 http://120.198.86.186:9901/tsfile/live/1104_1.m3u8?key=txiptv&amp;playlive=1&amp;authid=0
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="中数传媒",中国交通
+http://114.246.183.39:8888/rtp/239.3.1.188:8001
+#EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="中数传媒",中国交通
 http://111.199.3.80:8686/rtp/239.3.1.188:8001
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="中数传媒",中国交通
 http://114.250.20.79:4022/rtp/239.3.1.188:8001
@@ -3060,6 +3062,8 @@ http://112.225.126.253:4022/udp/239.253.254.143:8000
 http://family-ph.vividnian.com:8188/udp/233.50.201.188:5140
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="中数传媒",茶频道
 http://39.88.14.78:4000/udp/239.253.254.143:8000
+#EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="中数传媒",茶频道
+http://114.246.183.39:8888/rtp/239.3.1.165:8001
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="中数传媒",茶频道
 http://114.252.117.159:7000/rtp/239.3.1.165:8001
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="中数传媒",茶频道
@@ -11597,6 +11601,8 @@ http://home.pinkfloyd.cn:5000/rtp/238.1.78.183:7336
 #EXTINF:-1 tvg-id="肥西新闻综合" tvg-name="肥西新闻综合" tvg-logo="https://zzf.new.tg/data/logos/e306a324312c.png" group-title="其他频道",肥西新闻综合
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.185:7352
 #EXTINF:-1 tvg-id="长丰电视台" tvg-name="长丰电视台" tvg-logo="https://zzf.new.tg/data/logos/b16e13c8806c.png" group-title="其他频道",长丰电视台
+http://117.57.37.66:4022/rtp/238.1.78.182:7328
+#EXTINF:-1 tvg-id="长丰电视台" tvg-name="长丰电视台" tvg-logo="https://zzf.new.tg/data/logos/b16e13c8806c.png" group-title="其他频道",长丰电视台
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.182:7328
 #EXTINF:-1 tvg-id="滁州新闻综合" tvg-name="滁州新闻综合" tvg-logo="https://zzf.new.tg/data/logos/9363a63d7243.png" group-title="其他频道",滁州新闻综合
 http://117.57.37.66:4022/rtp/238.1.78.132:6928
@@ -11624,6 +11630,8 @@ http://home.pinkfloyd.cn:5000/rtp/238.1.78.187:7368
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.190:7392
 #EXTINF:-1 tvg-id="无为新闻频道" tvg-name="无为新闻频道" tvg-logo="https://zzf.new.tg/data/logos/ef5273c48170.png" group-title="其他频道",无为新闻频道
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.188:7376
+#EXTINF:-1 tvg-id="潜山综合频道" tvg-name="潜山综合频道" tvg-logo="https://zzf.new.tg/data/logos/ebcb31d62525.png" group-title="其他频道",潜山综合频道
+http://117.57.37.66:4022/rtp/238.1.78.192:7408
 #EXTINF:-1 tvg-id="太湖新闻综合" tvg-name="太湖新闻综合" tvg-logo="https://zzf.new.tg/data/logos/51fe6a5f732e.png" group-title="其他频道",太湖新闻综合
 http://home.pinkfloyd.cn:5000/rtp/238.1.79.12:4208
 #EXTINF:-1 tvg-id="黄山新闻综合" tvg-name="黄山新闻综合" tvg-logo="https://zzf.new.tg/data/logos/2c8eb2c01884.png" group-title="其他频道",黄山新闻综合
@@ -12442,6 +12450,8 @@ http://alist.xicp.fun:52057/rtp/239.69.2.1:11160
 http://59.173.122.230:10001/rtp/239.69.2.1:11160
 #EXTINF:-1 tvg-id="央广购物SD" tvg-name="央广购物SD" tvg-logo="https://zzf.new.tg/data/logos/63d874e61702.png" group-title="其他频道",央广购物SD
 http://www.zyhfm.com:8088/rtp/239.69.2.1:11160
+#EXTINF:-1 tvg-id="央广购物SD" tvg-name="央广购物SD" tvg-logo="https://zzf.new.tg/data/logos/63d874e61702.png" group-title="其他频道",央广购物SD
+http://www.3872327.top:1225/rtp/239.69.2.1:11160
 #EXTINF:-1 tvg-id="央广购物SD" tvg-name="央广购物SD" tvg-logo="https://zzf.new.tg/data/logos/63d874e61702.png" group-title="其他频道",央广购物SD
 http://www.ct123.online:8188/rtp/239.69.2.1:11160
 #EXTINF:-1 tvg-id="央广购物SD" tvg-name="央广购物SD" tvg-logo="https://zzf.new.tg/data/logos/63d874e61702.png" group-title="其他频道",央广购物SD
