@@ -1,5 +1,5 @@
 #EXTM3U
-# 每频道最多 20 条 2026-11-14 15:12:09
+# 每频道最多 20 条 2026-11-14 19:28:26
 #EXTINF:-1 tvg-id="更新" tvg-name="更新" group-title="更新时间 2026-11-14 11:06:26",2026-11-14 11:06:26 更新
 http://61.134.254.2:9001/rtp/226.0.2.11:8000
 #EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/ef66b8b1d36e.png" group-title="卫视频道",山西卫视
@@ -1633,8 +1633,6 @@ http://14.127.213.91:4022/udp/239.77.0.86:5146
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://119.116.17.243:8888/rtp/232.0.0.27:1234
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
-http://114.246.183.39:8888/rtp/239.3.1.129:8008
-#EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://61.49.164.102:1314/rtp/239.3.1.129:8008
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://111.199.3.80:8686/rtp/239.3.1.129:8008
@@ -1658,6 +1656,8 @@ http://59.173.122.230:10001/rtp/239.254.96.96:8550
 http://www.zyhfm.com:8088/rtp/239.254.96.96:8550
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
 http://www.ct123.online:8188/rtp/239.254.96.96:8550
+#EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="央视频道",CCTV1
+http://218.1.222.61:3333/rtp/233.18.204.52:5140
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
 http://14.127.213.91:4022/udp/239.77.1.158:5146
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
@@ -12210,8 +12210,6 @@ http://n2.192372.xyz:8888/rtp/239.3.1.249:8001
 http://111.199.3.80:8686/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="其他频道",4K超清
 http://114.250.20.79:4022/rtp/239.3.1.249:8001
-#EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="其他频道",4K超清
-http://114.246.183.39:8888/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="其他频道",4K超清
 http://114.252.117.159:7000/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="其他频道",4K超清

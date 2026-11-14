@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-14 15:12:09 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-14 19:28:26 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -178,8 +178,6 @@ http://14.127.213.91:4022/udp/239.77.0.86:5146
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="📺 央视频道",CCTV-1
 http://119.116.17.243:8888/rtp/232.0.0.27:1234
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="📺 央视频道",CCTV-1
-http://114.246.183.39:8888/rtp/239.3.1.129:8008
-#EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="📺 央视频道",CCTV-1
 http://61.49.164.102:1314/rtp/239.3.1.129:8008
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="📺 央视频道",CCTV-1
 http://111.199.3.80:8686/rtp/239.3.1.129:8008
@@ -201,6 +199,8 @@ http://221.232.101.209:19999/rtp/239.254.96.96:8550
 http://59.173.122.230:10001/rtp/239.254.96.96:8550
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="📺 央视频道",CCTV-1
 http://www.zyhfm.com:8088/rtp/239.254.96.96:8550
+#EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="📺 央视频道",CCTV-1
+http://www.ct123.online:8188/rtp/239.254.96.96:8550
 #EXTINF:-1 tvg-id="CCTV-2" tvg-name="CCTV-2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="📺 央视频道",CCTV-2
 http://14.127.213.91:4022/udp/239.77.1.158:5146
 #EXTINF:-1 tvg-id="CCTV-2" tvg-name="CCTV-2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="📺 央视频道",CCTV-2
@@ -2731,8 +2731,6 @@ http://n2.192372.xyz:8888/rtp/239.3.1.249:8001
 http://111.199.3.80:8686/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="🎬 4K节目",4K超清
 http://114.250.20.79:4022/rtp/239.3.1.249:8001
-#EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="🎬 4K节目",4K超清
-http://114.246.183.39:8888/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="🎬 4K节目",4K超清
 http://114.252.117.159:7000/rtp/239.3.1.249:8001
 #EXTINF:-1 tvg-id="4K超清" tvg-name="4K超清" tvg-logo="https://zzf.new.tg/data/logos/87cac093fa0b.png" group-title="🎬 4K节目",4K超清
