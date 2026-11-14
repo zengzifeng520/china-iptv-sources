@@ -1,7 +1,7 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="ℹ️ 订阅信息 到期 2027-10-8",有效期 2026-10-26 ~ 2027-10-8（剩余 328 天）
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-14 07:37:17 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-14 08:36:33 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -482,6 +482,8 @@ http://vpn.ydcb.top:40000/udp/239.94.0.34:5140
 #EXTINF:-1 tvg-id="CCTV-6" tvg-name="CCTV-6" tvg-logo="https://zzf.new.tg/data/logos/lib/3bb0f6e17fb9.png" group-title="📺 央视频道",CCTV-6
 http://www.893224162.xyz:8188/udp/239.94.2.33:5140
 #EXTINF:-1 tvg-id="CCTV-6" tvg-name="CCTV-6" tvg-logo="https://zzf.new.tg/data/logos/lib/3bb0f6e17fb9.png" group-title="📺 央视频道",CCTV-6
+http://117.57.37.66:4022/rtp/238.1.78.172:7248
+#EXTINF:-1 tvg-id="CCTV-6" tvg-name="CCTV-6" tvg-logo="https://zzf.new.tg/data/logos/lib/3bb0f6e17fb9.png" group-title="📺 央视频道",CCTV-6
 http://rfx2025.shunderen.top:2345/udp/239.77.0.171:5146
 #EXTINF:-1 tvg-id="CCTV-6" tvg-name="CCTV-6" tvg-logo="https://zzf.new.tg/data/logos/lib/3bb0f6e17fb9.png" group-title="📺 央视频道",CCTV-6
 http://113.90.154.189:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -511,8 +513,6 @@ http://vpn.jk960.cn:8686/udp/239.77.0.178:5146
 http://112.225.126.253:4022/udp/239.253.254.193:8000
 #EXTINF:-1 tvg-id="CCTV-6" tvg-name="CCTV-6" tvg-logo="https://zzf.new.tg/data/logos/lib/3bb0f6e17fb9.png" group-title="📺 央视频道",CCTV-6
 http://101.wifi98.com:9001/rtp/232.0.0.172:1234
-#EXTINF:-1 tvg-id="CCTV-6" tvg-name="CCTV-6" tvg-logo="https://zzf.new.tg/data/logos/lib/3bb0f6e17fb9.png" group-title="📺 央视频道",CCTV-6
-http://family-ph.vividnian.com:8188/udp/233.50.201.198:5140
 #EXTINF:-1 tvg-id="CCTV-7" tvg-name="CCTV-7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="📺 央视频道",CCTV-7
 http://120.70.60.179:9901/tsfile/live/1016_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV-7" tvg-name="CCTV-7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="📺 央视频道",CCTV-7
@@ -3826,6 +3826,8 @@ http://183.16.200.23:55555/udp/239.77.0.215:5146
 #EXTINF:-1 tvg-id="大湾区卫视" tvg-name="大湾区卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/6fa8ce022230.png" group-title="📡 卫视频道",大湾区卫视
 http://jyb7928.host:8066/udp/239.1.1.69:8069
 #EXTINF:-1 tvg-id="大湾区卫视" tvg-name="大湾区卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/6fa8ce022230.png" group-title="📡 卫视频道",大湾区卫视
+http://114.246.183.39:8888/rtp/239.3.1.161:8001
+#EXTINF:-1 tvg-id="大湾区卫视" tvg-name="大湾区卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/6fa8ce022230.png" group-title="📡 卫视频道",大湾区卫视
 http://120.198.95.220:9901/tsfile/live/1012_1.m3u8?key=txiptv&playlive=1&down=1
 #EXTINF:-1 tvg-id="天津卫视" tvg-name="天津卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/07d27d529eac.png" group-title="📡 卫视频道",天津卫视
 http://111.199.3.80:8686/rtp/239.3.1.141:1234
@@ -5159,6 +5161,8 @@ http://111.199.3.80:8686/rtp/239.3.1.159:8000
 http://114.250.20.79:4022/rtp/239.3.1.117:8000
 #EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
 http://111.199.3.80:8686/rtp/239.3.1.117:8000
+#EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
+http://114.246.183.39:8888/rtp/239.3.1.117:8000
 #EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
 http://n2.192372.xyz:8888/rtp/239.3.1.117:8000
 #EXTINF:-1 tvg-id="北京生活" tvg-name="北京生活" tvg-logo="https://zzf.new.tg/data/logos/lib/488d132b6c71.png" group-title="🏯 北京节目",北京生活
@@ -7213,6 +7217,8 @@ http://home.szjim.top:4000/udp/239.77.0.236:5146
 http://vpn.jk960.cn:8686/udp/239.253.43.54:5146
 #EXTINF:-1 tvg-id="佛山南海" tvg-name="佛山南海" tvg-logo="https://zzf.new.tg/data/logos/6987faa5c548.png" group-title="🌴 广东频道",佛山南海
 http://home.szjim.top:4000/udp/239.253.43.54:5146
+#EXTINF:-1 tvg-id="佛山南海" tvg-name="佛山南海" tvg-logo="https://zzf.new.tg/data/logos/6987faa5c548.png" group-title="🌴 广东频道",佛山南海
+http://183.16.200.23:55555/udp/239.253.43.49:5146
 #EXTINF:-1 tvg-id="佛山南海" tvg-name="佛山南海" tvg-logo="https://zzf.new.tg/data/logos/6987faa5c548.png" group-title="🌴 广东频道",佛山南海
 http://vpn.jk960.cn:8686/udp/239.253.43.49:5146
 #EXTINF:-1 tvg-id="佛山南海" tvg-name="佛山南海" tvg-logo="https://zzf.new.tg/data/logos/6987faa5c548.png" group-title="🌴 广东频道",佛山南海
@@ -9657,8 +9663,6 @@ http://1.192.242.239:8188/rtp/239.16.20.134:11340
 http://jyb7928.host:8066/udp/239.1.1.109:8109
 #EXTINF:-1 tvg-id="车迷频道" tvg-name="车迷频道" tvg-logo="https://zzf.new.tg/data/logos/lib/b7003227296a.png" group-title="🏙️ 地方频道",车迷频道
 http://60.0.97.175:9999/rtp/239.253.93.221:6399
-#EXTINF:-1 tvg-id="鉴赏" tvg-name="鉴赏" tvg-logo="https://zzf.new.tg/data/logos/12982b132a16.png" group-title="🏙️ 地方频道",鉴赏
-http://114.246.183.39:8888/rtp/239.3.1.82:4120
 #EXTINF:-1 tvg-id="鉴赏" tvg-name="鉴赏" tvg-logo="https://zzf.new.tg/data/logos/12982b132a16.png" group-title="🏙️ 地方频道",鉴赏
 http://61.49.164.102:1314/rtp/239.3.1.82:4120
 #EXTINF:-1 tvg-id="鉴赏" tvg-name="鉴赏" tvg-logo="https://zzf.new.tg/data/logos/12982b132a16.png" group-title="🏙️ 地方频道",鉴赏
