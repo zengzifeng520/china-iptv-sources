@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-14 09:36:36 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-14 10:36:37 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -1504,6 +1504,8 @@ http://60.0.97.175:9999/rtp/239.253.93.248:6426
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="💠 中数传媒",中国交通
 http://120.198.86.186:9901/tsfile/live/1104_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="💠 中数传媒",中国交通
+http://114.246.183.39:8888/rtp/239.3.1.188:8001
+#EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="💠 中数传媒",中国交通
 http://111.199.3.80:8686/rtp/239.3.1.188:8001
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="💠 中数传媒",中国交通
 http://114.250.20.79:4022/rtp/239.3.1.188:8001
@@ -1539,8 +1541,6 @@ http://59.173.122.230:10001/rtp/239.69.2.3:11172
 http://yy15238.netyiyang.com:8800/rtp/239.69.2.3:11172
 #EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="💠 中数传媒",中国交通
 http://alist.xicp.fun:52057/rtp/239.69.2.3:11172
-#EXTINF:-1 tvg-id="中国交通" tvg-name="中国交通" tvg-logo="https://zzf.new.tg/data/logos/lib/2bb8ec92e027.png" group-title="💠 中数传媒",中国交通
-http://www.ct123.online:8188/rtp/239.69.2.3:11172
 #EXTINF:-1 tvg-id="中国天气" tvg-name="中国天气" tvg-logo="https://zzf.new.tg/data/logos/lib/67e96c86c843.png" group-title="💠 中数传媒",中国天气
 http://xmzj.f3322.net:8188/udp/239.94.1.167:5140
 #EXTINF:-1 tvg-id="中国天气" tvg-name="中国天气" tvg-logo="https://zzf.new.tg/data/logos/lib/67e96c86c843.png" group-title="💠 中数传媒",中国天气
@@ -2392,6 +2392,8 @@ http://family-ph.vividnian.com:8188/udp/233.50.201.188:5140
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="💠 中数传媒",茶频道
 http://39.88.14.78:4000/udp/239.253.254.143:8000
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="💠 中数传媒",茶频道
+http://114.246.183.39:8888/rtp/239.3.1.165:8001
+#EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="💠 中数传媒",茶频道
 http://114.252.117.159:7000/rtp/239.3.1.165:8001
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="💠 中数传媒",茶频道
 http://61.49.164.102:1314/rtp/239.3.1.165:8001
@@ -2421,8 +2423,6 @@ http://www.ct123.online:8188/rtp/239.69.1.144:10500
 http://home.techua.net:8000/udp/225.1.2.19:5002
 #EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="💠 中数传媒",茶频道
 http://ak.cj022.com:10080/udp/225.1.2.19:5002
-#EXTINF:-1 tvg-id="茶频道" tvg-name="茶频道" tvg-logo="https://zzf.new.tg/data/logos/lib/d54d03a0d27d.png" group-title="💠 中数传媒",茶频道
-http://www.yyf1991.top:9999/rtp/233.18.204.43:5140
 #EXTINF:-1 tvg-id="金色学堂" tvg-name="金色学堂" tvg-logo="https://zzf.new.tg/data/logos/lib/f0899ad9522c.png" group-title="💠 中数传媒",金色学堂
 http://www.rongrong.me:14022/rtp/233.18.204.66:5140
 #EXTINF:-1 tvg-id="金色学堂" tvg-name="金色学堂" tvg-logo="https://zzf.new.tg/data/logos/lib/f0899ad9522c.png" group-title="💠 中数传媒",金色学堂
@@ -6347,6 +6347,8 @@ http://117.57.37.66:4022/rtp/238.1.78.132:6928
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.132:6928
 #EXTINF:-1 tvg-id="滁州科教" tvg-name="滁州科教" tvg-logo="https://zzf.new.tg/data/logos/a52335aa94ed.png" group-title="🏞️ 安徽节目",滁州科教
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.134:6944
+#EXTINF:-1 tvg-id="潜山综合频道" tvg-name="潜山综合频道" tvg-logo="https://zzf.new.tg/data/logos/ebcb31d62525.png" group-title="🏞️ 安徽节目",潜山综合频道
+http://117.57.37.66:4022/rtp/238.1.78.192:7408
 #EXTINF:-1 tvg-id="濉溪新闻频道" tvg-name="濉溪新闻频道" tvg-logo="https://zzf.new.tg/data/logos/8d13ef62601b.png" group-title="🏞️ 安徽节目",濉溪新闻频道
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.209:7544
 #EXTINF:-1 tvg-id="界首综合频道" tvg-name="界首综合频道" tvg-logo="https://zzf.new.tg/data/logos/dc5d8ecec475.png" group-title="🏞️ 安徽节目",界首综合频道
@@ -6379,6 +6381,8 @@ http://home.pinkfloyd.cn:5000/rtp/238.1.78.140:6992
 http://117.57.37.66:4022/rtp/238.1.78.139:6984
 #EXTINF:-1 tvg-id="铜陵科教" tvg-name="铜陵科教" tvg-logo="https://zzf.new.tg/data/logos/ede3eb38dfb5.png" group-title="🏞️ 安徽节目",铜陵科教
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.141:7000
+#EXTINF:-1 tvg-id="长丰电视台" tvg-name="长丰电视台" tvg-logo="https://zzf.new.tg/data/logos/b16e13c8806c.png" group-title="🏞️ 安徽节目",长丰电视台
+http://117.57.37.66:4022/rtp/238.1.78.182:7328
 #EXTINF:-1 tvg-id="长丰电视台" tvg-name="长丰电视台" tvg-logo="https://zzf.new.tg/data/logos/b16e13c8806c.png" group-title="🏞️ 安徽节目",长丰电视台
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.182:7328
 #EXTINF:-1 tvg-id="阜阳公共" tvg-name="阜阳公共" tvg-logo="https://zzf.new.tg/data/logos/b256b08ed0f7.png" group-title="🏞️ 安徽节目",阜阳公共
