@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-19 20:57:08 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-19 21:57:15 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="更新" tvg-name="更新" group-title="更新时间 2026-11-19 12:06:10",2026-11-19 12:06:10 更新
 http://116.168.36.43:4022/udp/225.0.4.106:7980
@@ -1010,6 +1010,8 @@ http://www.siyao.xin:4000/rtp/225.1.4.177:1226
 #EXTINF:-1 tvg-id="好学生" tvg-name="好学生" tvg-logo="https://zzf.new.tg/data/logos/0bbbdb4a77eb.png" group-title="地方频道",好学生
 http://tv.zhangzp.top:4022/udp/239.125.1.17:4120
 #EXTINF:-1 tvg-id="戏曲" tvg-name="戏曲" tvg-logo="https://zzf.new.tg/data/logos/f8b334a87a9c.png" group-title="地方频道",戏曲
+http://114.254.78.190:4022/rtp/239.3.1.78:4120
+#EXTINF:-1 tvg-id="戏曲" tvg-name="戏曲" tvg-logo="https://zzf.new.tg/data/logos/f8b334a87a9c.png" group-title="地方频道",戏曲
 http://114.250.20.79:4022/rtp/239.3.1.78:4120
 #EXTINF:-1 tvg-id="戏曲" tvg-name="戏曲" tvg-logo="https://zzf.new.tg/data/logos/f8b334a87a9c.png" group-title="地方频道",戏曲
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.78:4120
@@ -1017,6 +1019,8 @@ http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.78:4120
 http://n2.192372.xyz:8888/rtp/239.3.1.78:4120
 #EXTINF:-1 tvg-id="戏曲" tvg-name="戏曲" tvg-logo="https://zzf.new.tg/data/logos/f8b334a87a9c.png" group-title="地方频道",戏曲
 http://vpn.famcloud.top:9878/rtp/239.3.1.78:4120
+#EXTINF:-1 tvg-id="收视指南" tvg-name="收视指南" tvg-logo="https://zzf.new.tg/data/logos/45d0889cf718.png" group-title="地方频道",收视指南
+http://114.254.78.190:4022/rtp/239.3.1.193:8012
 #EXTINF:-1 tvg-id="收视指南" tvg-name="收视指南" tvg-logo="https://zzf.new.tg/data/logos/45d0889cf718.png" group-title="地方频道",收视指南
 http://61.49.164.102:1314/rtp/239.3.1.193:8012
 #EXTINF:-1 tvg-id="收视指南" tvg-name="收视指南" tvg-logo="https://zzf.new.tg/data/logos/45d0889cf718.png" group-title="地方频道",收视指南
@@ -5660,6 +5664,8 @@ http://120.238.84.45:9901/tsfile/live/1054_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="卫视频道",深圳卫视
 http://121.10.7.16:4000/udp/239.77.1.3:5146
 #EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="卫视频道",深圳卫视
+http://119.114.57.68:4022/rtp/232.0.0.110:1234
+#EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="卫视频道",深圳卫视
 http://121.10.7.16:4000/udp/239.77.1.21:5146
 #EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/38a395acd796.png" group-title="卫视频道",深圳卫视
 http://121.10.7.16:4000/udp/239.77.0.92:5146
@@ -9219,6 +9225,8 @@ http://114.252.117.159:7000/rtp/239.3.1.215:4220
 http://61.49.164.102:1314/rtp/239.3.1.215:4220
 #EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.215:4220
+#EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
+http://114.254.78.190:4022/rtp/239.3.1.215:4220
 #EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
 http://n2.192372.xyz:8888/rtp/239.3.1.215:4220
 #EXTINF:-1 tvg-id="CGTN 新闻HD" tvg-name="CGTN 新闻HD" tvg-logo="https://zzf.new.tg/data/logos/1d9c15c5d216.png" group-title="其他频道",CGTN 新闻HD
@@ -14235,20 +14243,24 @@ http://1.170.136.51:8022/udp/230.1.2.26:11111
 http://1.170.136.51:8022/udp/230.1.2.145:11111
 #EXTINF:-1 tvg-id="Lifetime" tvg-name="Lifetime" tvg-logo="https://gcore.jsdelivr.net/gh/wanglindl/TVlogo@main/img/Lifetime.png" group-title="其他频道",Lifetime
 http://1.170.136.51:8022/udp/224.1.4.230:11111
+#EXTINF:-1 tvg-id="Mezzo Live HD" tvg-name="Mezzo Live HD" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@main/png/MezzoLive.png" group-title="其他频道",Mezzo Live HD
+http://1.170.136.51:8022/udp/230.1.2.81:11111
 #EXTINF:-1 tvg-id="MOD 4K LIVE" tvg-name="MOD 4K LIVE" group-title="其他频道",MOD 4K LIVE
 http://1.170.136.51:8022/udp/230.1.2.203:11111
+#EXTINF:-1 tvg-id="momo2台" tvg-name="momo2台" group-title="其他频道",momo2台
+http://1.170.136.51:8022/udp/224.1.4.217:11111
+#EXTINF:-1 tvg-id="ROCK Entertainment" tvg-name="ROCK Entertainment" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@main/png/ROCK%20Entertainment.png" group-title="其他频道",ROCK Entertainment
+http://1.170.136.51:8022/udp/224.1.4.14:11111
+#EXTINF:-1 tvg-id="ROCK Extreme" tvg-name="ROCK Extreme" tvg-logo="https://gcore.jsdelivr.net/gh/yuanzl77/TVlogo@main/png/ROCK%20Extreme.png" group-title="其他频道",ROCK Extreme
+http://1.170.136.51:8022/udp/224.1.4.99:11111
 #EXTINF:-1 tvg-id="中視新聞台" tvg-name="中視新聞台" group-title="其他频道",中視新聞台
 http://1.170.136.51:8022/udp/224.1.4.252:11111
-#EXTINF:-1 tvg-id="世界羽球雜誌" tvg-name="世界羽球雜誌" group-title="其他频道",世界羽球雜誌
-http://1.170.136.51:8022/udp/224.1.4.191:11111
 #EXTINF:-1 tvg-id="民視第一台" tvg-name="民視第一台" group-title="其他频道",民視第一台
 http://1.170.136.51:8022/udp/224.1.4.77:11111
 #EXTINF:-1 tvg-id="美好1台" tvg-name="美好1台" group-title="其他频道",美好1台
 http://1.170.136.51:8022/udp/224.1.4.167:11111
 #EXTINF:-1 tvg-id="美食星球頻道" tvg-name="美食星球頻道" group-title="其他频道",美食星球頻道
 http://1.170.136.51:8022/udp/230.1.2.178:11111
-#EXTINF:-1 tvg-id="愛爾達綜合台" tvg-name="愛爾達綜合台" group-title="其他频道",愛爾達綜合台
-http://1.170.136.51:8022/udp/224.1.4.114:11111
 #EXTINF:-1 tvg-id="愛爾達影劇台" tvg-name="愛爾達影劇台" group-title="其他频道",愛爾達影劇台
 http://1.170.136.51:8022/udp/224.1.4.113:11111
 #EXTINF:-1 tvg-id="辽宁都市" tvg-name="辽宁都市" tvg-logo="https://zzf.new.tg/data/logos/lib/7780cc82541a.png" group-title="其他频道",辽宁都市
@@ -14335,6 +14347,8 @@ http://119.114.57.68:4022/rtp/232.0.0.129:1234
 http://fb4wd00001.f3322.net:1111/rtp/232.0.0.129:1234
 #EXTINF:-1 tvg-id="抚顺综合" tvg-name="抚顺综合" tvg-logo="https://zzf.new.tg/data/logos/64e5f15924bc.png" group-title="其他频道",抚顺综合
 http://119.114.57.68:4022/rtp/232.0.0.143:1234
+#EXTINF:-1 tvg-id="辽河新闻综合" tvg-name="辽河新闻综合" tvg-logo="https://zzf.new.tg/data/logos/eadc12cacd9e.png" group-title="其他频道",辽河新闻综合
+http://119.114.57.68:4022/rtp/232.0.0.214:1234
 #EXTINF:-1 tvg-id="福建新闻" tvg-name="福建新闻" tvg-logo="https://zzf.new.tg/data/logos/lib/664769d5dac7.png" group-title="其他频道",福建新闻
 http://nas01.misaka.show:5000/rtp/239.61.2.4:8018
 #EXTINF:-1 tvg-id="福建新闻" tvg-name="福建新闻" tvg-logo="https://zzf.new.tg/data/logos/lib/664769d5dac7.png" group-title="其他频道",福建新闻
@@ -16951,8 +16965,6 @@ http://120.70.60.179:9901/tsfile/live/1003_1.m3u8?key=txiptv&playlive=0&authid=0
 http://120.70.60.179:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-id="Хабар" tvg-name="Хабар" group-title="其他频道",Хабар
 http://120.70.60.179:9901/tsfile/live/1000_1.m3u8?key=txiptv&playlive=0&authid=0
-#EXTINF:-1 tvg-id="Новое телевидение" tvg-name="Новое телевидение" group-title="其他频道",Новое телевидение
-http://120.70.60.179:9901/tsfile/live/1010_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-id="qazaqstantv" tvg-name="qazaqstantv" group-title="其他频道",qazaqstantv
 http://120.70.60.179:9901/tsfile/live/1011_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-id="Abai TV" tvg-name="Abai TV" group-title="其他频道",Abai TV
