@@ -1,5 +1,5 @@
 #EXTM3U
-# 每频道最多 20 条 2026-11-20 23:32:39
+# 每频道最多 20 条 2026-11-21 04:06:19
 #EXTINF:-1 tvg-id="更新" tvg-name="更新" group-title="更新时间 2026-11-20 12:00:55",2026-11-20 12:00:55 更新
 http://121.29.98.145:9999/rtp/239.253.92.154:6011
 #EXTINF:-1 tvg-id="河北卫视" tvg-name="河北卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/2cc8390aabc7.png" group-title="卫视频道",河北卫视
@@ -567,8 +567,6 @@ http://183.16.200.23:55555/udp/239.77.1.174:5146
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/67278846212a.png" group-title="卫视频道",湖北卫视
 http://14.127.213.91:4022/udp/239.77.0.128:5146
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/67278846212a.png" group-title="卫视频道",湖北卫视
-http://114.254.78.190:4022/rtp/239.3.1.138:8044
-#EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/67278846212a.png" group-title="卫视频道",湖北卫视
 http://61.49.164.102:1314/rtp/239.3.1.138:8044
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/67278846212a.png" group-title="卫视频道",湖北卫视
 http://vpn.ydcb.top:40000/udp/239.94.0.84:5140
@@ -602,6 +600,8 @@ http://remote.jackye.site:8000/rtp/239.61.2.120:8714
 http://www.745612.xyz:7788/rtp/235.254.199.72:7980
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/67278846212a.png" group-title="卫视频道",湖北卫视
 http://106.80.124.223:7788/rtp/235.254.199.72:7980
+#EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/67278846212a.png" group-title="卫视频道",湖北卫视
+http://121.10.7.16:4000/udp/239.77.1.93:5146
 #EXTINF:-1 tvg-id="四川卫视" tvg-name="四川卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/8873a0fa6400.png" group-title="卫视频道",四川卫视
 http://183.16.200.23:55555/udp/239.77.1.215:5146
 #EXTINF:-1 tvg-id="四川卫视" tvg-name="四川卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/8873a0fa6400.png" group-title="卫视频道",四川卫视
@@ -1445,8 +1445,6 @@ http://e3.woc.iiiya.cn:18888/rtp/239.61.2.11:8060
 #EXTINF:-1 tvg-id="厦门卫视" tvg-name="厦门卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/54a5b18cf586.png" group-title="卫视频道",厦门卫视
 http://home.pinkfloyd.cn:5000/rtp/238.1.78.246:7840
 #EXTINF:-1 tvg-id="厦门卫视" tvg-name="厦门卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/54a5b18cf586.png" group-title="卫视频道",厦门卫视
-http://114.254.78.190:4022/rtp/239.3.1.143:4120
-#EXTINF:-1 tvg-id="厦门卫视" tvg-name="厦门卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/54a5b18cf586.png" group-title="卫视频道",厦门卫视
 http://woc.iiiya.cn:18888/rtp/239.61.2.11:8060
 #EXTINF:-1 tvg-id="厦门卫视" tvg-name="厦门卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/54a5b18cf586.png" group-title="卫视频道",厦门卫视
 http://e1.woc.iiiya.cn:18888/rtp/239.61.2.11:8060
@@ -1717,8 +1715,6 @@ http://e1.woc.iiiya.cn:18888/rtp/239.61.2.174:9032
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.60:8084
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
-http://114.254.78.190:4022/rtp/239.3.1.60:8084
-#EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
 http://woc.iiiya.cn:18888/rtp/239.61.2.174:9032
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
 http://remote.jackye.site:8000/rtp/239.61.2.174:9032
@@ -1726,6 +1722,8 @@ http://remote.jackye.site:8000/rtp/239.61.2.174:9032
 http://61.134.248.54:9005/rtp/226.0.2.19:8064
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
 http://61.134.254.2:9001/rtp/226.0.2.19:8064
+#EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://zzf.new.tg/data/logos/lib/f1dead953e39.png" group-title="央视频道",CCTV2
+http://121.10.7.16:4000/udp/239.77.1.158:5146
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://zzf.new.tg/data/logos/lib/17e98c89b10c.png" group-title="央视频道",CCTV3
 http://113.121.35.95:8989/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://zzf.new.tg/data/logos/lib/17e98c89b10c.png" group-title="央视频道",CCTV3
@@ -1849,8 +1847,6 @@ http://e1.woc.iiiya.cn:18888/rtp/239.61.3.36:9734
 #EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="央视频道",CCTV7
 http://121.29.98.145:9999/rtp/239.253.92.194:6059
 #EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="央视频道",CCTV7
-http://114.254.78.190:4022/rtp/239.3.1.61:8104
-#EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="央视频道",CCTV7
 http://vpn.ydcb.top:40000/udp/239.94.0.7:5140
 #EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="央视频道",CCTV7
 http://www.ct123.online:8188/rtp/239.69.1.103:10256
@@ -1886,6 +1882,8 @@ http://121.10.7.16:4000/udp/239.77.1.159:5146
 http://family-ph.vividnian.com:8188/udp/233.50.200.24:5140
 #EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="央视频道",CCTV7
 http://family-ph.vividnian.com:8188/udp/233.50.201.120:5140
+#EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://zzf.new.tg/data/logos/lib/371b61b09eab.png" group-title="央视频道",CCTV7
+http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.61:8104
 #EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://zzf.new.tg/data/logos/lib/100e00389a3a.png" group-title="央视频道",CCTV8
 http://121.29.98.145:9999/rtp/239.253.92.195:6060
 #EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://zzf.new.tg/data/logos/lib/100e00389a3a.png" group-title="央视频道",CCTV8
@@ -2289,8 +2287,6 @@ http://woc.iiiya.cn:18888/rtp/239.61.2.171:9014
 #EXTINF:-1 tvg-id="CETV2" tvg-name="CETV2" tvg-logo="https://zzf.new.tg/data/logos/lib/762dbbc1f491.png" group-title="央视频道",CETV2
 http://121.29.98.145:9999/rtp/239.253.92.108:6136
 #EXTINF:-1 tvg-id="CETV2" tvg-name="CETV2" tvg-logo="https://zzf.new.tg/data/logos/lib/762dbbc1f491.png" group-title="央视频道",CETV2
-http://114.254.78.190:4022/rtp/239.3.1.54:4120
-#EXTINF:-1 tvg-id="CETV2" tvg-name="CETV2" tvg-logo="https://zzf.new.tg/data/logos/lib/762dbbc1f491.png" group-title="央视频道",CETV2
 http://114.250.20.79:4022/rtp/239.3.1.54:4120
 #EXTINF:-1 tvg-id="CETV2" tvg-name="CETV2" tvg-logo="https://zzf.new.tg/data/logos/lib/762dbbc1f491.png" group-title="央视频道",CETV2
 http://n2.192372.xyz:8888/rtp/239.3.1.54:4120
@@ -2517,8 +2513,6 @@ http://121.19.134.149:808/tsfile/live/0016_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://zzf.new.tg/data/logos/lib/543274d57b3b.png" group-title="央视频道",CCTV16
 http://122.5.194.152:8899/udp/239.21.2.51:5002
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://zzf.new.tg/data/logos/lib/543274d57b3b.png" group-title="央视频道",CCTV16
-http://114.254.78.190:4022/rtp/239.3.1.183:8001
-#EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://zzf.new.tg/data/logos/lib/543274d57b3b.png" group-title="央视频道",CCTV16
 http://61.49.164.102:1314/rtp/239.3.1.183:8001
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://zzf.new.tg/data/logos/lib/543274d57b3b.png" group-title="央视频道",CCTV16
 http://114.250.20.79:4022/rtp/239.3.1.183:8001
@@ -2526,6 +2520,8 @@ http://114.250.20.79:4022/rtp/239.3.1.183:8001
 http://bit.famcloud.top:9878/rtp/239.3.1.183:8001
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://zzf.new.tg/data/logos/lib/543274d57b3b.png" group-title="央视频道",CCTV16
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.183:8001
+#EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://zzf.new.tg/data/logos/lib/543274d57b3b.png" group-title="央视频道",CCTV16
+http://n2.192372.xyz:8888/rtp/239.3.1.183:8001
 #EXTINF:-1 tvg-id="CGTN" tvg-name="CGTN" tvg-logo="https://zzf.new.tg/data/logos/lib/15cd42d2551b.png" group-title="央视频道",CGTN
 http://vpn.ydcb.top:40000/udp/239.94.0.40:5140
 #EXTINF:-1 tvg-id="CGTN" tvg-name="CGTN" tvg-logo="https://zzf.new.tg/data/logos/lib/15cd42d2551b.png" group-title="央视频道",CGTN
@@ -4251,8 +4247,6 @@ http://122.5.194.152:8899/udp/239.21.1.131:5002
 #EXTINF:-1 tvg-id="光影" tvg-name="光影" tvg-logo="https://zzf.new.tg/data/logos/a31f66f33a06.png" group-title="地方频道",光影
 http://tv.zhangzp.top:4022/udp/239.125.1.49:5000
 #EXTINF:-1 tvg-id="精选" tvg-name="精选" tvg-logo="https://zzf.new.tg/data/logos/2d17cf301e61.png" group-title="地方频道",精选
-http://114.254.78.190:4022/rtp/239.3.1.74:4120
-#EXTINF:-1 tvg-id="精选" tvg-name="精选" tvg-logo="https://zzf.new.tg/data/logos/2d17cf301e61.png" group-title="地方频道",精选
 http://61.49.164.102:1314/rtp/239.3.1.74:4120
 #EXTINF:-1 tvg-id="精选" tvg-name="精选" tvg-logo="https://zzf.new.tg/data/logos/2d17cf301e61.png" group-title="地方频道",精选
 http://114.250.20.79:4022/rtp/239.3.1.74:4120
@@ -4296,8 +4290,6 @@ http://tv.zhangzp.top:4022/udp/239.125.1.51:5000
 http://114.250.20.79:4022/rtp/239.3.1.236:2000
 #EXTINF:-1 tvg-id="爱上4K" tvg-name="爱上4K" tvg-logo="https://zzf.new.tg/data/logos/lib/a08d6f2d4c04.png" group-title="地方频道",爱上4K
 http://www.sccckj.cn:8899/udp/239.11.0.120:5140
-#EXTINF:-1 tvg-id="爱上4K" tvg-name="爱上4K" tvg-logo="https://zzf.new.tg/data/logos/lib/a08d6f2d4c04.png" group-title="地方频道",爱上4K
-http://114.254.78.190:4022/rtp/239.3.1.236:2000
 #EXTINF:-1 tvg-id="爱上4K" tvg-name="爱上4K" tvg-logo="https://zzf.new.tg/data/logos/lib/a08d6f2d4c04.png" group-title="地方频道",爱上4K
 http://n2.192372.xyz:8888/rtp/239.3.1.236:2000
 #EXTINF:-1 tvg-id="爱上4K" tvg-name="爱上4K" tvg-logo="https://zzf.new.tg/data/logos/lib/a08d6f2d4c04.png" group-title="地方频道",爱上4K
@@ -4460,8 +4452,6 @@ http://61.49.164.102:1314/rtp/239.3.1.75:4120
 http://114.250.20.79:4022/rtp/239.3.1.75:4120
 #EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="地方频道",解密
 http://n2.192372.xyz:8888/rtp/239.3.1.75:4120
-#EXTINF:-1 tvg-id="军事" tvg-name="军事" tvg-logo="https://zzf.new.tg/data/logos/e801f487fe59.png" group-title="地方频道",军事
-http://114.254.78.190:4022/rtp/239.3.1.76:4120
 #EXTINF:-1 tvg-id="军事" tvg-name="军事" tvg-logo="https://zzf.new.tg/data/logos/e801f487fe59.png" group-title="地方频道",军事
 http://114.250.20.79:4022/rtp/239.3.1.76:4120
 #EXTINF:-1 tvg-id="军事" tvg-name="军事" tvg-logo="https://zzf.new.tg/data/logos/e801f487fe59.png" group-title="地方频道",军事
@@ -5620,8 +5610,6 @@ http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.100:8001
 http://114.250.20.79:4022/rtp/239.3.1.100:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
 http://61.49.164.102:1314/rtp/239.3.1.102:8001
-#EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
-http://114.254.78.190:4022/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
 http://n2.192372.xyz:8888/rtp/239.3.1.102:8001
 #EXTINF:-1 tvg-id="萌宠TV" tvg-name="萌宠TV" tvg-logo="https://zzf.new.tg/data/logos/cb059bf92379.png" group-title="北京节目",萌宠TV
@@ -9241,8 +9229,6 @@ http://bit.famcloud.top:9878/rtp/239.3.1.242:8000
 #EXTINF:-1 tvg-id="BRTV文艺HD" tvg-name="BRTV文艺HD" tvg-logo="https://zzf.new.tg/data/logos/lib/3f5cce54245a.png" group-title="其他频道",BRTV文艺HD
 http://114.250.20.79:4022/rtp/239.3.1.242:8000
 #EXTINF:-1 tvg-id="BRTV财经HD" tvg-name="BRTV财经HD" tvg-logo="https://zzf.new.tg/data/logos/lib/4eaa7f994698.png" group-title="其他频道",BRTV财经HD
-http://114.254.78.190:4022/rtp/239.3.1.116:8000
-#EXTINF:-1 tvg-id="BRTV财经HD" tvg-name="BRTV财经HD" tvg-logo="https://zzf.new.tg/data/logos/lib/4eaa7f994698.png" group-title="其他频道",BRTV财经HD
 http://61.49.164.102:1314/rtp/239.3.1.116:8000
 #EXTINF:-1 tvg-id="BRTV财经HD" tvg-name="BRTV财经HD" tvg-logo="https://zzf.new.tg/data/logos/lib/4eaa7f994698.png" group-title="其他频道",BRTV财经HD
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.116:8000
@@ -9383,8 +9369,6 @@ http://n2.192372.xyz:8888/rtp/239.3.1.96:8001
 #EXTINF:-1 tvg-id="房山电视台" tvg-name="房山电视台" tvg-logo="https://zzf.new.tg/data/logos/dc4a0ca09fb2.png" group-title="其他频道",房山电视台
 http://114.250.20.79:4022/rtp/239.3.1.96:8001
 #EXTINF:-1 tvg-id="CCTV-4 中文国际 欧洲HD" tvg-name="CCTV-4 中文国际 欧洲HD" tvg-logo="https://zzf.new.tg/data/logos/28a1632c58f4.png" group-title="其他频道",CCTV-4 中文国际 欧洲HD
-http://114.254.78.190:4022/rtp/239.3.1.213:4220
-#EXTINF:-1 tvg-id="CCTV-4 中文国际 欧洲HD" tvg-name="CCTV-4 中文国际 欧洲HD" tvg-logo="https://zzf.new.tg/data/logos/28a1632c58f4.png" group-title="其他频道",CCTV-4 中文国际 欧洲HD
 http://61.49.164.102:1314/rtp/239.3.1.213:4220
 #EXTINF:-1 tvg-id="CCTV-4 中文国际 欧洲HD" tvg-name="CCTV-4 中文国际 欧洲HD" tvg-logo="https://zzf.new.tg/data/logos/28a1632c58f4.png" group-title="其他频道",CCTV-4 中文国际 欧洲HD
 http://114.250.20.79:4022/rtp/239.3.1.213:4220
@@ -9432,8 +9416,6 @@ http://bit.famcloud.top:9878/rtp/239.3.1.217:4220
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.217:4220
 #EXTINF:-1 tvg-id="CGTN 西班牙语HD" tvg-name="CGTN 西班牙语HD" tvg-logo="https://zzf.new.tg/data/logos/7b52759fc1d4.png" group-title="其他频道",CGTN 西班牙语HD
 http://vpn.famcloud.top:9878/rtp/239.3.1.217:4220
-#EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
-http://114.254.78.190:4022/rtp/239.3.1.219:4220
 #EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
 http://61.49.164.102:1314/rtp/239.3.1.219:4220
 #EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
