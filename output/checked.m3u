@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-20 21:32:23 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-20 22:32:40 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="更新" tvg-name="更新" group-title="更新时间 2026-11-20 12:00:55",2026-11-20 12:00:55 更新
 http://121.29.98.145:9999/rtp/239.253.92.154:6011
@@ -231,8 +231,6 @@ http://61.134.254.2:9001/rtp/226.0.2.176:9320
 http://14.127.213.91:4022/udp/239.77.0.126:5146
 #EXTINF:-1 tvg-id="江苏卫视" tvg-name="江苏卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/9ab7a83fce2b.png" group-title="卫视频道",江苏卫视
 http://remote.jackye.site:8000/rtp/239.61.2.30:8174
-#EXTINF:-1 tvg-id="江苏卫视" tvg-name="江苏卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/9ab7a83fce2b.png" group-title="卫视频道",江苏卫视
-http://119.114.57.68:4022/rtp/232.0.0.116:1234
 #EXTINF:-1 tvg-id="江苏卫视" tvg-name="江苏卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/9ab7a83fce2b.png" group-title="卫视频道",江苏卫视
 http://122.5.194.152:8899/udp/239.21.1.89:5002
 #EXTINF:-1 tvg-id="江苏卫视" tvg-name="江苏卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/9ab7a83fce2b.png" group-title="卫视频道",江苏卫视
@@ -2979,6 +2977,8 @@ http://61.134.248.54:9005/rtp/226.0.2.164:9224
 http://61.134.254.2:9001/rtp/226.0.2.164:9224
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
 http://family-ph.vividnian.com:8188/udp/233.50.201.123:5140
+#EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
+http://119.114.57.68:4022/rtp/232.0.0.139:1234
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
 http://n2.192372.xyz:8888/rtp/239.3.1.64:8124
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://zzf.new.tg/data/logos/lib/018064b27217.png" group-title="央视频道",CCTV12
@@ -6787,6 +6787,8 @@ http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.112:3002
 http://bit.famcloud.top:9878/rtp/239.3.1.112:3002
 #EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="4K节目",湖南卫视4K
 http://14.127.213.91:4022/udp/239.77.0.56:5146
+#EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="4K节目",湖南卫视4K
+http://114.254.78.190:4022/rtp/239.3.1.112:3002
 #EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="4K节目",湖南卫视4K
 http://home.szjim.top:4000/udp/239.77.0.56:5146
 #EXTINF:-1 tvg-id="湖南卫视4K" tvg-name="湖南卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/48304ffa72f6.png" group-title="4K节目",湖南卫视4K
@@ -11256,6 +11258,8 @@ http://n2.192372.xyz:8888/rtp/239.3.1.96:8001
 #EXTINF:-1 tvg-id="房山电视台" tvg-name="房山电视台" tvg-logo="https://zzf.new.tg/data/logos/dc4a0ca09fb2.png" group-title="其他频道",房山电视台
 http://114.250.20.79:4022/rtp/239.3.1.96:8001
 #EXTINF:-1 tvg-id="CCTV-4 中文国际 欧洲HD" tvg-name="CCTV-4 中文国际 欧洲HD" tvg-logo="https://zzf.new.tg/data/logos/28a1632c58f4.png" group-title="其他频道",CCTV-4 中文国际 欧洲HD
+http://114.254.78.190:4022/rtp/239.3.1.213:4220
+#EXTINF:-1 tvg-id="CCTV-4 中文国际 欧洲HD" tvg-name="CCTV-4 中文国际 欧洲HD" tvg-logo="https://zzf.new.tg/data/logos/28a1632c58f4.png" group-title="其他频道",CCTV-4 中文国际 欧洲HD
 http://61.49.164.102:1314/rtp/239.3.1.213:4220
 #EXTINF:-1 tvg-id="CCTV-4 中文国际 欧洲HD" tvg-name="CCTV-4 中文国际 欧洲HD" tvg-logo="https://zzf.new.tg/data/logos/28a1632c58f4.png" group-title="其他频道",CCTV-4 中文国际 欧洲HD
 http://114.250.20.79:4022/rtp/239.3.1.213:4220
@@ -11313,6 +11317,8 @@ http://bit.famcloud.top:9878/rtp/239.3.1.217:4220
 http://naslmd2.myqnapcloud.com:4022/rtp/239.3.1.217:4220
 #EXTINF:-1 tvg-id="CGTN 西班牙语HD" tvg-name="CGTN 西班牙语HD" tvg-logo="https://zzf.new.tg/data/logos/7b52759fc1d4.png" group-title="其他频道",CGTN 西班牙语HD
 http://vpn.famcloud.top:9878/rtp/239.3.1.217:4220
+#EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
+http://114.254.78.190:4022/rtp/239.3.1.219:4220
 #EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
 http://114.252.117.159:7000/rtp/239.3.1.219:4220
 #EXTINF:-1 tvg-id="CGTN 阿拉伯语HD" tvg-name="CGTN 阿拉伯语HD" tvg-logo="https://zzf.new.tg/data/logos/9237b802f32c.png" group-title="其他频道",CGTN 阿拉伯语HD
