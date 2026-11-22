@@ -1,7 +1,7 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="ℹ️ 订阅信息 到期 2027-10-8",有效期 2026-10-26 ~ 2027-10-8（剩余 320 天）
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-22 07:09:33 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-22 08:09:36 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -9472,6 +9472,8 @@ http://ikuai.hanxiaowang.win:3344/rtp/239.69.1.244:11106
 #EXTINF:-1 tvg-id="四海钓鱼" tvg-name="四海钓鱼" tvg-logo="https://zzf.new.tg/data/logos/lib/3c5ebb0f8035.png" group-title="🏙️ 地方频道",四海钓鱼
 http://yy15238.netyiyang.com:8800/rtp/239.69.1.244:11106
 #EXTINF:-1 tvg-id="四海钓鱼" tvg-name="四海钓鱼" tvg-logo="https://zzf.new.tg/data/logos/lib/3c5ebb0f8035.png" group-title="🏙️ 地方频道",四海钓鱼
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.243:6421
+#EXTINF:-1 tvg-id="四海钓鱼" tvg-name="四海钓鱼" tvg-logo="https://zzf.new.tg/data/logos/lib/3c5ebb0f8035.png" group-title="🏙️ 地方频道",四海钓鱼
 http://vpn.ydcb.top:40000/udp/239.94.1.168:5140
 #EXTINF:-1 tvg-id="四海钓鱼" tvg-name="四海钓鱼" tvg-logo="https://zzf.new.tg/data/logos/lib/3c5ebb0f8035.png" group-title="🏙️ 地方频道",四海钓鱼
 http://e3.woc.iiiya.cn:18888/rtp/239.61.3.69:9932
@@ -10089,6 +10091,8 @@ http://nas01.misaka.show:5000/rtp/239.61.3.43:9776
 http://fb4wd00001.f3322.net:1111/rtp/232.0.0.8:1234
 #EXTINF:-1 tvg-id="CGTN-法语国际" tvg-name="CGTN-法语国际" tvg-logo="https://zzf.new.tg/data/logos/091384ccabfd.png" group-title="📌 其他频道",CGTN-法语国际
 http://101.wifi98.com:9001/rtp/232.0.0.8:1234
+#EXTINF:-1 tvg-id="CGTN 英文记录" tvg-name="CGTN 英文记录" group-title="📌 其他频道",CGTN 英文记录
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.195:6373
 #EXTINF:-1 tvg-id="CGTN 英文记录" tvg-name="CGTN 英文记录" group-title="📌 其他频道",CGTN 英文记录
 http://60.0.97.175:9999/rtp/239.253.93.195:6373
 #EXTINF:-1 tvg-id="CGTN 英文记录" tvg-name="CGTN 英文记录" group-title="📌 其他频道",CGTN 英文记录
@@ -10833,10 +10837,6 @@ http://60.0.97.175:9999/rtp/239.253.94.9:6608
 http://60.0.97.175:9999/rtp/239.253.94.10:6609
 #EXTINF:-1 tvg-id="慢直播10" tvg-name="慢直播10" tvg-logo="https://zzf.new.tg/data/logos/d8002cddb060.png" group-title="📌 其他频道",慢直播10
 http://121.29.98.145:9999/rtp/239.253.94.10:6609
-#EXTINF:-1 tvg-id="慢直播11" tvg-name="慢直播11" tvg-logo="https://zzf.new.tg/data/logos/dba13af2f8a8.png" group-title="📌 其他频道",慢直播11
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.94.11:6610
-#EXTINF:-1 tvg-id="慢直播13" tvg-name="慢直播13" tvg-logo="https://zzf.new.tg/data/logos/195795f3be87.png" group-title="📌 其他频道",慢直播13
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.94.13:6612
 #EXTINF:-1 tvg-id="慢直播13" tvg-name="慢直播13" tvg-logo="https://zzf.new.tg/data/logos/195795f3be87.png" group-title="📌 其他频道",慢直播13
 http://60.0.97.175:9999/rtp/239.253.94.13:6612
 #EXTINF:-1 tvg-id="慢直播16" tvg-name="慢直播16" tvg-logo="https://zzf.new.tg/data/logos/9aabbe5abc22.png" group-title="📌 其他频道",慢直播16
@@ -10867,8 +10867,6 @@ http://121.29.98.145:9999/rtp/239.253.94.21:6620
 http://60.0.97.175:9999/rtp/239.253.94.23:6622
 #EXTINF:-1 tvg-id="慢直播24" tvg-name="慢直播24" tvg-logo="https://zzf.new.tg/data/logos/6b38769b06e7.png" group-title="📌 其他频道",慢直播24
 http://60.0.97.175:9999/rtp/239.253.94.24:6623
-#EXTINF:-1 tvg-id="慢直播九屏1" tvg-name="慢直播九屏1" tvg-logo="https://zzf.new.tg/data/logos/cf9d5769bf9e.png" group-title="📌 其他频道",慢直播九屏1
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.94.25:6624
 #EXTINF:-1 tvg-id="慢直播九屏1" tvg-name="慢直播九屏1" tvg-logo="https://zzf.new.tg/data/logos/cf9d5769bf9e.png" group-title="📌 其他频道",慢直播九屏1
 http://121.29.98.145:9999/rtp/239.253.94.25:6624
 #EXTINF:-1 tvg-id="慢直播九屏1" tvg-name="慢直播九屏1" tvg-logo="https://zzf.new.tg/data/logos/cf9d5769bf9e.png" group-title="📌 其他频道",慢直播九屏1
