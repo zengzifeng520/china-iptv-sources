@@ -1,5 +1,5 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-25 16:55:17 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-25 23:34:28 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -11468,6 +11468,8 @@ http://nas01.misaka.show:5000/rtp/239.61.2.64:8378
 #EXTINF:-1 tvg-id="中国气像" tvg-name="中国气像" tvg-logo="https://zzf.new.tg/data/logos/f62ad4131d40.png" group-title="📌 其他频道",中国气像
 http://e3.woc.iiiya.cn:18888/rtp/239.61.2.64:8378
 #EXTINF:-1 tvg-id="丰南电视" tvg-name="丰南电视" tvg-logo="https://zzf.new.tg/data/logos/442d2d637145.png" group-title="📌 其他频道",丰南电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.231:6070
+#EXTINF:-1 tvg-id="丰南电视" tvg-name="丰南电视" tvg-logo="https://zzf.new.tg/data/logos/442d2d637145.png" group-title="📌 其他频道",丰南电视
 http://60.0.97.175:9999/rtp/239.253.92.231:6070
 #EXTINF:-1 tvg-id="丰润电视" tvg-name="丰润电视" tvg-logo="https://zzf.new.tg/data/logos/a035f5c22131.png" group-title="📌 其他频道",丰润电视
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.252:6156
@@ -11627,8 +11629,6 @@ http://60.168.65.151:8888/rtp/238.1.79.52:4528
 http://home.pinkfloyd.cn:5000/rtp/238.1.79.52:4528
 #EXTINF:-1 tvg-id="五莲新闻" tvg-name="五莲新闻" group-title="📌 其他频道",五莲新闻
 http://122.5.194.152:8899/udp/239.21.1.249:5002
-#EXTINF:-1 tvg-id="井陉矿区电视" tvg-name="井陉矿区电视" tvg-logo="https://zzf.new.tg/data/logos/9af2bd2cff9a.png" group-title="📌 其他频道",井陉矿区电视
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.215:6067
 #EXTINF:-1 tvg-id="井陉矿区电视" tvg-name="井陉矿区电视" tvg-logo="https://zzf.new.tg/data/logos/9af2bd2cff9a.png" group-title="📌 其他频道",井陉矿区电视
 http://60.0.97.175:9999/rtp/239.253.92.215:6067
 #EXTINF:-1 tvg-id="交通之声广播" tvg-name="交通之声广播" tvg-logo="https://zzf.new.tg/data/logos/c135e22c5be9.png" group-title="📌 其他频道",交通之声广播
@@ -11803,6 +11803,8 @@ http://122.5.194.152:8899/udp/239.21.1.102:5002
 http://122.6.63.128:8886/udp/239.21.1.106:5002
 #EXTINF:-1 tvg-id="夏津综合" tvg-name="夏津综合" group-title="📌 其他频道",夏津综合
 http://122.5.194.152:8899/udp/239.21.1.106:5002
+#EXTINF:-1 tvg-id="大城电视" tvg-name="大城电视" tvg-logo="https://zzf.new.tg/data/logos/f901ccd2c901.png" group-title="📌 其他频道",大城电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.230:6068
 #EXTINF:-1 tvg-id="大城电视" tvg-name="大城电视" tvg-logo="https://zzf.new.tg/data/logos/f901ccd2c901.png" group-title="📌 其他频道",大城电视
 http://60.0.97.175:9999/rtp/239.253.92.230:6068
 #EXTINF:-1 tvg-id="大洼综合" tvg-name="大洼综合" tvg-logo="https://zzf.new.tg/data/logos/d160cabe5f0f.png" group-title="📌 其他频道",大洼综合
@@ -12594,9 +12596,13 @@ http://223.215.53.108:8090/rtp/238.1.78.133:6936
 #EXTINF:-1 tvg-id="滁州公共频道" tvg-name="滁州公共频道" tvg-logo="https://zzf.new.tg/data/logos/4a50cc6ce0dc.png" group-title="📌 其他频道",滁州公共频道
 http://60.168.65.151:8888/rtp/238.1.78.133:6936
 #EXTINF:-1 tvg-id="滦南电视" tvg-name="滦南电视" tvg-logo="https://zzf.new.tg/data/logos/c2e58cc05601.png" group-title="📌 其他频道",滦南电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.218:6100
+#EXTINF:-1 tvg-id="滦南电视" tvg-name="滦南电视" tvg-logo="https://zzf.new.tg/data/logos/c2e58cc05601.png" group-title="📌 其他频道",滦南电视
 http://121.29.98.145:9999/rtp/239.253.92.218:6100
 #EXTINF:-1 tvg-id="滦南电视" tvg-name="滦南电视" tvg-logo="https://zzf.new.tg/data/logos/c2e58cc05601.png" group-title="📌 其他频道",滦南电视
 http://60.0.97.175:9999/rtp/239.253.92.218:6100
+#EXTINF:-1 tvg-id="滦州电视" tvg-name="滦州电视" tvg-logo="https://zzf.new.tg/data/logos/057764e5f12a.png" group-title="📌 其他频道",滦州电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.97:6138
 #EXTINF:-1 tvg-id="滨州好生新闻" tvg-name="滨州好生新闻" group-title="📌 其他频道",滨州好生新闻
 http://122.6.63.128:8886/udp/239.21.1.238:5002
 #EXTINF:-1 tvg-id="滨州好生新闻" tvg-name="滨州好生新闻" group-title="📌 其他频道",滨州好生新闻
@@ -12667,6 +12673,8 @@ http://106.5.100.48:6001/rtp/239.252.220.140:5140
 http://tv.zhangzp.top:4022/udp/239.125.1.120:4130
 #EXTINF:-1 tvg-id="爱综艺(轮播频道)HD" tvg-name="爱综艺(轮播频道)HD" tvg-logo="https://zzf.new.tg/data/logos/a1531449edd4.png" group-title="📌 其他频道",爱综艺(轮播频道)HD
 http://www.smilehome.top:4022/udp/225.0.4.51:7980
+#EXTINF:-1 tvg-id="玉田电视" tvg-name="玉田电视" tvg-logo="https://zzf.new.tg/data/logos/4cbd49d2cad6.png" group-title="📌 其他频道",玉田电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.118:6133
 #EXTINF:-1 tvg-id="玉田电视" tvg-name="玉田电视" tvg-logo="https://zzf.new.tg/data/logos/4cbd49d2cad6.png" group-title="📌 其他频道",玉田电视
 http://60.0.97.175:9999/rtp/239.253.92.118:6133
 #EXTINF:-1 tvg-id="玉田电视" tvg-name="玉田电视" tvg-logo="https://zzf.new.tg/data/logos/4cbd49d2cad6.png" group-title="📌 其他频道",玉田电视
@@ -13042,6 +13050,8 @@ http://121.29.98.145:9999/rtp/239.253.93.125:6293
 #EXTINF:-1 tvg-id="辅视角1-高清" tvg-name="辅视角1-高清" tvg-logo="https://zzf.new.tg/data/logos/511d270e18cb.png" group-title="📌 其他频道",辅视角1-高清
 http://60.0.97.175:9999/rtp/239.253.93.125:6293
 #EXTINF:-1 tvg-id="迁西电视" tvg-name="迁西电视" tvg-logo="https://zzf.new.tg/data/logos/3a18e6b0298e.png" group-title="📌 其他频道",迁西电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.247:6091
+#EXTINF:-1 tvg-id="迁西电视" tvg-name="迁西电视" tvg-logo="https://zzf.new.tg/data/logos/3a18e6b0298e.png" group-title="📌 其他频道",迁西电视
 http://121.29.98.145:9999/rtp/239.253.92.247:6091
 #EXTINF:-1 tvg-id="迁西电视" tvg-name="迁西电视" tvg-logo="https://zzf.new.tg/data/logos/3a18e6b0298e.png" group-title="📌 其他频道",迁西电视
 http://60.0.97.175:9999/rtp/239.253.92.247:6091
@@ -13146,6 +13156,8 @@ http://vpn.ydcb.top:40000/udp/239.94.2.23:5140
 #EXTINF:-1 tvg-id="风景直播3" tvg-name="风景直播3" tvg-logo="https://zzf.new.tg/data/logos/57f33ad44401.png" group-title="📌 其他频道",风景直播3
 http://www.893224162.xyz:8188/udp/239.94.2.23:5140
 #EXTINF:-1 tvg-id="香河电视" tvg-name="香河电视" tvg-logo="https://zzf.new.tg/data/logos/ae08639e1fc0.png" group-title="📌 其他频道",香河电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.185:6049
+#EXTINF:-1 tvg-id="香河电视" tvg-name="香河电视" tvg-logo="https://zzf.new.tg/data/logos/ae08639e1fc0.png" group-title="📌 其他频道",香河电视
 http://60.0.97.175:9999/rtp/239.253.92.185:6049
 #EXTINF:-1 tvg-id="高淳综合" tvg-name="高淳综合" tvg-logo="https://zzf.new.tg/data/logos/5d88bad976c4.png" group-title="📌 其他频道",高淳综合
 http://h.vanshun.com:8802/rtp/239.49.1.142:6000
@@ -13161,8 +13173,6 @@ http://slq888.cn:9999/udp/233.50.200.223:5140
 http://183.129.255.66:8480/udp/233.50.200.223:5140
 #EXTINF:-1 tvg-id="高邑电视" tvg-name="高邑电视" tvg-logo="https://zzf.new.tg/data/logos/8ec87861bab6.png" group-title="📌 其他频道",高邑电视
 http://121.29.98.145:9999/rtp/239.253.92.160:6041
-#EXTINF:-1 tvg-id="高邑电视" tvg-name="高邑电视" tvg-logo="https://zzf.new.tg/data/logos/8ec87861bab6.png" group-title="📌 其他频道",高邑电视
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.160:6041
 #EXTINF:-1 tvg-id="高邑电视" tvg-name="高邑电视" tvg-logo="https://zzf.new.tg/data/logos/8ec87861bab6.png" group-title="📌 其他频道",高邑电视
 http://60.0.97.175:9999/rtp/239.253.92.160:6041
 #EXTINF:-1 tvg-id="高阳电视" tvg-name="高阳电视" tvg-logo="https://zzf.new.tg/data/logos/5f886bba7f74.png" group-title="📌 其他频道",高阳电视
