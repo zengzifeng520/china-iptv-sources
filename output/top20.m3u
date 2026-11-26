@@ -1,5 +1,5 @@
 #EXTM3U
-# 每频道最多 20 条 2026-11-27 05:39:35
+# 每频道最多 20 条 2026-11-27 06:39:29
 #EXTINF:-1 tvg-id="更新" tvg-name="更新" group-title="更新时间 2026-11-25 13:24:23",2026-11-25 13:24:23 更新
 http://183.191.179.16:9010/rtp/226.0.2.11:8000
 #EXTINF:-1 tvg-id="山西卫视" tvg-name="山西卫视" tvg-logo="https://zzf.new.tg/data/logos/lib/ef66b8b1d36e.png" group-title="卫视频道",山西卫视
@@ -4789,6 +4789,8 @@ http://114.252.116.128:7000/rtp/239.3.1.73:4120
 #EXTINF:-1 tvg-id="美人" tvg-name="美人" tvg-logo="https://zzf.new.tg/data/logos/a632acd88921.png" group-title="地方频道",美人
 http://tv.zhangzp.top:4022/udp/239.125.44.9:4120
 #EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="地方频道",解密
+http://123.122.138.20:4022/rtp/239.3.1.75:4120
+#EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="地方频道",解密
 http://114.250.20.79:4022/rtp/239.3.1.75:4120
 #EXTINF:-1 tvg-id="解密" tvg-name="解密" tvg-logo="https://zzf.new.tg/data/logos/1872008289c5.png" group-title="地方频道",解密
 http://n2.192372.xyz:8888/rtp/239.3.1.75:4120
@@ -4918,6 +4920,8 @@ http://vpn.famcloud.top:9878/rtp/239.3.1.83:4120
 http://tv.zhangzp.top:4022/udp/239.125.1.48:5000
 #EXTINF:-1 tvg-id="台球" tvg-name="台球" tvg-logo="https://zzf.new.tg/data/logos/ed67615cf2e7.png" group-title="地方频道",台球
 http://114.252.116.128:7000/rtp/239.3.1.85:4120
+#EXTINF:-1 tvg-id="台球" tvg-name="台球" tvg-logo="https://zzf.new.tg/data/logos/ed67615cf2e7.png" group-title="地方频道",台球
+http://123.122.138.20:4022/rtp/239.3.1.85:4120
 #EXTINF:-1 tvg-id="台球" tvg-name="台球" tvg-logo="https://zzf.new.tg/data/logos/ed67615cf2e7.png" group-title="地方频道",台球
 http://61.49.164.102:1314/rtp/239.3.1.85:4120
 #EXTINF:-1 tvg-id="台球" tvg-name="台球" tvg-logo="https://zzf.new.tg/data/logos/ed67615cf2e7.png" group-title="地方频道",台球
@@ -5124,6 +5128,8 @@ http://www.siyao.xin:4000/rtp/225.1.4.190:1239
 http://tv.zhangzp.top:4022/udp/239.125.1.125:4130
 #EXTINF:-1 tvg-id="魅力时尚" tvg-name="魅力时尚" tvg-logo="https://zzf.new.tg/data/logos/435fea246b39.png" group-title="地方频道",魅力时尚
 http://114.252.116.128:7000/rtp/239.3.1.196:9012
+#EXTINF:-1 tvg-id="魅力时尚" tvg-name="魅力时尚" tvg-logo="https://zzf.new.tg/data/logos/435fea246b39.png" group-title="地方频道",魅力时尚
+http://123.122.138.20:4022/rtp/239.3.1.196:9012
 #EXTINF:-1 tvg-id="魅力时尚" tvg-name="魅力时尚" tvg-logo="https://zzf.new.tg/data/logos/435fea246b39.png" group-title="地方频道",魅力时尚
 http://61.49.164.102:1314/rtp/239.3.1.196:9012
 #EXTINF:-1 tvg-id="魅力时尚" tvg-name="魅力时尚" tvg-logo="https://zzf.new.tg/data/logos/435fea246b39.png" group-title="地方频道",魅力时尚
@@ -5357,6 +5363,8 @@ http://61.49.164.102:1314/rtp/239.3.1.140:8001
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
 http://114.250.20.79:4022/rtp/239.3.1.140:8001
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
+http://123.122.138.20:4022/rtp/239.3.1.140:8001
+#EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
 http://61.49.164.102:1314/rtp/239.3.1.139:8001
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
 http://123.122.138.20:4022/rtp/239.3.1.139:8001
@@ -5368,8 +5376,6 @@ http://rfx2025.shunderen.top:2345/udp/239.77.1.13:5146
 http://rfx2025.shunderen.top:2345/udp/239.77.0.3:5146
 #EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
 http://home.szjim.top:4000/udp/239.77.0.153:5146
-#EXTINF:-1 tvg-id="北京卫视4K" tvg-name="北京卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/1d09bca501de.png" group-title="4K节目",北京卫视4K
-http://home.szjim.top:4000/udp/239.77.0.3:5146
 #EXTINF:-1 tvg-id="广东卫视4K" tvg-name="广东卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="4K节目",广东卫视4K
 http://www.rongrong.me:14022/rtp/233.18.204.218:5140
 #EXTINF:-1 tvg-id="广东卫视4K" tvg-name="广东卫视4K" tvg-logo="https://zzf.new.tg/data/logos/lib/0d77ae0569c8.png" group-title="4K节目",广东卫视4K
@@ -12941,11 +12947,17 @@ http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.13:6166
 #EXTINF:-1 tvg-id="邯郸科技教育" tvg-name="邯郸科技教育" tvg-logo="https://zzf.new.tg/data/logos/5519117269b0.png" group-title="其他频道",邯郸科技教育
 http://121.29.98.145:9999/rtp/239.253.93.13:6166
 #EXTINF:-1 tvg-id="元氏电视" tvg-name="元氏电视" tvg-logo="https://zzf.new.tg/data/logos/abb18b0c70a3.png" group-title="其他频道",元氏电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.142:6040
+#EXTINF:-1 tvg-id="元氏电视" tvg-name="元氏电视" tvg-logo="https://zzf.new.tg/data/logos/abb18b0c70a3.png" group-title="其他频道",元氏电视
 http://121.29.98.145:9999/rtp/239.253.92.142:6040
 #EXTINF:-1 tvg-id="无极电视" tvg-name="无极电视" tvg-logo="https://zzf.new.tg/data/logos/ef30581596a1.png" group-title="其他频道",无极电视
 http://121.29.98.145:9999/rtp/239.253.92.138:6222
 #EXTINF:-1 tvg-id="高邑电视" tvg-name="高邑电视" tvg-logo="https://zzf.new.tg/data/logos/8ec87861bab6.png" group-title="其他频道",高邑电视
 http://121.29.98.145:9999/rtp/239.253.92.160:6041
+#EXTINF:-1 tvg-id="高邑电视" tvg-name="高邑电视" tvg-logo="https://zzf.new.tg/data/logos/8ec87861bab6.png" group-title="其他频道",高邑电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.160:6041
+#EXTINF:-1 tvg-id="井陉矿区电视" tvg-name="井陉矿区电视" tvg-logo="https://zzf.new.tg/data/logos/9af2bd2cff9a.png" group-title="其他频道",井陉矿区电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.215:6067
 #EXTINF:-1 tvg-id="赞皇电视" tvg-name="赞皇电视" tvg-logo="https://zzf.new.tg/data/logos/5f668cfa7587.png" group-title="其他频道",赞皇电视
 http://121.29.98.145:9999/rtp/239.253.92.12:6042
 #EXTINF:-1 tvg-id="深泽电视" tvg-name="深泽电视" tvg-logo="https://zzf.new.tg/data/logos/9fc0dec877ab.png" group-title="其他频道",深泽电视
@@ -13074,6 +13086,8 @@ http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.42:6195
 http://121.29.98.145:9999/rtp/239.253.93.42:6195
 #EXTINF:-1 tvg-id="武强电视" tvg-name="武强电视" tvg-logo="https://zzf.new.tg/data/logos/eedad6d04f09.png" group-title="其他频道",武强电视
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.79:6245
+#EXTINF:-1 tvg-id="阜城电视" tvg-name="阜城电视" tvg-logo="https://zzf.new.tg/data/logos/ba64eac60668.png" group-title="其他频道",阜城电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.168:6336
 #EXTINF:-1 tvg-id="故城电视" tvg-name="故城电视" tvg-logo="https://zzf.new.tg/data/logos/d95140608774.png" group-title="其他频道",故城电视
 http://121.29.98.145:9999/rtp/239.253.93.161:6329
 #EXTINF:-1 tvg-id="枣强电视" tvg-name="枣强电视" tvg-logo="https://zzf.new.tg/data/logos/62c9bb430f75.png" group-title="其他频道",枣强电视
