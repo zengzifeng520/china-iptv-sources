@@ -1,7 +1,7 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="ℹ️ 订阅信息 到期 2027-10-8",有效期 2026-10-26 ~ 2027-10-8（剩余 314 天）
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-28 06:15:38 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-28 07:15:44 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -5423,8 +5423,6 @@ http://121.29.98.145:9999/rtp/239.253.93.38:6191
 http://121.29.98.145:9999/rtp/239.253.93.54:6207
 #EXTINF:-1 tvg-id="来安新闻综合" tvg-name="来安新闻综合" tvg-logo="https://zzf.new.tg/data/logos/0dc92b4805b2.png" group-title="🏔️ 河北节目",来安新闻综合
 http://114.97.154.108:8888/rtp/238.1.78.204:7504
-#EXTINF:-1 tvg-id="武强电视" tvg-name="武强电视" tvg-logo="https://zzf.new.tg/data/logos/eedad6d04f09.png" group-title="🏔️ 河北节目",武强电视
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.79:6245
 #EXTINF:-1 tvg-id="永清电视" tvg-name="永清电视" tvg-logo="https://zzf.new.tg/data/logos/1372070e23c6.png" group-title="🏔️ 河北节目",永清电视
 http://121.29.98.145:9999/rtp/239.253.93.172:6340
 #EXTINF:-1 tvg-id="沙河电视" tvg-name="沙河电视" tvg-logo="https://zzf.new.tg/data/logos/05d1b1bd998b.png" group-title="🏔️ 河北节目",沙河电视
@@ -5435,8 +5433,6 @@ http://121.29.98.145:9999/rtp/239.253.93.179:6347
 http://121.29.98.145:9999/rtp/239.253.92.122:6016
 #EXTINF:-1 tvg-id="沧州新闻综合" tvg-name="沧州新闻综合" tvg-logo="https://zzf.new.tg/data/logos/9fbfa3433f81.png" group-title="🏔️ 河北节目",沧州新闻综合
 http://121.29.98.145:9999/rtp/239.253.92.121:6015
-#EXTINF:-1 tvg-id="沧州新闻综合" tvg-name="沧州新闻综合" tvg-logo="https://zzf.new.tg/data/logos/9fbfa3433f81.png" group-title="🏔️ 河北节目",沧州新闻综合
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.121:6015
 #EXTINF:-1 tvg-id="河北三佳购物" tvg-name="河北三佳购物" group-title="🏔️ 河北节目",河北三佳购物
 http://tv.zhangzp.top:4022/udp/239.125.2.144:4120
 #EXTINF:-1 tvg-id="河北公共" tvg-name="河北公共" tvg-logo="https://zzf.new.tg/data/logos/lib/cbe17a06d800.png" group-title="🏔️ 河北节目",河北公共
@@ -5447,12 +5443,16 @@ http://121.29.98.145:9999/rtp/239.253.92.176:6006
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.176:6006
 #EXTINF:-1 tvg-id="河北少儿科教" tvg-name="河北少儿科教" tvg-logo="https://zzf.new.tg/data/logos/lib/9e4c7cb1e98c.png" group-title="🏔️ 河北节目",河北少儿科教
 http://121.29.98.145:9999/rtp/239.253.92.174:6004
+#EXTINF:-1 tvg-id="河北少儿科教" tvg-name="河北少儿科教" tvg-logo="https://zzf.new.tg/data/logos/lib/9e4c7cb1e98c.png" group-title="🏔️ 河北节目",河北少儿科教
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.174:6004
 #EXTINF:-1 tvg-id="河北影视剧" tvg-name="河北影视剧" tvg-logo="https://zzf.new.tg/data/logos/lib/03e6d0f63c22.png" group-title="🏔️ 河北节目",河北影视剧
 http://121.29.98.145:9999/rtp/239.253.92.173:6003
 #EXTINF:-1 tvg-id="河北影视剧" tvg-name="河北影视剧" tvg-logo="https://zzf.new.tg/data/logos/lib/03e6d0f63c22.png" group-title="🏔️ 河北节目",河北影视剧
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.173:6003
 #EXTINF:-1 tvg-id="河北经济生活" tvg-name="河北经济生活" tvg-logo="https://zzf.new.tg/data/logos/lib/0240476bd39d.png" group-title="🏔️ 河北节目",河北经济生活
 http://121.29.98.145:9999/rtp/239.253.92.171:6001
+#EXTINF:-1 tvg-id="河北经济生活" tvg-name="河北经济生活" tvg-logo="https://zzf.new.tg/data/logos/lib/0240476bd39d.png" group-title="🏔️ 河北节目",河北经济生活
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.171:6001
 #EXTINF:-1 tvg-id="河北都市" tvg-name="河北都市" tvg-logo="https://zzf.new.tg/data/logos/lib/6f0fec3ecb0b.png" group-title="🏔️ 河北节目",河北都市
 http://121.29.98.145:9999/rtp/239.253.92.172:6002
 #EXTINF:-1 tvg-id="河北都市" tvg-name="河北都市" tvg-logo="https://zzf.new.tg/data/logos/lib/6f0fec3ecb0b.png" group-title="🏔️ 河北节目",河北都市
@@ -10083,8 +10083,6 @@ http://nas01.misaka.show:5000/rtp/239.61.2.64:8378
 http://e3.woc.iiiya.cn:18888/rtp/239.61.2.64:8378
 #EXTINF:-1 tvg-id="丰南电视" tvg-name="丰南电视" tvg-logo="https://zzf.new.tg/data/logos/442d2d637145.png" group-title="📌 其他频道",丰南电视
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.231:6070
-#EXTINF:-1 tvg-id="丰润电视" tvg-name="丰润电视" tvg-logo="https://zzf.new.tg/data/logos/a035f5c22131.png" group-title="📌 其他频道",丰润电视
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.252:6156
 #EXTINF:-1 tvg-id="丰顺综合" tvg-name="丰顺综合" tvg-logo="https://zzf.new.tg/data/logos/b16a29bf4ab9.png" group-title="📌 其他频道",丰顺综合
 http://120.198.86.186:9901/tsfile/live/1100_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="临时直播频道2" tvg-name="临时直播频道2" tvg-logo="https://zzf.new.tg/data/logos/e94c30eea968.png" group-title="📌 其他频道",临时直播频道2
@@ -10681,8 +10679,6 @@ http://home.techua.net:8000/udp/225.1.2.55:5002
 http://ak.cj022.com:10080/udp/225.1.2.55:5002
 #EXTINF:-1 tvg-id="慢直播3" tvg-name="慢直播3" tvg-logo="https://zzf.new.tg/data/logos/58fbf946b423.png" group-title="📌 其他频道",慢直播3
 http://121.29.98.145:9999/rtp/239.253.94.3:6602
-#EXTINF:-1 tvg-id="慢直播3" tvg-name="慢直播3" tvg-logo="https://zzf.new.tg/data/logos/58fbf946b423.png" group-title="📌 其他频道",慢直播3
-http://13809529pqxx.vicp.fun:4022/rtp/239.253.94.3:6602
 #EXTINF:-1 tvg-id="慢直播4" tvg-name="慢直播4" tvg-logo="https://zzf.new.tg/data/logos/6456dc64e13a.png" group-title="📌 其他频道",慢直播4
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.94.4:6603
 #EXTINF:-1 tvg-id="慢直播4" tvg-name="慢直播4" tvg-logo="https://zzf.new.tg/data/logos/6456dc64e13a.png" group-title="📌 其他频道",慢直播4
@@ -11249,6 +11245,8 @@ http://vpn.ydcb.top:40000/udp/239.94.1.68:5140
 http://www.893224162.xyz:8188/udp/239.94.1.68:5140
 #EXTINF:-1 tvg-id="睛彩河北" tvg-name="睛彩河北" tvg-logo="https://zzf.new.tg/data/logos/5ac3089eebbe.png" group-title="📌 其他频道",睛彩河北
 http://121.29.98.145:9999/rtp/239.253.92.104:6221
+#EXTINF:-1 tvg-id="睛彩河北" tvg-name="睛彩河北" tvg-logo="https://zzf.new.tg/data/logos/5ac3089eebbe.png" group-title="📌 其他频道",睛彩河北
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.104:6221
 #EXTINF:-1 tvg-id="第一财*" tvg-name="第一财*" tvg-logo="https://zzf.new.tg/data/logos/c5c4dfa070e1.png" group-title="📌 其他频道",第一财*
 http://h.vanshun.com:8802/rtp/239.49.1.168:6000
 #EXTINF:-1 tvg-id="第一财*" tvg-name="第一财*" tvg-logo="https://zzf.new.tg/data/logos/c5c4dfa070e1.png" group-title="📌 其他频道",第一财*
