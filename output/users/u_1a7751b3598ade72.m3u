@@ -1,7 +1,7 @@
 #EXTM3U url-tvg="https://zengzifeng.ccwu.cc/output/epg.xml"
 #EXTINF:-1 tvg-id="订阅" tvg-name="订阅" group-title="ℹ️ 订阅信息 到期 2027-10-8",有效期 2026-10-26 ~ 2027-10-8（剩余 314 天）
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
-#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-28 08:15:44 推送
+#EXTINF:-1 tvg-id="推送时间" tvg-name="推送时间" group-title="🕒 推送时间",2026-11-28 09:15:45 推送
 https://zengzifeng.ccwu.cc/output/media/promo.mp4
 #EXTINF:-1 tvg-id="CCTV-1" tvg-name="CCTV-1" tvg-logo="https://zzf.new.tg/data/logos/lib/81505df17c37.png" group-title="🎯 咪咕直播",CCTV-1
 http://47.103.64.145:8014/608807420
@@ -5375,8 +5375,12 @@ http://home.techua.net:8000/udp/225.1.1.83:5002
 http://ak.cj022.com:10080/udp/225.1.1.83:5002
 #EXTINF:-1 tvg-id="南和电视" tvg-name="南和电视" tvg-logo="https://zzf.new.tg/data/logos/044d839ad39c.png" group-title="🏔️ 河北节目",南和电视
 http://121.29.98.145:9999/rtp/239.253.93.80:6246
+#EXTINF:-1 tvg-id="南宫电视" tvg-name="南宫电视" tvg-logo="https://zzf.new.tg/data/logos/be26786727b6.png" group-title="🏔️ 河北节目",南宫电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.48:6201
 #EXTINF:-1 tvg-id="双滦电视" tvg-name="双滦电视" tvg-logo="https://zzf.new.tg/data/logos/534426da577f.png" group-title="🏔️ 河北节目",双滦电视
 http://121.29.98.145:9999/rtp/239.253.92.147:6224
+#EXTINF:-1 tvg-id="唐山新闻综合" tvg-name="唐山新闻综合" tvg-logo="https://zzf.new.tg/data/logos/6bed8df67eeb.png" group-title="🏔️ 河北节目",唐山新闻综合
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.245:6089
 #EXTINF:-1 tvg-id="唐山新闻综合" tvg-name="唐山新闻综合" tvg-logo="https://zzf.new.tg/data/logos/6bed8df67eeb.png" group-title="🏔️ 河北节目",唐山新闻综合
 http://121.29.98.145:9999/rtp/239.253.92.245:6089
 #EXTINF:-1 tvg-id="固安电视" tvg-name="固安电视" tvg-logo="https://zzf.new.tg/data/logos/be3d4a2ef135.png" group-title="🏔️ 河北节目",固安电视
@@ -5398,7 +5402,13 @@ http://121.29.98.145:9999/rtp/239.253.93.163:6331
 #EXTINF:-1 tvg-id="崇礼电视" tvg-name="崇礼电视" tvg-logo="https://zzf.new.tg/data/logos/f977c61aa6f0.png" group-title="🏔️ 河北节目",崇礼电视
 http://121.29.98.145:9999/rtp/239.253.93.147:6315
 #EXTINF:-1 tvg-id="巨鹿电视" tvg-name="巨鹿电视" tvg-logo="https://zzf.new.tg/data/logos/832e6b8cff38.png" group-title="🏔️ 河北节目",巨鹿电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.254:6449
+#EXTINF:-1 tvg-id="巨鹿电视" tvg-name="巨鹿电视" tvg-logo="https://zzf.new.tg/data/logos/832e6b8cff38.png" group-title="🏔️ 河北节目",巨鹿电视
 http://121.29.98.145:9999/rtp/239.253.92.254:6449
+#EXTINF:-1 tvg-id="平乡电视" tvg-name="平乡电视" tvg-logo="https://zzf.new.tg/data/logos/f25bf4aa1741.png" group-title="🏔️ 河北节目",平乡电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.53:6206
+#EXTINF:-1 tvg-id="平泉电视" tvg-name="平泉电视" tvg-logo="https://zzf.new.tg/data/logos/063fc404cbc8.png" group-title="🏔️ 河北节目",平泉电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.156:6012
 #EXTINF:-1 tvg-id="广宗电视" tvg-name="广宗电视" tvg-logo="https://zzf.new.tg/data/logos/ad1c45d7e05c.png" group-title="🏔️ 河北节目",广宗电视
 http://121.29.98.145:9999/rtp/239.253.93.50:6203
 #EXTINF:-1 tvg-id="广平电视" tvg-name="广平电视" tvg-logo="https://zzf.new.tg/data/logos/1291319e7007.png" group-title="🏔️ 河北节目",广平电视
@@ -5423,6 +5433,8 @@ http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.166:6334
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.79:6245
 #EXTINF:-1 tvg-id="永清电视" tvg-name="永清电视" tvg-logo="https://zzf.new.tg/data/logos/1372070e23c6.png" group-title="🏔️ 河北节目",永清电视
 http://121.29.98.145:9999/rtp/239.253.93.172:6340
+#EXTINF:-1 tvg-id="沙河电视" tvg-name="沙河电视" tvg-logo="https://zzf.new.tg/data/logos/05d1b1bd998b.png" group-title="🏔️ 河北节目",沙河电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.179:6347
 #EXTINF:-1 tvg-id="沙河电视" tvg-name="沙河电视" tvg-logo="https://zzf.new.tg/data/logos/05d1b1bd998b.png" group-title="🏔️ 河北节目",沙河电视
 http://121.29.98.145:9999/rtp/239.253.93.179:6347
 #EXTINF:-1 tvg-id="沧州公共" tvg-name="沧州公共" tvg-logo="https://zzf.new.tg/data/logos/69a4bb2713f3.png" group-title="🏔️ 河北节目",沧州公共
@@ -5466,6 +5478,8 @@ http://121.29.98.145:9999/rtp/239.253.93.22:6175
 #EXTINF:-1 tvg-id="涿鹿电视" tvg-name="涿鹿电视" tvg-logo="https://zzf.new.tg/data/logos/13b6c140f9f1.png" group-title="🏔️ 河北节目",涿鹿电视
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.181:6349
 #EXTINF:-1 tvg-id="深州电视" tvg-name="深州电视" tvg-logo="https://zzf.new.tg/data/logos/b1ffb181043a.png" group-title="🏔️ 河北节目",深州电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.42:6195
+#EXTINF:-1 tvg-id="深州电视" tvg-name="深州电视" tvg-logo="https://zzf.new.tg/data/logos/b1ffb181043a.png" group-title="🏔️ 河北节目",深州电视
 http://121.29.98.145:9999/rtp/239.253.93.42:6195
 #EXTINF:-1 tvg-id="清河电视" tvg-name="清河电视" tvg-logo="https://zzf.new.tg/data/logos/1ff22b7d2f5c.png" group-title="🏔️ 河北节目",清河电视
 http://121.29.98.145:9999/rtp/239.253.93.44:6197
@@ -5473,6 +5487,8 @@ http://121.29.98.145:9999/rtp/239.253.93.44:6197
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.19:6172
 #EXTINF:-1 tvg-id="满城电视" tvg-name="满城电视" tvg-logo="https://zzf.new.tg/data/logos/607db7e37b11.png" group-title="🏔️ 河北节目",满城电视
 http://121.29.98.145:9999/rtp/239.253.93.19:6172
+#EXTINF:-1 tvg-id="滦平电视" tvg-name="滦平电视" tvg-logo="https://zzf.new.tg/data/logos/8d98491e6ce9.png" group-title="🏔️ 河北节目",滦平电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.100:6142
 #EXTINF:-1 tvg-id="石家庄娱乐" tvg-name="石家庄娱乐" tvg-logo="https://zzf.new.tg/data/logos/5dab6f9cfe26.png" group-title="🏔️ 河北节目",石家庄娱乐
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.93:8120
 #EXTINF:-1 tvg-id="石家庄娱乐" tvg-name="石家庄娱乐" tvg-logo="https://zzf.new.tg/data/logos/5dab6f9cfe26.png" group-title="🏔️ 河北节目",石家庄娱乐
@@ -5481,6 +5497,8 @@ http://121.29.98.145:9999/rtp/239.253.92.93:8120
 http://121.29.98.145:9999/rtp/239.253.92.149:6035
 #EXTINF:-1 tvg-id="秦皇岛公共" tvg-name="秦皇岛公共" tvg-logo="https://zzf.new.tg/data/logos/dd7dbbb76bab.png" group-title="🏔️ 河北节目",秦皇岛公共
 http://121.29.98.145:9999/rtp/239.253.92.53:6022
+#EXTINF:-1 tvg-id="秦皇岛影视" tvg-name="秦皇岛影视" tvg-logo="https://zzf.new.tg/data/logos/fab7040181a1.png" group-title="🏔️ 河北节目",秦皇岛影视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.54:6023
 #EXTINF:-1 tvg-id="秦皇岛影视" tvg-name="秦皇岛影视" tvg-logo="https://zzf.new.tg/data/logos/fab7040181a1.png" group-title="🏔️ 河北节目",秦皇岛影视
 http://121.29.98.145:9999/rtp/239.253.92.54:6023
 #EXTINF:-1 tvg-id="秦皇岛新闻综合" tvg-name="秦皇岛新闻综合" tvg-logo="https://zzf.new.tg/data/logos/0b743424bcf5.png" group-title="🏔️ 河北节目",秦皇岛新闻综合
@@ -10075,6 +10093,8 @@ http://nas01.misaka.show:5000/rtp/239.61.2.64:8378
 http://e3.woc.iiiya.cn:18888/rtp/239.61.2.64:8378
 #EXTINF:-1 tvg-id="丰南电视" tvg-name="丰南电视" tvg-logo="https://zzf.new.tg/data/logos/442d2d637145.png" group-title="📌 其他频道",丰南电视
 http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.231:6070
+#EXTINF:-1 tvg-id="丰润电视" tvg-name="丰润电视" tvg-logo="https://zzf.new.tg/data/logos/a035f5c22131.png" group-title="📌 其他频道",丰润电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.92.252:6156
 #EXTINF:-1 tvg-id="丰顺综合" tvg-name="丰顺综合" tvg-logo="https://zzf.new.tg/data/logos/b16a29bf4ab9.png" group-title="📌 其他频道",丰顺综合
 http://120.198.86.186:9901/tsfile/live/1100_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="临时直播频道2" tvg-name="临时直播频道2" tvg-logo="https://zzf.new.tg/data/logos/e94c30eea968.png" group-title="📌 其他频道",临时直播频道2
@@ -11315,6 +11335,8 @@ http://fb4wd00001.f3322.net:1111/rtp/232.0.0.64:1234
 http://101.wifi98.com:9001/rtp/232.0.0.64:1234
 #EXTINF:-1 tvg-id="羽毛球专区" tvg-name="羽毛球专区" tvg-logo="https://zzf.new.tg/data/logos/445668314c33.png" group-title="📌 其他频道",羽毛球专区
 http://121.29.98.145:9999/rtp/239.253.93.202:6380
+#EXTINF:-1 tvg-id="肃宁电视" tvg-name="肃宁电视" tvg-logo="https://zzf.new.tg/data/logos/570de1d73c2d.png" group-title="📌 其他频道",肃宁电视
+http://13809529pqxx.vicp.fun:4022/rtp/239.253.93.152:6320
 #EXTINF:-1 tvg-id="肃宁电视" tvg-name="肃宁电视" tvg-logo="https://zzf.new.tg/data/logos/570de1d73c2d.png" group-title="📌 其他频道",肃宁电视
 http://121.29.98.145:9999/rtp/239.253.93.152:6320
 #EXTINF:-1 tvg-id="芒果汽车HD" tvg-name="芒果汽车HD" tvg-logo="https://zzf.new.tg/data/logos/4e18ecddcadb.png" group-title="📌 其他频道",芒果汽车HD
